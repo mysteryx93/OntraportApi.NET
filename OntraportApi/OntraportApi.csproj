@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>EmergenceGuardian.OntraportApi</RootNamespace>
+    <AssemblyName>EmergenceGuardian.OntraportApi</AssemblyName>
+    <Authors>Etienne Charland</Authors>
+    <Company>Emergence Guardian</Company>
+    <Copyright></Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+</Project>
