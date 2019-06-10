@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using EmergenceGuardian.OntraportApi.Converters;
 using EmergenceGuardian.OntraportApi.Models;
 using Xunit;
 using Xunit.Abstractions;
@@ -86,8 +87,9 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 
             foreach (var propInfo in result.GetType().GetProperties())
             {
-                if (propInfo.GetIndexParameters().Length == 0)
+                if (IsGenericTypeOf(typeof(ApiPropertyBase<,>), propInfo.PropertyType))
                 {
+                    //if (typeof(ApiPropertyBase<,>).IsAssignableFrom( propInfo.PropertyType.BaseType.GetGenericTypeDefinition())) {
                     var prop = propInfo.GetValue(result);
                     var hasKeyInfo = prop.GetType().GetProperty("HasKey");
                     if (hasKeyInfo != null)
@@ -104,6 +106,15 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
                 }
             }
             Assert.False(hasError, "Some keys are not present in the dictionary and have been listed in output.");
+        }
+
+        private bool IsGenericTypeOf(Type genericType, Type someType)
+        {
+            if (someType.IsGenericType
+                    && genericType == someType.GetGenericTypeDefinition()) return true;
+
+            return someType.BaseType != null
+                    && IsGenericTypeOf(genericType, someType.BaseType);
         }
 
         [Fact]
@@ -135,7 +146,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             var result = new List<string>();
             foreach (var propInfo in obj.GetType().GetProperties())
             {
-                if (propInfo.GetIndexParameters().Length == 0)
+                if (IsGenericTypeOf(typeof(ApiPropertyBase<,>), propInfo.PropertyType))
                 {
                     var prop = propInfo.GetValue(obj);
                     var keyInfo = prop.GetType().GetProperty("Key");
