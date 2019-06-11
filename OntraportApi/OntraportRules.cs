@@ -14,7 +14,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportRules : OntraportBaseDelete<ApiRule>, IOntraportRules
     {
-        public OntraportRules(IApiRequestHelper apiRequest) : 
+        public OntraportRules(IOntraportRequestHelper apiRequest) : 
             base(apiRequest, "Rule", "Rules", "name")
         { }
 

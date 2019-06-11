@@ -16,5 +16,6 @@ namespace EmergenceGuardian.OntraportApi.Converters
         public ApiPropertyString(ApiObject host, string key) :
             base(host, key)
         { }
+
     }
 }

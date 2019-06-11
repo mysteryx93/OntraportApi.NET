@@ -14,11 +14,11 @@ namespace EmergenceGuardian.OntraportApi
     public abstract class OntraportBaseRead<T> : IOntraportBaseRead<T> 
         where T : ApiObject
     {
-        protected readonly IApiRequestHelper ApiRequest;
+        protected readonly IOntraportRequestHelper ApiRequest;
         protected readonly string EndpointSingular;
         protected readonly string EndpointPlural;
 
-        public OntraportBaseRead(IApiRequestHelper apiRequest, string endpointSingular, string endpointPlural)
+        public OntraportBaseRead(IOntraportRequestHelper apiRequest, string endpointSingular, string endpointPlural)
         {
             ApiRequest = apiRequest;
             EndpointSingular = endpointSingular;

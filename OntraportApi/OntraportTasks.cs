@@ -14,7 +14,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportTasks : OntraportBaseRead<ApiTask>, IOntraportTasks
     {
-        public OntraportTasks(IApiRequestHelper apiRequest) : 
+        public OntraportTasks(IOntraportRequestHelper apiRequest) : 
             base(apiRequest, "Task", "Tasks")
         { }
 

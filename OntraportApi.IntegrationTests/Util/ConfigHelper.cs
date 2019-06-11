@@ -5,7 +5,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 {
     public class ConfigHelper
     {
-        public ApiConfig GetConfig()
+        public OntraportConfig GetConfig()
         {
             var builder = new ConfigurationBuilder()
                 .AddUserSecrets<ConfigHelper>();
@@ -24,7 +24,7 @@ dotnet user-secrets set OntraportAppId ""your-app-id-here""
 dotnet user-secrets set OntraportApiKey ""your-api-key-here""");
             }
 
-            return new ApiConfig()
+            return new OntraportConfig()
             {
                 AppId = AppId,
                 ApiKey = ApiKey

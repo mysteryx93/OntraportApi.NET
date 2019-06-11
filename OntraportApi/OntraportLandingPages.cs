@@ -13,7 +13,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportLandingPages : OntraportBaseRead<ApiLandingPage>, IOntraportLandingPages
     {
-        public OntraportLandingPages(IApiRequestHelper apiRequest) : 
+        public OntraportLandingPages(IOntraportRequestHelper apiRequest) : 
             base(apiRequest, "LandingPage", "LandingPages")
         { }
 

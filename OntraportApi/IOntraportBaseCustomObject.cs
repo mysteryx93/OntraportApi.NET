@@ -7,7 +7,7 @@ namespace EmergenceGuardian.OntraportApi
     /// Base class to provides Ontraport API support for custom objects.
     /// </summary>
     public interface IOntraportBaseCustomObject<T>  : IOntraportBaseDelete<T>
-        where T : ApiCustomObject
+        where T : ApiCustomObjectBase
     {
         /// <summary>
         /// Looks for an existing object with a matching unique field and merges supplied data with existing data.

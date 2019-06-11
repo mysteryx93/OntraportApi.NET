@@ -20,7 +20,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         private OntraportObjects SetupApi()
         {
             var config = new ConfigHelper().GetConfig();
-            var requestHelper = new ApiRequestHelper(config, new WebRequestService());
+            var requestHelper = new OntraportRequestHelper(config, new WebRequestService());
             return new OntraportObjects(requestHelper);
         }
 

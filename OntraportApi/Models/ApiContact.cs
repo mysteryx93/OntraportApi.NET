@@ -6,7 +6,7 @@ namespace EmergenceGuardian.OntraportApi.Models
     /// <summary>
     /// Contact objects allow you to keep up-to-date records for all the contacts you are managing.
     /// </summary>
-    public class ApiContact : ApiCustomObject
+    public class ApiContact : ApiCustomObjectBase
     {
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's first name.

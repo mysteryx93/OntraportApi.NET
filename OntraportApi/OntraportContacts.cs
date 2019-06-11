@@ -13,7 +13,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportContacts : OntraportBaseCustomObject<ApiContact>, IOntraportContacts
     {
-        public OntraportContacts(IApiRequestHelper apiRequest) : 
+        public OntraportContacts(IOntraportRequestHelper apiRequest) : 
             base(apiRequest, "Contact", "Contacts", "email")
         { }
 

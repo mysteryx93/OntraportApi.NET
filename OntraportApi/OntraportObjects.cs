@@ -14,9 +14,9 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportObjects : IOntraportObjects
     {
-        private readonly IApiRequestHelper _apiRequest;
+        private readonly IOntraportRequestHelper _apiRequest;
 
-        public OntraportObjects(IApiRequestHelper apiRequest)
+        public OntraportObjects(IOntraportRequestHelper apiRequest)
         {
             _apiRequest = apiRequest;
         }

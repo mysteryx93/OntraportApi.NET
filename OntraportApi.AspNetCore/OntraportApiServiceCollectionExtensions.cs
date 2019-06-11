@@ -14,7 +14,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAdd(ServiceDescriptor.Singleton<IOntraportCampaignBuilderItems, OntraportCampaignBuilderItems>());
             services.TryAdd(ServiceDescriptor.Singleton<IOntraportCompanies, OntraportCompanies>());
             services.TryAdd(ServiceDescriptor.Singleton<IOntraportContacts, OntraportContacts>());
+            services.TryAdd(ServiceDescriptor.Singleton<IOntraportCoupons, OntraportCoupons>());
+            services.TryAdd(ServiceDescriptor.Singleton<IOntraportCouponCodes, OntraportCouponCodes>());
+            services.TryAdd(ServiceDescriptor.Singleton<IOntraportCouponProducts, OntraportCouponProducts>());
             services.TryAdd(ServiceDescriptor.Singleton<IOntraportCreditCards, OntraportCreditCards>());
+            services.TryAdd(ServiceDescriptor.Singleton<IOntraportCustomObjects, OntraportCustomObjects>());
             services.TryAdd(ServiceDescriptor.Singleton<IOntraportDeals, OntraportDeals>());
             services.TryAdd(ServiceDescriptor.Singleton<IOntraportForms, OntraportForms>());
             services.TryAdd(ServiceDescriptor.Singleton<IOntraportLandingPages, OntraportLandingPages>());
@@ -27,7 +31,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAdd(ServiceDescriptor.Singleton<IOntraportTransactions, OntraportTransactions>());
             services.TryAdd(ServiceDescriptor.Singleton<IOntraportWebhooks, OntraportWebhooks>());
             services.TryAdd(ServiceDescriptor.Singleton<IWebRequestService, WebRequestService>());
-            services.TryAdd(ServiceDescriptor.Singleton<IApiRequestHelper, ApiRequestHelper>());
+            services.TryAdd(ServiceDescriptor.Singleton<IOntraportRequestHelper, OntraportRequestHelper>());
 
             return services;
         }

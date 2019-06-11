@@ -13,7 +13,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportForms : OntraportBaseRead<ApiForm>, IOntraportForms
     {
-        public OntraportForms(IApiRequestHelper apiRequest) :
+        public OntraportForms(IOntraportRequestHelper apiRequest) :
             base(apiRequest, "Form", "Forms")
         { }
 

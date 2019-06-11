@@ -8,7 +8,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 {
     public abstract class OntraportBaseCustomObjectTests<T, U> : OntraportBaseDeleteTests<T, U>
         where T : OntraportBaseCustomObject<U>
-        where U : ApiCustomObject
+        where U : ApiCustomObjectBase
     {
         public OntraportBaseCustomObjectTests(ITestOutputHelper output, int validId) :
             base(output, validId)

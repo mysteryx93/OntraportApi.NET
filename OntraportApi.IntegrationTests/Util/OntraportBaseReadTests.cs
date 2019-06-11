@@ -26,14 +26,14 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         protected T SetupApi()
         {
             var config = new ConfigHelper().GetConfig();
-            var requestHelper = new ApiRequestHelper(config, new WebRequestService());
+            var requestHelper = new OntraportRequestHelper(config, new WebRequestService());
             return (T)Activator.CreateInstance(typeof(T), new[] { requestHelper });
         }
 
         protected OntraportObjects SetupObjectsApi()
         {
             var config = new ConfigHelper().GetConfig();
-            var requestHelper = new ApiRequestHelper(config, new WebRequestService());
+            var requestHelper = new OntraportRequestHelper(config, new WebRequestService());
             return new OntraportObjects(requestHelper);
         }
 
@@ -53,6 +53,16 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             var api = SetupApi();
 
             var result = await api.SelectMultipleAsync(new ApiSearchOptions(_validId));
+
+            Assert.NotEmpty(result);
+        }
+
+        [Fact]
+        public async Task SelectMultipleAsync_NoArgs_ReturnsAll()
+        {
+            var api = SetupApi();
+
+            var result = await api.SelectMultipleAsync();
 
             Assert.NotEmpty(result);
         }
@@ -89,7 +99,6 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             {
                 if (IsGenericTypeOf(typeof(ApiPropertyBase<,>), propInfo.PropertyType))
                 {
-                    //if (typeof(ApiPropertyBase<,>).IsAssignableFrom( propInfo.PropertyType.BaseType.GetGenericTypeDefinition())) {
                     var prop = propInfo.GetValue(result);
                     var hasKeyInfo = prop.GetType().GetProperty("HasKey");
                     if (hasKeyInfo != null)
@@ -106,6 +115,31 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
                 }
             }
             Assert.False(hasError, "Some keys are not present in the dictionary and have been listed in output.");
+        }
+
+        [Fact]
+        public async Task SelectAsync_ValidId_AllPropertiesHaveValueProperty()
+        {
+            var api = SetupApi();
+            bool hasError = false;
+
+            var result = await api.SelectAsync(_validId);
+
+            foreach (var propInfo in result.GetType().GetProperties())
+            {
+                if (IsGenericTypeOf(typeof(ApiPropertyBase<,>), propInfo.PropertyType))
+                {
+                    var valuePropName = propInfo.Name + "Value";
+                    var valueProp = result.GetType().GetProperty(valuePropName);
+
+                    if (valueProp == null)
+                    {
+                        hasError = true;
+                        _output.WriteLine(propInfo.Name);
+                    }
+                }
+            }
+            Assert.False(hasError, "Some properties don't have a matching Value property.");
         }
 
         private bool IsGenericTypeOf(Type genericType, Type someType)
@@ -134,7 +168,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
                     if (!propList.Contains(key))
                     {
                         hasError = true;
-                        _output.WriteLine(key);
+                        _output.WriteLine($"{key} :      {result.Data[key]}");
                     }
                 }
             }

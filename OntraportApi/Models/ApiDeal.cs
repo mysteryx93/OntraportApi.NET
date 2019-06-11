@@ -5,7 +5,7 @@ using EmergenceGuardian.OntraportApi.Converters;
 
 namespace EmergenceGuardian.OntraportApi.Models
 {
-    public class ApiDeal : ApiCustomObject
+    public class ApiDeal : ApiCustomObjectBase
     {
         /// <summary>
         /// Returns a ApiProperty object to get or set the deal's name.

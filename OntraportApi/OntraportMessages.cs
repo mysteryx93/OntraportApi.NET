@@ -14,7 +14,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportMessages : OntraportBaseWrite<ApiMessage>, IOntraportMessages
     {
-        public OntraportMessages(IApiRequestHelper apiRequest) : 
+        public OntraportMessages(IOntraportRequestHelper apiRequest) : 
             base(apiRequest, "Message", "Messages", "alias")
         { }
 

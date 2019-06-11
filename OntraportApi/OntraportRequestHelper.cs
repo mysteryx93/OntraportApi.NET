@@ -12,14 +12,14 @@ namespace EmergenceGuardian.OntraportApi
     /// <summary>
     /// Sends API requests to Ontraport, formatting the parameters and parsing the response.
     /// </summary>
-    public class ApiRequestHelper : IApiRequestHelper
+    public class OntraportRequestHelper : IOntraportRequestHelper
     {
         private const string ContentJson = "application/json";
         // private const string ContentUrl = "application/x-www-form-urlencoded";
-        private readonly ApiConfig _config;
+        private readonly OntraportConfig _config;
         private readonly IWebRequestService _webRequest;
 
-        public ApiRequestHelper(ApiConfig config, IWebRequestService webRequest)
+        public OntraportRequestHelper(OntraportConfig config, IWebRequestService webRequest)
         {
             if (string.IsNullOrEmpty(config.ApiKey)) throw new ArgumentException("ApiConfig.ApiKey is required.");
             if (string.IsNullOrEmpty(config.AppId)) throw new ArgumentException("ApiConfig.AppId is required.");

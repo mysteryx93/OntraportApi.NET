@@ -5,7 +5,7 @@ using EmergenceGuardian.OntraportApi.Converters;
 
 namespace EmergenceGuardian.OntraportApi.Models
 {
-    public class ApiCompany : ApiCustomObject
+    public class ApiCompany : ApiCustomObjectBase
     {
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's name.
@@ -128,9 +128,14 @@ namespace EmergenceGuardian.OntraportApi.Models
         public string ZipValue { get => Zip.Value; set => Zip.Value = value; }
 
         /// <summary>
+        /// Returns a ApiProperty object to get or set the company's country.
+        /// </summary>
+        public ApiPropertyString Country => _country ?? (_country = new ApiPropertyString(this, "country"));
+        private ApiPropertyString _country;
+        /// <summary>
         /// Gets or sets the company's country.
         /// </summary>
-        //public ApiProperty Country => _country ?? (_country = new ApiProperty(this, "country"));
-        //private ApiProperty _country;
+        public string CountryValue { get => Country.Value; set => Country.Value = value; }
+
     }
 }

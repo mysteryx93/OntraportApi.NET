@@ -11,9 +11,10 @@ namespace EmergenceGuardian.OntraportApi
     /// <summary>
     /// Base class to provides Ontraport API support for custom objects.
     /// </summary>
-    public abstract class OntraportBaseCustomObject<T> : OntraportBaseDelete<T>, IOntraportBaseCustomObject<T> where T : ApiCustomObject
+    public abstract class OntraportBaseCustomObject<T> : OntraportBaseDelete<T>, IOntraportBaseCustomObject<T> 
+        where T : ApiCustomObjectBase
     {
-        public OntraportBaseCustomObject(IApiRequestHelper apiRequest, string endpointSingular, string endpointPlural, string primarySearchKey) :
+        public OntraportBaseCustomObject(IOntraportRequestHelper apiRequest, string endpointSingular, string endpointPlural, string primarySearchKey) :
             base(apiRequest, endpointSingular, endpointPlural, primarySearchKey)
         { }
 

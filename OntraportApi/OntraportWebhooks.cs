@@ -12,7 +12,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportWebhooks : OntraportBaseRead<ApiWebhook>, IOntraportWebhooks
     {
-        public OntraportWebhooks(IApiRequestHelper apiRequest) : 
+        public OntraportWebhooks(IOntraportRequestHelper apiRequest) : 
             base(apiRequest, "Webhook", "Webhooks")
         { }
 

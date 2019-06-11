@@ -12,7 +12,7 @@ namespace EmergenceGuardian.OntraportApi
     public abstract class OntraportBaseDelete<T> : OntraportBaseWrite<T>, IOntraportBaseDelete<T> 
         where T : ApiObject
     {
-        public OntraportBaseDelete(IApiRequestHelper apiRequest, string endpointSingular, string endpointPlural, string primarySearchKey) :
+        public OntraportBaseDelete(IOntraportRequestHelper apiRequest, string endpointSingular, string endpointPlural, string primarySearchKey) :
             base(apiRequest, endpointSingular, endpointPlural, primarySearchKey)
         { }
 

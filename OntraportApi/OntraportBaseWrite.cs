@@ -16,7 +16,7 @@ namespace EmergenceGuardian.OntraportApi
     {
         protected readonly string PrimarySearchKey;
 
-        public OntraportBaseWrite(IApiRequestHelper apiRequest, string endpointSingular, string endpointPlural, string primarySearchKey) :
+        public OntraportBaseWrite(IOntraportRequestHelper apiRequest, string endpointSingular, string endpointPlural, string primarySearchKey) :
             base(apiRequest, endpointSingular, endpointPlural)
         {
             PrimarySearchKey = primarySearchKey;
@@ -25,7 +25,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <summary>
         /// Retrieves all the information for an existing object.
         /// </summary>
-        /// <param name="id">The ID of the specific object.</param>
+        /// <param name="keyValue">The key value of the specific object, usually the name or email.</param>
         /// <returns>The selected object.</returns>
         public async Task<T> SelectAsync(string keyValue)
         {

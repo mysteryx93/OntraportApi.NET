@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace EmergenceGuardian.OntraportApi
 {
-    public interface IApiRequestHelper
+    public interface IOntraportRequestHelper
     {
         /// <summary>
         /// Sends a GET API query to Ontraport.
