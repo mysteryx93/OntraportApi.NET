@@ -71,8 +71,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If there is a trial period for the product, gets or sets the units of length of the trial period. 
         /// </summary>
-        [JsonConverter(typeof(JsonConverterStringEnum<ApiTransactionPeriodUnit>))]
-        public ApiTransactionPeriodUnit? TrialPeriodUnit { get; set; }
+        [JsonConverter(typeof(JsonConverterStringEnum<TransactionPeriodUnit>))]
+        public TransactionPeriodUnit? TrialPeriodUnit { get; set; }
 
         /// <summary>
         /// Gets or sets the length of the trial period. Must be used in conjunction with trial_period_unit.
@@ -118,8 +118,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets how often a subscription product is delivered. 
         /// </summary>
-        [JsonConverter(typeof(JsonConverterStringEnum<ApiTransactionPeriodUnit>))]
-        public ApiTransactionPeriodUnit? SubscriptionUnit { get; set; }
+        [JsonConverter(typeof(JsonConverterStringEnum<TransactionPeriodUnit>))]
+        public TransactionPeriodUnit? SubscriptionUnit { get; set; }
 
 
         public ApiTransactionProduct AddPrice(decimal price)

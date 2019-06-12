@@ -29,7 +29,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the units of time of payments.
         /// </summary>
-        [JsonConverter(typeof(JsonConverterStringEnum<ApiTransactionPeriodUnit>))]
-        public ApiTransactionPeriodUnit? Unit { get; set; }
+        [JsonConverter(typeof(JsonConverterStringEnum<TransactionPeriodUnit>))]
+        public TransactionPeriodUnit? Unit { get; set; }
     }
 }
