@@ -31,8 +31,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the contact who made the transaction.
         /// </summary>
-        public ApiPropertyInt ContactId => _contactId ?? (_contactId = new ApiPropertyInt(this, "contact_id"));
-        private ApiPropertyInt _contactId;
+        public ApiProperty<int> ContactId => _contactId ?? (_contactId = new ApiProperty<int>(this, "contact_id"));
+        private ApiProperty<int> _contactId;
         /// <summary>
         /// Gets or sets the ID of the contact who made the transaction.
         /// </summary>
@@ -51,8 +51,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the transaction resulted from a subscription purchase, returns a ApiProperty object to get or set the ID of the associated order.
         /// </summary>
-        public ApiPropertyInt OrderId => _orderId ?? (_orderId = new ApiPropertyInt(this, "order_id"));
-        private ApiPropertyInt _orderId;
+        public ApiProperty<int> OrderId => _orderId ?? (_orderId = new ApiProperty<int>(this, "order_id"));
+        private ApiProperty<int> _orderId;
         /// <summary>
         /// If the transaction resulted from a subscription purchase, gets or sets the ID of the associated order.
         /// </summary>
@@ -61,8 +61,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the transaction resulted from a purchase made via a form, returns a ApiProperty object to get or set the ID of that form.
         /// </summary>
-        public ApiPropertyInt FormId => _formId ?? (_formId = new ApiPropertyInt(this, "form_id"));
-        private ApiPropertyInt _formId;
+        public ApiProperty<int> FormId => _formId ?? (_formId = new ApiProperty<int>(this, "form_id"));
+        private ApiProperty<int> _formId;
         /// <summary>
         /// If the transaction resulted from a purchase made via a form, returns a ApiProperty object to get or set the ID of that form.
         /// </summary>
@@ -71,8 +71,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the transaction resulted from a purchase made via a landing page, returns a ApiProperty object to get or set the ID of that landing page.
         /// </summary>
-        public ApiPropertyInt LandingPageId => _landingPageId ?? (_landingPageId = new ApiPropertyInt(this, "lp_id"));
-        private ApiPropertyInt _landingPageId;
+        public ApiProperty<int> LandingPageId => _landingPageId ?? (_landingPageId = new ApiProperty<int>(this, "lp_id"));
+        private ApiProperty<int> _landingPageId;
         /// <summary>
         /// If the transaction resulted from a purchase made via a landing page, gets or sets the ID of that landing page.
         /// </summary>
@@ -81,8 +81,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the credit card used to charge the transaction.
         /// </summary>
-        public ApiPropertyInt CreditCardId => _creditCardId ?? (_creditCardId = new ApiPropertyInt(this, "cc_id"));
-        private ApiPropertyInt _creditCardId;
+        public ApiProperty<int> CreditCardId => _creditCardId ?? (_creditCardId = new ApiProperty<int>(this, "cc_id"));
+        private ApiProperty<int> _creditCardId;
         /// <summary>
         /// Gets or sets the ID of the credit card used to charge the transaction.
         /// </summary>
@@ -91,8 +91,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the payment gateway used to complete the transaction.
         /// </summary>
-        public ApiPropertyInt GatewayId => _gatewayId ?? (_gatewayId = new ApiPropertyInt(this, "gateway_id"));
-        private ApiPropertyInt _gatewayId;
+        public ApiProperty<int> GatewayId => _gatewayId ?? (_gatewayId = new ApiProperty<int>(this, "gateway_id"));
+        private ApiProperty<int> _gatewayId;
         /// <summary>
         /// Gets or sets the ID of the payment gateway used to complete the transaction.
         /// </summary>
@@ -106,13 +106,13 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the date and time the transaction was made.
         /// </summary>
-        public DateTimeOffset DateValue { get => DateCreated.Value; set => DateCreated.Value = value; }
+        public DateTimeOffset DateCreatedValue { get => DateCreated.Value; set => DateCreated.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the invoice template sent to the contact.
         /// </summary>
-        public ApiPropertyInt TemplateId => _templateId ?? (_templateId = new ApiPropertyInt(this, "template_id"));
-        private ApiPropertyInt _templateId;
+        public ApiProperty<int> TemplateId => _templateId ?? (_templateId = new ApiProperty<int>(this, "template_id"));
+        private ApiProperty<int> _templateId;
         /// <summary>
         /// Gets or sets the ID of the invoice template sent to the contact.
         /// </summary>
@@ -121,72 +121,72 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the amount of the transaction prior to tax and shipping.
         /// </summary>
-        public ApiPropertyDouble Subtotal => _subtotal ?? (_subtotal = new ApiPropertyDouble(this, "subtotal"));
-        private ApiPropertyDouble _subtotal;
+        public ApiProperty<decimal> Subtotal => _subtotal ?? (_subtotal = new ApiProperty<decimal>(this, "subtotal"));
+        private ApiProperty<decimal> _subtotal;
         /// <summary>
         /// Gets or sets the amount of the transaction prior to tax and shipping.
         /// </summary>
-        public double SubtotalValue { get => Subtotal.Value; set => Subtotal.Value = value; }
+        public decimal SubtotalValue { get => Subtotal.Value; set => Subtotal.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the amount of the tax on the transaction.
         /// </summary>
-        public ApiPropertyDouble Tax => _tax ?? (_tax = new ApiPropertyDouble(this, "tax"));
-        private ApiPropertyDouble _tax;
+        public ApiProperty<decimal> Tax => _tax ?? (_tax = new ApiProperty<decimal>(this, "tax"));
+        private ApiProperty<decimal> _tax;
         /// <summary>
         /// Gets or sets the amount of the tax on the transaction.
         /// </summary>
-        public double TaxValue { get => Tax.Value; set => Tax.Value = value; }
+        public decimal TaxValue { get => Tax.Value; set => Tax.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the amount of any city tax on the transaction.
         /// </summary>
-        public ApiPropertyDouble TaxCity => _taxCity ?? (_taxCity = new ApiPropertyDouble(this, "tax_city"));
-        private ApiPropertyDouble _taxCity;
+        public ApiProperty<decimal> TaxCity => _taxCity ?? (_taxCity = new ApiProperty<decimal>(this, "tax_city"));
+        private ApiProperty<decimal> _taxCity;
         /// <summary>
         /// Gets or sets the amount of any city tax on the transaction.
         /// </summary>
-        public double TaxCityValue { get => TaxCity.Value; set => TaxCity.Value = value; }
+        public decimal TaxCityValue { get => TaxCity.Value; set => TaxCity.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the amount of any state tax on the transaction.
         /// </summary>
-        public ApiPropertyDouble TaxState => _taxState ?? (_taxState = new ApiPropertyDouble(this, "tax_state"));
-        private ApiPropertyDouble _taxState;
+        public ApiProperty<decimal> TaxState => _taxState ?? (_taxState = new ApiProperty<decimal>(this, "tax_state"));
+        private ApiProperty<decimal> _taxState;
         /// <summary>
         /// Gets or sets the amount of any state tax on the transaction.
         /// </summary>
-        public double TaxStateValue { get => TaxState.Value; set => TaxState.Value = value; }
+        public decimal TaxStateValue { get => TaxState.Value; set => TaxState.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the amount of any county tax on the transaction.
         /// </summary>
-        public ApiPropertyDouble TaxCountry => _taxCountry ?? (_taxCountry = new ApiPropertyDouble(this, "tax_county"));
-        private ApiPropertyDouble _taxCountry;
+        public ApiProperty<decimal> TaxCountry => _taxCountry ?? (_taxCountry = new ApiProperty<decimal>(this, "tax_county"));
+        private ApiProperty<decimal> _taxCountry;
         /// <summary>
         /// Gets or sets the amount of any county tax on the transaction.
         /// </summary>
-        public double TaxCountryValue { get => TaxCountry.Value; set => TaxCountry.Value = value; }
+        public decimal TaxCountryValue { get => TaxCountry.Value; set => TaxCountry.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the cost of shipping for the transaction.
         /// </summary>
-        public ApiPropertyDouble Shipping => _shipping ?? (_shipping = new ApiPropertyDouble(this, "shipping"));
-        private ApiPropertyDouble _shipping;
+        public ApiProperty<decimal> Shipping => _shipping ?? (_shipping = new ApiProperty<decimal>(this, "shipping"));
+        private ApiProperty<decimal> _shipping;
         /// <summary>
         /// Gets or sets the cost of shipping for the transaction.
         /// </summary>
-        public double ShippingValue { get => Shipping.Value; set => Shipping.Value = value; }
+        public decimal ShippingValue { get => Shipping.Value; set => Shipping.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the total amount of the transaction.
         /// </summary>
-        public ApiPropertyDouble Total => _total ?? (_total = new ApiPropertyDouble(this, "total"));
-        private ApiPropertyDouble _total;
+        public ApiProperty<decimal> Total => _total ?? (_total = new ApiProperty<decimal>(this, "total"));
+        private ApiProperty<decimal> _total;
         /// <summary>
         /// Gets or sets the total amount of the transaction.
         /// </summary>
-        public double TotalValue { get => Total.Value; set => Total.Value = value; }
+        public decimal TotalValue { get => Total.Value; set => Total.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the zip code for the shipping address.
@@ -231,8 +231,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If a sale comes from another system, returns a ApiProperty object to get or set the order ID sent from that system.
         /// </summary>
-        public ApiPropertyInt ExternalOrderId => _externalOrderId ?? (_externalOrderId = new ApiPropertyInt(this, "external_order_id"));
-        private ApiPropertyInt _externalOrderId;
+        public ApiProperty<int> ExternalOrderId => _externalOrderId ?? (_externalOrderId = new ApiProperty<int>(this, "external_order_id"));
+        private ApiProperty<int> _externalOrderId;
         /// <summary>
         /// If a sale comes from another system, gets or sets the order ID sent from that system.
         /// </summary>
@@ -241,8 +241,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the affiliate to be credited for the transaction.
         /// </summary>
-        public ApiPropertyInt AffiliateId => _affiliateId ?? (_affiliateId = new ApiPropertyInt(this, "oprid"));
-        private ApiPropertyInt _affiliateId;
+        public ApiProperty<int> AffiliateId => _affiliateId ?? (_affiliateId = new ApiProperty<int>(this, "oprid"));
+        private ApiProperty<int> _affiliateId;
         /// <summary>
         /// Gets or sets the ID of the affiliate to be credited for the transaction.
         /// </summary>
@@ -271,8 +271,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the transaction has been recharged, returns a ApiProperty object to get or set the count of the number of times this has been attempted.
         /// </summary>
-        public ApiPropertyInt RechargeAttempts => _rechargeAttempts ?? (_rechargeAttempts = new ApiPropertyInt(this, "recharge_attempts"));
-        private ApiPropertyInt _rechargeAttempts;
+        public ApiProperty<int> RechargeAttempts => _rechargeAttempts ?? (_rechargeAttempts = new ApiProperty<int>(this, "recharge_attempts"));
+        private ApiProperty<int> _rechargeAttempts;
         /// <summary>
         /// If the transaction has been recharged, gets or sets the count of the number of times this has been attempted.
         /// </summary>

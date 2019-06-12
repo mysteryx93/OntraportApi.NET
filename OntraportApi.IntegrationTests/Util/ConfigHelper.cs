@@ -9,12 +9,12 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var builder = new ConfigurationBuilder()
                 .AddUserSecrets<ConfigHelper>();
-            var Configuration = builder.Build();
+            var configuration = builder.Build();
 
-            var AppId = Configuration["OntraportAppId"];
-            var ApiKey = Configuration["OntraportApiKey"];
+            var appId = configuration["OntraportAppId"];
+            var apiKey = configuration["OntraportApiKey"];
 
-            if (string.IsNullOrEmpty(AppId) || string.IsNullOrEmpty(ApiKey))
+            if (string.IsNullOrEmpty(appId) || string.IsNullOrEmpty(apiKey))
             {
                 throw new ArgumentException(
 @"Ontraport API credentials must be set in your User Secret Manager. Open the command-line tool and navigate to the OntraportApi.IntegrationTests project directory.
@@ -26,8 +26,8 @@ dotnet user-secrets set OntraportApiKey ""your-api-key-here""");
 
             return new OntraportConfig()
             {
-                AppId = AppId,
-                ApiKey = ApiKey
+                AppId = appId,
+                ApiKey = apiKey
             };
         }
     }

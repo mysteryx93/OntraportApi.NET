@@ -11,8 +11,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the hosted URL's ID.
         /// </summary>
-        public ApiPropertyInt UriId => _uriId ?? (_uriId = new ApiPropertyInt(this, "uri_id"));
-        private ApiPropertyInt _uriId;
+        public ApiProperty<int> UriId => _uriId ?? (_uriId = new ApiProperty<int>(this, "uri_id"));
+        private ApiProperty<int> _uriId;
         /// <summary>
         /// Gets or sets the hosted URL's ID.
         /// </summary>
@@ -51,8 +51,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If using split testing, returns a ApiProperty object to get or set the ID of the next split test in line for rotation.
         /// </summary>
-        public ApiPropertyInt Rotation => _rotation ?? (_rotation = new ApiPropertyInt(this, "rotation"));
-        private ApiPropertyInt _rotation;
+        public ApiProperty<int> Rotation => _rotation ?? (_rotation = new ApiProperty<int>(this, "rotation"));
+        private ApiProperty<int> _rotation;
         /// <summary>
         /// If using split testing, gets or sets the ID of the next split test in line for rotation.
         /// </summary>
@@ -91,8 +91,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set count of visits for split test A.
         /// </summary>
-        public ApiPropertyInt Visits0 => _visits0 ?? (_visits0 = new ApiPropertyInt(this, "visits_0"));
-        private ApiPropertyInt _visits0;
+        public ApiProperty<int> Visits0 => _visits0 ?? (_visits0 = new ApiProperty<int>(this, "visits_0"));
+        private ApiProperty<int> _visits0;
         /// <summary>
         /// Gets or sets count of visits for split test A.
         /// </summary>
@@ -101,8 +101,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of visits for split test B.
         /// </summary>
-        public ApiPropertyInt Visits1 => _visits1 ?? (_visits1 = new ApiPropertyInt(this, "visits_1"));
-        private ApiPropertyInt _visits1;
+        public ApiProperty<int> Visits1 => _visits1 ?? (_visits1 = new ApiProperty<int>(this, "visits_1"));
+        private ApiProperty<int> _visits1;
         /// <summary>
         /// Gets or sets the count of visits for split test B.
         /// </summary>
@@ -111,8 +111,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of visits for split test C.
         /// </summary>
-        public ApiPropertyInt Visits2 => _visits2 ?? (_visits2 = new ApiPropertyInt(this, "visits_2"));
-        private ApiPropertyInt _visits2;
+        public ApiProperty<int> Visits2 => _visits2 ?? (_visits2 = new ApiProperty<int>(this, "visits_2"));
+        private ApiProperty<int> _visits2;
         /// <summary>
         /// Gets or sets the count of visits for split test C.
         /// </summary>
@@ -121,8 +121,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of visits for split test D.
         /// </summary>
-        public ApiPropertyInt Visits3 => _visits3 ?? (_visits3 = new ApiPropertyInt(this, "visits_3"));
-        private ApiPropertyInt _visits3;
+        public ApiProperty<int> Visits3 => _visits3 ?? (_visits3 = new ApiProperty<int>(this, "visits_3"));
+        private ApiProperty<int> _visits3;
         /// <summary>
         /// Gets or sets the count of visits for split test D.
         /// </summary>
@@ -171,8 +171,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of unique visits for split test A.
         /// </summary>
-        public ApiPropertyInt UniqueVisits0 => _uniqueVisits0 ?? (_uniqueVisits0 = new ApiPropertyInt(this, "unique_visits_0"));
-        private ApiPropertyInt _uniqueVisits0;
+        public ApiProperty<int> UniqueVisits0 => _uniqueVisits0 ?? (_uniqueVisits0 = new ApiProperty<int>(this, "unique_visits_0"));
+        private ApiProperty<int> _uniqueVisits0;
         /// <summary>
         /// Gets or sets the count of unique visits for split test A.
         /// </summary>
@@ -181,8 +181,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of unique visits for split test B.
         /// </summary>
-        public ApiPropertyInt UniqueVisits1 => _uniqueVisits1 ?? (_uniqueVisits1 = new ApiPropertyInt(this, "unique_visits_1"));
-        private ApiPropertyInt _uniqueVisits1;
+        public ApiProperty<int> UniqueVisits1 => _uniqueVisits1 ?? (_uniqueVisits1 = new ApiProperty<int>(this, "unique_visits_1"));
+        private ApiProperty<int> _uniqueVisits1;
         /// <summary>
         /// Gets or sets the count of unique visits for split test B.
         /// </summary>
@@ -191,8 +191,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of unique visits for split test C.
         /// </summary>
-        public ApiPropertyInt UniqueVisits2 => _uniqueVisits2 ?? (_uniqueVisits2 = new ApiPropertyInt(this, "unique_visits_2"));
-        private ApiPropertyInt _uniqueVisits2;
+        public ApiProperty<int> UniqueVisits2 => _uniqueVisits2 ?? (_uniqueVisits2 = new ApiProperty<int>(this, "unique_visits_2"));
+        private ApiProperty<int> _uniqueVisits2;
         /// <summary>
         /// Gets or sets the count of unique visits for split test C.
         /// </summary>
@@ -201,8 +201,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of unique visits for split test D.
         /// </summary>
-        public ApiPropertyInt UniqueVisits3 => _uniqueVisits3 ?? (_uniqueVisits3 = new ApiPropertyInt(this, "unique_visits_3"));
-        private ApiPropertyInt _uniqueVisits3;
+        public ApiProperty<int> UniqueVisits3 => _uniqueVisits3 ?? (_uniqueVisits3 = new ApiProperty<int>(this, "unique_visits_3"));
+        private ApiProperty<int> _uniqueVisits3;
         /// <summary>
         /// Gets or sets the count of unique visits for split test D.
         /// </summary>
@@ -211,8 +211,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of converts for split test A.
         /// </summary>
-        public ApiPropertyInt Convert0 => _convert0 ?? (_convert0 = new ApiPropertyInt(this, "convert_0"));
-        private ApiPropertyInt _convert0;
+        public ApiProperty<int> Convert0 => _convert0 ?? (_convert0 = new ApiProperty<int>(this, "convert_0"));
+        private ApiProperty<int> _convert0;
         /// <summary>
         /// Gets or sets the count of converts for split test A.
         /// </summary>
@@ -221,8 +221,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of converts for split test B.
         /// </summary>
-        public ApiPropertyInt Convert1 => _convert1 ?? (_convert1 = new ApiPropertyInt(this, "convert_1"));
-        private ApiPropertyInt _convert1;
+        public ApiProperty<int> Convert1 => _convert1 ?? (_convert1 = new ApiProperty<int>(this, "convert_1"));
+        private ApiProperty<int> _convert1;
         /// <summary>
         /// Gets or sets the count of converts for split test B.
         /// </summary>
@@ -231,8 +231,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of converts for split test C.
         /// </summary>
-        public ApiPropertyInt Convert2 => _convert2 ?? (_convert2 = new ApiPropertyInt(this, "convert_2"));
-        private ApiPropertyInt _convert2;
+        public ApiProperty<int> Convert2 => _convert2 ?? (_convert2 = new ApiProperty<int>(this, "convert_2"));
+        private ApiProperty<int> _convert2;
         /// <summary>
         /// Gets or sets the count of converts for split test C.
         /// </summary>
@@ -241,8 +241,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of converts for split test D.
         /// </summary>
-        public ApiPropertyInt Convert3 => _convert3 ?? (_convert3 = new ApiPropertyInt(this, "convert_3"));
-        private ApiPropertyInt _convert3;
+        public ApiProperty<int> Convert3 => _convert3 ?? (_convert3 = new ApiProperty<int>(this, "convert_3"));
+        private ApiProperty<int> _convert3;
         /// <summary>
         /// Gets or sets the count of converts for split test D.
         /// </summary>
@@ -251,8 +251,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of unique convert for split test A.
         /// </summary>
-        public ApiPropertyInt UniqueConvert0 => _unique_convert0 ?? (_unique_convert0 = new ApiPropertyInt(this, "unique_convert_0"));
-        private ApiPropertyInt _unique_convert0;
+        public ApiProperty<int> UniqueConvert0 => _unique_convert0 ?? (_unique_convert0 = new ApiProperty<int>(this, "unique_convert_0"));
+        private ApiProperty<int> _unique_convert0;
         /// <summary>
         /// Gets or sets the count of unique convert for split test A.
         /// </summary>
@@ -261,8 +261,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of unique convert for split test B.
         /// </summary>
-        public ApiPropertyInt UniqueConvert1 => _unique_convert1 ?? (_unique_convert1 = new ApiPropertyInt(this, "unique_convert_1"));
-        private ApiPropertyInt _unique_convert1;
+        public ApiProperty<int> UniqueConvert1 => _unique_convert1 ?? (_unique_convert1 = new ApiProperty<int>(this, "unique_convert_1"));
+        private ApiProperty<int> _unique_convert1;
         /// <summary>
         /// Gets or sets the count of unique convert for split test B.
         /// </summary>
@@ -271,8 +271,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of unique convert for split test C.
         /// </summary>
-        public ApiPropertyInt UniqueConvert2 => _unique_convert2 ?? (_unique_convert2 = new ApiPropertyInt(this, "unique_convert_2"));
-        private ApiPropertyInt _unique_convert2;
+        public ApiProperty<int> UniqueConvert2 => _unique_convert2 ?? (_unique_convert2 = new ApiProperty<int>(this, "unique_convert_2"));
+        private ApiProperty<int> _unique_convert2;
         /// <summary>
         /// Gets or sets the count of unique convert for split test C.
         /// </summary>
@@ -281,8 +281,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the count of unique convert for split test D.
         /// </summary>
-        public ApiPropertyInt UniqueConvert3 => _unique_convert3 ?? (_unique_convert3 = new ApiPropertyInt(this, "unique_convert_3"));
-        private ApiPropertyInt _unique_convert3;
+        public ApiProperty<int> UniqueConvert3 => _unique_convert3 ?? (_unique_convert3 = new ApiProperty<int>(this, "unique_convert_3"));
+        private ApiProperty<int> _unique_convert3;
         /// <summary>
         /// Gets or sets the count of unique convert for split test D.
         /// </summary>

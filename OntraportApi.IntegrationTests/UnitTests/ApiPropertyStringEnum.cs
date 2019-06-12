@@ -76,9 +76,9 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 
         [Theory]
         [InlineData(null, null)]
-        [InlineData("transactionalonly", BulkMailStatus.TransactionalOnly)]
-        [InlineData("optedin", BulkMailStatus.OptedIn)]
-        [InlineData("hardbounce", BulkMailStatus.HardBounce)]
+        [InlineData("transactional_only", BulkMailStatus.TransactionalOnly)]
+        [InlineData("opted_in", BulkMailStatus.OptedIn)]
+        [InlineData("hard_bounce", BulkMailStatus.HardBounce)]
         public void SetNullableValue_Value_StoreExpectedValue(string expected, BulkMailStatus? value)
         {
             var prop = SetupProperty();
@@ -119,11 +119,13 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             Assert.False(result);
         }
 
-        [Fact]
-        public void HasValue_SetNull_ReturnsFalse()
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        public void HasValue_SetNull_ReturnsFalse(string value)
         {
             var prop = SetupProperty();
-            Set(null);
+            Set(value);
 
             var result = prop.HasValue;
 
@@ -131,9 +133,8 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         }
 
         [Theory]
-        [InlineData("")]
-        [InlineData("optedIn")]
-        [InlineData("hardbounce")]
+        [InlineData("opted_in")]
+        [InlineData("hard_bounce")]
         public void HasValue_Set_ReturnsTrue(string value)
         {
             var prop = SetupProperty();

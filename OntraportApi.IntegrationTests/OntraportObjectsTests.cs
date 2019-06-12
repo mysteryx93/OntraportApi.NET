@@ -319,7 +319,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         public async Task UpdateAsync_SetName_ReturnsSameName()
         {
             var api = SetupApi();
-            var name = "NewName2";
+            var name = "NewName";
 
             var result = await api.UpdateAsync(ApiObjectType.Contact, 19, new { firstname = name });
 

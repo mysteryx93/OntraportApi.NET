@@ -23,7 +23,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         public bool Unique { get; set; }
 
         [JsonConverter(typeof(JsonConverterIntBool))]
-        public bool Editable { get; set; }
+        public bool? Editable { get; set; }
 
         [JsonConverter(typeof(JsonConverterIntBool))]
         public bool Deletable { get; set; }

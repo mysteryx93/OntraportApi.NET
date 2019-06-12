@@ -11,8 +11,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user who controls the product. This field must contain a value for a product object to be saved properly.
         /// </summary>
-        public ApiPropertyInt Owner => _owner ?? (_owner = new ApiPropertyInt(this, "owner"));
-        private ApiPropertyInt _owner;
+        public ApiProperty<int> Owner => _owner ?? (_owner = new ApiProperty<int>(this, "owner"));
+        private ApiProperty<int> _owner;
         /// <summary>
         /// Gets or sets the ID of the user who controls the product. This field must contain a value for a product object to be saved properly.
         /// </summary>
@@ -31,12 +31,12 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the product's price.
         /// </summary>
-        public ApiPropertyDouble Price => _price ?? (_price = new ApiPropertyDouble(this, "price"));
-        private ApiPropertyDouble _price;
+        public ApiProperty<decimal> Price => _price ?? (_price = new ApiProperty<decimal>(this, "price"));
+        private ApiProperty<decimal> _price;
         /// <summary>
         /// Gets or sets the product's price.
         /// </summary>
-        public double PriceValue { get => Price.Value; set => Price.Value = value; }
+        public decimal PriceValue { get => Price.Value; set => Price.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date the product was added.

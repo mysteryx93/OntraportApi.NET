@@ -9,7 +9,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
     public class OntraportProductsTests : OntraportBaseDeleteTests<OntraportProducts, ApiProduct>
     {
         public OntraportProductsTests(ITestOutputHelper output) :
-            base(output, 1)
+            base(output, 1, "product1")
         {
         }
 

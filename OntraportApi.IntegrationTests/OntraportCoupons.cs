@@ -9,7 +9,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
     public class OntraportCouponsTests : OntraportBaseDeleteTests<OntraportCoupons, ApiCoupon>
     {
         public OntraportCouponsTests(ITestOutputHelper output) :
-            base(output, 2)
+            base(output, 2, "GroupCoupon1")
         {
         }
 

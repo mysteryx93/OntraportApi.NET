@@ -71,8 +71,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the number of times the message has been sent.
         /// </summary>
-        public ApiPropertyInt StatSent => _statSent ?? (_statSent = new ApiPropertyInt(this, "mcsent"));
-        private ApiPropertyInt _statSent;
+        public ApiProperty<int> StatSent => _statSent ?? (_statSent = new ApiProperty<int>(this, "mcsent"));
+        private ApiProperty<int> _statSent;
         /// <summary>
         /// Gets or sets the number of times the message has been sent.
         /// </summary>
@@ -81,8 +81,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the rate of messages that have been opened versus sent, represented as a percentage.
         /// </summary>
-        public ApiPropertyInt StatOpened => _statOpened ?? (_statOpened = new ApiPropertyInt(this, "mcopened"));
-        private ApiPropertyInt _statOpened;
+        public ApiProperty<int> StatOpened => _statOpened ?? (_statOpened = new ApiProperty<int>(this, "mcopened"));
+        private ApiProperty<int> _statOpened;
         /// <summary>
         /// Gets or sets the rate of messages that have been opened versus sent, represented as a percentage.
         /// </summary>
@@ -91,8 +91,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the rate of clickthroughs in opened messages, represented as a percentage.
         /// </summary>
-        public ApiPropertyInt StatClicked => _statClicked ?? (_statClicked = new ApiPropertyInt(this, "mcclicked"));
-        private ApiPropertyInt _statClicked;
+        public ApiProperty<int> StatClicked => _statClicked ?? (_statClicked = new ApiProperty<int>(this, "mcclicked"));
+        private ApiProperty<int> _statClicked;
         /// <summary>
         /// Gets or sets the rate of clickthroughs in opened messages, represented as a percentage.
         /// </summary>
@@ -101,8 +101,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the rate of complaints about sent messages, represented as a percentage.
         /// </summary>
-        public ApiPropertyInt StatAbuse => _statAbuse ?? (_statAbuse = new ApiPropertyInt(this, "mcabuse"));
-        private ApiPropertyInt _statAbuse;
+        public ApiProperty<int> StatAbuse => _statAbuse ?? (_statAbuse = new ApiProperty<int>(this, "mcabuse"));
+        private ApiProperty<int> _statAbuse;
         /// <summary>
         /// Gets or sets the rate of complaints about sent messages, represented as a percentage.
         /// </summary>
@@ -111,8 +111,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the rate of opt-outs on this message, represented as a percentage.
         /// </summary>
-        public ApiPropertyInt StatUnsubscribed => _statUnsubscribed ?? (_statUnsubscribed = new ApiPropertyInt(this, "mcunsub"));
-        private ApiPropertyInt _statUnsubscribed;
+        public ApiProperty<int> StatUnsubscribed => _statUnsubscribed ?? (_statUnsubscribed = new ApiProperty<int>(this, "mcunsub"));
+        private ApiProperty<int> _statUnsubscribed;
         /// <summary>
         /// Gets or sets the rate of opt-outs on this message, represented as a percentage.
         /// </summary>
@@ -121,12 +121,12 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the SpamAssassin spam score of the message. The lower the score, the better the rating. Messages with a spam score of 5 or higher will not be sent.
         /// </summary>
-        public ApiPropertyDouble SpamScore => _spamScore ?? (_spamScore = new ApiPropertyDouble(this, "spam_score"));
-        private ApiPropertyDouble _spamScore;
+        public ApiProperty<float> SpamScore => _spamScore ?? (_spamScore = new ApiProperty<float>(this, "spam_score"));
+        private ApiProperty<float> _spamScore;
         /// <summary>
         /// Gets or sets the SpamAssassin spam score of the message. The lower the score, the better the rating. Messages with a spam score of 5 or higher will not be sent.
         /// </summary>
-        public double SpamScoreValue { get => SpamScore.Value; set => SpamScore.Value = value; }
+        public float SpamScoreValue { get => SpamScore.Value; set => SpamScore.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the email subject line.
@@ -141,8 +141,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the object type associated with the message. The default is 0 for contact objects. This field should only be changed if you are using custom objects.
         /// </summary>
-        public ApiPropertyInt ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiPropertyInt(this, "object_type_id"));
-        private ApiPropertyInt _objectTypeId;
+        public ApiProperty<int> ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiProperty<int>(this, "object_type_id"));
+        private ApiProperty<int> _objectTypeId;
         /// <summary>
         /// Gets or sets the ID of the object type associated with the message. The default is 0 for contact objects. This field should only be changed if you are using custom objects.
         /// </summary>
@@ -181,8 +181,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user having ownership of the message.
         /// </summary>
-        public ApiPropertyInt Owner => _owner ?? (_owner = new ApiPropertyInt(this, "owner"));
-        private ApiPropertyInt _owner;
+        public ApiProperty<int> Owner => _owner ?? (_owner = new ApiProperty<int>(this, "owner"));
+        private ApiProperty<int> _owner;
         /// <summary>
         /// Gets or sets the ID of the user having ownership of the message.
         /// </summary>
@@ -274,15 +274,15 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or setes whether or not long lines are being wrapped.
         /// </summary>
-        public ApiPropertyInt WordWrap => _wordWrap ?? (_wordWrap = new ApiPropertyInt(this, "word_wrap_checkbox"));
-        private ApiPropertyInt _wordWrap;
+        public ApiProperty<int> WordWrap => _wordWrap ?? (_wordWrap = new ApiProperty<int>(this, "word_wrap_checkbox"));
+        private ApiProperty<int> _wordWrap;
         /// <summary>
         /// Gets or setes whether or not long lines are being wrapped.
         /// </summary>
         public int WordWrapValue { get => WordWrap.Value; set => WordWrap.Value = value; }
 
-        //public ApiPropertyInt UtmTracking => _utmTracking ?? (_utmTracking = new ApiPropertyInt(this, "utm_tracking"));
-        //private ApiPropertyInt _utmTracking;
+        //public ApiProperty<int> UtmTracking => _utmTracking ?? (_utmTracking = new ApiProperty<int>(this, "utm_tracking"));
+        //private ApiProperty<int> _utmTracking;
 
         //public ApiProperty Resource => _resource ?? (_resource = new ApiProperty(this, "resource"));
         //private ApiProperty _resource;

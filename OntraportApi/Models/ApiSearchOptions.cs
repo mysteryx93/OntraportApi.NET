@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace EmergenceGuardian.OntraportApi.Models
@@ -217,6 +218,6 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// Returns the conditions as a JSON-encoded string.
         /// </summary>
         /// <returns></returns>
-        public string GetCondition() => _content.Any() ? _content.ToString() : null;
+        public string GetCondition() => _content.Any() ? JsonConvert.SerializeObject(_content, Formatting.None) : null;
     }
 }

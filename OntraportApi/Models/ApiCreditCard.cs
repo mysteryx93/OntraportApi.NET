@@ -31,8 +31,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the contact associated with the credit card.
         /// </summary>
-        public ApiPropertyInt ContactId => _contactId ?? (_contactId = new ApiPropertyInt(this, "contact_id"));
-        private ApiPropertyInt _contactId;
+        public ApiProperty<int> ContactId => _contactId ?? (_contactId = new ApiProperty<int>(this, "contact_id"));
+        private ApiProperty<int> _contactId;
         /// <summary>
         /// Gets or sets the ID of the contact associated with the credit card.
         /// </summary>
@@ -41,8 +41,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the last four digits of the credit card number.
         /// </summary>
-        public ApiPropertyInt LastFourDigits => _last4 ?? (_last4 = new ApiPropertyInt(this, "last4"));
-        private ApiPropertyInt _last4;
+        public ApiProperty<int> LastFourDigits => _last4 ?? (_last4 = new ApiProperty<int>(this, "last4"));
+        private ApiProperty<int> _last4;
         /// <summary>
         /// Gets or sets the last four digits of the credit card number.
         /// </summary>
@@ -61,8 +61,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the two-digit integer representation of the credit card's expiration month.
         /// </summary>
-        public ApiPropertyInt ExpirationMonth => _expirationMonth ?? (_expirationMonth = new ApiPropertyInt(this, "exp_month"));
-        private ApiPropertyInt _expirationMonth;
+        public ApiProperty<int> ExpirationMonth => _expirationMonth ?? (_expirationMonth = new ApiProperty<int>(this, "exp_month"));
+        private ApiProperty<int> _expirationMonth;
         /// <summary>
         /// Gets or sets the two-digit integer representation of the credit card's expiration month.
         /// </summary>
@@ -71,8 +71,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the four-digit credit card expiration year.
         /// </summary>
-        public ApiPropertyInt ExpirationYear => _expirationYear ?? (_expirationYear = new ApiPropertyInt(this, "exp_year"));
-        private ApiPropertyInt _expirationYear;
+        public ApiProperty<int> ExpirationYear => _expirationYear ?? (_expirationYear = new ApiProperty<int>(this, "exp_year"));
+        private ApiProperty<int> _expirationYear;
         /// <summary>
         /// Gets or sets the four-digit credit card expiration year.
         /// </summary>
@@ -161,8 +161,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the invoice generated in relation to the most recent charge to the credit card.
         /// </summary>
-        public ApiPropertyInt LastInvoiceId => _lastInvoiceId ?? (_lastInvoiceId = new ApiPropertyInt(this, "invoice_id"));
-        private ApiPropertyInt _lastInvoiceId;
+        public ApiProperty<int> LastInvoiceId => _lastInvoiceId ?? (_lastInvoiceId = new ApiProperty<int>(this, "invoice_id"));
+        private ApiProperty<int> _lastInvoiceId;
         /// <summary>
         /// Gets or sets the ID of the invoice generated in relation to the most recent charge to the credit card.
         /// </summary>

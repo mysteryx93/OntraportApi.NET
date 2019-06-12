@@ -50,8 +50,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set how much the company earns in a year.
         /// </summary>
-        public ApiPropertyInt AnnualRevenue => _annualRevenue ?? (_annualRevenue = new ApiPropertyInt(this, "annual_revenue"));
-        private ApiPropertyInt _annualRevenue;
+        public ApiProperty<int> AnnualRevenue => _annualRevenue ?? (_annualRevenue = new ApiProperty<int>(this, "annual_revenue"));
+        private ApiProperty<int> _annualRevenue;
         /// <summary>
         /// Gets or sets how much the company earns in a year.
         /// </summary>
@@ -60,8 +60,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set how many employees are in the company.
         /// </summary>
-        public ApiPropertyInt EmployeeCount => _employeeCount ?? (_employeeCount = new ApiPropertyInt(this, "employee_count"));
-        private ApiPropertyInt _employeeCount;
+        public ApiProperty<int> EmployeeCount => _employeeCount ?? (_employeeCount = new ApiProperty<int>(this, "employee_count"));
+        private ApiProperty<int> _employeeCount;
         /// <summary>
         /// Gets or sets how many employees are in the company.
         /// </summary>

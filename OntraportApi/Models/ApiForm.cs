@@ -64,8 +64,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user controlling the form.
         /// </summary>
-        public ApiPropertyInt Owner => _owner ?? (_owner = new ApiPropertyInt(this, "owner"));
-        private ApiPropertyInt _owner;
+        public ApiProperty<int> Owner => _owner ?? (_owner = new ApiProperty<int>(this, "owner"));
+        private ApiProperty<int> _owner;
         /// <summary>
         /// Gets or sets the ID of the user controlling the form.
         /// </summary>
@@ -94,8 +94,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the number of times the form has been filled out.
         /// </summary>
-        public ApiPropertyInt Fillouts => _fillouts ?? (_fillouts = new ApiPropertyInt(this, "fillouts"));
-        private ApiPropertyInt _fillouts;
+        public ApiProperty<int> Fillouts => _fillouts ?? (_fillouts = new ApiProperty<int>(this, "fillouts"));
+        private ApiProperty<int> _fillouts;
         /// <summary>
         /// Gets or sets the number of times the form has been filled out.
         /// </summary>
@@ -124,8 +124,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the object type associated with the form.
         /// </summary>
-        public ApiPropertyInt ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiPropertyInt(this, "object_type_id"));
-        private ApiPropertyInt _objectTypeId;
+        public ApiProperty<int> ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiProperty<int>(this, "object_type_id"));
+        private ApiProperty<int> _objectTypeId;
         /// <summary>
         /// Gets or sets the ID of the object type associated with the form.
         /// </summary>
@@ -144,8 +144,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the number of times the form has been visited.
         /// </summary>
-        public ApiPropertyInt Visits => _visits ?? (_visits = new ApiPropertyInt(this, "visits"));
-        private ApiPropertyInt _visits;
+        public ApiProperty<int> Visits => _visits ?? (_visits = new ApiProperty<int>(this, "visits"));
+        private ApiProperty<int> _visits;
         /// <summary>
         /// Gets or sets the number of times the form has been visited.
         /// </summary>
@@ -154,8 +154,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the number of times unique visitors have visited the form.
         /// </summary>
-        public ApiPropertyInt UniqueVisits => _uniqueVisits ?? (_uniqueVisits = new ApiPropertyInt(this, "unique_visits"));
-        private ApiPropertyInt _uniqueVisits;
+        public ApiProperty<int> UniqueVisits => _uniqueVisits ?? (_uniqueVisits = new ApiProperty<int>(this, "unique_visits"));
+        private ApiProperty<int> _uniqueVisits;
         /// <summary>
         /// Gets or sets the number of times unique visitors have visited the form.
         /// </summary>
@@ -185,20 +185,20 @@ namespace EmergenceGuardian.OntraportApi.Models
         private ApiPropertyString _campaigns;
         public string CampaignsValue { get=> Campaigns.Value; set => Campaigns.Value = value; }
 
-        public ApiPropertyInt UniqueFillouts => _uniqueFillouts ?? (_uniqueFillouts = new ApiPropertyInt(this, "unique_fillouts"));
-        private ApiPropertyInt _uniqueFillouts;
+        public ApiProperty<int> UniqueFillouts => _uniqueFillouts ?? (_uniqueFillouts = new ApiProperty<int>(this, "unique_fillouts"));
+        private ApiProperty<int> _uniqueFillouts;
         public int UniqueFilloutsValue { get=> UniqueFillouts.Value; set => UniqueFillouts.Value = value; }
 
-        public ApiPropertyDouble Revenue => _revenue ?? (_revenue = new ApiPropertyDouble(this, "revenue"));
-        private ApiPropertyDouble _revenue;
-        public double RevenueValue { get=> Revenue.Value; set => Revenue.Value = value; }
+        public ApiProperty<decimal> Revenue => _revenue ?? (_revenue = new ApiProperty<decimal>(this, "revenue"));
+        private ApiProperty<decimal> _revenue;
+        public decimal RevenueValue { get=> Revenue.Value; set => Revenue.Value = value; }
 
         public ApiPropertyBool SkipBackgroundAutomation => _skipBackgroundAutomation ?? (_skipBackgroundAutomation = new ApiPropertyBool(this, "skip_bg_automation"));
         private ApiPropertyBool _skipBackgroundAutomation;
         public bool SkipBackgroundAutomationValue { get=> SkipBackgroundAutomation.Value; set => SkipBackgroundAutomation.Value = value; }
 
-        public ApiPropertyInt RuleHash => _ruleHash ?? (_ruleHash = new ApiPropertyInt(this, "rule_hash"));
-        private ApiPropertyInt _ruleHash;
+        public ApiProperty<int> RuleHash => _ruleHash ?? (_ruleHash = new ApiProperty<int>(this, "rule_hash"));
+        private ApiProperty<int> _ruleHash;
         public int RuleHashValue { get=> RuleHash.Value; set => RuleHash.Value = value; }
 
 

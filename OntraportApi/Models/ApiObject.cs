@@ -29,8 +29,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the object's ID.
         /// </summary>
-        public ApiPropertyInt Id => _id ?? (_id = new ApiPropertyInt(this, _idField));
-        private ApiPropertyInt _id;
+        public ApiProperty<int> Id => _id ?? (_id = new ApiProperty<int>(this, _idField));
+        private ApiProperty<int> _id;
         /// <summary>
         /// Gets or sets the object's ID.
         /// </summary>

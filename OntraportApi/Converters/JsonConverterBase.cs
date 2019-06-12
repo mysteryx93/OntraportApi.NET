@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Globalization;
+using EmergenceGuardian.OntraportApi.Models;
 
 namespace EmergenceGuardian.OntraportApi.Converters
 {
@@ -14,7 +15,7 @@ namespace EmergenceGuardian.OntraportApi.Converters
         where T : struct
     {
         public override Nullable<T> ReadJson(JsonReader reader, Type objectType, Nullable<T> existingValue, bool hasExistingValue, JsonSerializer serializer) =>
-            Parse<T>(reader.Value?.ToString());
+            Parse<Nullable<T>>(reader.Value?.ToString(), reader.Path);
 
         public override void WriteJson(JsonWriter writer, Nullable<T> value, JsonSerializer serializer) =>
             writer.WriteValue(Format(value));
@@ -29,7 +30,7 @@ namespace EmergenceGuardian.OntraportApi.Converters
         /// </summary>
         /// <param name="value">The value to parse.</param>
         /// <returns>The parsed value.</returns>
-        public virtual P Parse<P>(string value) => (P)(object)value;
+        public virtual P Parse<P>(string value, string jsonPath = null) => value != null ? value.Convert<P>() : CreateNull<P>(jsonPath);
 
         /// <summary>
         /// When overriden in a derived class, formats data of type T into Ontraport API format.
@@ -42,6 +43,17 @@ namespace EmergenceGuardian.OntraportApi.Converters
         /// Creates a null object if P is nullable, otherwise throws a NullReferenceException.
         /// </summary>
         /// <typeparam name="P">The type to set to null.</typeparam>
-        protected P CreateNull<P>() => typeof(P) == typeof(Nullable<T>) ? default(P) : throw new NullReferenceException();
+        protected P CreateNull<P>(string jsonPath)
+        {
+            if (typeof(P) == typeof(Nullable<T>))
+            {
+                return default(P);
+            }
+            else
+            {
+                var message = jsonPath != null ? $"Unexpected null value at '{jsonPath}'." : null;
+                throw new NullReferenceException(message);
+            }
+        }
     }
 }

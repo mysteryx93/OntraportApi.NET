@@ -15,7 +15,7 @@ namespace EmergenceGuardian.OntraportApi.Converters
 
         public override string NullString => "";
 
-        public override P Parse<P>(string value)
+        public override P Parse<P>(string value, string jsonPath = null)
         {
             if (!string.IsNullOrEmpty(value))
             {
@@ -25,7 +25,7 @@ namespace EmergenceGuardian.OntraportApi.Converters
                     return (P)(object)result;
                 }
             }
-            return CreateNull<P>();
+            return CreateNull<P>(jsonPath);
         }
 
         public override object Format(T? value) => 

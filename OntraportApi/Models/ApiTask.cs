@@ -11,8 +11,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the user who has control of the task.
         /// </summary>
-        public ApiPropertyInt Owner => _owner ?? (_owner = new ApiPropertyInt(this, "owner"));
-        private ApiPropertyInt _owner;
+        public ApiProperty<int> Owner => _owner ?? (_owner = new ApiProperty<int>(this, "owner"));
+        private ApiProperty<int> _owner;
         /// <summary>
         /// Returns a ApiProperty object to get or set the user who has control of the task.
         /// </summary>
@@ -21,8 +21,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the task is a step in a sequence, returns a ApiProperty object to get or set the ID of that sequence.
         /// </summary>
-        public ApiPropertyInt DripId => _dripId ?? (_dripId = new ApiPropertyInt(this, "drip_id"));
-        private ApiPropertyInt _dripId;
+        public ApiProperty<int> DripId => _dripId ?? (_dripId = new ApiProperty<int>(this, "drip_id"));
+        private ApiProperty<int> _dripId;
         /// <summary>
         /// If the task is a step in a sequence, gets or sets the ID of that sequence.
         /// </summary>
@@ -31,8 +31,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the contact the task is related to.
         /// </summary>
-        public ApiPropertyInt ContactId => _contactId ?? (_contactId = new ApiPropertyInt(this, "contact_id"));
-        private ApiPropertyInt _contactId;
+        public ApiProperty<int> ContactId => _contactId ?? (_contactId = new ApiProperty<int>(this, "contact_id"));
+        private ApiProperty<int> _contactId;
         /// <summary>
         /// Gets or sets the ID of the contact the task is related to.
         /// </summary>
@@ -41,8 +41,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the task is a step in a sequence, returns a ApiProperty object to get or set the order in the sequence of that step.
         /// </summary>
-        public ApiPropertyInt StepNum => _stepNum ?? (_stepNum = new ApiPropertyInt(this, "step_num"));
-        private ApiPropertyInt _stepNum;
+        public ApiProperty<int> StepNum => _stepNum ?? (_stepNum = new ApiProperty<int>(this, "step_num"));
+        private ApiProperty<int> _stepNum;
         /// <summary>
         /// If the task is a step in a sequence, gets or sets the order in the sequence of that step.
         /// </summary>
@@ -131,8 +131,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the task has an outcome, returns a ApiProperty object to get or set the ID of that outcome. Task outcomes are user-defined and stored as a related object.
         /// </summary>
-        public ApiPropertyInt CallOutcomeId => _callOutcomeId ?? (_callOutcomeId = new ApiPropertyInt(this, "call_outcome_id"));
-        private ApiPropertyInt _callOutcomeId;
+        public ApiProperty<int> CallOutcomeId => _callOutcomeId ?? (_callOutcomeId = new ApiProperty<int>(this, "call_outcome_id"));
+        private ApiProperty<int> _callOutcomeId;
         /// <summary>
         /// If the task has an outcome, gets or sets the ID of that outcome. Task outcomes are user-defined and stored as a related object.
         /// </summary>
@@ -141,8 +141,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the task message. The task message is the generic template the task was created from.
         /// </summary>
-        public ApiPropertyInt TaskTemplateId => _taskTemplateId ?? (_taskTemplateId = new ApiPropertyInt(this, "item_id"));
-        private ApiPropertyInt _taskTemplateId;
+        public ApiProperty<int> TaskTemplateId => _taskTemplateId ?? (_taskTemplateId = new ApiProperty<int>(this, "item_id"));
+        private ApiProperty<int> _taskTemplateId;
         /// <summary>
         /// Gets or sets the ID of the task message. The task message is the generic template the task was created from.
         /// </summary>
@@ -171,8 +171,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID for the type of object the task is associated with.
         /// </summary>
-        public ApiPropertyInt ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiPropertyInt(this, "object_type_id"));
-        private ApiPropertyInt _objectTypeId;
+        public ApiProperty<int> ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiProperty<int>(this, "object_type_id"));
+        private ApiProperty<int> _objectTypeId;
         /// <summary>
         /// Gets or sets the ID for the type of object the task is associated with.
         /// </summary>

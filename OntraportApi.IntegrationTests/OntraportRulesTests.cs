@@ -9,7 +9,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
     public class OntraportRulesTests : OntraportBaseDeleteTests<OntraportRules, ApiRule>
     {
         public OntraportRulesTests(ITestOutputHelper output) :
-            base(output, 1)
+            base(output, 1, "rule1")
         {
         }
 

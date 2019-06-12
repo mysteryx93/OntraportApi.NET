@@ -10,8 +10,8 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         where T : OntraportBaseCustomObject<U>
         where U : ApiCustomObjectBase
     {
-        public OntraportBaseCustomObjectTests(ITestOutputHelper output, int validId) :
-            base(output, validId)
+        public OntraportBaseCustomObjectTests(ITestOutputHelper output, int validId, string validKeyValue) :
+            base(output, validId, validKeyValue)
         {
         }
 

@@ -41,8 +41,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the object type the campaign relates to.
         /// </summary>
-        public ApiPropertyInt ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiPropertyInt(this, "object_type_id"));
-        private ApiPropertyInt _objectTypeId;
+        public ApiProperty<int> ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiProperty<int>(this, "object_type_id"));
+        private ApiProperty<int> _objectTypeId;
         /// <summary>
         /// Gets or sets the ID of the object type the campaign relates to.
         /// </summary>

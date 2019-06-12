@@ -8,12 +8,12 @@ namespace EmergenceGuardian.OntraportApi.Models
     /// </summary>
     public class ApiCouponCode : ApiObject
     {
-        public ApiPropertyInt CouponId => _couponId ?? (_couponId = new ApiPropertyInt(this, "coupon_id"));
-        private ApiPropertyInt _couponId;
+        public ApiProperty<int> CouponId => _couponId ?? (_couponId = new ApiProperty<int>(this, "coupon_id"));
+        private ApiProperty<int> _couponId;
         public int CouponIdValue { get => CouponId.Value; set => CouponId.Value = value; }
 
-        public ApiPropertyInt ContactId => _contactId ?? (_contactId = new ApiPropertyInt(this, "contact_id"));
-        private ApiPropertyInt _contactId;
+        public ApiProperty<int> ContactId => _contactId ?? (_contactId = new ApiProperty<int>(this, "contact_id"));
+        private ApiProperty<int> _contactId;
         public int ContactIdValue { get => ContactId.Value; set => ContactId.Value = value; }
 
         public ApiPropertyString Code => _code ?? (_code = new ApiPropertyString(this, "code"));

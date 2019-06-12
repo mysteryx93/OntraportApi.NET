@@ -11,8 +11,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user who controls the custom object. This field must contain a value for a custom object to be saved properly.
         /// </summary>
-        public ApiPropertyInt Owner => _owner ?? (_owner = new ApiPropertyInt(this, "owner"));
-        private ApiPropertyInt _owner;
+        public ApiProperty<int> Owner => _owner ?? (_owner = new ApiProperty<int>(this, "owner"));
+        private ApiProperty<int> _owner;
         /// <summary>
         /// Gets or sets the ID of the user who controls the custom object. This field must contain a value for a custom object to be saved properly.
         /// </summary>
@@ -51,8 +51,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the source from which the custom object was added to the database.
         /// </summary>
-        public ApiPropertyInt SystemSource => _systemSource ?? (_systemSource = new ApiPropertyInt(this, "system_source"));
-        private ApiPropertyInt _systemSource;
+        public ApiProperty<int> SystemSource => _systemSource ?? (_systemSource = new ApiProperty<int>(this, "system_source"));
+        private ApiProperty<int> _systemSource;
         /// <summary>
         /// Gets or sets the source from which the custom object was added to the database.
         /// </summary>
@@ -85,8 +85,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the import batch the custom object was imported with, if any.
         /// </summary>
-        public ApiPropertyInt ImportId => _importId ?? (_importId = new ApiPropertyInt(this, "import_id"));
-        private ApiPropertyInt _importId;
+        public ApiProperty<int> ImportId => _importId ?? (_importId = new ApiProperty<int>(this, "import_id"));
+        private ApiProperty<int> _importId;
         /// <summary>
         /// Gets or sets the ID of the import batch the custom object was imported with, if any.
         /// </summary>
@@ -142,8 +142,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// </summary>
         public string ListCampaignsValue { get => ListCampaigns.Value; set => ListCampaigns.Value = value; }
 
-        public ApiPropertyInt BIndex => _bindex ?? (_bindex = new ApiPropertyInt(this, "bindex"));
-        private ApiPropertyInt _bindex;
+        public ApiProperty<int> BIndex => _bindex ?? (_bindex = new ApiProperty<int>(this, "bindex"));
+        private ApiProperty<int> _bindex;
         public int BIndexValue { get => BIndex.Value; set => BIndex.Value = value; }
     }
 }

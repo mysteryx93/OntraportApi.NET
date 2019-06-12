@@ -12,8 +12,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the rule is a step in a sequence, returns a ApiProperty object to get or set the ID of that sequence.
         /// </summary>
-        public ApiPropertyInt DripId => _dripId ?? (_dripId = new ApiPropertyInt(this, "drip_id"));
-        private ApiPropertyInt _dripId;
+        public ApiProperty<int> DripId => _dripId ?? (_dripId = new ApiProperty<int>(this, "drip_id"));
+        private ApiProperty<int> _dripId;
         /// <summary>
         /// If the rule is a step in a sequence, gets or sets the ID of that sequence.
         /// </summary>
@@ -82,8 +82,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID for the type of object the rule is associated with.
         /// </summary>
-        public ApiPropertyInt ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiPropertyInt(this, "object_type_id"));
-        private ApiPropertyInt _objectTypeId;
+        public ApiProperty<int> ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiProperty<int>(this, "object_type_id"));
+        private ApiProperty<int> _objectTypeId;
         /// <summary>
         /// Gets or sets the ID for the type of object the rule is associated with.
         /// </summary>

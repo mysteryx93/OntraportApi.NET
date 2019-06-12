@@ -11,13 +11,13 @@ namespace EmergenceGuardian.OntraportApi.Converters
     {
         public override string NullString => "";
 
-        public override P Parse<P>(string value)
+        public override P Parse<P>(string value, string jsonPath = null)
         {
             if (!string.IsNullOrEmpty(value))
             {
                 return (P)(object)Enum.Parse(typeof(T), value);
             }
-            return CreateNull<P>();
+            return CreateNull<P>(jsonPath);
         }
 
         public override object Format(T? value) => value != null ? (int)(object)value : (int?)null;

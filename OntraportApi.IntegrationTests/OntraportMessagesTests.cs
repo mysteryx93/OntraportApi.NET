@@ -9,7 +9,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
     public class OntraportMessagesTests : OntraportBaseWriteTests<OntraportMessages, ApiMessage>
     {
         public OntraportMessagesTests(ITestOutputHelper output) :
-            base(output, 2)
+            base(output, 2, "Message1")
         {
         }
 

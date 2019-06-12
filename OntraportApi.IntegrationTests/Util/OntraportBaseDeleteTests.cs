@@ -11,8 +11,8 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         where T : OntraportBaseDelete<U>
         where U : ApiObject
     {
-        public OntraportBaseDeleteTests(ITestOutputHelper output, int validId) : 
-            base(output, validId)
+        public OntraportBaseDeleteTests(ITestOutputHelper output, int validId, string validKeyValue) : 
+            base(output, validId, validKeyValue)
         {
         }
 

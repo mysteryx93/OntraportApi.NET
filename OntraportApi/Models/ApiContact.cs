@@ -41,8 +41,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the affiliate ID of the first affiliate to refer the contact.
         /// </summary>
-        public ApiPropertyInt FirstReferrer => _firstReferrer ?? (_firstReferrer = new ApiPropertyInt(this, "freferrer"));
-        private ApiPropertyInt _firstReferrer;
+        public ApiProperty<int> FirstReferrer => _firstReferrer ?? (_firstReferrer = new ApiProperty<int>(this, "freferrer"));
+        private ApiProperty<int> _firstReferrer;
         /// <summary>
         /// Gets or sets the affiliate ID of the first affiliate to refer the contact.
         /// </summary>
@@ -51,8 +51,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the affiliate ID of the last affiliate to refer the contact.
         /// </summary>
-        public ApiPropertyInt LastReferrer => _lastReferrer ?? (_lastReferrer = new ApiPropertyInt(this, "lreferrer"));
-        private ApiPropertyInt _lastReferrer;
+        public ApiProperty<int> LastReferrer => _lastReferrer ?? (_lastReferrer = new ApiProperty<int>(this, "lreferrer"));
+        private ApiProperty<int> _lastReferrer;
         /// <summary>
         /// Gets or sets the affiliate ID of the last affiliate to refer the contact.
         /// </summary>
@@ -221,8 +221,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the lead source ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiPropertyInt LeadSourceFirst => _leadSourceFirst ?? (_leadSourceFirst = new ApiPropertyInt(this, "n_lead_source"));
-        private ApiPropertyInt _leadSourceFirst;
+        public ApiProperty<int> LeadSourceFirst => _leadSourceFirst ?? (_leadSourceFirst = new ApiProperty<int>(this, "n_lead_source"));
+        private ApiProperty<int> _leadSourceFirst;
         /// <summary>
         /// Gets or sets the lead source ID for the tracking URL the contact arrived from.
         /// </summary>
@@ -231,8 +231,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the content ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiPropertyInt LeadContentFirst => _leadContentFirst ?? (_leadContentFirst = new ApiPropertyInt(this, "n_content"));
-        private ApiPropertyInt _leadContentFirst;
+        public ApiProperty<int> LeadContentFirst => _leadContentFirst ?? (_leadContentFirst = new ApiProperty<int>(this, "n_content"));
+        private ApiProperty<int> _leadContentFirst;
         /// <summary>
         /// Gets or sets the content ID for the tracking URL the contact arrived from.
         /// </summary>
@@ -241,8 +241,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the medium ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiPropertyInt LeadMediumFirst => _leadMediumFirst ?? (_leadMediumFirst = new ApiPropertyInt(this, "n_medium"));
-        private ApiPropertyInt _leadMediumFirst;
+        public ApiProperty<int> LeadMediumFirst => _leadMediumFirst ?? (_leadMediumFirst = new ApiProperty<int>(this, "n_medium"));
+        private ApiProperty<int> _leadMediumFirst;
         /// <summary>
         /// Gets or sets the medium ID for the tracking URL the contact arrived from.
         /// </summary>
@@ -251,8 +251,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the tracking campaign ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiPropertyInt LeadCampaignFirst => _leadCampaignFirst ?? (_leadCampaignFirst = new ApiPropertyInt(this, "n_campaign"));
-        private ApiPropertyInt _leadCampaignFirst;
+        public ApiProperty<int> LeadCampaignFirst => _leadCampaignFirst ?? (_leadCampaignFirst = new ApiProperty<int>(this, "n_campaign"));
+        private ApiProperty<int> _leadCampaignFirst;
         /// <summary>
         /// Gets or sets the tracking campaign ID for the tracking URL the contact arrived from.
         /// </summary>
@@ -261,8 +261,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the term ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiPropertyInt LeadTermsFirst => _leadTermsFirst ?? (_leadTermsFirst = new ApiPropertyInt(this, "n_term"));
-        private ApiPropertyInt _leadTermsFirst;
+        public ApiProperty<int> LeadTermsFirst => _leadTermsFirst ?? (_leadTermsFirst = new ApiProperty<int>(this, "n_term"));
+        private ApiProperty<int> _leadTermsFirst;
         /// <summary>
         /// Gets or sets the term ID for the tracking URL the contact arrived from.
         /// </summary>
@@ -271,8 +271,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the last lead source ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiPropertyInt LeadSourceLast => _leadSourceLast ?? (_leadSourceLast = new ApiPropertyInt(this, "l_lead_source"));
-        private ApiPropertyInt _leadSourceLast;
+        public ApiProperty<int> LeadSourceLast => _leadSourceLast ?? (_leadSourceLast = new ApiProperty<int>(this, "l_lead_source"));
+        private ApiProperty<int> _leadSourceLast;
         /// <summary>
         /// Gets or sets the last lead source ID for the tracking URL the contact arrived from.
         /// </summary>
@@ -281,8 +281,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the last content ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiPropertyInt LeadContentLast => _leadContentLast ?? (_leadContentLast = new ApiPropertyInt(this, "l_content"));
-        private ApiPropertyInt _leadContentLast;
+        public ApiProperty<int> LeadContentLast => _leadContentLast ?? (_leadContentLast = new ApiProperty<int>(this, "l_content"));
+        private ApiProperty<int> _leadContentLast;
         /// <summary>
         /// Gets or sets the last content ID for the tracking URL the contact arrived from.
         /// </summary>
@@ -291,8 +291,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the last medium ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiPropertyInt LeadMediumLast => _leadMediumLast ?? (_leadMediumLast = new ApiPropertyInt(this, "l_medium"));
-        private ApiPropertyInt _leadMediumLast;
+        public ApiProperty<int> LeadMediumLast => _leadMediumLast ?? (_leadMediumLast = new ApiProperty<int>(this, "l_medium"));
+        private ApiProperty<int> _leadMediumLast;
         /// <summary>
         /// Gets or sets the last medium ID for the tracking URL the contact arrived from.
         /// </summary>
@@ -301,8 +301,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the last tracking campaign ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiPropertyInt LeadCampaignLast => _leadCampaignLast ?? (_leadCampaignLast = new ApiPropertyInt(this, "l_campaign"));
-        private ApiPropertyInt _leadCampaignLast;
+        public ApiProperty<int> LeadCampaignLast => _leadCampaignLast ?? (_leadCampaignLast = new ApiProperty<int>(this, "l_campaign"));
+        private ApiProperty<int> _leadCampaignLast;
         /// <summary>
         /// Gets or sets the last tracking campaign ID for the tracking URL the contact arrived from.
         /// </summary>
@@ -311,8 +311,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the last term ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiPropertyInt LeadTermsLast => _leadTermsLast ?? (_leadTermsLast = new ApiPropertyInt(this, "l_term"));
-        private ApiPropertyInt _leadTermsLast;
+        public ApiProperty<int> LeadTermsLast => _leadTermsLast ?? (_leadTermsLast = new ApiProperty<int>(this, "l_term"));
+        private ApiProperty<int> _leadTermsLast;
         /// <summary>
         /// Gets or sets the last term ID for the tracking URL the contact arrived from.
         /// </summary>
@@ -321,8 +321,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the page the contact was referred from.
         /// </summary>
-        public ApiPropertyInt ReferralPage => _referralPage ?? (_referralPage = new ApiPropertyInt(this, "referral_page"));
-        private ApiPropertyInt _referralPage;
+        public ApiProperty<int> ReferralPage => _referralPage ?? (_referralPage = new ApiProperty<int>(this, "referral_page"));
+        private ApiProperty<int> _referralPage;
         /// <summary>
         /// Gets or sets the page the contact was referred from.
         /// </summary>
@@ -331,8 +331,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the contact is an affiliate, returns a ApiProperty object to get or set the total number of affiliate sales.
         /// </summary>
-        public ApiPropertyInt AffiliateSales => _affiliateSales ?? (_affiliateSales = new ApiPropertyInt(this, "aff_sales"));
-        private ApiPropertyInt _affiliateSales;
+        public ApiProperty<int> AffiliateSales => _affiliateSales ?? (_affiliateSales = new ApiProperty<int>(this, "aff_sales"));
+        private ApiProperty<int> _affiliateSales;
         /// <summary>
         /// If the contact is an affiliate, gets or sets the total number of affiliate sales.
         /// </summary>
@@ -341,18 +341,18 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the contact is an affiliate, returns a ApiProperty object to get or set the total amount of affiliate sales.
         /// </summary>
-        public ApiPropertyDouble AffiliateAmount => _affiliateAmount ?? (_affiliateAmount = new ApiPropertyDouble(this, "aff_amount"));
-        private ApiPropertyDouble _affiliateAmount;
+        public ApiProperty<decimal> AffiliateAmount => _affiliateAmount ?? (_affiliateAmount = new ApiProperty<decimal>(this, "aff_amount"));
+        private ApiProperty<decimal> _affiliateAmount;
         /// <summary>
         /// If the contact is an affiliate, gets or sets the total amount of affiliate sales.
         /// </summary>
-        public double AffiliateAmountValue { get => AffiliateAmount.Value; set => AffiliateAmount.Value = value; }
+        public decimal AffiliateAmountValue { get => AffiliateAmount.Value; set => AffiliateAmount.Value = value; }
 
         /// <summary>
         /// For affiliates, returns a ApiProperty object to get or set the partner program ID.
         /// </summary>
-        public ApiPropertyInt AffiliateProgramId => _affiliateProgramId ?? (_affiliateProgramId = new ApiPropertyInt(this, "program_id"));
-        private ApiPropertyInt _affiliateProgramId;
+        public ApiProperty<int> AffiliateProgramId => _affiliateProgramId ?? (_affiliateProgramId = new ApiProperty<int>(this, "program_id"));
+        private ApiProperty<int> _affiliateProgramId;
         /// <summary>
         /// For affiliates, returns a ApiProperty object to get or set the partner program ID.
         /// </summary>
@@ -381,28 +381,28 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the amount of the contact's most recent credit card charge.
         /// </summary>
-        public ApiPropertyDouble LastTransactionAmount => _lastTransactionAmount ?? (_lastTransactionAmount = new ApiPropertyDouble(this, "mrcAmount"));
-        private ApiPropertyDouble _lastTransactionAmount;
+        public ApiProperty<decimal> LastTransactionAmount => _lastTransactionAmount ?? (_lastTransactionAmount = new ApiProperty<decimal>(this, "mrcAmount"));
+        private ApiProperty<decimal> _lastTransactionAmount;
         /// <summary>
         /// Gets or sets the amount of the contact's most recent credit card charge.
         /// </summary>
-        public double LastTransactionAmountValue { get => LastTransactionAmount.Value; set => LastTransactionAmount.Value = value; }
+        public decimal LastTransactionAmountValue { get => LastTransactionAmount.Value; set => LastTransactionAmount.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the total contact transactions remaining unpaid.
         /// </summary>
-        public ApiPropertyDouble LastTransactionUnpaid => _lastTransactionUnpaid ?? (_lastTransactionUnpaid = new ApiPropertyDouble(this, "mrcUnpaid"));
-        private ApiPropertyDouble _lastTransactionUnpaid;
+        public ApiProperty<decimal> LastTransactionUnpaid => _lastTransactionUnpaid ?? (_lastTransactionUnpaid = new ApiProperty<decimal>(this, "mrcUnpaid"));
+        private ApiProperty<decimal> _lastTransactionUnpaid;
         /// <summary>
         /// Gets or sets the total contact transactions remaining unpaid.
         /// </summary>
-        public double LastTransactionUnpaidValue { get => LastTransactionUnpaid.Value; set => LastTransactionUnpaid.Value = value; }
+        public decimal LastTransactionUnpaidValue { get => LastTransactionUnpaid.Value; set => LastTransactionUnpaid.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's most recent invoice number.
         /// </summary>
-        public ApiPropertyInt LastInvoiceNumber => _lastInvoiceNumber ?? (_lastInvoiceNumber = new ApiPropertyInt(this, "mriInvoiceNum"));
-        private ApiPropertyInt _lastInvoiceNumber;
+        public ApiProperty<int> LastInvoiceNumber => _lastInvoiceNumber ?? (_lastInvoiceNumber = new ApiProperty<int>(this, "mriInvoiceNum"));
+        private ApiProperty<int> _lastInvoiceNumber;
         /// <summary>
         /// Gets or sets the contact's most recent invoice number.
         /// </summary>
@@ -411,12 +411,12 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's most recent invoice total.
         /// </summary>
-        public ApiPropertyDouble LastInvoiceTotal => _lastInvoiceTotal ?? (_lastInvoiceTotal = new ApiPropertyDouble(this, "mriInvoiceTotal"));
-        private ApiPropertyDouble _lastInvoiceTotal;
+        public ApiProperty<decimal> LastInvoiceTotal => _lastInvoiceTotal ?? (_lastInvoiceTotal = new ApiProperty<decimal>(this, "mriInvoiceTotal"));
+        private ApiProperty<decimal> _lastInvoiceTotal;
         /// <summary>
         /// Gets or sets the contact's most recent invoice total.
         /// </summary>
-        public double LastInvoiceTotalValue { get => LastInvoiceTotal.Value; set => LastInvoiceTotal.Value = value; }
+        public decimal LastInvoiceTotalValue { get => LastInvoiceTotal.Value; set => LastInvoiceTotal.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's credit card type.
@@ -431,8 +431,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the expiration month of the contact's credit card.
         /// </summary>
-        public ApiPropertyInt CreditCardExpirationMonth => _creditCardExpirationMonth ?? (_creditCardExpirationMonth = new ApiPropertyInt(this, "ccExpirationMonth"));
-        private ApiPropertyInt _creditCardExpirationMonth;
+        public ApiProperty<int> CreditCardExpirationMonth => _creditCardExpirationMonth ?? (_creditCardExpirationMonth = new ApiProperty<int>(this, "ccExpirationMonth"));
+        private ApiProperty<int> _creditCardExpirationMonth;
         /// <summary>
         /// Gets or sets the expiration month of the contact's credit card.
         /// </summary>
@@ -441,8 +441,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the year the contact's credit card expires.
         /// </summary>
-        public ApiPropertyInt CreditCardExpirationYear => _creditCardExpirationYear ?? (_creditCardExpirationYear = new ApiPropertyInt(this, "ccExpirationYear"));
-        private ApiPropertyInt _creditCardExpirationYear;
+        public ApiProperty<int> CreditCardExpirationYear => _creditCardExpirationYear ?? (_creditCardExpirationYear = new ApiProperty<int>(this, "ccExpirationYear"));
+        private ApiProperty<int> _creditCardExpirationYear;
         /// <summary>
         /// Gets or sets the year the contact's credit card expires.
         /// </summary>
@@ -451,8 +451,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the day of the month that the contact's credit card expires.
         /// </summary>
-        public ApiPropertyInt CreditCardExpirationDay => _creditCardExpirationDay ?? (_creditCardExpirationDay = new ApiPropertyInt(this, "ccExpirationDate"));
-        private ApiPropertyInt _creditCardExpirationDay;
+        public ApiProperty<int> CreditCardExpirationDay => _creditCardExpirationDay ?? (_creditCardExpirationDay = new ApiProperty<int>(this, "ccExpirationDate"));
+        private ApiProperty<int> _creditCardExpirationDay;
         /// <summary>
         /// Gets or sets the day of the month that the contact's credit card expires.
         /// </summary>
@@ -501,18 +501,18 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the total amount the contact has spent with your company.
         /// </summary>
-        public ApiPropertyDouble Spent => _spent ?? (_spent = new ApiPropertyDouble(this, "spent"));
-        private ApiPropertyDouble _spent;
+        public ApiProperty<decimal> Spent => _spent ?? (_spent = new ApiProperty<decimal>(this, "spent"));
+        private ApiProperty<decimal> _spent;
         /// <summary>
         /// Gets or sets the total amount the contact has spent with your company.
         /// </summary>
-        public double SpentValue { get => Spent.Value; set => Spent.Value = value; }
+        public decimal SpentValue { get => Spent.Value; set => Spent.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's total orders.
         /// </summary>
-        public ApiPropertyInt NumPurchased => _numPurchased ?? (_numPurchased = new ApiPropertyInt(this, "num_purchased"));
-        private ApiPropertyInt _numPurchased;
+        public ApiProperty<int> NumPurchased => _numPurchased ?? (_numPurchased = new ApiProperty<int>(this, "num_purchased"));
+        private ApiProperty<int> _numPurchased;
         /// <summary>
         /// Gets or sets the contact's total orders.
         /// </summary>
@@ -521,19 +521,19 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's score based upon lead scoring rules.
         /// </summary>
-        public ApiPropertyInt Grade => _grade ?? (_grade = new ApiPropertyInt(this, "grade"));
-        private ApiPropertyInt _grade;
+        public ApiProperty<int> Grade => _grade ?? (_grade = new ApiProperty<int>(this, "grade"));
+        private ApiProperty<int> _grade;
         /// <summary>
         /// Gets or sets the contact's score based upon lead scoring rules.
         /// </summary>
         public int GradeValue { get => Grade.Value; set => Grade.Value = value; }
 
-        public ApiPropertyInt NMedia => _nMedia ?? (_nMedia = new ApiPropertyInt(this, "n_media"));
-        private ApiPropertyInt _nMedia;
+        public ApiProperty<int> NMedia => _nMedia ?? (_nMedia = new ApiProperty<int>(this, "n_media"));
+        private ApiProperty<int> _nMedia;
         public int NMediaValue { get => NMedia.Value; set => NMedia.Value = value; }
 
-        public ApiPropertyInt TimeSinceLastActivityDate => _timeSinceLastActivityDate ?? (_timeSinceLastActivityDate = new ApiPropertyInt(this, "time_since_dla"));
-        private ApiPropertyInt _timeSinceLastActivityDate;
+        public ApiProperty<int> TimeSinceLastActivityDate => _timeSinceLastActivityDate ?? (_timeSinceLastActivityDate = new ApiProperty<int>(this, "time_since_dla"));
+        private ApiProperty<int> _timeSinceLastActivityDate;
         public int TimeSinceLastActivityDateValue { get => TimeSinceLastActivityDate.Value; set => TimeSinceLastActivityDate.Value = value; }
 
 

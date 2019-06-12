@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using EmergenceGuardian.OntraportApi.Models;
 using Xunit;
@@ -13,6 +14,19 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
         }
 
+        [Fact]
+        public async Task LogTransaction_Order_LoggedProperly()
+        {
+            var api = SetupApi();
+            var apiObj = SetupObjectsApi();
+            var contactId = await apiObj.GetObjectIdByEmailAsync(ApiObjectType.Contact, "a@test.com");
+            var offer = new ApiTransactionOffer()
+                .AddProduct(1, 2, 100);
+
+            var result = await api.LogTransactionAsync(contactId.Value, offer);
+
+            Assert.NotEqual(0, result);
+        }
 
     }
 }

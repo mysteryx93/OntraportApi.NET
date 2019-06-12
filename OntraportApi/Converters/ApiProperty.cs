@@ -7,7 +7,7 @@ namespace EmergenceGuardian.OntraportApi.Converters
     /// Represents a ValueType property on an ApiObject. Changes are tracked and can be returned with ApiObject.GetChanges().
     /// </summary>
     /// <typeparam name="T">A value type that cannot be null.</typeparam>
-    public abstract class ApiProperty<T> : ApiPropertyBase<T, T?>
+    public class ApiProperty<T> : ApiPropertyBase<T, T?>
         where T : struct
     {
         public ApiProperty() { }

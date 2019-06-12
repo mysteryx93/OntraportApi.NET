@@ -17,33 +17,33 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// </summary>
         public string NameValue { get => Name.Value; set => Name.Value = value; }
 
-        public ApiPropertyDouble Value => _value ?? (_value = new ApiPropertyDouble(this, "value"));
-        private ApiPropertyDouble _value;
-        public double ValueValue { get => Value.Value; set => Value.Value = value; }
+        public ApiProperty<decimal> Value => _value ?? (_value = new ApiProperty<decimal>(this, "value"));
+        private ApiProperty<decimal> _value;
+        public decimal ValueValue { get => Value.Value; set => Value.Value = value; }
 
         public ApiPropertyDateTime ExpectedCloseDate => _expectedCloseDate ?? (_expectedCloseDate = new ApiPropertyDateTime(this, "expected_close_date"));
         private ApiPropertyDateTime _expectedCloseDate;
         public DateTimeOffset ExpectedCloseDateValue { get => ExpectedCloseDate.Value; set => ExpectedCloseDate.Value = value; }
 
-        public ApiPropertyInt ExpectedWinPercent => _expectedWinPercent ?? (_expectedWinPercent = new ApiPropertyInt(this, "expected_win_percent"));
-        private ApiPropertyInt _expectedWinPercent;
+        public ApiProperty<int> ExpectedWinPercent => _expectedWinPercent ?? (_expectedWinPercent = new ApiProperty<int>(this, "expected_win_percent"));
+        private ApiProperty<int> _expectedWinPercent;
         public int ExpectedWinPercentValue { get => ExpectedWinPercent.Value; set => ExpectedWinPercent.Value = value; }
 
-        public ApiPropertyInt Calc => _calc ?? (_calc = new ApiPropertyInt(this, "calc"));
-        private ApiPropertyInt _calc;
+        public ApiProperty<int> Calc => _calc ?? (_calc = new ApiProperty<int>(this, "calc"));
+        private ApiProperty<int> _calc;
         public int CalcValue { get => Calc.Value; set => Calc.Value = value; }
 
-        public ApiPropertyInt PrimaryContact => _primaryContact ?? (_primaryContact = new ApiPropertyInt(this, "primary_contact"));
-        private ApiPropertyInt _primaryContact;
+        public ApiProperty<int> PrimaryContact => _primaryContact ?? (_primaryContact = new ApiProperty<int>(this, "primary_contact"));
+        private ApiProperty<int> _primaryContact;
         public int PrimaryContactValue { get => PrimaryContact.Value; set => PrimaryContact.Value = value; }
 
-        public ApiPropertyInt Company => _company ?? (_company = new ApiPropertyInt(this, "company"));
-        private ApiPropertyInt _company;
+        public ApiProperty<int> Company => _company ?? (_company = new ApiProperty<int>(this, "company"));
+        private ApiProperty<int> _company;
         public int CompanyValue { get => Company.Value; set => Company.Value = value; }
 
-        public ApiPropertyDouble WeightedValue => _weightedValue ?? (_weightedValue = new ApiPropertyDouble(this, "weighted_value"));
-        private ApiPropertyDouble _weightedValue;
-        public double WeightedValueValue { get => WeightedValue.Value; set => WeightedValue.Value = value; }
+        public ApiProperty<decimal> WeightedValue => _weightedValue ?? (_weightedValue = new ApiProperty<decimal>(this, "weighted_value"));
+        private ApiProperty<decimal> _weightedValue;
+        public decimal WeightedValueValue { get => WeightedValue.Value; set => WeightedValue.Value = value; }
 
         public ApiProperty<SaleStatus> SaleStage => _saleStage ?? (_saleStage = new ApiPropertyIntEnum<SaleStatus>(this, "sales_stage"));
         private ApiProperty<SaleStatus> _saleStage;

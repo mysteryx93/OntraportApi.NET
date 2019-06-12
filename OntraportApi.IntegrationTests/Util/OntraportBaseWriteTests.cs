@@ -10,9 +10,12 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         where T : OntraportBaseWrite<U>
         where U : ApiObject
     {
-        public OntraportBaseWriteTests(ITestOutputHelper output, int validId) : 
+        private readonly string _validKeyValue;
+
+        public OntraportBaseWriteTests(ITestOutputHelper output, int validId, string validKeyValue) : 
             base(output, validId)
         {
+            _validKeyValue = validKeyValue;
         }
 
         [Fact]
@@ -46,6 +49,16 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             {
                 email = "c@test.com"
             });
+
+            Assert.NotEmpty(result.Data);
+        }
+
+        [Fact]
+        public async Task SelectAsync_ByKeyValue_ReturnsData()
+        {
+            var api = SetupApi();
+
+            var result = await api.SelectAsync(_validKeyValue);
 
             Assert.NotEmpty(result.Data);
         }

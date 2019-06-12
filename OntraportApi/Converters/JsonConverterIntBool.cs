@@ -11,7 +11,7 @@ namespace EmergenceGuardian.OntraportApi.Converters
     {
         public override string NullString => "";
 
-        public override P Parse<P>(string value)
+        public override P Parse<P>(string value, string jsonPath = null)
         {
             // Different forms may use either a binary integer or boolean value for deleted field.
             int? valueInt = null;
@@ -28,12 +28,11 @@ namespace EmergenceGuardian.OntraportApi.Converters
                 valueInt = value.Convert<int?>();
             }
 
-            return (P)(object)((valueInt ?? 0) == 1);
-            //if (valueInt.HasValue)
-            //{
-            //    return (P)(object)(valueInt == 1);
-            //}
-            //return CreateNull<P>();
+            if (valueInt.HasValue)
+            {
+                return (P)(object)(valueInt == 1);
+            }
+            return CreateNull<P>(jsonPath);
         }
 
         public override object Format(bool? value) => value.HasValue ? (value == true ? 1 : 0) : (object)null;

@@ -10,7 +10,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         private readonly string _key = "key1";
         private readonly ApiObject _host = new ApiObject();
 
-        private ApiProperty<int> SetupProperty() => new ApiPropertyInt(_host, _key);
+        private ApiProperty<int> SetupProperty() => new ApiProperty<int>(_host, _key);
 
         private void Set(int? value) => _host.Data[_key] = value.HasValue ? value.ToString() : null;
 

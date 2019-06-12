@@ -16,24 +16,24 @@ namespace EmergenceGuardian.OntraportApi.Models
         private ApiPropertyStringEnum<CouponType> _type;
         public CouponType TypeValue { get => Type.Value; set => Type.Value = value; }
 
-        public ApiPropertyInt Issued => _issued ?? (_issued = new ApiPropertyInt(this, "issued"));
-        private ApiPropertyInt _issued;
+        public ApiProperty<int> Issued => _issued ?? (_issued = new ApiProperty<int>(this, "issued"));
+        private ApiProperty<int> _issued;
         public int IssuedValue { get => Issued.Value; set => Issued.Value = value; }
 
         public ApiPropertyIntBool Redeemed => _redeemed ?? (_redeemed = new ApiPropertyIntBool(this, "redeemed"));
         private ApiPropertyIntBool _redeemed;
         public bool RedeemedValue { get => Redeemed.Value; set => Redeemed.Value = value; }
 
-        public ApiPropertyInt Remaining => _remaining ?? (_remaining = new ApiPropertyInt(this, "remaining"));
-        private ApiPropertyInt _remaining;
+        public ApiProperty<int> Remaining => _remaining ?? (_remaining = new ApiProperty<int>(this, "remaining"));
+        private ApiProperty<int> _remaining;
         public int RemainingValue { get => Remaining.Value; set => Remaining.Value = value; }
 
-        public ApiPropertyDouble TotalCollected => _totalCollected ?? (_totalCollected = new ApiPropertyDouble(this, "total_collected"));
-        private ApiPropertyDouble _totalCollected;
-        public double TotalCollectedValue { get => TotalCollected.Value; set => TotalCollected.Value = value; }
+        public ApiProperty<decimal> TotalCollected => _totalCollected ?? (_totalCollected = new ApiProperty<decimal>(this, "total_collected"));
+        private ApiProperty<decimal> _totalCollected;
+        public decimal TotalCollectedValue { get => TotalCollected.Value; set => TotalCollected.Value = value; }
 
-        public ApiPropertyInt NewBuyers => _newBuyers ?? (_newBuyers = new ApiPropertyInt(this, "new_buyers"));
-        private ApiPropertyInt _newBuyers;
+        public ApiProperty<int> NewBuyers => _newBuyers ?? (_newBuyers = new ApiProperty<int>(this, "new_buyers"));
+        private ApiProperty<int> _newBuyers;
         public int NewBuyersValue { get => NewBuyers.Value; set => NewBuyers.Value = value; }
 
         public ApiPropertyString ProductSelection => _productSelection ?? (_productSelection = new ApiPropertyString(this, "product_selection"));
@@ -44,9 +44,9 @@ namespace EmergenceGuardian.OntraportApi.Models
         private ApiPropertyStringEnum<CouponDiscountType> _discountType;
         public CouponDiscountType DiscountTypeValue { get => DiscountType.Value; set => DiscountType.Value = value; }
 
-        public ApiPropertyDouble DiscountValue => _discountValue ?? (_discountValue = new ApiPropertyDouble(this, "discount_value"));
-        private ApiPropertyDouble _discountValue;
-        public double DiscountValueValue { get => DiscountValue.Value; set => DiscountValue.Value = value; }
+        public ApiProperty<decimal> DiscountValue => _discountValue ?? (_discountValue = new ApiProperty<decimal>(this, "discount_value"));
+        private ApiProperty<decimal> _discountValue;
+        public decimal DiscountValueValue { get => DiscountValue.Value; set => DiscountValue.Value = value; }
 
         public ApiPropertyString DiscountDescription => _discountDescription ?? (_discountDescription = new ApiPropertyString(this, "discount_description"));
         private ApiPropertyString _discountDescription;
@@ -67,8 +67,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// When ValidationType is Time, gets or sets for how many days the coupon is valid.
         /// </summary>
-        public ApiPropertyInt ValidTimeframe => _validTimeframe ?? (_validTimeframe = new ApiPropertyInt(this, "valid_timeframe"));
-        private ApiPropertyInt _validTimeframe;
+        public ApiProperty<int> ValidTimeframe => _validTimeframe ?? (_validTimeframe = new ApiProperty<int>(this, "valid_timeframe"));
+        private ApiProperty<int> _validTimeframe;
         public int ValidTimeframeValue { get => ValidTimeframe.Value; set => ValidTimeframe.Value = value; }
 
         public ApiPropertyStringEnum<CouponStatus> Status => _status ?? (_status = new ApiPropertyStringEnum<CouponStatus>(this, "status"));
@@ -129,7 +129,9 @@ namespace EmergenceGuardian.OntraportApi.Models
         public enum CouponStatus
         {
             Valid,
-            Invalid
+            NotValid,
+            Expired,
+            ReachedLimit
         }
     }
 }

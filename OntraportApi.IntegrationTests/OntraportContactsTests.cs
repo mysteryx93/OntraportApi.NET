@@ -11,7 +11,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
     public class OntraportContactsTests : OntraportBaseDeleteTests<OntraportContacts, ApiContact>
     {
         public OntraportContactsTests(ITestOutputHelper output) :
-            base(output, 19)
+            base(output, 19, "a@test.com")
         {
         }
 
@@ -46,7 +46,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 
             var result = await api.SelectAsync(_validId);
 
-            result.AffiliateAmount.Value = Math.PI;
+            result.AffiliateAmount.Value = 100;
             var changes = result.GetChanges();
             Assert.Contains(changes, x => x.Key == result.AffiliateAmount.Key);
         }
