@@ -13,7 +13,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntraportTransactions
     {
-        public OntraportTransactions(OntraportHttpClient apiRequest) : 
+        public OntraportTransactions(OntraportHttpClient apiRequest) :
             base(apiRequest, "Transaction", "Transactions")
         { }
 
@@ -90,8 +90,8 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="transactionDate">The date and time of the transaction.</param>
         /// <param name="invoiceTemplate">The ID of the invoice template to use for this transaction. The default invoice ID is 1.</param>
         /// <returns>The transaction result.</returns>
-        public async Task<ApiTransactionResult> ProcessManualAsync(int contactId, int gatewayId, 
-            ApiTransactionOffer offer, ApiTransactionAddress billingAddress = null, ApiTransactionPayer payer = null, 
+        public async Task<ApiTransactionResult> ProcessManualAsync(int contactId, int gatewayId,
+            ApiTransactionOffer offer, ApiTransactionAddress billingAddress = null, ApiTransactionPayer payer = null,
             int? creditCardId = null, string externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1)
         {
             var query = new Dictionary<string, object>
@@ -122,7 +122,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="transactionDate">The date and time of the transaction.</param>
         /// <param name="invoiceTemplate">The ID of the invoice template to use for this transaction. The default invoice ID is 1.</param>
         /// <returns>The invoice ID.</returns>
-        public async Task<int> LogTransactionAsync(int contactId, ApiTransactionOffer offer, 
+        public async Task<int> LogTransactionAsync(int contactId, ApiTransactionOffer offer,
             string externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1)
         {
             var query = new Dictionary<string, object>
