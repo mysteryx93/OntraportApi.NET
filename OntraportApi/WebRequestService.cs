@@ -24,9 +24,6 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>The server's response.</returns>
         public async Task<string> ServerRequestAsync(string url, string requestContent = null, string method = "GET", string contentType = null, NameValueCollection headers = null)
         {
-            // ServicePointManager.Expect100Continue = false;
-            // ServicePointManager.ServerCertificateValidationCallback = (s, cert, chain, ssl) => true;
-
             // Initialize client
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = method;
@@ -41,8 +38,8 @@ namespace EmergenceGuardian.OntraportApi
                 // Call method and get result
                 using (var rs = await request.GetRequestStreamAsync())
                 {
-                    var RequestBytes = Encoding.UTF8.GetBytes(requestContent);
-                    await rs.WriteAsync(RequestBytes, 0, RequestBytes.Length);
+                    var requestBytes = Encoding.UTF8.GetBytes(requestContent);
+                    await rs.WriteAsync(requestBytes, 0, requestBytes.Length);
                 }
             }
 
@@ -53,8 +50,7 @@ namespace EmergenceGuardian.OntraportApi
                 {
                     using (var reader = new StreamReader(responseStream))
                     {
-                        string result = await reader.ReadToEndAsync();
-                        return result;
+                        return await reader.ReadToEndAsync();
                     }
                 }
             }
@@ -95,7 +91,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="formParams">The list of form parameter to send.</param>
         public string ClientPostForm(string url, IDictionary<string, string> formParams)
         {
-            StringBuilder response = new StringBuilder()
+            var response = new StringBuilder()
                 .AppendLine("<html>")
                 .AppendLine("<body onload='document.forms[0].submit();'>")
                 .AppendLine($"<form action='{url}' method='post' accept-charset='UTF-8'>");
@@ -118,7 +114,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="content"></param>
         public string ClientRedirect(string content, string redirectUrl)
         {
-            StringBuilder response = new StringBuilder()
+            var response = new StringBuilder()
                 .AppendLine("<html>")
                 .AppendLine("<head>")
                 .AppendLine("<title>Page Redirection</title>")

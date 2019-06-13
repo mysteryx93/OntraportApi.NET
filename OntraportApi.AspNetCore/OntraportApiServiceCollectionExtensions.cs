@@ -1,37 +1,48 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using EmergenceGuardian.OntraportApi;
+using Microsoft.Extensions.Options;
 
 // ReSharper disable once CheckNamespace - MS guidelines say put DI registration in this NS
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class OntraportApiServiceCollectionExtensions
     {
-        public static IServiceCollection AddOntraportApi(this IServiceCollection services)
+        /// <summary>
+        /// Registers OntraportApi classes into the IoC container. If options is null, only IWebRequestService will be registered.
+        /// </summary>
+        /// <param name="services">The IoC services container.</param>
+        /// <param name="options">The OntraportApi configuration with API keys.</param>
+        public static IServiceCollection AddOntraportApi(this IServiceCollection services, IOptions<OntraportConfig> options)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportCampaignBuilderItems, OntraportCampaignBuilderItems>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportCompanies, OntraportCompanies>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportContacts, OntraportContacts>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportCoupons, OntraportCoupons>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportCouponCodes, OntraportCouponCodes>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportCouponProducts, OntraportCouponProducts>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportCreditCards, OntraportCreditCards>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportCustomObjects, OntraportCustomObjects>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportDeals, OntraportDeals>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportForms, OntraportForms>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportLandingPages, OntraportLandingPages>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportMessages, OntraportMessages>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportObjects, OntraportObjects>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportOffers, OntraportOffers>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportProducts, OntraportProducts>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportRules, OntraportRules>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportTasks, OntraportTasks>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportTransactions, OntraportTransactions>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportWebhooks, OntraportWebhooks>());
-            services.TryAdd(ServiceDescriptor.Singleton<IWebRequestService, WebRequestService>());
-            services.TryAdd(ServiceDescriptor.Singleton<IOntraportRequestHelper, OntraportRequestHelper>());
+            services.TryAdd(ServiceDescriptor.Transient<IWebRequestService, WebRequestService>());
+
+            if (options != null)
+            {
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportRequestHelper, OntraportRequestHelper>());
+                services.TryAdd(ServiceDescriptor.Singleton<OntraportConfig>((x) => options.Value));
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportCampaignBuilderItems, OntraportCampaignBuilderItems>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportCompanies, OntraportCompanies>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportContacts, OntraportContacts>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportCoupons, OntraportCoupons>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportCouponCodes, OntraportCouponCodes>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportCouponProducts, OntraportCouponProducts>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportCreditCards, OntraportCreditCards>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportCustomObjects, OntraportCustomObjects>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportDeals, OntraportDeals>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportForms, OntraportForms>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportLandingPages, OntraportLandingPages>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportMessages, OntraportMessages>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportObjects, OntraportObjects>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportOffers, OntraportOffers>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportProducts, OntraportProducts>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportRules, OntraportRules>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportTasks, OntraportTasks>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportTransactions, OntraportTransactions>());
+                services.TryAdd(ServiceDescriptor.Transient<IOntraportWebhooks, OntraportWebhooks>());
+            }
 
             return services;
         }

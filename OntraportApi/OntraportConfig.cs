@@ -15,9 +15,5 @@ namespace EmergenceGuardian.OntraportApi
         /// Gets or sets the Ontraport API Key, found in your account administration section.
         /// </summary>
         public string ApiKey { get; set; }
-        /// <summary>
-        /// Gets or sets how many times to retry a query if it fails.
-        /// </summary>
-        public int AutoRetries { get; set; } = 3;
     }
 }
