@@ -22,13 +22,13 @@ namespace EmergenceGuardian.OntraportApi
         private readonly OntraportConfig _config;
         private readonly HttpClient _httpClient;
 
-        public OntraportHttpClient(IOptions<OntraportConfig> config, HttpClient httpClientFactory)
+        public OntraportHttpClient(IOptions<OntraportConfig> config, HttpClient httpClient)
         {
             _config = config.Value;
-            _httpClient = httpClientFactory;
+            _httpClient = httpClient;
 
-            if (string.IsNullOrEmpty(_config.ApiKey)) throw new ArgumentException("ApiConfig.ApiKey is required.");
-            if (string.IsNullOrEmpty(_config.AppId)) throw new ArgumentException("ApiConfig.AppId is required.");
+            if (string.IsNullOrEmpty(_config.ApiKey)) throw new ArgumentException("OntraportConfig.ApiKey is required.");
+            if (string.IsNullOrEmpty(_config.AppId)) throw new ArgumentException("OntraportConfig.AppId is required.");
 
             _httpClient.BaseAddress = new Uri("https://api.ontraport.com/1/");
             _httpClient.DefaultRequestHeaders.Add("Api-key", _config.ApiKey);

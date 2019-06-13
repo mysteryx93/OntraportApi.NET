@@ -18,6 +18,7 @@ namespace Microsoft.Extensions.DependencyInjection
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.AddHttpClient<OntraportHttpClient>();
+            services.AddHttpClient<IOntraportPostForms, OntraportPostForms>();
 
             services.TryAddTransient<IOntraportCampaignBuilderItems, OntraportCampaignBuilderItems>();
             services.TryAddTransient<IOntraportCompanies, OntraportCompanies>();
