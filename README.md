@@ -91,6 +91,6 @@ Fully-typed API and classes for all main documented classes (and a few more), wi
 - Transactions
 - Webhooks
 
-Each typed ApiObject has integrated changes-tracking support. You can return a dictionary of eedited field keys and values with GetChanges().
+Each typed ApiObject has integrated changes-tracking support. You can return a dictionary of edited field keys and values with GetChanges().
 
 All other object types can be used via IOntraportObjects.
