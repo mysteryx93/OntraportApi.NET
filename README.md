@@ -93,4 +93,6 @@ Fully-typed API and classes for all main documented classes (and a few more), wi
 
 Each typed ApiObject has integrated changes-tracking support. You can return a dictionary of edited field keys and values with GetChanges().
 
+All data formatting and parsing, such as Unix Epoch date time format to DateTimeOffset, is done automatically.
+
 All other object types can be used via IOntraportObjects.
