@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using EmergenceGuardian.OntraportApi.Models;
+using Microsoft.Extensions.Options;
 
 namespace EmergenceGuardian.OntraportApi
 {
@@ -19,13 +20,13 @@ namespace EmergenceGuardian.OntraportApi
         private readonly OntraportConfig _config;
         private readonly IWebRequestService _webRequest;
 
-        public OntraportRequestHelper(OntraportConfig config, IWebRequestService webRequest)
+        public OntraportRequestHelper(IOptions<OntraportConfig> config, IWebRequestService webRequest)
         {
-            if (string.IsNullOrEmpty(config.ApiKey)) throw new ArgumentException("ApiConfig.ApiKey is required.");
-            if (string.IsNullOrEmpty(config.AppId)) throw new ArgumentException("ApiConfig.AppId is required.");
-
-            _config = config;
+            _config = config.Value;
             _webRequest = webRequest;
+
+            if (string.IsNullOrEmpty(_config.ApiKey)) throw new ArgumentException("ApiConfig.ApiKey is required.");
+            if (string.IsNullOrEmpty(_config.AppId)) throw new ArgumentException("ApiConfig.AppId is required.");
         }
 
         /// <summary>

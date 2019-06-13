@@ -20,7 +20,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             var api = SetupApi();
             var status = ApiTask.TaskStatus.Cancelled;
 
-            var result = await api.UpdateAsync(_validId, status: status);
+            var result = await api.UpdateAsync(ValidId, status: status);
 
             Assert.Equal(status, result.Status.Value);
         }

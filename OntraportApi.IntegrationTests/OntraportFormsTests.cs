@@ -18,7 +18,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectSmartFormHtmlAsync(_validId);
+            var result = await api.SelectSmartFormHtmlAsync(ValidId);
 
             Assert.NotEmpty(result);
         }

@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OntraportApi\OntraportApi.csproj" />
+    <ProjectReference Include="..\OntraportApi\EmergenceGuardian.OntraportApi.csproj" />
   </ItemGroup>
 
 </Project>

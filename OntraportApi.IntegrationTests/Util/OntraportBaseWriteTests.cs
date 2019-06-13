@@ -33,7 +33,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.UpdateAsync(_validId, new {
+            var result = await api.UpdateAsync(ValidId, new {
                 email = "c@test.com"
             });
 
@@ -45,7 +45,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.UpdateAsync(_validId, new
+            var result = await api.UpdateAsync(ValidId, new
             {
                 email = "c@test.com"
             });

@@ -13,7 +13,6 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         private const string SectionTest = "Test Section";
         private const int ValidContactId = 19;
         private const int ValidSequenceId = 1;
-        private const int ValidCampaignId = 6;
         private const int ValidTagId = 1;
         private const int ValidTagId2 = 3;
 

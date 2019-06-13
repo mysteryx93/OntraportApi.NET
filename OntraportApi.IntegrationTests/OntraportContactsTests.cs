@@ -20,7 +20,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectAsync(_validId);
+            var result = await api.SelectAsync(ValidId);
 
             result.Address.Value = "abc";
             var changes = result.GetChanges();
@@ -32,7 +32,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectAsync(_validId);
+            var result = await api.SelectAsync(ValidId);
 
             result.Birthday.Value = DateTimeOffset.Now;
             var changes = result.GetChanges();
@@ -44,7 +44,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectAsync(_validId);
+            var result = await api.SelectAsync(ValidId);
 
             result.AffiliateAmount.Value = 100;
             var changes = result.GetChanges();

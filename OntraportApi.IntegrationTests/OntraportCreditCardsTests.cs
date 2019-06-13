@@ -18,9 +18,9 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SetDefaultAsync(_validId);
+            var result = await api.SetDefaultAsync(ValidId);
 
-            Assert.Equal(_validId, result.Id.Value);
+            Assert.Equal(ValidId, result.Id.Value);
         }
     }
 }

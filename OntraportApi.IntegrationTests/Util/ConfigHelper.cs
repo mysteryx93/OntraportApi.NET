@@ -1,11 +1,13 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Moq;
 
 namespace EmergenceGuardian.OntraportApi.IntegrationTests
 {
     public class ConfigHelper
     {
-        public OntraportConfig GetConfig()
+        public IOptions<OntraportConfig> GetConfig()
         {
             var builder = new ConfigurationBuilder()
                 .AddUserSecrets<ConfigHelper>();
@@ -24,11 +26,12 @@ dotnet user-secrets set OntraportAppId ""your-app-id-here""
 dotnet user-secrets set OntraportApiKey ""your-api-key-here""");
             }
 
-            return new OntraportConfig()
+            var config = new OntraportConfig()
             {
                 AppId = appId,
                 ApiKey = apiKey
             };
+            return Mock.Of<IOptions<OntraportConfig>>(x => x.Value == config);
         }
     }
 }

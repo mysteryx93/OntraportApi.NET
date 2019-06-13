@@ -14,13 +14,13 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         where T : OntraportBaseRead<U>
         where U : ApiObject
     {
-        protected readonly ITestOutputHelper _output;
-        protected readonly int _validId;
+        protected readonly ITestOutputHelper Output;
+        protected readonly int ValidId;
 
         public OntraportBaseReadTests(ITestOutputHelper output, int validId)
         {
-            _output = output;
-            _validId = validId;
+            Output = output;
+            ValidId = validId;
         }
 
         protected T SetupApi()
@@ -42,7 +42,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectAsync(_validId);
+            var result = await api.SelectAsync(ValidId);
 
             Assert.NotNull(result.Data);
         }
@@ -52,7 +52,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectMultipleAsync(new ApiSearchOptions(_validId));
+            var result = await api.SelectMultipleAsync(new ApiSearchOptions(ValidId));
 
             Assert.NotEmpty(result);
         }
@@ -91,9 +91,9 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         public async Task SelectAsync_ValidId_AllPropertiesHaveKey()
         {
             var api = SetupApi();
-            bool hasError = false;
+            var hasError = false;
 
-            var result = await api.SelectAsync(_validId);
+            var result = await api.SelectAsync(ValidId);
 
             foreach (var propInfo in result.GetType().GetProperties())
             {
@@ -109,7 +109,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
                             hasError = true;
                             var keyInfo = prop.GetType().GetProperty("Key");
                             var key = keyInfo.GetValue(prop);
-                            _output.WriteLine(key.ToString());
+                            Output.WriteLine(key.ToString());
                         }
                     }
                 }
@@ -121,9 +121,9 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         public async Task SelectAsync_ValidId_AllPropertiesHaveValueProperty()
         {
             var api = SetupApi();
-            bool hasError = false;
+            var hasError = false;
 
-            var result = await api.SelectAsync(_validId);
+            var result = await api.SelectAsync(ValidId);
 
             foreach (var propInfo in result.GetType().GetProperties())
             {
@@ -135,7 +135,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
                     if (valueProp == null)
                     {
                         hasError = true;
-                        _output.WriteLine(propInfo.Name);
+                        Output.WriteLine(propInfo.Name);
                     }
                 }
             }
@@ -155,9 +155,9 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         public async Task SelectAsync_ValidId_AllKeysHaveProperties()
         {
             var api = SetupApi();
-            bool hasError = false;
+            var hasError = false;
 
-            var result = await api.SelectAsync(_validId);
+            var result = await api.SelectAsync(ValidId);
 
             var propList = GetAllFieldProperties(result);
             var customFieldRegex = new Regex("^f[0-9]{4}$");
@@ -168,7 +168,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
                     if (!propList.Contains(key))
                     {
                         hasError = true;
-                        _output.WriteLine($"{key} :      {result.Data[key]}");
+                        Output.WriteLine($"{key} :      {result.Data[key]}");
                     }
                 }
             }
