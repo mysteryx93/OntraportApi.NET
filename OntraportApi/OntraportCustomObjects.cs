@@ -15,7 +15,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportCustomObjects : OntraportBaseRead<ApiCustomObject>, IOntraportCustomObjects
     {
-        public OntraportCustomObjects(IOntraportRequestHelper apiRequest) :
+        public OntraportCustomObjects(OntraportHttpClient apiRequest) :
             base(apiRequest, "CustomObject", "CustomObjects")
         { }
 

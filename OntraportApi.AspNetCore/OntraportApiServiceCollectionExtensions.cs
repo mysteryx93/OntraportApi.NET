@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using EmergenceGuardian.OntraportApi;
+using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace - MS guidelines say put DI registration in this NS
 namespace Microsoft.Extensions.DependencyInjection
@@ -16,28 +17,27 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.TryAdd(ServiceDescriptor.Transient<IWebRequestService, WebRequestService>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportRequestHelper, OntraportRequestHelper>());
+            services.AddHttpClient<OntraportHttpClient>();
 
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportCampaignBuilderItems, OntraportCampaignBuilderItems>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportCompanies, OntraportCompanies>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportContacts, OntraportContacts>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportCoupons, OntraportCoupons>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportCouponCodes, OntraportCouponCodes>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportCouponProducts, OntraportCouponProducts>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportCreditCards, OntraportCreditCards>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportCustomObjects, OntraportCustomObjects>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportDeals, OntraportDeals>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportForms, OntraportForms>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportLandingPages, OntraportLandingPages>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportMessages, OntraportMessages>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportObjects, OntraportObjects>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportOffers, OntraportOffers>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportProducts, OntraportProducts>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportRules, OntraportRules>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportTasks, OntraportTasks>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportTransactions, OntraportTransactions>());
-            services.TryAdd(ServiceDescriptor.Transient<IOntraportWebhooks, OntraportWebhooks>());
+            services.TryAddTransient<IOntraportCampaignBuilderItems, OntraportCampaignBuilderItems>();
+            services.TryAddTransient<IOntraportCompanies, OntraportCompanies>();
+            services.TryAddTransient<IOntraportContacts, OntraportContacts>();
+            services.TryAddTransient<IOntraportCoupons, OntraportCoupons>();
+            services.TryAddTransient<IOntraportCouponCodes, OntraportCouponCodes>();
+            services.TryAddTransient<IOntraportCouponProducts, OntraportCouponProducts>();
+            services.TryAddTransient<IOntraportCreditCards, OntraportCreditCards>();
+            services.TryAddTransient<IOntraportCustomObjects, OntraportCustomObjects>();
+            services.TryAddTransient<IOntraportDeals, OntraportDeals>();
+            services.TryAddTransient<IOntraportForms, OntraportForms>();
+            services.TryAddTransient<IOntraportLandingPages, OntraportLandingPages>();
+            services.TryAddTransient<IOntraportMessages, OntraportMessages>();
+            services.TryAddTransient<IOntraportObjects, OntraportObjects>();
+            services.TryAddTransient<IOntraportOffers, OntraportOffers>();
+            services.TryAddTransient<IOntraportProducts, OntraportProducts>();
+            services.TryAddTransient<IOntraportRules, OntraportRules>();
+            services.TryAddTransient<IOntraportTasks, OntraportTasks>();
+            services.TryAddTransient<IOntraportTransactions, OntraportTransactions>();
+            services.TryAddTransient<IOntraportWebhooks, OntraportWebhooks>();
 
             return services;
         }

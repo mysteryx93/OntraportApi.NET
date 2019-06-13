@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Moq;
@@ -7,6 +8,12 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 {
     public class ConfigHelper
     {
+        public OntraportHttpClient GetHttpClient()
+        {
+            // var factory = Mock.Of<IHttpClientFactory>(x => x.CreateClient(It.IsAny<string>()) == new HttpClient());
+            return new OntraportHttpClient(GetConfig(), new HttpClient());
+        }
+
         public IOptions<OntraportConfig> GetConfig()
         {
             var builder = new ConfigurationBuilder()

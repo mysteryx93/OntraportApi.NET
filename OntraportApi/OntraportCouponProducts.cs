@@ -11,7 +11,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportCouponProducts : OntraportBaseRead<ApiCouponProduct>, IOntraportCouponProducts
     {
-        public OntraportCouponProducts(IOntraportRequestHelper apiRequest) :
+        public OntraportCouponProducts(OntraportHttpClient apiRequest) :
             base(apiRequest, "CouponProduct", "CouponProducts")
         {
         }

@@ -13,7 +13,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntraportTransactions
     {
-        public OntraportTransactions(IOntraportRequestHelper apiRequest) : 
+        public OntraportTransactions(OntraportHttpClient apiRequest) : 
             base(apiRequest, "Transaction", "Transactions")
         { }
 

@@ -25,16 +25,13 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 
         protected T SetupApi()
         {
-            var config = new ConfigHelper().GetConfig();
-            var requestHelper = new OntraportRequestHelper(config, new WebRequestService());
-            return (T)Activator.CreateInstance(typeof(T), new[] { requestHelper });
+            var httpClient = new ConfigHelper().GetHttpClient();
+            return (T)Activator.CreateInstance(typeof(T), new[] { httpClient });
         }
 
         protected OntraportObjects SetupObjectsApi()
         {
-            var config = new ConfigHelper().GetConfig();
-            var requestHelper = new OntraportRequestHelper(config, new WebRequestService());
-            return new OntraportObjects(requestHelper);
+            return new OntraportObjects(new ConfigHelper().GetHttpClient());
         }
 
         [Fact]

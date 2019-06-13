@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -13,20 +15,24 @@ namespace EmergenceGuardian.OntraportApi
     /// <summary>
     /// Sends API requests to Ontraport, formatting the parameters and parsing the response.
     /// </summary>
-    public class OntraportRequestHelper : IOntraportRequestHelper
+    public class OntraportHttpClient
     {
         private const string ContentJson = "application/json";
-        // private const string ContentUrl = "application/x-www-form-urlencoded";
+        private const string ContentUrl = "application/x-www-form-urlencoded";
         private readonly OntraportConfig _config;
-        private readonly IWebRequestService _webRequest;
+        private readonly HttpClient _httpClient;
 
-        public OntraportRequestHelper(IOptions<OntraportConfig> config, IWebRequestService webRequest)
+        public OntraportHttpClient(IOptions<OntraportConfig> config, HttpClient httpClientFactory)
         {
             _config = config.Value;
-            _webRequest = webRequest;
+            _httpClient = httpClientFactory;
 
             if (string.IsNullOrEmpty(_config.ApiKey)) throw new ArgumentException("ApiConfig.ApiKey is required.");
             if (string.IsNullOrEmpty(_config.AppId)) throw new ArgumentException("ApiConfig.AppId is required.");
+
+            _httpClient.BaseAddress = new Uri("https://api.ontraport.com/1/");
+            _httpClient.DefaultRequestHeaders.Add("Api-key", _config.ApiKey);
+            _httpClient.DefaultRequestHeaders.Add("Api-Appid", _config.AppId);
         }
 
         /// <summary>
@@ -37,7 +43,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="values">Values set by the method type.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
         public async Task<T> GetAsync<T>(string endpoint, IDictionary<string, object> values = null) where T : class =>
-            await RequestAsync<T>(endpoint, "GET", false, values);
+            await RequestAsync<T>(endpoint, HttpMethod.Get, false, values);
 
         /// <summary>
         /// Sends a DELETE API query to Ontraport.
@@ -47,7 +53,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="values">Values set by the method type.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
         public async Task<T> DeleteAsync<T>(string endpoint, IDictionary<string, object> values = null, bool encodeJson = true) where T : class =>
-            await RequestAsync<T>(endpoint, "DELETE", encodeJson, values);
+            await RequestAsync<T>(endpoint, HttpMethod.Delete, encodeJson, values);
 
         /// <summary>
         /// Sends a POST API query to Ontraport.
@@ -57,7 +63,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="values">Values set by the method type.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
         public async Task<T> PostAsync<T>(string endpoint, IDictionary<string, object> values = null) where T : class =>
-            await RequestAsync<T>(endpoint, "POST", true, values);
+            await RequestAsync<T>(endpoint, HttpMethod.Post, true, values);
 
         /// <summary>
         /// Sends a PUT API query to Ontraport.
@@ -67,7 +73,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="values">Values set by the method type.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
         public async Task<T> PutAsync<T>(string endpoint, IDictionary<string, object> values = null) where T : class =>
-            await RequestAsync<T>(endpoint, "PUT", true, values);
+            await RequestAsync<T>(endpoint, HttpMethod.Put, true, values);
 
         /// <summary>
         /// Sends an API query to Ontraport.
@@ -79,7 +85,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="values">Values set by the method type.</param>
         /// <param name="valuesOptional">Optional values set by the caller.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
-        protected async Task<T> RequestAsync<T>(string endpoint, string method, bool encodeJson, IDictionary<string, object> values = null)
+        protected async Task<T> RequestAsync<T>(string endpoint, HttpMethod method, bool encodeJson, IDictionary<string, object> values = null)
             where T : class
         {
             values = values ?? new Dictionary<string, object>();
@@ -89,24 +95,21 @@ namespace EmergenceGuardian.OntraportApi
                 JsonConvert.SerializeObject(values, Formatting.None) :
                 values.ToQueryString();
 
-            var requestUrl = "https://api.ontraport.com/1/" + endpoint;
+            var requestUrl = endpoint;
             if (!encodeJson && !string.IsNullOrEmpty(content))
             {
                 requestUrl += "?" + content;
-                content = null;
+                content = "";
             }
 
-            // Send request.
-            var response = await _webRequest.ServerRequestAsync(
-                requestUrl,
-                content,
-                method,
-                encodeJson ? ContentJson : null,
-                new NameValueCollection()
+            var response = await _httpClient.SendAsync(new HttpRequestMessage(method, requestUrl)
             {
-                { "Api-key", _config.ApiKey },
-                { "Api-Appid", _config.AppId },
+                 Content = new StringContent(content, Encoding.UTF8, encodeJson ? ContentJson : ContentUrl)
             });
+            response.EnsureSuccessStatusCode();
+
+            var responseText = await response.Content.ReadAsStringAsync();
+            response.Content?.Dispose();
 
             if (typeof(T) == typeof(object))
             {
@@ -115,12 +118,12 @@ namespace EmergenceGuardian.OntraportApi
             if (typeof(T) == typeof(JObject))
             {
                 // Return JSON manual parser.
-                return JObject.Parse(response) as T;
+                return JObject.Parse(responseText) as T;
             }
             else
             {
                 // Parse response.
-                var result = JsonConvert.DeserializeObject<ApiResponse<T>>(response);
+                var result = JsonConvert.DeserializeObject<ApiResponse<T>>(responseText);
                 if (result.Code != 0)
                 {
                     throw new WebException($"The remote server returned an error: ({result.Code})");

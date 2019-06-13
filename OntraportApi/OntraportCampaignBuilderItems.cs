@@ -10,7 +10,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportCampaignBuilderItems : OntraportBaseRead<ApiCampaignBuilderItem>, IOntraportCampaignBuilderItems
     {
-        public OntraportCampaignBuilderItems(IOntraportRequestHelper apiRequest) :
+        public OntraportCampaignBuilderItems(OntraportHttpClient apiRequest) :
             base(apiRequest, "CampaignBuilderItem", "CampaignBuilderItems")
         { }
         

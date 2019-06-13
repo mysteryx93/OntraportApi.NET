@@ -8,7 +8,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportCompanies : OntraportCompanies<ApiCompany>, IOntraportCompanies
     {
-        public OntraportCompanies(IOntraportRequestHelper apiRequest) : base(apiRequest)
+        public OntraportCompanies(OntraportHttpClient apiRequest) : base(apiRequest)
         { }
     }
 
@@ -19,7 +19,7 @@ namespace EmergenceGuardian.OntraportApi
     public class OntraportCompanies<T> : OntraportBaseCustomObject<T>, IOntraportCompanies<T>
         where T : ApiCompany
     {
-        public OntraportCompanies(IOntraportRequestHelper apiRequest) : 
+        public OntraportCompanies(OntraportHttpClient apiRequest) : 
             base(apiRequest, "Company", "Companies", "name")
         { }
 

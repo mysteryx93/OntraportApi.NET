@@ -16,7 +16,7 @@ namespace EmergenceGuardian.OntraportApi
     {
         protected readonly string PrimarySearchKey;
 
-        public OntraportBaseWrite(IOntraportRequestHelper apiRequest, string endpointSingular, string endpointPlural, string primarySearchKey) :
+        public OntraportBaseWrite(OntraportHttpClient apiRequest, string endpointSingular, string endpointPlural, string primarySearchKey) :
             base(apiRequest, endpointSingular, endpointPlural)
         {
             PrimarySearchKey = primarySearchKey;

@@ -11,7 +11,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportCoupons : OntraportBaseDelete<ApiCoupon>, IOntraportCoupons
     {
-        public OntraportCoupons(IOntraportRequestHelper apiRequest) :
+        public OntraportCoupons(OntraportHttpClient apiRequest) :
             base(apiRequest, "Coupon", "Coupons", "name")
         {
         }

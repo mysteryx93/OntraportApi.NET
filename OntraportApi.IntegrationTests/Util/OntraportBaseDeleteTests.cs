@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using EmergenceGuardian.OntraportApi.Converters;
 using EmergenceGuardian.OntraportApi.Models;
@@ -25,7 +26,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             await api.DeleteAsync(obj.Id.Value);
 
             // Should throw Object Not Found.
-            await Assert.ThrowsAsync<System.Net.WebException>(() => api.SelectAsync(obj.Id.Value));
+            await Assert.ThrowsAsync<HttpRequestException>(() => api.SelectAsync(obj.Id.Value));
         }
 
         [Fact]
@@ -37,7 +38,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             await api.DeleteMultipleAsync(new ApiSearchOptions(obj.Id.Value));
 
             // Should throw Object Not Found.
-            await Assert.ThrowsAsync<System.Net.WebException>(() => api.SelectAsync(obj.Id.Value));
+            await Assert.ThrowsAsync<HttpRequestException>(() => api.SelectAsync(obj.Id.Value));
         }
     }
 }

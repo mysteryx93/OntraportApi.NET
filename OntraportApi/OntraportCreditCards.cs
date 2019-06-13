@@ -12,7 +12,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportCreditCards : OntraportBaseRead<ApiCreditCard>, IOntraportCreditCards
     {
-        public OntraportCreditCards(IOntraportRequestHelper apiRequest) : 
+        public OntraportCreditCards(OntraportHttpClient apiRequest) : 
             base(apiRequest, "CreditCard", "CreditCards")
         { }
 

@@ -14,7 +14,7 @@ namespace EmergenceGuardian.OntraportApi
     public abstract class OntraportBaseCustomObject<T> : OntraportBaseDelete<T>, IOntraportBaseCustomObject<T> 
         where T : ApiCustomObjectBase
     {
-        public OntraportBaseCustomObject(IOntraportRequestHelper apiRequest, string endpointSingular, string endpointPlural, string primarySearchKey) :
+        public OntraportBaseCustomObject(OntraportHttpClient apiRequest, string endpointSingular, string endpointPlural, string primarySearchKey) :
             base(apiRequest, endpointSingular, endpointPlural, primarySearchKey)
         { }
 

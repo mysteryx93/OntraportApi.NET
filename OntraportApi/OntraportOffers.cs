@@ -14,7 +14,7 @@ namespace EmergenceGuardian.OntraportApi
     /// </summary>
     public class OntraportOffers : OntraportBaseWrite<ApiOffer>, IOntraportOffers
     {
-        public OntraportOffers(IOntraportRequestHelper apiRequest) : 
+        public OntraportOffers(OntraportHttpClient apiRequest) : 
             base(apiRequest, "Offer", "Offers", "name")
         { }
 
