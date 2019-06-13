@@ -21,7 +21,7 @@ Return the name and birthday of a contact by email.
 public async Task<string> GetCustomerNameAndBirthday(string email)
 {
     var customer = await _ontraContacts.SelectAsync(email);
-    return $"{customer.FirstNameValue} {customer.LastNameValue} - {customer.BirthdayValue}";
+    return $"{customer.FirstName} {customer.LastName} - {customer.Birthday}";
 }
 ```
 
