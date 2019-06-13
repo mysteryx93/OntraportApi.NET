@@ -32,10 +32,10 @@ public async Task AddOrMergeContact(string email, string firstName, string lastN
 {
     var contact = new ApiContact()
     {
-        EmailValue = email,
-        FirstNameValue = firstName,
-        LastNameValue = lastName
-     };
+        Email = email,
+        FirstName = firstName,
+        LastName = lastName
+    };
     await _ontraContacts.CreateOrMergeAsync(contact.GetChanges());
 }
 ```
@@ -43,14 +43,14 @@ public async Task AddOrMergeContact(string email, string firstName, string lastN
 Edit contacts
 
 ```c#
-public async Task EditCompany(string oldName, string newName)
+public async Task EditCompanyField(string oldName, string newName)
 {
     var contacts = await _ontraContacts.SelectMultipleAsync(
-        new ApiSearchOptions().AddCondition("company", "=", oldName));
+        new ApiSearchOptions().AddCondition(ApiContact.CompanyKey, "=", oldName));
     var tasks = contacts.Select(async x =>
     {
-        x.CompanyValue = newName;
-        return await _ontraContacts.UpdateAsync(x.IdValue, x.GetChanges());
+        x.Company = newName;
+        return await _ontraContacts.UpdateAsync(x.Id.Value, x.GetChanges());
     });
     await Task.WhenAll(tasks);
 }
@@ -61,10 +61,10 @@ Log a transaction manually
 ```c#
 public async Task LogTransaction(string email, string productName, int quantity)
 {
-    var customer = await _ontraContacts.SelectAsync(email);
+    var contact = await _ontraContacts.SelectAsync(email);
     var product = await _ontraProducts.SelectAsync(productName);
-    await _ontraTransactions.LogTransactionAsync(customer.IdValue,
-        new ApiTransactionOffer().AddProduct(product.IdValue, quantity, product.PriceValue));
+    await _ontraTransactions.LogTransactionAsync(contact.Id.Value,
+        new ApiTransactionOffer().AddProduct(product.Id.Value, quantity, product.Price.Value));
 }
 ```    
 
