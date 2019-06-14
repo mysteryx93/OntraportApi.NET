@@ -153,7 +153,7 @@ public class ApiCustomContact : ApiContact
 }
 ```
 
-Then, use *OntraportContacts<ApiCustomContact>* instead of *OntraportContacts*. That's it.
+Then, use *OntraportContacts\<ApiCustomContact\>* instead of *OntraportContacts*. That's it.
     
 Supprted ApiProperty objects:
 - ApiProperty<int>
