@@ -22,9 +22,9 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 
             var result = await api.SelectAsync(ValidId);
 
-            result.Address.Value = "abc";
+            result.AddressField.Value = "abc";
             var changes = result.GetChanges();
-            Assert.Contains(changes, x => x.Key == result.Address.Key);
+            Assert.Contains(changes, x => x.Key == result.AddressField.Key);
         }
 
         [Fact]
@@ -34,9 +34,9 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 
             var result = await api.SelectAsync(ValidId);
 
-            result.Birthday.Value = DateTimeOffset.Now;
+            result.BirthdayField.Value = DateTimeOffset.Now;
             var changes = result.GetChanges();
-            Assert.Contains(changes, x => x.Key == result.Birthday.Key);
+            Assert.Contains(changes, x => x.Key == result.BirthdayField.Key);
         }
 
         [Fact]
@@ -46,9 +46,9 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 
             var result = await api.SelectAsync(ValidId);
 
-            result.AffiliateAmount.Value = 100;
+            result.AffiliateAmountField.Value = 100;
             var changes = result.GetChanges();
-            Assert.Contains(changes, x => x.Key == result.AffiliateAmount.Key);
+            Assert.Contains(changes, x => x.Key == result.AffiliateAmountField.Key);
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
                 firstname = firstName
             });
 
-            Assert.Equal(firstName, result.FirstNameValue);
+            Assert.Equal(firstName, result.FirstName);
         }
 
         [Fact]
@@ -74,17 +74,17 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             var newStatus = SaleStatus.Consideration;
             var contact = new ApiContact()
             {
-                EmailValue = "typed@test.com",
-                FirstNameValue = newName,
-                LastNameValue = "Charland"
+                Email = "typed@test.com",
+                FirstName = newName,
+                LastName = "Charland"
             };
-            contact.Status.Value = newStatus;
+            contact.StatusField.Value = newStatus;
 
             var result = await api.CreateOrMergeAsync(contact.GetChanges());
 
             var newContact = await api.SelectAsync("typed@test.com");
-            Assert.Equal(newStatus, newContact.Status.Value);
-            Assert.Equal(newName, newContact.FirstName.Value);
+            Assert.Equal(newStatus, newContact.StatusField.Value);
+            Assert.Equal(newName, newContact.FirstNameField.Value);
         }
 
         [Fact]
@@ -94,16 +94,16 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             var newName = "Etienne";
             var newStatus = SaleStatus.DemoScheduled;
             var contact = await api.SelectAsync("typed@test.com");
-            contact.FirstNameValue = newName;
-            contact.LastName.Value = "Charlandd";
-            contact.Status.Value = newStatus;
-            contact.DateLastActivity.Value = new DateTimeOffset(2019, 6, 1, 1, 1, 1, TimeSpan.Zero);
+            contact.FirstName = newName;
+            contact.LastNameField.Value = "Charlandd";
+            contact.StatusField.Value = newStatus;
+            contact.DateLastActivityField.Value = new DateTimeOffset(2019, 6, 1, 1, 1, 1, TimeSpan.Zero);
 
             var result = await api.UpdateAsync(contact.Id.Value, contact.GetChanges());
 
             var newContact = await api.SelectAsync("typed@test.com");
-            Assert.Equal(newStatus, newContact.Status.Value);
-            Assert.Equal(newName, newContact.FirstNameValue);
+            Assert.Equal(newStatus, newContact.StatusField.Value);
+            Assert.Equal(newName, newContact.FirstName);
         }
     }
 }

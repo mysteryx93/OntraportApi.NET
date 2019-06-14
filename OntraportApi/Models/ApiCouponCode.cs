@@ -8,33 +8,40 @@ namespace EmergenceGuardian.OntraportApi.Models
     /// </summary>
     public class ApiCouponCode : ApiObject
     {
-        public ApiProperty<int> CouponId => _couponId ?? (_couponId = new ApiProperty<int>(this, "coupon_id"));
-        private ApiProperty<int> _couponId;
-        public int CouponIdValue { get => CouponId.Value; set => CouponId.Value = value; }
+        public ApiProperty<int> CouponIdField => _couponIdField ?? (_couponIdField = new ApiProperty<int>(this, CouponIdKey));
+        private ApiProperty<int> _couponIdField;
+        public const string CouponIdKey = "coupon_id";
+        public int? CouponId { get => CouponIdField.Value; set => CouponIdField.Value = value; }
 
-        public ApiProperty<int> ContactId => _contactId ?? (_contactId = new ApiProperty<int>(this, "contact_id"));
-        private ApiProperty<int> _contactId;
-        public int ContactIdValue { get => ContactId.Value; set => ContactId.Value = value; }
+        public ApiProperty<int> ContactIdField => _contactIdField ?? (_contactIdField = new ApiProperty<int>(this, ContactIdKey));
+        private ApiProperty<int> _contactIdField;
+        public const string ContactIdKey = "contact_id";
+        public int? ContactId { get => ContactIdField.Value; set => ContactIdField.Value = value; }
 
-        public ApiPropertyString Code => _code ?? (_code = new ApiPropertyString(this, "code"));
-        private ApiPropertyString _code;
-        public string CodeValue { get => Code.Value; set => Code.Value = value; }
+        public ApiPropertyString CodeField => _codeField ?? (_codeField = new ApiPropertyString(this, CodeKey));
+        private ApiPropertyString _codeField;
+        public const string CodeKey = "code";
+        public string Code { get => CodeField.Value; set => CodeField.Value = value; }
 
-        public ApiPropertyDateTime Expiration => _expiration ?? (_expiration = new ApiPropertyDateTime(this, "expiration"));
-        private ApiPropertyDateTime _expiration;
-        public DateTimeOffset ExpirationValue { get => Expiration.Value; set => Expiration.Value = value; }
+        public ApiPropertyDateTime ExpirationField => _expirationField ?? (_expirationField = new ApiPropertyDateTime(this, ExpirationKey));
+        private ApiPropertyDateTime _expirationField;
+        public const string ExpirationKey = "expiration";
+        public DateTimeOffset? Expiration { get => ExpirationField.Value; set => ExpirationField.Value = value; }
 
-        public ApiPropertyDateTime DateCreated => _dateCreated ?? (_dateCreated = new ApiPropertyDateTime(this, "date"));
-        private ApiPropertyDateTime _dateCreated;
-        public DateTimeOffset DateCreatedValue { get => DateCreated.Value; set => DateCreated.Value = value; }
+        public ApiPropertyDateTime DateCreatedField => _dateCreatedField ?? (_dateCreatedField = new ApiPropertyDateTime(this, DateCreatedKey));
+        private ApiPropertyDateTime _dateCreatedField;
+        public const string DateCreatedKey = "date";
+        public DateTimeOffset? DateCreated { get => DateCreatedField.Value; set => DateCreatedField.Value = value; }
 
-        public ApiPropertyDateTime DateRedeemed => _dateRedeemed ?? (_dateRedeemed = new ApiPropertyDateTime(this, "date_redeemed"));
-        private ApiPropertyDateTime _dateRedeemed;
-        public DateTimeOffset DateRedeemedValue { get => DateRedeemed.Value; set => DateRedeemed.Value = value; }
+        public ApiPropertyDateTime DateRedeemedField => _dateRedeemedField ?? (_dateRedeemedField = new ApiPropertyDateTime(this, DateRedeemedKey));
+        private ApiPropertyDateTime _dateRedeemedField;
+        public const string DateRedeemedKey = "date_redeemed";
+        public DateTimeOffset? DateRedeemed { get => DateRedeemedField.Value; set => DateRedeemedField.Value = value; }
 
-        public ApiPropertyIntBool Deleted => _deleted ?? (_deleted = new ApiPropertyIntBool(this, "deleted"));
-        private ApiPropertyIntBool _deleted;
-        public bool DeletedValue { get => Deleted.Value; set => Deleted.Value = value; }
+        public ApiPropertyIntBool DeletedField => _deletedField ?? (_deletedField = new ApiPropertyIntBool(this, DeletedKey));
+        private ApiPropertyIntBool _deletedField;
+        public const string DeletedKey = "deleted";
+        public bool? Deleted { get => DeletedField.Value; set => DeletedField.Value = value; }
 
     }
 }

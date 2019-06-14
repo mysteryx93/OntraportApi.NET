@@ -11,162 +11,178 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the first name of the credit card owner.
         /// </summary>
-        public ApiPropertyString FirstName => _firstName ?? (_firstName = new ApiPropertyString(this, "firstname"));
-        private ApiPropertyString _firstName;
+        public ApiPropertyString FirstNameField => _firstNameField ?? (_firstNameField = new ApiPropertyString(this, FirstNameKey));
+        private ApiPropertyString _firstNameField;
+        public const string FirstNameKey = "firstname";
         /// <summary>
         /// Gets or sets the first name of the credit card owner.
         /// </summary>
-        public string FirstNameValue { get => FirstName.Value; set => FirstName.Value = value; }
+        public string FirstNameValue { get => FirstNameField.Value; set => FirstNameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last name of the credit card owner.
         /// </summary>
-        public ApiPropertyString Lastname => _lastname ?? (_lastname = new ApiPropertyString(this, "lastname"));
-        private ApiPropertyString _lastname;
+        public ApiPropertyString LastnameField => _lastnameField ?? (_lastnameField = new ApiPropertyString(this, LastNameKey));
+        private ApiPropertyString _lastnameField;
+        public const string LastNameKey = "lastname";
         /// <summary>
         /// Gets or sets the last name of the credit card owner.
         /// </summary>
-        public string LastnameValue { get => Lastname.Value; set => Lastname.Value = value; }
+        public string LastnameValue { get => LastnameField.Value; set => LastnameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the contact associated with the credit card.
         /// </summary>
-        public ApiProperty<int> ContactId => _contactId ?? (_contactId = new ApiProperty<int>(this, "contact_id"));
-        private ApiProperty<int> _contactId;
+        public ApiProperty<int> ContactIdField => _contactIdField ?? (_contactIdField = new ApiProperty<int>(this, ContactIdKey));
+        private ApiProperty<int> _contactIdField;
+        public const string ContactIdKey = "contact_id";
         /// <summary>
         /// Gets or sets the ID of the contact associated with the credit card.
         /// </summary>
-        public int ContactIdValue { get => ContactId.Value; set => ContactId.Value = value; }
+        public int? ContactIdValue { get => ContactIdField.Value; set => ContactIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last four digits of the credit card number.
         /// </summary>
-        public ApiProperty<int> LastFourDigits => _last4 ?? (_last4 = new ApiProperty<int>(this, "last4"));
-        private ApiProperty<int> _last4;
+        public ApiProperty<int> LastFourDigitsField => _lastFourDigitsField ?? (_lastFourDigitsField = new ApiProperty<int>(this, LastFourDigitsKey));
+        private ApiProperty<int> _lastFourDigitsField;
+        public const string LastFourDigitsKey = "last4";
         /// <summary>
         /// Gets or sets the last four digits of the credit card number.
         /// </summary>
-        public int LastFourDigitsValue { get => LastFourDigits.Value; set => LastFourDigits.Value = value; }
+        public int? LastFourDigitsValue { get => LastFourDigitsField.Value; set => LastFourDigitsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the credit card issuer.
         /// </summary>
-        public ApiProperty<CreditCardType> Type => _type ?? (_type = new ApiPropertyIntEnum<CreditCardType>(this, "type"));
-        private ApiProperty<CreditCardType> _type;
+        public ApiProperty<CreditCardType> TypeField => _typeField ?? (_typeField = new ApiPropertyIntEnum<CreditCardType>(this, TypeKey));
+        private ApiProperty<CreditCardType> _typeField;
+        public const string TypeKey = "type";
         /// <summary>
         /// Gets or sets the credit card issuer.
         /// </summary>
-        public CreditCardType TypeValue { get => Type.Value; set => Type.Value = value; }
+        public CreditCardType? TypeValue { get => TypeField.Value; set => TypeField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the two-digit integer representation of the credit card's expiration month.
         /// </summary>
-        public ApiProperty<int> ExpirationMonth => _expirationMonth ?? (_expirationMonth = new ApiProperty<int>(this, "exp_month"));
-        private ApiProperty<int> _expirationMonth;
+        public ApiProperty<int> ExpirationMonthField => _expirationMonthField ?? (_expirationMonthField = new ApiProperty<int>(this, ExpirationMonthKey));
+        private ApiProperty<int> _expirationMonthField;
+        public const string ExpirationMonthKey = "exp_month";
         /// <summary>
         /// Gets or sets the two-digit integer representation of the credit card's expiration month.
         /// </summary>
-        public int ExpirationMonthValue { get => ExpirationMonth.Value; set => ExpirationMonth.Value = value; }
+        public int? ExpirationMonthValue { get => ExpirationMonthField.Value; set => ExpirationMonthField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the four-digit credit card expiration year.
         /// </summary>
-        public ApiProperty<int> ExpirationYear => _expirationYear ?? (_expirationYear = new ApiProperty<int>(this, "exp_year"));
-        private ApiProperty<int> _expirationYear;
+        public ApiProperty<int> ExpirationYearField => _expirationYearField ?? (_expirationYearField = new ApiProperty<int>(this, ExpirationYearKey));
+        private ApiProperty<int> _expirationYearField;
+        public const string ExpirationYearKey = "exp_year";
         /// <summary>
         /// Gets or sets the four-digit credit card expiration year.
         /// </summary>
-        public int ExpirationYearValue { get => ExpirationYear.Value; set => ExpirationYear.Value = value; }
+        public int? ExpirationYearValue { get => ExpirationYearField.Value; set => ExpirationYearField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the credit card's billing address.
         /// </summary>
-        public ApiPropertyString Address => _address ?? (_address = new ApiPropertyString(this, "address"));
-        private ApiPropertyString _address;
+        public ApiPropertyString AddressField => _addressField ?? (_addressField = new ApiPropertyString(this, AddressKey));
+        private ApiPropertyString _addressField;
+        public const string AddressKey = "address";
         /// <summary>
         /// Gets or sets the credit card's billing address.
         /// </summary>
-        public string AddressValue { get => Address.Value; set => Address.Value = value; }
+        public string AddressValue { get => AddressField.Value; set => AddressField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set additional information about the credit card's billing address, such as unit number.
         /// </summary>
-        public ApiPropertyString Address2 => _address2 ?? (_address2 = new ApiPropertyString(this, "address2"));
-        private ApiPropertyString _address2;
+        public ApiPropertyString Address2Field => _address2Field ?? (_address2Field = new ApiPropertyString(this, Address2Key));
+        private ApiPropertyString _address2Field;
+        public const string Address2Key = "address2";
         /// <summary>
         /// Gets or sets additional information about the credit card's billing address, such as unit number.
         /// </summary>
-        public string Address2Value { get => Address2.Value; set => Address2.Value = value; }
+        public string Address2Value { get => Address2Field.Value; set => Address2Field.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the credit card's billing address city.
         /// </summary>
-        public ApiPropertyString City => _city ?? (_city = new ApiPropertyString(this, "city"));
-        private ApiPropertyString _city;
+        public ApiPropertyString CityField => _cityField ?? (_cityField = new ApiPropertyString(this, CityKey));
+        private ApiPropertyString _cityField;
+        public const string CityKey = "city";
         /// <summary>
         /// Gets or sets the credit card's billing address city.
         /// </summary>
-        public string CityValue { get => City.Value; set => City.Value = value; }
+        public string CityValue { get => CityField.Value; set => CityField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the credit card's billing address state.
         /// </summary>
-        public ApiPropertyString State => _state ?? (_state = new ApiPropertyString(this, "state"));
-        private ApiPropertyString _state;
+        public ApiPropertyString StateField => _stateField ?? (_stateField = new ApiPropertyString(this, StateKey));
+        private ApiPropertyString _stateField;
+        public const string StateKey = "state";
         /// <summary>
         /// Gets or sets the credit card's billing address state.
         /// </summary>
-        public string StateValue { get => State.Value; set => State.Value = value; }
+        public string StateValue { get => StateField.Value; set => StateField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the credit card's billing address zip code.
         /// </summary>
-        public ApiPropertyString Zip => _zip ?? (_zip = new ApiPropertyString(this, "zip"));
-        private ApiPropertyString _zip;
+        public ApiPropertyString ZipField => _zipField ?? (_zipField = new ApiPropertyString(this, ZipKey));
+        private ApiPropertyString _zipField;
+        public const string ZipKey = "zip";
         /// <summary>
         /// Gets or sets the credit card's billing address zip code.
         /// </summary>
-        public string ZipValue { get => Zip.Value; set => Zip.Value = value; }
+        public string ZipValue { get => ZipField.Value; set => ZipField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the credit card's billing address country.
         /// </summary>
-        public ApiPropertyString Country => _country ?? (_country = new ApiPropertyString(this, "country"));
-        private ApiPropertyString _country;
+        public ApiPropertyString CountryField => _countryField ?? (_countryField = new ApiPropertyString(this, CountryKey));
+        private ApiPropertyString _countryField;
+        public const string CountryKey = "country";
         /// <summary>
         /// Gets or sets the credit card's billing address country.
         /// </summary>
-        public string CountryValue { get => Country.Value; set => Country.Value = value; }
+        public string CountryValue { get => CountryField.Value; set => CountryField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the current status of the credit card.
         /// </summary>
-        public ApiProperty<CreditCardStatus> Status => _status ?? (_status = new ApiPropertyIntEnum<CreditCardStatus>(this, "status"));
-        private ApiProperty<CreditCardStatus> _status;
+        public ApiProperty<CreditCardStatus> StatusField => _statusField ?? (_statusField = new ApiPropertyIntEnum<CreditCardStatus>(this, StatusKey));
+        private ApiProperty<CreditCardStatus> _statusField;
+        public const string StatusKey = "status";
         /// <summary>
         /// Gets or sets the current status of the credit card.
         /// </summary>
-        public CreditCardStatus StatusValue { get => Status.Value; set => Status.Value = value; }
+        public CreditCardStatus? StatusValue { get => StatusField.Value; set => StatusField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date and time of the most recent charge.
         /// </summary>
-        public ApiPropertyDateTime LastTransactionDate => _lastTransactionDate ?? (_lastTransactionDate = new ApiPropertyDateTime(this, "recent_sale"));
-        private ApiPropertyDateTime _lastTransactionDate;
+        public ApiPropertyDateTime LastTransactionDateField => _lastTransactionDateField ?? (_lastTransactionDateField = new ApiPropertyDateTime(this, LastTransactionDateKey));
+        private ApiPropertyDateTime _lastTransactionDateField;
+        public const string LastTransactionDateKey = "recent_sale";
         /// <summary>
         /// Gets or sets the date and time of the most recent charge.
         /// </summary>
-        public DateTimeOffset LastTransactionDateValue { get => LastTransactionDate.Value; set => LastTransactionDate.Value = value; }
+        public DateTimeOffset? LastTransactionDateValue { get => LastTransactionDateField.Value; set => LastTransactionDateField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the invoice generated in relation to the most recent charge to the credit card.
         /// </summary>
-        public ApiProperty<int> LastInvoiceId => _lastInvoiceId ?? (_lastInvoiceId = new ApiProperty<int>(this, "invoice_id"));
-        private ApiProperty<int> _lastInvoiceId;
+        public ApiProperty<int> LastInvoiceIdField => _lastInvoiceIdField ?? (_lastInvoiceIdField = new ApiProperty<int>(this, LastInvoiceIdKey));
+        private ApiProperty<int> _lastInvoiceIdField;
+        public const string LastInvoiceIdKey = "invoice_id";
         /// <summary>
         /// Gets or sets the ID of the invoice generated in relation to the most recent charge to the credit card.
         /// </summary>
-        public int LastInvoiceIdValue { get => LastInvoiceId.Value; set => LastInvoiceId.Value = value; }
+        public int? LastInvoiceIdValue { get => LastInvoiceIdField.Value; set => LastInvoiceIdField.Value = value; }
 
 
 

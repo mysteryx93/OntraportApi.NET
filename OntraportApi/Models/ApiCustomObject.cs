@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using EmergenceGuardian.OntraportApi.Converters;
 
 namespace EmergenceGuardian.OntraportApi.Models
@@ -11,61 +9,75 @@ namespace EmergenceGuardian.OntraportApi.Models
     /// </summary>
     public class ApiCustomObject : ApiObject
     {
-        public ApiPropertyString Name => _name ?? (_name = new ApiPropertyString(this, "name"));
-        private ApiPropertyString _name;
-        public string NameValue { get => Name.Value; set => Name.Value = value; }
+        public ApiPropertyString NameField => _nameField ?? (_nameField = new ApiPropertyString(this, NameKey));
+        private ApiPropertyString _nameField;
+        public const string NameKey = "name";
+        public string NameValue { get => NameField.Value; set => NameField.Value = value; }
 
-        public ApiPropertyDateTime DateCreated => _dateCreated ?? (_dateCreated = new ApiPropertyDateTime(this, "date_created"));
-        private ApiPropertyDateTime _dateCreated;
-        public DateTimeOffset DateCreatedValue { get => DateCreated.Value; set => DateCreated.Value = value; }
+        public ApiPropertyDateTime DateCreatedField => _dateCreatedField ?? (_dateCreatedField = new ApiPropertyDateTime(this, DateCreatedKey));
+        private ApiPropertyDateTime _dateCreatedField;
+        public const string DateCreatedKey = "date_created";
+        public DateTimeOffset? DateCreatedValue { get => DateCreatedField.Value; set => DateCreatedField.Value = value; }
 
-        public ApiPropertyString Table => _table ?? (_table = new ApiPropertyString(this, "table"));
-        private ApiPropertyString _table;
-        public string TableValue { get => Table.Value; set => Table.Value = value; }
+        public ApiPropertyString TableField => _tableField ?? (_tableField = new ApiPropertyString(this, TableKey));
+        private ApiPropertyString _tableField;
+        public const string TableKey = "table";
+        public string TableValue { get => TableField.Value; set => TableField.Value = value; }
 
-        public ApiPropertyString Key => _key ?? (_key = new ApiPropertyString(this, "key"));
-        private ApiPropertyString _key;
-        public string KeyValue { get => Key.Value; set => Key.Value = value; }
+        public ApiPropertyString KeyField => _keyField ?? (_keyField = new ApiPropertyString(this, KeyKey));
+        private ApiPropertyString _keyField;
+        public const string KeyKey = "key";
+        public string KeyValue { get => KeyField.Value; set => KeyField.Value = value; }
 
-        public ApiPropertyString ExternalKey => _externalKey ?? (_externalKey = new ApiPropertyString(this, "external_key"));
-        private ApiPropertyString _externalKey;
-        public string ExternalKeyValue { get => ExternalKey.Value; set => ExternalKey.Value = value; }
+        public ApiPropertyString ExternalKeyField => _externalKeyField ?? (_externalKeyField = new ApiPropertyString(this, ExternalKeyKey));
+        private ApiPropertyString _externalKeyField;
+        public const string ExternalKeyKey = "external_key";
+        public string ExternalKeyValue { get => ExternalKeyField.Value; set => ExternalKeyField.Value = value; }
 
-        public ApiPropertyIntBool PrimaryNav => _primaryNav ?? (_primaryNav = new ApiPropertyIntBool(this, "primary_nav"));
-        private ApiPropertyIntBool _primaryNav;
-        public bool PrimaryNavValue { get => PrimaryNav.Value; set => PrimaryNav.Value = value; }
+        public ApiPropertyIntBool PrimaryNavField => _primaryNavField ?? (_primaryNavField = new ApiPropertyIntBool(this, PrimaryNavKey));
+        private ApiPropertyIntBool _primaryNavField;
+        public const string PrimaryNavKey = "primary_nav";
+        public bool? PrimaryNavValue { get => PrimaryNavField.Value; set => PrimaryNavField.Value = value; }
 
-        public ApiPropertyString Singular => _singular ?? (_singular = new ApiPropertyString(this, "singular"));
-        private ApiPropertyString _singular;
-        public string SingularValue { get => Singular.Value; set => Singular.Value = value; }
+        public ApiPropertyString SingularField => _singularField ?? (_singularField = new ApiPropertyString(this, SingularKey));
+        private ApiPropertyString _singularField;
+        public const string SingularKey = "singular";
+        public string SingularValue { get => SingularField.Value; set => SingularField.Value = value; }
 
-        public ApiPropertyString Plural => _plural ?? (_plural = new ApiPropertyString(this, "plural"));
-        private ApiPropertyString _plural;
-        public string PluralValue { get => Plural.Value; set => Plural.Value = value; }
+        public ApiPropertyString PluralField => _pluralField ?? (_pluralField = new ApiPropertyString(this, PluralKey));
+        private ApiPropertyString _pluralField;
+        public const string PluralKey = "plural";
+        public string PluralValue { get => PluralField.Value; set => PluralField.Value = value; }
 
-        public ApiPropertyString Possessive => _possessive ?? (_possessive = new ApiPropertyString(this, "possessive"));
-        private ApiPropertyString _possessive;
-        public string PossessiveValue { get => Possessive.Value; set => Possessive.Value = value; }
+        public ApiPropertyString PossessiveField => _possessiveField ?? (_possessiveField = new ApiPropertyString(this, PossessiveKey));
+        private ApiPropertyString _possessiveField;
+        public const string PossessiveKey = "possessive";
+        public string PossessiveValue { get => PossessiveField.Value; set => PossessiveField.Value = value; }
 
-        public ApiPropertyString PluralPossessive => _pluralPossessive ?? (_pluralPossessive = new ApiPropertyString(this, "plural_possessive"));
-        private ApiPropertyString _pluralPossessive;
-        public string PluralPossessiveValue { get => PluralPossessive.Value; set => PluralPossessive.Value = value; }
+        public ApiPropertyString PluralPossessiveField => _pluralPossessiveField ?? (_pluralPossessiveField = new ApiPropertyString(this, PluralPossessiveKey));
+        private ApiPropertyString _pluralPossessiveField;
+        public const string PluralPossessiveKey = "plural_possessive";
+        public string PluralPossessiveValue { get => PluralPossessiveField.Value; set => PluralPossessiveField.Value = value; }
 
-        public ApiPropertyString Icon => _icon ?? (_icon = new ApiPropertyString(this, "icon"));
-        private ApiPropertyString _icon;
-        public string IconValue { get => Icon.Value; set => Icon.Value = value; }
+        public ApiPropertyString IconField => _iconField ?? (_iconField = new ApiPropertyString(this, IconKey));
+        private ApiPropertyString _iconField;
+        public const string IconKey = "icon";
+        public string IconValue { get => IconField.Value; set => IconField.Value = value; }
 
-        public ApiPropertyString Theme => _theme ?? (_theme = new ApiPropertyString(this, "theme"));
-        private ApiPropertyString _theme;
-        public string ThemeValue { get => Theme.Value; set => Theme.Value = value; }
+        public ApiPropertyString ThemeField => _themeField ?? (_themeField = new ApiPropertyString(this, ThemeKey));
+        private ApiPropertyString _themeField;
+        public const string ThemeKey = "theme";
+        public string ThemeValue { get => ThemeField.Value; set => ThemeField.Value = value; }
 
-        public ApiPropertyIntBool Deletable => _deletable ?? (_deletable = new ApiPropertyIntBool(this, "deletable"));
-        private ApiPropertyIntBool _deletable;
-        public bool DeletableValue { get => Deletable.Value; set => Deletable.Value = value; }
+        public ApiPropertyIntBool DeletableField => _deletableField ?? (_deletableField = new ApiPropertyIntBool(this, DeletableKey));
+        private ApiPropertyIntBool _deletableField;
+        public const string DeletableKey = "deletable";
+        public bool? DeletableValue { get => DeletableField.Value; set => DeletableField.Value = value; }
 
-        public ApiPropertyString ObjectLabel => _objectLabel ?? (_objectLabel = new ApiPropertyString(this, "object_label"));
-        private ApiPropertyString _objectLabel;
-        public string ObjectLabelValue { get => ObjectLabel.Value; set => ObjectLabel.Value = value; }
+        public ApiPropertyString ObjectLabelField => _objectLabelField ?? (_objectLabelField = new ApiPropertyString(this, ObjectLabelKey));
+        private ApiPropertyString _objectLabelField;
+        public const string ObjectLabelKey = "object_label";
+        public string ObjectLabelValue { get => ObjectLabelField.Value; set => ObjectLabelField.Value = value; }
 
     }
 }

@@ -55,16 +55,16 @@ namespace EmergenceGuardian.OntraportApi.Converters
         /// <summary>
         /// Gets or sets the value of the property.
         /// </summary>
-        public T Value
-        {
-            get => Get<T>();
-            set => Set(value);
-        }
+        //public T Value
+        //{
+        //    get => Get<T>();
+        //    set => Set(value);
+        //}
 
         /// <summary>
         /// Gets or sets the nullable value of the property.
         /// </summary>
-        public N NullableValue
+        public N Value
         {
             get => Get<N>();
             set => Set(value);

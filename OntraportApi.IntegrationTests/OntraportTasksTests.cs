@@ -22,7 +22,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 
             var result = await api.UpdateAsync(ValidId, status: status);
 
-            Assert.Equal(status, result.Status.Value);
+            Assert.Equal(status, result.StatusField.Value);
         }
 
         [Fact]

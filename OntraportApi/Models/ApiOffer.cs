@@ -11,42 +11,46 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user who controls the offer. This field must contain a value for an offer object to be saved properly.
         /// </summary>
-        public ApiProperty<int> Owner => _owner ?? (_owner = new ApiProperty<int>(this, "owner"));
-        private ApiProperty<int> _owner;
+        public ApiProperty<int> OwnerField => _ownerField ?? (_ownerField = new ApiProperty<int>(this, OwnerKey));
+        private ApiProperty<int> _ownerField;
+        public const string OwnerKey = "owner";
         /// <summary>
         /// Gets or sets the ID of the user who controls the offer. This field must contain a value for an offer object to be saved properly.
         /// </summary>
-        public int OwnerValue { get => Owner.Value; set => Owner.Value = value; }
+        public int? Owner { get => OwnerField.Value; set => OwnerField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the offer's name.
         /// </summary>
-        public ApiPropertyString Name => _name ?? (_name = new ApiPropertyString(this, "name"));
-        private ApiPropertyString _name;
+        public ApiPropertyString NameField => _nameField ?? (_nameField = new ApiPropertyString(this, NameKey));
+        private ApiPropertyString _nameField;
+        public const string NameKey = "name";
         /// <summary>
         /// Gets or sets the offer's name.
         /// </summary>
-        public string NameValue { get => Name.Value; set => Name.Value = value; }
+        public string Name { get => NameField.Value; set => NameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether the offer is accessible for processing manual transactions. 
         /// </summary>
-        public ApiPropertyIntBool Public => _public ?? (_public = new ApiPropertyIntBool(this, "public"));
-        private ApiPropertyIntBool _public;
+        public ApiPropertyIntBool PublicField => _publicField ?? (_publicField = new ApiPropertyIntBool(this, PublicKey));
+        private ApiPropertyIntBool _publicField;
+        public const string PublicKey = "public";
         /// <summary>
         /// Gets or sets whether the offer is accessible for processing manual transactions. 
         /// </summary>
-        public bool PublicValue { get => Public.Value; set => Public.Value = value; }
+        public bool? Public { get => PublicField.Value; set => PublicField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set a json encoded string containing an offer's data.
         /// </summary>
-        public ApiPropertyString Content => _data ?? (_data = new ApiPropertyString(this, "data"));
-        private ApiPropertyString _data;
+        public ApiPropertyString ContentField => _contentField ?? (_contentField = new ApiPropertyString(this, ContentKey));
+        private ApiPropertyString _contentField;
+        public const string ContentKey = "data";
         /// <summary>
         /// Gets or sets a json encoded string containing an offer's data.
         /// </summary>
-        public string ContentValue { get => Content.Value; set => Content.Value = value; }
+        public string Content { get => ContentField.Value; set => ContentField.Value = value; }
 
     }
 }

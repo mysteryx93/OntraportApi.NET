@@ -12,102 +12,112 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the rule is a step in a sequence, returns a ApiProperty object to get or set the ID of that sequence.
         /// </summary>
-        public ApiProperty<int> DripId => _dripId ?? (_dripId = new ApiProperty<int>(this, "drip_id"));
-        private ApiProperty<int> _dripId;
+        public ApiProperty<int> DripIdField => _dripIdField ?? (_dripIdField = new ApiProperty<int>(this, DripIdKey));
+        private ApiProperty<int> _dripIdField;
+        public const string DripIdKey = "drip_id";
         /// <summary>
         /// If the rule is a step in a sequence, gets or sets the ID of that sequence.
         /// </summary>
-        public int DripIdValue { get => DripId.Value; set => DripId.Value = value; }
+        public int? DripId { get => DripIdField.Value; set => DripIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the events that trigger rule execution.
         /// </summary>
-        public ApiPropertyString Events => _events ?? (_events = new ApiPropertyString(this, "events"));
-        private ApiPropertyString _events;
+        public ApiPropertyString EventsField => _eventsField ?? (_eventsField = new ApiPropertyString(this, EventsKey));
+        private ApiPropertyString _eventsField;
+        public const string EventsKey = "events";
         /// <summary>
         /// Gets or sets the events that trigger rule execution.
         /// </summary>
-        public string EventsValue { get => Events.Value; set => Events.Value = value; }
+        public string Events { get => EventsField.Value; set => EventsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the criteria that must be met for the rule to act after it is triggered.
         /// </summary>
-        public ApiPropertyString Conditions => _conditions ?? (_conditions = new ApiPropertyString(this, "conditions"));
-        private ApiPropertyString _conditions;
+        public ApiPropertyString ConditionsField => _conditionsField ?? (_conditionsField = new ApiPropertyString(this, ConditionsKey));
+        private ApiPropertyString _conditionsField;
+        public const string ConditionsKey = "conditions";
         /// <summary>
         /// Gets or sets the criteria that must be met for the rule to act after it is triggered.
         /// </summary>
-        public string ConditionsValue { get => Conditions.Value; set => Conditions.Value = value; }
+        public string Conditions { get => ConditionsField.Value; set => ConditionsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the action to perform when rule is triggered.
         /// </summary>
-        public ApiPropertyString Actions => _actions ?? (_actions = new ApiPropertyString(this, "actions"));
-        private ApiPropertyString _actions;
+        public ApiPropertyString ActionsField => _actionsField ?? (_actionsField = new ApiPropertyString(this, ActionsKey));
+        private ApiPropertyString _actionsField;
+        public const string ActionsKey = "actions";
         /// <summary>
         /// Gets or sets the action to perform when rule is triggered.
         /// </summary>
-        public string ActionsValue { get => Actions.Value; set => Actions.Value = value; }
+        public string Actions { get => ActionsField.Value; set => ActionsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the name of the rule.
         /// </summary>
-        public ApiPropertyString Name => _name ?? (_name = new ApiPropertyString(this, "name"));
-        private ApiPropertyString _name;
+        public ApiPropertyString NameField => _nameField ?? (_nameField = new ApiPropertyString(this, NameKey));
+        private ApiPropertyString _nameField;
+        public const string NameKey = "name";
         /// <summary>
         /// Gets or sets the name of the rule.
         /// </summary>
-        public string NameValue { get => Name.Value; set => Name.Value = value; }
+        public string Name { get => NameField.Value; set => NameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the rule is paused.
         /// </summary>
-        public ApiPropertyIntBool Paused => _pause ?? (_pause = new ApiPropertyIntBool(this, "pause"));
-        private ApiPropertyIntBool _pause;
+        public ApiPropertyIntBool PausedField => _pauseField ?? (_pauseField = new ApiPropertyIntBool(this, PausedKey));
+        private ApiPropertyIntBool _pauseField;
+        public const string PausedKey = "pause";
         /// <summary>
         /// Gets or sets whether or not the rule is paused.
         /// </summary>
-        public bool PausedValue { get => Paused.Value; set => Paused.Value = value; }
+        public bool? Paused { get => PausedField.Value; set => PausedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last time the rule was triggered.
         /// </summary>
-        public ApiPropertyIntBool DateLastAction => _dateLastAction ?? (_dateLastAction = new ApiPropertyIntBool(this, "last_action"));
-        private ApiPropertyIntBool _dateLastAction;
+        public ApiPropertyIntBool DateLastActionField => _dateLastActionField ?? (_dateLastActionField = new ApiPropertyIntBool(this, DateLastActionKey));
+        private ApiPropertyIntBool _dateLastActionField;
+        public const string DateLastActionKey = "last_action";
         /// <summary>
         /// Gets or sets the last time the rule was triggered.
         /// </summary>
-        public bool DateLastActionValue { get => DateLastAction.Value; set => DateLastAction.Value = value; }
+        public bool? DateLastAction { get => DateLastActionField.Value; set => DateLastActionField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID for the type of object the rule is associated with.
         /// </summary>
-        public ApiProperty<int> ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiProperty<int>(this, "object_type_id"));
-        private ApiProperty<int> _objectTypeId;
+        public ApiProperty<int> ObjectTypeIdField => _objectTypeIdField ?? (_objectTypeIdField = new ApiProperty<int>(this, ObjectTypeIdKey));
+        private ApiProperty<int> _objectTypeIdField;
+        public const string ObjectTypeIdKey = "object_type_id";
         /// <summary>
         /// Gets or sets the ID for the type of object the rule is associated with.
         /// </summary>
-        public int ObjectTypeIdValue { get => ObjectTypeId.Value; set => ObjectTypeId.Value = value; }
+        public int? ObjectTypeId { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date the rule was added.
         /// </summary>
-        public ApiPropertyDateTime DateAdded => _dateAdded ?? (_dateAdded = new ApiPropertyDateTime(this, "date"));
-        private ApiPropertyDateTime _dateAdded;
+        public ApiPropertyDateTime DateAddedField => _dateAddedField ?? (_dateAddedField = new ApiPropertyDateTime(this, DateAddedKey));
+        private ApiPropertyDateTime _dateAddedField;
+        public const string DateAddedKey = "date";
         /// <summary>
         /// Gets or sets the date the rule was added.
         /// </summary>
-        public DateTimeOffset DateAddedValue { get => DateAdded.Value; set => DateAdded.Value = value; }
+        public DateTimeOffset? DateAdded { get => DateAddedField.Value; set => DateAddedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date the rule was last modified.
         /// </summary>
-        public ApiPropertyDateTime DateLastModified => _dateLastModified ?? (_dateLastModified = new ApiPropertyDateTime(this, "dlm"));
-        private ApiPropertyDateTime _dateLastModified;
+        public ApiPropertyDateTime DateLastModifiedField => _dateLastModifiedField ?? (_dateLastModifiedField = new ApiPropertyDateTime(this, DateLastModifiedKey));
+        private ApiPropertyDateTime _dateLastModifiedField;
+        public const string DateLastModifiedKey = "dlm";
         /// <summary>
         /// Gets or sets the date the rule was last modified.
         /// </summary>
-        public DateTimeOffset DateLastModifiedValue { get => DateLastModified.Value; set => DateLastModified.Value = value; }
+        public DateTimeOffset? DateLastModified { get => DateLastModifiedField.Value; set => DateLastModifiedField.Value = value; }
 
     }
 }

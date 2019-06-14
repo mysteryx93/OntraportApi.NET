@@ -11,530 +11,584 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's first name.
         /// </summary>
-        public ApiPropertyString FirstName => _firstName ?? (_firstName = new ApiPropertyString(this, "firstname"));
-        private ApiPropertyString _firstName;
+        public ApiPropertyString FirstNameField => _firstNameField ?? (_firstNameField = new ApiPropertyString(this, FirstNameKey));
+        private ApiPropertyString _firstNameField;
+        public const string FirstNameKey = "firstname";
         /// <summary>
         /// Gets or sets the contact's first name.
         /// </summary>
-        public string FirstNameValue { get => FirstName.Value; set => FirstName.Value = value; }
+        public string FirstName { get => FirstNameField.Value; set => FirstNameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's last name.
         /// </summary>
-        public ApiPropertyString LastName => _lastName ?? (_lastName = new ApiPropertyString(this, "lastname"));
-        private ApiPropertyString _lastName;
+        public ApiPropertyString LastNameField => _lastNameField ?? (_lastNameField = new ApiPropertyString(this, LastNameKey));
+        private ApiPropertyString _lastNameField;
+        public const string LastNameKey = "lastname";
         /// <summary>
         /// Gets or sets the contact's last name.
         /// </summary>
-        public string LastNameValue { get => LastName.Value; set => LastName.Value = value; }
+        public string LastName { get => LastNameField.Value; set => LastNameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's email address.
         /// </summary>
-        public ApiPropertyString Email => _email ?? (_email = new ApiPropertyString(this, "email"));
-        private ApiPropertyString _email;
+        public ApiPropertyString EmailField => _emailField ?? (_emailField = new ApiPropertyString(this, EmailKey));
+        private ApiPropertyString _emailField;
+        public const string EmailKey = "email";
         /// <summary>
         /// Gets or sets the contact's email address.
         /// </summary>
-        public string EmailValue { get => Email.Value; set => Email.Value = value; }
+        public string Email { get => EmailField.Value; set => EmailField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the affiliate ID of the first affiliate to refer the contact.
         /// </summary>
-        public ApiProperty<int> FirstReferrer => _firstReferrer ?? (_firstReferrer = new ApiProperty<int>(this, "freferrer"));
-        private ApiProperty<int> _firstReferrer;
+        public ApiProperty<int> FirstReferrerField => _firstReferrerField ?? (_firstReferrerField = new ApiProperty<int>(this, FirstReferrerKey));
+        private ApiProperty<int> _firstReferrerField;
+        public const string FirstReferrerKey = "freferrer";
         /// <summary>
         /// Gets or sets the affiliate ID of the first affiliate to refer the contact.
         /// </summary>
-        public int FirstReferrerValue { get => FirstReferrer.Value; set => FirstReferrer.Value = value; }
+        public int? FirstReferrer { get => FirstReferrerField.Value; set => FirstReferrerField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the affiliate ID of the last affiliate to refer the contact.
         /// </summary>
-        public ApiProperty<int> LastReferrer => _lastReferrer ?? (_lastReferrer = new ApiProperty<int>(this, "lreferrer"));
-        private ApiProperty<int> _lastReferrer;
+        public ApiProperty<int> LastReferrerField => _lastReferrerField ?? (_lastReferrerField = new ApiProperty<int>(this, LastReferrerKey));
+        private ApiProperty<int> _lastReferrerField;
+        public const string LastReferrerKey = "lreferrer";
         /// <summary>
         /// Gets or sets the affiliate ID of the last affiliate to refer the contact.
         /// </summary>
-        public int LastReferrerValue { get => LastReferrer.Value; set => LastReferrer.Value = value; }
+        public int? LastReferrer { get => LastReferrerField.Value; set => LastReferrerField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's postal address.
         /// </summary>
-        public ApiPropertyString Address => _address ?? (_address = new ApiPropertyString(this, "address"));
-        private ApiPropertyString _address;
+        public ApiPropertyString AddressField => _addressField ?? (_addressField = new ApiPropertyString(this, AddressKey));
+        private ApiPropertyString _addressField;
+        public const string AddressKey = "address";
         /// <summary>
         /// Gets or sets the contact's postal address.
         /// </summary>
-        public string AddressValue { get => Address.Value; set => Address.Value = value; }
+        public string Address { get => AddressField.Value; set => AddressField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set a second address field which is generally used for storing suite or unit numbers.
         /// </summary>
-        public ApiPropertyString Address2 => _address2 ?? (_address2 = new ApiPropertyString(this, "address2"));
-        private ApiPropertyString _address2;
+        public ApiPropertyString Address2Field => _address2Field ?? (_address2Field = new ApiPropertyString(this, Address2Key));
+        private ApiPropertyString _address2Field;
+        public const string Address2Key = "address2";
         /// <summary>
         /// Gets or sets a second address field which is generally used for storing suite or unit numbers.
         /// </summary>
-        public string Address2Value { get => Address2.Value; set => Address2.Value = value; }
+        public string Address2 { get => Address2Field.Value; set => Address2Field.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's city.
         /// </summary>
-        public ApiPropertyString City => _city ?? (_city = new ApiPropertyString(this, "city"));
-        private ApiPropertyString _city;
+        public ApiPropertyString CityField => _cityField ?? (_cityField = new ApiPropertyString(this, CityKey));
+        private ApiPropertyString _cityField;
+        public const string CityKey = "city";
         /// <summary>
         /// Gets or sets the contact's city.
         /// </summary>
-        public string CityValue { get => City.Value; set => City.Value = value; }
+        public string City { get => CityField.Value; set => CityField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's state.
         /// </summary>
-        public ApiPropertyString State => _state ?? (_state = new ApiPropertyString(this, "state"));
-        private ApiPropertyString _state;
+        public ApiPropertyString StateField => _stateField ?? (_stateField = new ApiPropertyString(this, StateKey));
+        private ApiPropertyString _stateField;
+        public const string StateKey = "state";
         /// <summary>
         /// Gets or sets the contact's state.
         /// </summary>
-        public string StateValue { get => State.Value; set => State.Value = value; }
+        public string State { get => StateField.Value; set => StateField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's postal code.
         /// </summary>
-        public ApiPropertyString Zip => _zip ?? (_zip = new ApiPropertyString(this, "zip"));
-        private ApiPropertyString _zip;
+        public ApiPropertyString ZipField => _zipField ?? (_zipField = new ApiPropertyString(this, ZipKey));
+        private ApiPropertyString _zipField;
+        public const string ZipKey = "zip";
         /// <summary>
         /// Gets or sets the contact's postal code.
         /// </summary>
-        public string ZipValue { get => Zip.Value; set => Zip.Value = value; }
+        public string Zip { get => ZipField.Value; set => ZipField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's country.
         /// </summary>
-        public ApiPropertyString Country => _country ?? (_country = new ApiPropertyString(this, "country"));
-        private ApiPropertyString _country;
+        public ApiPropertyString CountryField => _countryField ?? (_countryField = new ApiPropertyString(this, CountryKey));
+        private ApiPropertyString _countryField;
+        public const string CountryKey = "country";
         /// <summary>
         /// Gets or sets the contact's country.
         /// </summary>
-        public string CountryValue { get => Country.Value; set => Country.Value = value; }
+        public string Country { get => CountryField.Value; set => CountryField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's birthday.
         /// </summary>
-        public ApiPropertyDateTime Birthday => _birthday ?? (_birthday = new ApiPropertyDateTime(this, "birthday"));
-        private ApiPropertyDateTime _birthday;
+        public ApiPropertyDateTime BirthdayField => _birthdayField ?? (_birthdayField = new ApiPropertyDateTime(this, BirthdayKey));
+        private ApiPropertyDateTime _birthdayField;
+        public const string BirthdayKey = "birthday";
         /// <summary>
         /// Gets or sets the contact's birthday.
         /// </summary>
-        public DateTimeOffset BirthdayValue { get => Birthday.Value; set => Birthday.Value = value; }
+        public DateTimeOffset? Birthday { get => BirthdayField.Value; set => BirthdayField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's priority.
         /// </summary>
-        public ApiPropertyIntEnum<ContactPriority> Priority => _priority ?? (_priority = new ApiPropertyIntEnum<ContactPriority>(this, "priority"));
-        private ApiPropertyIntEnum<ContactPriority> _priority;
+        public ApiPropertyIntEnum<ContactPriority> PriorityField => _priorityField ?? (_priorityField = new ApiPropertyIntEnum<ContactPriority>(this, PriorityKey));
+        private ApiPropertyIntEnum<ContactPriority> _priorityField;
+        public const string PriorityKey = "priority";
         /// <summary>
         /// Gets or sets the contact's priority.
         /// </summary>
-        public ContactPriority PriorityValue { get => Priority.Value; set => Priority.Value = value; }
+        public ContactPriority? Priority { get => PriorityField.Value; set => PriorityField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's Sales Stage.
         /// </summary>
-        public ApiPropertyIntEnum<SaleStatus> Status => _status ?? (_status = new ApiPropertyIntEnum<SaleStatus>(this, "status"));
-        private ApiPropertyIntEnum<SaleStatus> _status;
+        public ApiPropertyIntEnum<SaleStatus> StatusField => _statusField ?? (_statusField = new ApiPropertyIntEnum<SaleStatus>(this, StatusKey));
+        private ApiPropertyIntEnum<SaleStatus> _statusField;
+        public const string StatusKey = "status";
         /// <summary>
         /// Gets or sets the contact's Sales Stage.
         /// </summary>
-        public SaleStatus StatusValue { get => Status.Value; set => Status.Value = value; }
+        public SaleStatus? Status { get => StatusField.Value; set => StatusField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's home phone number.
         /// </summary>
-        public ApiPropertyString HomePhone => _homePhone ?? (_homePhone = new ApiPropertyString(this, "home_phone"));
-        private ApiPropertyString _homePhone;
+        public ApiPropertyString HomePhoneField => _homePhoneField ?? (_homePhoneField = new ApiPropertyString(this, HomePhoneKey));
+        private ApiPropertyString _homePhoneField;
+        public const string HomePhoneKey = "home_phone";
         /// <summary>
         /// Gets or sets the contact's home phone number.
         /// </summary>
-        public string HomePhoneValue { get => HomePhone.Value; set => HomePhone.Value = value; }
+        public string HomePhone { get => HomePhoneField.Value; set => HomePhoneField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the mobile number where the contact prefers receive text messages.
         /// </summary>
-        public ApiPropertyString SmsNumber => _smsNumber ?? (_smsNumber = new ApiPropertyString(this, "sms_number"));
-        private ApiPropertyString _smsNumber;
+        public ApiPropertyString SmsNumberField => _smsNumberField ?? (_smsNumberField = new ApiPropertyString(this, SmsNumberKey));
+        private ApiPropertyString _smsNumberField;
+        public const string SmsNumberKey = "sms_number";
         /// <summary>
         /// Gets or sets the mobile number where the contact prefers receive text messages.
         /// </summary>
-        public string SmsNumberValue { get => SmsNumber.Value; set => SmsNumber.Value = value; }
+        public string SmsNumber { get => SmsNumberField.Value; set => SmsNumberField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's office phone number.
         /// </summary>
-        public ApiPropertyString OfficePhone => _officePhone ?? (_officePhone = new ApiPropertyString(this, "office_phone"));
-        private ApiPropertyString _officePhone;
+        public ApiPropertyString OfficePhoneField => _officePhoneField ?? (_officePhoneField = new ApiPropertyString(this, OfficePhoneKey));
+        private ApiPropertyString _officePhoneField;
+        public const string OfficePhoneKey = "office_phone";
         /// <summary>
         /// Gets or sets the contact's office phone number.
         /// </summary>
-        public string OfficePhoneValue { get => OfficePhone.Value; set => OfficePhone.Value = value; }
+        public string OfficePhone { get => OfficePhoneField.Value; set => OfficePhoneField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's fax number.
         /// </summary>
-        public ApiPropertyString Fax => _fax ?? (_fax = new ApiPropertyString(this, "fax"));
-        private ApiPropertyString _fax;
+        public ApiPropertyString FaxField => _faxField ?? (_faxField = new ApiPropertyString(this, FaxKey));
+        private ApiPropertyString _faxField;
+        public const string FaxKey = "fax";
         /// <summary>
         /// Gets or sets the contact's fax number.
         /// </summary>
-        public string FaxValue { get => Fax.Value; set => Fax.Value = value; }
+        public string Fax { get => FaxField.Value; set => FaxField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company the contact is affiliated with.
         /// </summary>
-        public ApiPropertyString Company => _company ?? (_company = new ApiPropertyString(this, "company"));
-        private ApiPropertyString _company;
+        public ApiPropertyString CompanyField => _companyField ?? (_companyField = new ApiPropertyString(this, CompanyKey));
+        private ApiPropertyString _companyField;
+        public const string CompanyKey = "company";
         /// <summary>
         /// Gets or sets the company the contact is affiliated with.
         /// </summary>
-        public string CompanyValue { get => _company.Value; set => Company.Value = value; }
+        public string Company { get => _companyField.Value; set => CompanyField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's job title.
         /// </summary>
-        public ApiPropertyString Title => _title ?? (_title = new ApiPropertyString(this, "title"));
-        private ApiPropertyString _title;
+        public ApiPropertyString TitleField => _titleField ?? (_titleField = new ApiPropertyString(this, TitleKey));
+        private ApiPropertyString _titleField;
+        public const string TitleKey = "title";
         /// <summary>
         /// Gets or sets the contact's job title.
         /// </summary>
-        public string TitleValue { get => Title.Value; set => Title.Value = value; }
+        public string Title { get => TitleField.Value; set => TitleField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's website.
         /// </summary>
-        public ApiPropertyString Website => _website ?? (_website = new ApiPropertyString(this, "website"));
-        private ApiPropertyString _website;
+        public ApiPropertyString WebsiteField => _websiteField ?? (_websiteField = new ApiPropertyString(this, WebsiteKey));
+        private ApiPropertyString _websiteField;
+        public const string WebsiteKey = "website";
         /// <summary>
         /// Gets or sets the contact's website.
         /// </summary>
-        public string WebsiteValue { get => Website.Value; set => Website.Value = value; }
+        public string Website { get => WebsiteField.Value; set => WebsiteField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the lead source ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiProperty<int> LeadSourceFirst => _leadSourceFirst ?? (_leadSourceFirst = new ApiProperty<int>(this, "n_lead_source"));
-        private ApiProperty<int> _leadSourceFirst;
+        public ApiProperty<int> LeadSourceFirstField => _leadSourceFirstField ?? (_leadSourceFirstField = new ApiProperty<int>(this, LeadSourceFirstKey));
+        private ApiProperty<int> _leadSourceFirstField;
+        public const string LeadSourceFirstKey = "n_lead_source";
         /// <summary>
         /// Gets or sets the lead source ID for the tracking URL the contact arrived from.
         /// </summary>
-        public int LeadSourceFirstValue { get => LeadSourceFirst.Value; set => LeadSourceFirst.Value = value; }
+        public int? LeadSourceFirst { get => LeadSourceFirstField.Value; set => LeadSourceFirstField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the content ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiProperty<int> LeadContentFirst => _leadContentFirst ?? (_leadContentFirst = new ApiProperty<int>(this, "n_content"));
-        private ApiProperty<int> _leadContentFirst;
+        public ApiProperty<int> LeadContentFirstField => _leadContentFirstField ?? (_leadContentFirstField = new ApiProperty<int>(this, LeadContentFirstKey));
+        private ApiProperty<int> _leadContentFirstField;
+        public const string LeadContentFirstKey = "n_content";
         /// <summary>
         /// Gets or sets the content ID for the tracking URL the contact arrived from.
         /// </summary>
-        public int LeadContentFirstValue { get => LeadContentFirst.Value; set => LeadContentFirst.Value = value; }
+        public int? LeadContentFirst { get => LeadContentFirstField.Value; set => LeadContentFirstField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the medium ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiProperty<int> LeadMediumFirst => _leadMediumFirst ?? (_leadMediumFirst = new ApiProperty<int>(this, "n_medium"));
-        private ApiProperty<int> _leadMediumFirst;
+        public ApiProperty<int> LeadMediumFirstField => _leadMediumFirstField ?? (_leadMediumFirstField = new ApiProperty<int>(this, LeadMediumFirstKey));
+        private ApiProperty<int> _leadMediumFirstField;
+        public const string LeadMediumFirstKey = "n_medium";
         /// <summary>
         /// Gets or sets the medium ID for the tracking URL the contact arrived from.
         /// </summary>
-        public int LeadMediumFirstValue { get => LeadMediumFirst.Value; set => LeadMediumFirst.Value = value; }
+        public int? LeadMediumFirst { get => LeadMediumFirstField.Value; set => LeadMediumFirstField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the tracking campaign ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiProperty<int> LeadCampaignFirst => _leadCampaignFirst ?? (_leadCampaignFirst = new ApiProperty<int>(this, "n_campaign"));
-        private ApiProperty<int> _leadCampaignFirst;
+        public ApiProperty<int> LeadCampaignFirstField => _leadCampaignFirstField ?? (_leadCampaignFirstField = new ApiProperty<int>(this, LeadCampaignFirstKey));
+        private ApiProperty<int> _leadCampaignFirstField;
+        public const string LeadCampaignFirstKey = "n_campaign";
         /// <summary>
         /// Gets or sets the tracking campaign ID for the tracking URL the contact arrived from.
         /// </summary>
-        public int LeadCampaignFirstValue { get => LeadCampaignFirst.Value; set => LeadCampaignFirst.Value = value; }
+        public int? LeadCampaignFirst { get => LeadCampaignFirstField.Value; set => LeadCampaignFirstField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the term ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiProperty<int> LeadTermsFirst => _leadTermsFirst ?? (_leadTermsFirst = new ApiProperty<int>(this, "n_term"));
-        private ApiProperty<int> _leadTermsFirst;
+        public ApiProperty<int> LeadTermsFirstField => _leadTermsFirstField ?? (_leadTermsFirstField = new ApiProperty<int>(this, LeadTermsFirstKey));
+        private ApiProperty<int> _leadTermsFirstField;
+        public const string LeadTermsFirstKey = "n_term";
         /// <summary>
         /// Gets or sets the term ID for the tracking URL the contact arrived from.
         /// </summary>
-        public int LeadTermsFirstValue { get => LeadTermsFirst.Value; set => LeadTermsFirst.Value = value; }
+        public int? LeadTermsFirst { get => LeadTermsFirstField.Value; set => LeadTermsFirstField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last lead source ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiProperty<int> LeadSourceLast => _leadSourceLast ?? (_leadSourceLast = new ApiProperty<int>(this, "l_lead_source"));
-        private ApiProperty<int> _leadSourceLast;
+        public ApiProperty<int> LeadSourceLastField => _leadSourceLastField ?? (_leadSourceLastField = new ApiProperty<int>(this, LeadSourceLastKey));
+        private ApiProperty<int> _leadSourceLastField;
+        public const string LeadSourceLastKey = "l_lead_source";
         /// <summary>
         /// Gets or sets the last lead source ID for the tracking URL the contact arrived from.
         /// </summary>
-        public int LeadSourceLastValue { get => LeadSourceLast.Value; set => LeadSourceLast.Value = value; }
+        public int? LeadSourceLast { get => LeadSourceLastField.Value; set => LeadSourceLastField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last content ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiProperty<int> LeadContentLast => _leadContentLast ?? (_leadContentLast = new ApiProperty<int>(this, "l_content"));
-        private ApiProperty<int> _leadContentLast;
+        public ApiProperty<int> LeadContentLastField => _leadContentLastField ?? (_leadContentLastField = new ApiProperty<int>(this, LeadContentLastKey));
+        private ApiProperty<int> _leadContentLastField;
+        public const string LeadContentLastKey = "l_content";
         /// <summary>
         /// Gets or sets the last content ID for the tracking URL the contact arrived from.
         /// </summary>
-        public int LeadContentLastValue { get => LeadContentLast.Value; set => LeadContentLast.Value = value; }
+        public int? LeadContentLast { get => LeadContentLastField.Value; set => LeadContentLastField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last medium ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiProperty<int> LeadMediumLast => _leadMediumLast ?? (_leadMediumLast = new ApiProperty<int>(this, "l_medium"));
-        private ApiProperty<int> _leadMediumLast;
+        public ApiProperty<int> LeadMediumLastField => _leadMediumLastField ?? (_leadMediumLastField = new ApiProperty<int>(this, LeadMediumLastKey));
+        private ApiProperty<int> _leadMediumLastField;
+        public const string LeadMediumLastKey = "l_medium";
         /// <summary>
         /// Gets or sets the last medium ID for the tracking URL the contact arrived from.
         /// </summary>
-        public int LeadMediumLastValue { get => LeadMediumLast.Value; set => LeadMediumLast.Value = value; }
+        public int? LeadMediumLast { get => LeadMediumLastField.Value; set => LeadMediumLastField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last tracking campaign ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiProperty<int> LeadCampaignLast => _leadCampaignLast ?? (_leadCampaignLast = new ApiProperty<int>(this, "l_campaign"));
-        private ApiProperty<int> _leadCampaignLast;
+        public ApiProperty<int> LeadCampaignLastField => _leadCampaignLastField ?? (_leadCampaignLastField = new ApiProperty<int>(this, LeadCampaignLastKey));
+        private ApiProperty<int> _leadCampaignLastField;
+        public const string LeadCampaignLastKey = "l_campaign";
         /// <summary>
         /// Gets or sets the last tracking campaign ID for the tracking URL the contact arrived from.
         /// </summary>
-        public int LeadCampaignLastValue { get => LeadCampaignLast.Value; set => LeadCampaignLast.Value = value; }
+        public int? LeadCampaignLast { get => LeadCampaignLastField.Value; set => LeadCampaignLastField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last term ID for the tracking URL the contact arrived from.
         /// </summary>
-        public ApiProperty<int> LeadTermsLast => _leadTermsLast ?? (_leadTermsLast = new ApiProperty<int>(this, "l_term"));
-        private ApiProperty<int> _leadTermsLast;
+        public ApiProperty<int> LeadTermsLastField => _leadTermsLastField ?? (_leadTermsLastField = new ApiProperty<int>(this, LeadTermsLastKey));
+        private ApiProperty<int> _leadTermsLastField;
+        public const string LeadTermsLastKey = "l_term";
         /// <summary>
         /// Gets or sets the last term ID for the tracking URL the contact arrived from.
         /// </summary>
-        public int LeadTermsLastValue { get => LeadTermsLast.Value; set => LeadTermsLast.Value = value; }
+        public int? LeadTermsLast { get => LeadTermsLastField.Value; set => LeadTermsLastField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the page the contact was referred from.
         /// </summary>
-        public ApiProperty<int> ReferralPage => _referralPage ?? (_referralPage = new ApiProperty<int>(this, "referral_page"));
-        private ApiProperty<int> _referralPage;
+        public ApiProperty<int> ReferralPageField => _referralPageField ?? (_referralPageField = new ApiProperty<int>(this, ReferralPageKey));
+        private ApiProperty<int> _referralPageField;
+        public const string ReferralPageKey = "referral_page";
         /// <summary>
         /// Gets or sets the page the contact was referred from.
         /// </summary>
-        public int ReferralPageValue { get => ReferralPage.Value; set => ReferralPage.Value = value; }
+        public int? ReferralPage { get => ReferralPageField.Value; set => ReferralPageField.Value = value; }
 
         /// <summary>
         /// If the contact is an affiliate, returns a ApiProperty object to get or set the total number of affiliate sales.
         /// </summary>
-        public ApiProperty<int> AffiliateSales => _affiliateSales ?? (_affiliateSales = new ApiProperty<int>(this, "aff_sales"));
-        private ApiProperty<int> _affiliateSales;
+        public ApiProperty<int> AffiliateSalesField => _affiliateSalesField ?? (_affiliateSalesField = new ApiProperty<int>(this, AffiliateSalesKey));
+        private ApiProperty<int> _affiliateSalesField;
+        public const string AffiliateSalesKey = "aff_sales";
         /// <summary>
         /// If the contact is an affiliate, gets or sets the total number of affiliate sales.
         /// </summary>
-        public int AffiliateSalesValue { get => AffiliateSales.Value; set => AffiliateSales.Value = value; }
+        public int? AffiliateSales { get => AffiliateSalesField.Value; set => AffiliateSalesField.Value = value; }
 
         /// <summary>
         /// If the contact is an affiliate, returns a ApiProperty object to get or set the total amount of affiliate sales.
         /// </summary>
-        public ApiProperty<decimal> AffiliateAmount => _affiliateAmount ?? (_affiliateAmount = new ApiProperty<decimal>(this, "aff_amount"));
-        private ApiProperty<decimal> _affiliateAmount;
+        public ApiProperty<decimal> AffiliateAmountField => _affiliateAmountField ?? (_affiliateAmountField = new ApiProperty<decimal>(this, AffiliateAmountKey));
+        private ApiProperty<decimal> _affiliateAmountField;
+        public const string AffiliateAmountKey = "aff_amount";
         /// <summary>
         /// If the contact is an affiliate, gets or sets the total amount of affiliate sales.
         /// </summary>
-        public decimal AffiliateAmountValue { get => AffiliateAmount.Value; set => AffiliateAmount.Value = value; }
+        public decimal? AffiliateAmount { get => AffiliateAmountField.Value; set => AffiliateAmountField.Value = value; }
 
         /// <summary>
         /// For affiliates, returns a ApiProperty object to get or set the partner program ID.
         /// </summary>
-        public ApiProperty<int> AffiliateProgramId => _affiliateProgramId ?? (_affiliateProgramId = new ApiProperty<int>(this, "program_id"));
-        private ApiProperty<int> _affiliateProgramId;
+        public ApiProperty<int> AffiliateProgramIdField => _affiliateProgramIdField ?? (_affiliateProgramIdField = new ApiProperty<int>(this, AffiliateProgramKey));
+        private ApiProperty<int> _affiliateProgramIdField;
+        public const string AffiliateProgramKey = "program_id";
         /// <summary>
         /// For affiliates, returns a ApiProperty object to get or set the partner program ID.
         /// </summary>
-        public int AffiliateProgramIdValue { get => AffiliateProgramId.Value; set => AffiliateProgramId.Value = value; }
+        public int? AffiliateProgramId { get => AffiliateProgramIdField.Value; set => AffiliateProgramIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the affiliate email address for Paypal payments.
         /// </summary>
-        public ApiPropertyString AffiliatePayPal => _affiliatePayPal ?? (_affiliatePayPal = new ApiPropertyString(this, "aff_paypal"));
-        private ApiPropertyString _affiliatePayPal;
+        public ApiPropertyString AffiliatePayPalField => _affiliatePayPalField ?? (_affiliatePayPalField = new ApiPropertyString(this, AffiliatePayPalKey));
+        private ApiPropertyString _affiliatePayPalField;
+        public const string AffiliatePayPalKey = "aff_paypal";
         /// <summary>
         /// Gets or sets the affiliate email address for Paypal payments.
         /// </summary>
-        public string AffiliatePayPalValue { get => AffiliatePayPal.Value; set => AffiliatePayPal.Value = value; }
+        public string AffiliatePayPal { get => AffiliatePayPalField.Value; set => AffiliatePayPalField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's gender as listed on Facebook.
         /// </summary>
-        public ApiPropertyString FacebookGender => _facebookGender ?? (_facebookGender = new ApiPropertyString(this, "fb_gender"));
-        private ApiPropertyString _facebookGender;
+        public ApiPropertyString FacebookGenderField => _facebookGenderField ?? (_facebookGenderField = new ApiPropertyString(this, FacebookGenderKey));
+        private ApiPropertyString _facebookGenderField;
+        public const string FacebookGenderKey = "fb_gender";
         /// <summary>
         /// Gets or sets the contact's gender as listed on Facebook.
         /// </summary>
-        public string FacebookGenderValue { get => FacebookGender.Value; set => FacebookGender.Value = value; }
+        public string FacebookGender { get => FacebookGenderField.Value; set => FacebookGenderField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the amount of the contact's most recent credit card charge.
         /// </summary>
-        public ApiProperty<decimal> LastTransactionAmount => _lastTransactionAmount ?? (_lastTransactionAmount = new ApiProperty<decimal>(this, "mrcAmount"));
-        private ApiProperty<decimal> _lastTransactionAmount;
+        public ApiProperty<decimal> LastTransactionAmountField => _lastTransactionAmountField ?? (_lastTransactionAmountField = new ApiProperty<decimal>(this, LastTransactionAmountKey));
+        private ApiProperty<decimal> _lastTransactionAmountField;
+        public const string LastTransactionAmountKey = "mrcAmount";
         /// <summary>
         /// Gets or sets the amount of the contact's most recent credit card charge.
         /// </summary>
-        public decimal LastTransactionAmountValue { get => LastTransactionAmount.Value; set => LastTransactionAmount.Value = value; }
+        public decimal? LastTransactionAmount { get => LastTransactionAmountField.Value; set => LastTransactionAmountField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the total contact transactions remaining unpaid.
         /// </summary>
-        public ApiProperty<decimal> LastTransactionUnpaid => _lastTransactionUnpaid ?? (_lastTransactionUnpaid = new ApiProperty<decimal>(this, "mrcUnpaid"));
-        private ApiProperty<decimal> _lastTransactionUnpaid;
+        public ApiProperty<decimal> LastTransactionUnpaidField => _lastTransactionUnpaidField ?? (_lastTransactionUnpaidField = new ApiProperty<decimal>(this, LastTransactionUnpaidKey));
+        private ApiProperty<decimal> _lastTransactionUnpaidField;
+        public const string LastTransactionUnpaidKey = "mrcUnpaid";
         /// <summary>
         /// Gets or sets the total contact transactions remaining unpaid.
         /// </summary>
-        public decimal LastTransactionUnpaidValue { get => LastTransactionUnpaid.Value; set => LastTransactionUnpaid.Value = value; }
+        public decimal? LastTransactionUnpaid { get => LastTransactionUnpaidField.Value; set => LastTransactionUnpaidField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's most recent invoice number.
         /// </summary>
-        public ApiProperty<int> LastInvoiceNumber => _lastInvoiceNumber ?? (_lastInvoiceNumber = new ApiProperty<int>(this, "mriInvoiceNum"));
-        private ApiProperty<int> _lastInvoiceNumber;
+        public ApiProperty<int> LastInvoiceNumberField => _lastInvoiceNumberField ?? (_lastInvoiceNumberField = new ApiProperty<int>(this, LastInvoiceNumberKey));
+        private ApiProperty<int> _lastInvoiceNumberField;
+        public const string LastInvoiceNumberKey = "mriInvoiceNum";
         /// <summary>
         /// Gets or sets the contact's most recent invoice number.
         /// </summary>
-        public int LastInvoiceNumberValue { get => LastInvoiceNumber.Value; set => LastInvoiceNumber.Value = value; }
+        public int? LastInvoiceNumber { get => LastInvoiceNumberField.Value; set => LastInvoiceNumberField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's most recent invoice total.
         /// </summary>
-        public ApiProperty<decimal> LastInvoiceTotal => _lastInvoiceTotal ?? (_lastInvoiceTotal = new ApiProperty<decimal>(this, "mriInvoiceTotal"));
-        private ApiProperty<decimal> _lastInvoiceTotal;
+        public ApiProperty<decimal> LastInvoiceTotalField => _lastInvoiceTotalField ?? (_lastInvoiceTotalField = new ApiProperty<decimal>(this, LastInvoiceTotalKey));
+        private ApiProperty<decimal> _lastInvoiceTotalField;
+        public const string LastInvoiceTotalKey = "mriInvoiceTotal";
         /// <summary>
         /// Gets or sets the contact's most recent invoice total.
         /// </summary>
-        public decimal LastInvoiceTotalValue { get => LastInvoiceTotal.Value; set => LastInvoiceTotal.Value = value; }
+        public decimal? LastInvoiceTotal { get => LastInvoiceTotalField.Value; set => LastInvoiceTotalField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's credit card type.
         /// </summary>
-        public ApiProperty<CreditCardType> CreditCardType => _creditCardType ?? (_creditCardType = new ApiPropertyIntEnum<CreditCardType>(this, "ccType"));
-        private ApiProperty<CreditCardType> _creditCardType;
+        public ApiProperty<CreditCardType> CreditCardTypeField => _creditCardTypeField ?? (_creditCardTypeField = new ApiPropertyIntEnum<CreditCardType>(this, CreditCardTypeKey));
+        private ApiProperty<CreditCardType> _creditCardTypeField;
+        public const string CreditCardTypeKey = "ccType";
         /// <summary>
         /// Gets or sets the contact's credit card type.
         /// </summary>
-        public CreditCardType CreditCardTypeValue { get => CreditCardType.Value; set => CreditCardType.Value = value; }
+        public CreditCardType? CreditCardType { get => CreditCardTypeField.Value; set => CreditCardTypeField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the expiration month of the contact's credit card.
         /// </summary>
-        public ApiProperty<int> CreditCardExpirationMonth => _creditCardExpirationMonth ?? (_creditCardExpirationMonth = new ApiProperty<int>(this, "ccExpirationMonth"));
-        private ApiProperty<int> _creditCardExpirationMonth;
+        public ApiProperty<int> CreditCardExpirationMonthField => _creditCardExpirationMonthField ?? (_creditCardExpirationMonthField = new ApiProperty<int>(this, CreditCardExpirationMonthKey));
+        private ApiProperty<int> _creditCardExpirationMonthField;
+        public const string CreditCardExpirationMonthKey = "ccExpirationMonth";
         /// <summary>
         /// Gets or sets the expiration month of the contact's credit card.
         /// </summary>
-        public int CreditCardExpirationMonthValue { get => CreditCardExpirationMonth.Value; set => CreditCardExpirationMonth.Value = value; }
+        public int? CreditCardExpirationMonth { get => CreditCardExpirationMonthField.Value; set => CreditCardExpirationMonthField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the year the contact's credit card expires.
         /// </summary>
-        public ApiProperty<int> CreditCardExpirationYear => _creditCardExpirationYear ?? (_creditCardExpirationYear = new ApiProperty<int>(this, "ccExpirationYear"));
-        private ApiProperty<int> _creditCardExpirationYear;
+        public ApiProperty<int> CreditCardExpirationYearField => _creditCardExpirationYearField ?? (_creditCardExpirationYearField = new ApiProperty<int>(this, CreditCardExpirationYearKey));
+        private ApiProperty<int> _creditCardExpirationYearField;
+        public const string CreditCardExpirationYearKey = "ccExpirationYear";
         /// <summary>
         /// Gets or sets the year the contact's credit card expires.
         /// </summary>
-        public int CreditCardExpirationYearValue { get => CreditCardExpirationYear.Value; set => CreditCardExpirationYear.Value = value; }
+        public int? CreditCardExpirationYear { get => CreditCardExpirationYearField.Value; set => CreditCardExpirationYearField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the day of the month that the contact's credit card expires.
         /// </summary>
-        public ApiProperty<int> CreditCardExpirationDay => _creditCardExpirationDay ?? (_creditCardExpirationDay = new ApiProperty<int>(this, "ccExpirationDate"));
-        private ApiProperty<int> _creditCardExpirationDay;
+        public ApiProperty<int> CreditCardExpirationDayField => _creditCardExpirationDayField ?? (_creditCardExpirationDayField = new ApiProperty<int>(this, CreditCardExpirationDayKey));
+        private ApiProperty<int> _creditCardExpirationDayField;
+        public const string CreditCardExpirationDayKey = "ccExpirationDate";
         /// <summary>
         /// Gets or sets the day of the month that the contact's credit card expires.
         /// </summary>
-        public int CreditCardExpirationDayValue { get => CreditCardExpirationDay.Value; set => CreditCardExpirationDay.Value = value; }
+        public int? CreditCardExpirationDay { get => CreditCardExpirationDayField.Value; set => CreditCardExpirationDayField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last 4 digits of the contact's credit card number.
         /// </summary>
-        public ApiPropertyString CreditCardNumber => _creditCardNumber ?? (_creditCardNumber = new ApiPropertyString(this, "ccNumber"));
-        private ApiPropertyString _creditCardNumber;
+        public ApiPropertyString CreditCardNumberField => _creditCardNumberField ?? (_creditCardNumberField = new ApiPropertyString(this, CreditCardNumberKey));
+        private ApiPropertyString _creditCardNumberField;
+        public const string CreditCardNumberKey = "ccNumber";
         /// <summary>
         /// Gets or sets the last 4 digits of the contact's credit card number.
         /// </summary>
-        public string CreditCardNumberValue { get => CreditCardNumber.Value; set => CreditCardNumber.Value = value; }
+        public string CreditCardNumber { get => CreditCardNumberField.Value; set => CreditCardNumberField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the result of the contact's most recent credit card charge.
         /// </summary>
-        public ApiProperty<ContactTransactionResult> LastTransactionResult => _lastTransactionResult ?? (_lastTransactionResult = new ApiPropertyIntEnum<ContactTransactionResult>(this, "mrcResult"));
-        private ApiProperty<ContactTransactionResult> _lastTransactionResult;
+        public ApiProperty<ContactTransactionResult> LastTransactionResultField => _lastTransactionResultField ?? (_lastTransactionResultField = new ApiPropertyIntEnum<ContactTransactionResult>(this, LastTransactionResultKey));
+        private ApiProperty<ContactTransactionResult> _lastTransactionResultField;
+        public const string LastTransactionResultKey = "mrcResult";
         /// <summary>
         /// Gets or sets the result of the contact's most recent credit card charge.
         /// </summary>
-        public ContactTransactionResult LastTransactionResultValue { get => LastTransactionResult.Value; set => LastTransactionResult.Value = value; }
+        public ContactTransactionResult? LastTransactionResult { get => LastTransactionResultField.Value; set => LastTransactionResultField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last text message the contact received from you.
         /// </summary>
-        public ApiPropertyString LastInboundSms => _lastInboundSms ?? (_lastInboundSms = new ApiPropertyString(this, "last_inbound_sms"));
-        private ApiPropertyString _lastInboundSms;
+        public ApiPropertyString LastInboundSmsField => _lastInboundSmsField ?? (_lastInboundSmsField = new ApiPropertyString(this, LastInboundSmsKey));
+        private ApiPropertyString _lastInboundSmsField;
+        public const string LastInboundSmsKey = "last_inbound_sms";
         /// <summary>
         /// Gets or sets the last text message the contact received from you.
         /// </summary>
-        public string LastInboundSmsValue { get => LastInboundSms.Value; set => LastInboundSms.Value = value; }
+        public string LastInboundSms { get => LastInboundSmsField.Value; set => LastInboundSmsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's timezone.
         /// </summary>
-        public ApiPropertyString Timezone => _timezone ?? (_timezone = new ApiPropertyString(this, "timezone"));
-        private ApiPropertyString _timezone;
+        public ApiPropertyString TimezoneField => _timezoneField ?? (_timezoneField = new ApiPropertyString(this, TimezoneKey));
+        private ApiPropertyString _timezoneField;
+        public const string TimezoneKey = "timezone";
         /// <summary>
         /// Gets or sets the contact's timezone.
         /// </summary>
-        public string TimezoneValue { get => Timezone.Value; set => Timezone.Value = value; }
+        public string Timezone { get => TimezoneField.Value; set => TimezoneField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the total amount the contact has spent with your company.
         /// </summary>
-        public ApiProperty<decimal> Spent => _spent ?? (_spent = new ApiProperty<decimal>(this, "spent"));
-        private ApiProperty<decimal> _spent;
+        public ApiProperty<decimal> SpentField => _spentField ?? (_spentField = new ApiProperty<decimal>(this, SpentKey));
+        private ApiProperty<decimal> _spentField;
+        public const string SpentKey = "spent";
         /// <summary>
         /// Gets or sets the total amount the contact has spent with your company.
         /// </summary>
-        public decimal SpentValue { get => Spent.Value; set => Spent.Value = value; }
+        public decimal? Spent { get => SpentField.Value; set => SpentField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's total orders.
         /// </summary>
-        public ApiProperty<int> NumPurchased => _numPurchased ?? (_numPurchased = new ApiProperty<int>(this, "num_purchased"));
-        private ApiProperty<int> _numPurchased;
+        public ApiProperty<int> NumPurchasedField => _numPurchasedField ?? (_numPurchasedField = new ApiProperty<int>(this, NumPurchasedKey));
+        private ApiProperty<int> _numPurchasedField;
+        public const string NumPurchasedKey = "num_purchased";
         /// <summary>
         /// Gets or sets the contact's total orders.
         /// </summary>
-        public int NumPurchasedValue { get => NumPurchased.Value; set => NumPurchased.Value = value; }
+        public int? NumPurchased { get => NumPurchasedField.Value; set => NumPurchasedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's score based upon lead scoring rules.
         /// </summary>
-        public ApiProperty<int> Grade => _grade ?? (_grade = new ApiProperty<int>(this, "grade"));
-        private ApiProperty<int> _grade;
+        public ApiProperty<int> GradeField => _gradeField ?? (_gradeField = new ApiProperty<int>(this, GradeKey));
+        private ApiProperty<int> _gradeField;
+        public const string GradeKey = "grade";
         /// <summary>
         /// Gets or sets the contact's score based upon lead scoring rules.
         /// </summary>
-        public int GradeValue { get => Grade.Value; set => Grade.Value = value; }
+        public int? Grade { get => GradeField.Value; set => GradeField.Value = value; }
 
-        public ApiProperty<int> NMedia => _nMedia ?? (_nMedia = new ApiProperty<int>(this, "n_media"));
-        private ApiProperty<int> _nMedia;
-        public int NMediaValue { get => NMedia.Value; set => NMedia.Value = value; }
+        public ApiProperty<int> NMediaField => _nMediaField ?? (_nMediaField = new ApiProperty<int>(this, NMediaKey));
+        private ApiProperty<int> _nMediaField;
+        public const string NMediaKey = "n_media";
+        public int? NMedia { get => NMediaField.Value; set => NMediaField.Value = value; }
 
-        public ApiProperty<int> TimeSinceLastActivityDate => _timeSinceLastActivityDate ?? (_timeSinceLastActivityDate = new ApiProperty<int>(this, "time_since_dla"));
-        private ApiProperty<int> _timeSinceLastActivityDate;
-        public int TimeSinceLastActivityDateValue { get => TimeSinceLastActivityDate.Value; set => TimeSinceLastActivityDate.Value = value; }
+        public ApiPropertyTimeSpan TimeSinceLastActivityField => _timeSinceLastActivityField ?? (_timeSinceLastActivityField = new ApiPropertyTimeSpan(this, TimeSinceLastActivityDateKey));
+        private ApiPropertyTimeSpan _timeSinceLastActivityField;
+        public const string TimeSinceLastActivityDateKey = "time_since_dla";
+        public TimeSpan? TimeSinceLastActivityDate { get => TimeSinceLastActivityField.Value; set => TimeSinceLastActivityField.Value = value; }
 
 
 
@@ -550,6 +604,9 @@ namespace EmergenceGuardian.OntraportApi.Models
             Low = 10
         }
 
+        /// <summary>
+        /// The result of a credit card charge.
+        /// </summary>
         public enum ContactTransactionResult
         {
             Success = 0,

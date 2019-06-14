@@ -11,139 +11,154 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user who controls the custom object. This field must contain a value for a custom object to be saved properly.
         /// </summary>
-        public ApiProperty<int> Owner => _owner ?? (_owner = new ApiProperty<int>(this, "owner"));
-        private ApiProperty<int> _owner;
+        public ApiProperty<int> OwnerField => _ownerField ?? (_ownerField = new ApiProperty<int>(this, OwnerKey));
+        private ApiProperty<int> _ownerField;
+        public const string OwnerKey = "owner";
         /// <summary>
         /// Gets or sets the ID of the user who controls the custom object. This field must contain a value for a custom object to be saved properly.
         /// </summary>
-        public int OwnerValue { get => Owner.Value; set => Owner.Value = value; }
+        public int? Owner { get => OwnerField.Value; set => OwnerField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date the custom object was added.
         /// </summary>
-        public ApiPropertyDateTime DateAdded => _dateAdded ?? (_dateAdded = new ApiPropertyDateTime(this, "date"));
-        private ApiPropertyDateTime _dateAdded;
+        public ApiPropertyDateTime DateAddedField => _dateAddedField ?? (_dateAddedField = new ApiPropertyDateTime(this, DateAddedKey));
+        private ApiPropertyDateTime _dateAddedField;
+        public const string DateAddedKey = "date";
         /// <summary>
         /// Gets or sets the date the custom object was added.
         /// </summary>
-        public DateTimeOffset DateAddedValue { get => DateAdded.Value; set => DateAdded.Value = value; }
+        public DateTimeOffset? DateAdded { get => DateAddedField.Value; set => DateAddedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date of the custom object's last activity. In this documentation, activity means that the object object interacted with a form, website, or email link.
         /// </summary>
-        public ApiPropertyDateTime DateLastActivity => _dateLastActivity ?? (_dateLastActivity = new ApiPropertyDateTime(this, "dla"));
-        private ApiPropertyDateTime _dateLastActivity;
+        public ApiPropertyDateTime DateLastActivityField => _dateLastActivityField ?? (_dateLastActivityField = new ApiPropertyDateTime(this, DateLastActivityKey));
+        private ApiPropertyDateTime _dateLastActivityField;
+        public const string DateLastActivityKey = "dla";
         /// <summary>
         /// Gets or sets the date of the custom object's last activity. In this documentation, activity means that the object object interacted with a form, website, or email link.
         /// </summary>
-        public DateTimeOffset DateLastActivityValue { get => DateLastActivity.Value; set => DateLastActivity.Value = value; }
+        public DateTimeOffset? DateLastActivity { get => DateLastActivityField.Value; set => DateLastActivityField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date the custom object was last modified.
         /// </summary>
-        public ApiPropertyDateTime DateLastModified => _dateLastModified ?? (_dateLastModified = new ApiPropertyDateTime(this, "dlm"));
-        private ApiPropertyDateTime _dateLastModified;
+        public ApiPropertyDateTime DateLastModifiedField => _dateLastModifiedField ?? (_dateLastModifiedField = new ApiPropertyDateTime(this, DateLastModifiedKey));
+        private ApiPropertyDateTime _dateLastModifiedField;
+        public const string DateLastModifiedKey = "dlm";
         /// <summary>
         /// Gets or sets the date the custom object was last modified.
         /// </summary>
-        public DateTimeOffset DateLastModifiedValue { get => DateLastModified.Value; set => DateLastModified.Value = value; }
+        public DateTimeOffset? DateLastModified { get => DateLastModifiedField.Value; set => DateLastModifiedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the source from which the custom object was added to the database.
         /// </summary>
-        public ApiProperty<int> SystemSource => _systemSource ?? (_systemSource = new ApiProperty<int>(this, "system_source"));
-        private ApiProperty<int> _systemSource;
+        public ApiProperty<int> SystemSourceField => _systemSourceField ?? (_systemSourceField = new ApiProperty<int>(this, SystemSourceKey));
+        private ApiProperty<int> _systemSourceField;
+        public const string SystemSourceKey = "system_source";
         /// <summary>
         /// Gets or sets the source from which the custom object was added to the database.
         /// </summary>
-        public int SystemSourceValue { get => SystemSource.Value; set => SystemSource.Value = value; }
+        public int? SystemSource { get => SystemSourceField.Value; set => SystemSourceField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the specific location from which the custom object was added to the database.
         /// </summary>
-        public ApiPropertyString SourceLocation => _sourceLocation ?? (_sourceLocation = new ApiPropertyString(this, "source_location"));
-        private ApiPropertyString _sourceLocation;
+        public ApiPropertyString SourceLocationField => _sourceLocationField ?? (_sourceLocationField = new ApiPropertyString(this, SourceLocationKey));
+        private ApiPropertyString _sourceLocationField;
+        public const string SourceLocationKey = "source_location";
         /// <summary>
         /// Gets or sets the specific location from which the custom object was added to the database.
         /// </summary>
-        public string SourceLocationValue { get => SourceLocation.Value; set => SourceLocation.Value = value; }
+        public string SourceLocation { get => SourceLocationField.Value; set => SourceLocationField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the custom object's IP address.
         /// </summary>
-        public ApiPropertyString IpAddress => _ipAddress ?? (_ipAddress = new ApiPropertyString(this, "ip_addy"));
-        private ApiPropertyString _ipAddress;
+        public ApiPropertyString IpAddressField => _ipAddressField ?? (_ipAddressField = new ApiPropertyString(this, IpAddressKey));
+        private ApiPropertyString _ipAddressField;
+        public const string IpAddressKey = "ip_addy";
         /// <summary>
         /// Gets or sets the custom object's IP address.
         /// </summary>
-        public string IpAddressValue { get => IpAddress.Value; set => IpAddress.Value = value; }
+        public string IpAddress { get => IpAddressField.Value; set => IpAddressField.Value = value; }
 
-        public ApiPropertyString IpAddressDisplay => _ipAddressDisplay ?? (_ipAddressDisplay = new ApiPropertyString(this, "ip_addy_display"));
-        private ApiPropertyString _ipAddressDisplay;
-        public string IpAddressDisplayValue { get => IpAddressDisplay.Value; set => IpAddressDisplay.Value = value; }
+        public ApiPropertyString IpAddressDisplayField => _ipAddressDisplayField ?? (_ipAddressDisplayField = new ApiPropertyString(this, IpAddressDisplayKey));
+        private ApiPropertyString _ipAddressDisplayField;
+        public const string IpAddressDisplayKey = "ip_addy_display";
+        public string IpAddressDisplay { get => IpAddressDisplayField.Value; set => IpAddressDisplayField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the import batch the custom object was imported with, if any.
         /// </summary>
-        public ApiProperty<int> ImportId => _importId ?? (_importId = new ApiProperty<int>(this, "import_id"));
-        private ApiProperty<int> _importId;
+        public ApiProperty<int> ImportIdField => _importIdField ?? (_importIdField = new ApiProperty<int>(this, ImportIdKey));
+        private ApiProperty<int> _importIdField;
+        public const string ImportIdKey = "import_id";
         /// <summary>
         /// Gets or sets the ID of the import batch the custom object was imported with, if any.
         /// </summary>
-        public int ImportIdValue { get => ImportId.Value; set => ImportId.Value = value; }
+        public int? ImportId { get => ImportIdField.Value; set => ImportIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set a flag that indicates a custom object's bulk email status.
         /// </summary>
-        public ApiProperty<BulkMailStatus> BulkMail => _bulkMail ?? (_bulkMail = new ApiPropertyIntEnum<BulkMailStatus>(this, "bulk_mail"));
-        private ApiProperty<BulkMailStatus> _bulkMail;
+        public ApiProperty<BulkMailStatus> BulkMailField => _bulkMailField ?? (_bulkMailField = new ApiPropertyIntEnum<BulkMailStatus>(this, BulkMailKey));
+        private ApiProperty<BulkMailStatus> _bulkMailField;
+        public const string BulkMailKey = "bulk_mail";
         /// <summary>
         /// Gets or sets a flag that indicates a custom object's bulk email status.
         /// </summary>
-        public BulkMailStatus BulkMailValue { get => BulkMail.Value; set => BulkMail.Value = value; }
+        public BulkMailStatus? BulkMail { get => BulkMailField.Value; set => BulkMailField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set a flag that indicates whether or not a custom object is opted in to receive bulk texts.
         /// </summary>
-        public ApiProperty<BulkSmsStatus> BulkSms => _bulkSms ?? (_bulkSms = new ApiPropertyIntEnum<BulkSmsStatus>(this, "bulk_sms"));
-        private ApiProperty<BulkSmsStatus> _bulkSms;
+        public ApiProperty<BulkSmsStatus> BulkSmsField => _bulkSmsField ?? (_bulkSmsField = new ApiPropertyIntEnum<BulkSmsStatus>(this, BulkSmsKey));
+        private ApiProperty<BulkSmsStatus> _bulkSmsField;
+        public const string BulkSmsKey = "bulk_sms";
         /// <summary>
         /// Gets or sets a flag that indicates whether or not a custom object is opted in to receive bulk texts.
         /// </summary>
-        public BulkSmsStatus BulkSmsValue { get => BulkSms.Value; set => BulkSms.Value = value; }
+        public BulkSmsStatus? BulkSms { get => BulkSmsField.Value; set => BulkSmsField.Value = value; }
 
         /// <summary>
         /// Deprecated. Returns a ApiProperty object to get or set the tags a contact is subscribed to.
         /// </summary>
-        public ApiPropertyString ListTags => _listTags ?? (_listTags = new ApiPropertyString(this, "contact_cat"));
-        private ApiPropertyString _listTags;
+        public ApiPropertyString ListTagsField => _listTagsField ?? (_listTagsField = new ApiPropertyString(this, ListTagsKey));
+        private ApiPropertyString _listTagsField;
+        public const string ListTagsKey = "contact_cat";
         /// <summary>
         /// Deprecated. Gets or sets the tags a contact is subscribed to.
         /// </summary>
-        public string ListTagsValue { get => ListTags.Value; set => ListTags.Value = value; }
+        public string ListTags { get => ListTagsField.Value; set => ListTagsField.Value = value; }
 
         /// <summary>
         /// Deprecated. Returns a ApiProperty object to get or set the sequences a contact is subscribed to.
         /// </summary>
-        public ApiPropertyString ListSequences => _listSequences ?? (_listSequences = new ApiPropertyString(this, "updateSequence"));
-        private ApiPropertyString _listSequences;
+        public ApiPropertyString ListSequencesField => _listSequencesField ?? (_listSequencesField = new ApiPropertyString(this, ListSequencesKey));
+        private ApiPropertyString _listSequencesField;
+        public const string ListSequencesKey = "updateSequence";
         /// <summary>
         /// Deprecated. Gets or sets the sequences a contact is subscribed to.
         /// </summary>
-        public string ListSequencesValue { get => ListSequences.Value; set => ListSequences.Value = value; }
+        public string ListSequencesValue { get => ListSequencesField.Value; set => ListSequencesField.Value = value; }
 
         /// <summary>
         /// Deprecated. Returns a ApiProperty object to get or set the campaigns a contact is subscribed to.
         /// </summary>
-        public ApiPropertyString ListCampaigns => _listCampaigns ?? (_listCampaigns = new ApiPropertyString(this, "updateCampaign"));
-        private ApiPropertyString _listCampaigns;
+        public ApiPropertyString ListCampaignsField => _listCampaignsField ?? (_listCampaignsField = new ApiPropertyString(this, ListCampaignsKey));
+        private ApiPropertyString _listCampaignsField;
+        public const string ListCampaignsKey = "updateCampaign";
         /// <summary>
         /// Deprecated. Gets or sets the campaigns a contact is subscribed to.
         /// </summary>
-        public string ListCampaignsValue { get => ListCampaigns.Value; set => ListCampaigns.Value = value; }
+        public string ListCampaignsValue { get => ListCampaignsField.Value; set => ListCampaignsField.Value = value; }
 
-        public ApiProperty<int> BIndex => _bindex ?? (_bindex = new ApiProperty<int>(this, "bindex"));
-        private ApiProperty<int> _bindex;
-        public int BIndexValue { get => BIndex.Value; set => BIndex.Value = value; }
+        public ApiProperty<int> BIndexField => _bindexField ?? (_bindexField = new ApiProperty<int>(this, BIndexKey));
+        private ApiProperty<int> _bindexField;
+        public const string BIndexKey = "bindex";
+        public int? BIndex { get => BIndexField.Value; set => BIndexField.Value = value; }
     }
 }

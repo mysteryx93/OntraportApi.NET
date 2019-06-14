@@ -8,88 +8,108 @@ namespace EmergenceGuardian.OntraportApi.Models
     /// </summary>
     public class ApiCoupon : ApiObject
     {
-        public ApiPropertyString Name => _name ?? (_name = new ApiPropertyString(this, "name"));
-        private ApiPropertyString _name;
-        public string NameValue { get => Name.Value; set => Name.Value = value; }
+        public ApiPropertyString NameField => _nameField ?? (_nameField = new ApiPropertyString(this, NameKey));
+        private ApiPropertyString _nameField;
+        public const string NameKey = "name";
+        public string Name { get => NameField.Value; set => NameField.Value = value; }
 
-        public ApiPropertyStringEnum<CouponType> Type => _type ?? (_type = new ApiPropertyStringEnum<CouponType>(this, "type"));
-        private ApiPropertyStringEnum<CouponType> _type;
-        public CouponType TypeValue { get => Type.Value; set => Type.Value = value; }
+        public ApiPropertyStringEnum<CouponType> TypeField => _typeField ?? (_typeField = new ApiPropertyStringEnum<CouponType>(this, TypeKey));
+        private ApiPropertyStringEnum<CouponType> _typeField;
+        public const string TypeKey = "type";
+        public CouponType? Type { get => TypeField.Value; set => TypeField.Value = value; }
 
-        public ApiProperty<int> Issued => _issued ?? (_issued = new ApiProperty<int>(this, "issued"));
-        private ApiProperty<int> _issued;
-        public int IssuedValue { get => Issued.Value; set => Issued.Value = value; }
+        public ApiProperty<int> IssuedField => _issuedField ?? (_issuedField = new ApiProperty<int>(this, IssuedKey));
+        private ApiProperty<int> _issuedField;
+        public const string IssuedKey = "issued";
+        public int? Issued { get => IssuedField.Value; set => IssuedField.Value = value; }
 
-        public ApiPropertyIntBool Redeemed => _redeemed ?? (_redeemed = new ApiPropertyIntBool(this, "redeemed"));
-        private ApiPropertyIntBool _redeemed;
-        public bool RedeemedValue { get => Redeemed.Value; set => Redeemed.Value = value; }
+        public ApiPropertyIntBool RedeemedField => _redeemedField ?? (_redeemedField = new ApiPropertyIntBool(this, RedeemedKey));
+        private ApiPropertyIntBool _redeemedField;
+        public const string RedeemedKey = "redeemed";
+        public bool? Redeemed { get => RedeemedField.Value; set => RedeemedField.Value = value; }
 
-        public ApiProperty<int> Remaining => _remaining ?? (_remaining = new ApiProperty<int>(this, "remaining"));
-        private ApiProperty<int> _remaining;
-        public int RemainingValue { get => Remaining.Value; set => Remaining.Value = value; }
+        public ApiProperty<int> RemainingField => _remainingField ?? (_remainingField = new ApiProperty<int>(this, RemainingKey));
+        private ApiProperty<int> _remainingField;
+        public const string RemainingKey = "remaining";
+        public int? Remaining { get => RemainingField.Value; set => RemainingField.Value = value; }
 
-        public ApiProperty<decimal> TotalCollected => _totalCollected ?? (_totalCollected = new ApiProperty<decimal>(this, "total_collected"));
-        private ApiProperty<decimal> _totalCollected;
-        public decimal TotalCollectedValue { get => TotalCollected.Value; set => TotalCollected.Value = value; }
+        public ApiProperty<decimal> TotalCollectedField => _totalCollectedField ?? (_totalCollectedField = new ApiProperty<decimal>(this, TotalCollectedKey));
+        private ApiProperty<decimal> _totalCollectedField;
+        public const string TotalCollectedKey = "total_collected";
+        public decimal? TotalCollected { get => TotalCollectedField.Value; set => TotalCollectedField.Value = value; }
 
-        public ApiProperty<int> NewBuyers => _newBuyers ?? (_newBuyers = new ApiProperty<int>(this, "new_buyers"));
-        private ApiProperty<int> _newBuyers;
-        public int NewBuyersValue { get => NewBuyers.Value; set => NewBuyers.Value = value; }
+        public ApiProperty<int> NewBuyersField => _newBuyersField ?? (_newBuyersField = new ApiProperty<int>(this, NewBuyersKey));
+        private ApiProperty<int> _newBuyersField;
+        public const string NewBuyersKey = "new_buyers";
+        public int? NewBuyers { get => NewBuyersField.Value; set => NewBuyersField.Value = value; }
 
-        public ApiPropertyString ProductSelection => _productSelection ?? (_productSelection = new ApiPropertyString(this, "product_selection"));
-        private ApiPropertyString _productSelection;
-        public string ProductSelectionValue { get => ProductSelection.Value; set => ProductSelection.Value = value; }
+        public ApiPropertyString ProductSelectionField => _productSelectionField ?? (_productSelectionField = new ApiPropertyString(this, ProductSelectionKey));
+        private ApiPropertyString _productSelectionField;
+        public const string ProductSelectionKey = "product_selection";
+        public string ProductSelection { get => ProductSelectionField.Value; set => ProductSelectionField.Value = value; }
 
-        public ApiPropertyStringEnum<CouponDiscountType> DiscountType => _discountType ?? (_discountType = new ApiPropertyStringEnum<CouponDiscountType>(this, "discount_type"));
-        private ApiPropertyStringEnum<CouponDiscountType> _discountType;
-        public CouponDiscountType DiscountTypeValue { get => DiscountType.Value; set => DiscountType.Value = value; }
+        public ApiPropertyStringEnum<CouponDiscountType> DiscountTypeField => _discountTypeField ?? (_discountTypeField = new ApiPropertyStringEnum<CouponDiscountType>(this, DiscountTypeKey));
+        private ApiPropertyStringEnum<CouponDiscountType> _discountTypeField;
+        public const string DiscountTypeKey = "discount_type";
+        public CouponDiscountType? DiscountType { get => DiscountTypeField.Value; set => DiscountTypeField.Value = value; }
 
-        public ApiProperty<decimal> DiscountValue => _discountValue ?? (_discountValue = new ApiProperty<decimal>(this, "discount_value"));
-        private ApiProperty<decimal> _discountValue;
-        public decimal DiscountValueValue { get => DiscountValue.Value; set => DiscountValue.Value = value; }
+        public ApiProperty<decimal> DiscountValueField => _discountValueField ?? (_discountValueField = new ApiProperty<decimal>(this, DiscountValueKey));
+        private ApiProperty<decimal> _discountValueField;
+        public const string DiscountValueKey = "discount_value";
+        public decimal? DiscountValue { get => DiscountValueField.Value; set => DiscountValueField.Value = value; }
 
-        public ApiPropertyString DiscountDescription => _discountDescription ?? (_discountDescription = new ApiPropertyString(this, "discount_description"));
-        private ApiPropertyString _discountDescription;
-        public string DiscountDescriptionValue { get => DiscountDescription.Value; set => DiscountDescription.Value = value; }
+        public ApiPropertyString DiscountDescriptionField => _discountDescriptionField ?? (_discountDescriptionField = new ApiPropertyString(this, DiscountDescriptionKey));
+        private ApiPropertyString _discountDescriptionField;
+        public const string DiscountDescriptionKey = "discount_description";
+        public string DiscountDescription { get => DiscountDescriptionField.Value; set => DiscountDescriptionField.Value = value; }
 
-        public ApiPropertyStringEnum<CouponValidType> ValidType => _validType ?? (_validType = new ApiPropertyStringEnum<CouponValidType>(this, "valid_type"));
-        private ApiPropertyStringEnum<CouponValidType> _validType;
-        public CouponValidType ValidTypeValue { get => ValidType.Value; set => ValidType.Value = value; }
+        public ApiPropertyStringEnum<CouponValidType> ValidTypeField => _validTypeField ?? (_validTypeField = new ApiPropertyStringEnum<CouponValidType>(this, ValidTypeKey));
+        private ApiPropertyStringEnum<CouponValidType> _validTypeField;
+        public const string ValidTypeKey = "valid_type";
+        public CouponValidType? ValidType { get => ValidTypeField.Value; set => ValidTypeField.Value = value; }
 
-        public ApiPropertyDateTime ValidStartDate => _validStartDate ?? (_validStartDate = new ApiPropertyDateTime(this, "valid_start_date"));
-        private ApiPropertyDateTime _validStartDate;
-        public DateTimeOffset ValidStartDateValue { get => ValidStartDate.Value; set => ValidStartDate.Value = value; }
+        public ApiPropertyDateTime ValidStartDateField => _validStartDateField ?? (_validStartDateField = new ApiPropertyDateTime(this, ValidStartDateKey));
+        private ApiPropertyDateTime _validStartDateField;
+        public const string ValidStartDateKey = "valid_start_date";
+        public DateTimeOffset? ValidStartDate { get => ValidStartDateField.Value; set => ValidStartDateField.Value = value; }
 
-        public ApiPropertyDateTime ValidEndDate => _validEndDate ?? (_validEndDate = new ApiPropertyDateTime(this, "valid_end_date"));
-        private ApiPropertyDateTime _validEndDate;
-        public DateTimeOffset ValidEndDateValue { get => ValidEndDate.Value; set => ValidEndDate.Value = value; }
+        public ApiPropertyDateTime ValidEndDateField => _validEndDateField ?? (_validEndDateField = new ApiPropertyDateTime(this, ValidEndDateKey));
+        private ApiPropertyDateTime _validEndDateField;
+        public const string ValidEndDateKey = "valid_end_date";
+        public DateTimeOffset? ValidEndDate { get => ValidEndDateField.Value; set => ValidEndDateField.Value = value; }
 
         /// <summary>
         /// When ValidationType is Time, gets or sets for how many days the coupon is valid.
         /// </summary>
-        public ApiProperty<int> ValidTimeframe => _validTimeframe ?? (_validTimeframe = new ApiProperty<int>(this, "valid_timeframe"));
-        private ApiProperty<int> _validTimeframe;
-        public int ValidTimeframeValue { get => ValidTimeframe.Value; set => ValidTimeframe.Value = value; }
+        public ApiProperty<int> ValidTimeframeField => _validTimeframeField ?? (_validTimeframeField = new ApiProperty<int>(this, ValidTimeframeKey));
+        private ApiProperty<int> _validTimeframeField;
+        public const string ValidTimeframeKey = "valid_timeframe";
+        public int? ValidTimeframe { get => ValidTimeframeField.Value; set => ValidTimeframeField.Value = value; }
 
-        public ApiPropertyStringEnum<CouponStatus> Status => _status ?? (_status = new ApiPropertyStringEnum<CouponStatus>(this, "status"));
-        private ApiPropertyStringEnum<CouponStatus> _status;
-        public CouponStatus StatusValue { get => Status.Value; set => Status.Value = value; }
+        public ApiPropertyStringEnum<CouponStatus> StatusField => _statusField ?? (_statusField = new ApiPropertyStringEnum<CouponStatus>(this, StatusKey));
+        private ApiPropertyStringEnum<CouponStatus> _statusField;
+        public const string StatusKey = "status";
+        public CouponStatus? Status { get => StatusField.Value; set => StatusField.Value = value; }
 
-        public ApiPropertyDateTime DateCreated => _dateCreated ?? (_dateCreated = new ApiPropertyDateTime(this, "date"));
-        private ApiPropertyDateTime _dateCreated;
-        public DateTimeOffset DateCreatedValue { get => DateCreated.Value; set => DateCreated.Value = value; }
+        public ApiPropertyDateTime DateCreatedField => _dateCreatedField ?? (_dateCreatedField = new ApiPropertyDateTime(this, DateCreatedKey));
+        private ApiPropertyDateTime _dateCreatedField;
+        public const string DateCreatedKey = "date";
+        public DateTimeOffset? DateCreated { get => DateCreatedField.Value; set => DateCreatedField.Value = value; }
 
-        public ApiPropertyIntBool Deleted => _deleted ?? (_deleted = new ApiPropertyIntBool(this, "deleted"));
-        private ApiPropertyIntBool _deleted;
-        public bool DeletedValue { get => Deleted.Value; set => Deleted.Value = value; }
+        public ApiPropertyIntBool DeletedField => _deletedField ?? (_deletedField = new ApiPropertyIntBool(this, DeletedKey));
+        private ApiPropertyIntBool _deletedField;
+        public const string DeletedKey = "deleted";
+        public bool? Deleted { get => DeletedField.Value; set => DeletedField.Value = value; }
 
-        public ApiPropertyIntBool Recurring => _recurring ?? (_recurring = new ApiPropertyIntBool(this, "recurring"));
-        private ApiPropertyIntBool _recurring;
-        public bool RecurringValue { get => Recurring.Value; set => Recurring.Value = value; }
+        public ApiPropertyIntBool RecurringField => _recurringField ?? (_recurringField = new ApiPropertyIntBool(this, RecurringKey));
+        private ApiPropertyIntBool _recurringField;
+        public const string RecurringKey = "recurring";
+        public bool? Recurring { get => RecurringField.Value; set => RecurringField.Value = value; }
 
-        public ApiPropertyString CouponCode => _couponCode ?? (_couponCode = new ApiPropertyString(this, "coupon_code"));
-        private ApiPropertyString _couponCode;
-        public string CouponCodeValue { get => CouponCode.Value; set => CouponCode.Value = value; }
+        public ApiPropertyString CouponCodeField => _couponCodeField ?? (_couponCodeField = new ApiPropertyString(this, CouponCodeKey));
+        private ApiPropertyString _couponCodeField;
+        public const string CouponCodeKey = "coupon_code";
+        public string CouponCode { get => CouponCodeField.Value; set => CouponCodeField.Value = value; }
 
 
 

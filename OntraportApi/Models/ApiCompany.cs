@@ -10,132 +10,145 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's name.
         /// </summary>
-        public ApiPropertyString Name => _name ?? (_name = new ApiPropertyString(this, "name"));
-        private ApiPropertyString _name;
+        public ApiPropertyString NameField => _nameField ?? (_nameField = new ApiPropertyString(this, NameKey));
+        private ApiPropertyString _nameField;
+        public const string NameKey = "name";
         /// <summary>
         /// Gets or sets the company's name.
         /// </summary>
-        public string NameValue { get => Name.Value; set => Name.Value = value; }
+        public string Name { get => NameField.Value; set => NameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's phone number.
         /// </summary>
-        public ApiPropertyString Phone => _phone ?? (_phone = new ApiPropertyString(this, "phone"));
-        private ApiPropertyString _phone;
+        public ApiPropertyString PhoneField => _phoneField ?? (_phoneField = new ApiPropertyString(this, PhoneKey));
+        private ApiPropertyString _phoneField;
+        public const string PhoneKey = "phone";
         /// <summary>
         /// Gets or sets the company's phone number.
         /// </summary>
-        public string PhoneValue { get => Phone.Value; set => Phone.Value = value; }
+        public string Phone { get => PhoneField.Value; set => PhoneField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's industry.
         /// </summary>
-        public ApiPropertyString Industry => _industry ?? (_industry = new ApiPropertyString(this, "industry"));
-        private ApiPropertyString _industry;
+        public ApiPropertyString IndustryField => _industryField ?? (_industryField = new ApiPropertyString(this, IndustryKey));
+        private ApiPropertyString _industryField;
+        public const string IndustryKey = "industry";
         /// <summary>
         /// Gets or sets the company's industry.
         /// </summary>
-        public string IndustryValue { get => Industry.Value; set => Industry.Value = value; }
+        public string Industry { get => IndustryField.Value; set => IndustryField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's description.
         /// </summary>
-        public ApiPropertyString Description => _description ?? (_description = new ApiPropertyString(this, "description"));
-        private ApiPropertyString _description;
+        public ApiPropertyString DescriptionField => _descriptionField ?? (_descriptionField = new ApiPropertyString(this, DescriptionKey));
+        private ApiPropertyString _descriptionField;
+        public const string DescriptionKey = "description";
         /// <summary>
         /// Gets or sets the company's description.
         /// </summary>
-        public string DescriptionValue { get => Description.Value; set => Description.Value = value; }
+        public string Description { get => DescriptionField.Value; set => DescriptionField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set how much the company earns in a year.
         /// </summary>
-        public ApiProperty<int> AnnualRevenue => _annualRevenue ?? (_annualRevenue = new ApiProperty<int>(this, "annual_revenue"));
-        private ApiProperty<int> _annualRevenue;
+        public ApiProperty<int> AnnualRevenueField => _annualRevenueField ?? (_annualRevenueField = new ApiProperty<int>(this, AnnualRevenueKey));
+        private ApiProperty<int> _annualRevenueField;
+        public const string AnnualRevenueKey = "annual_revenue";
         /// <summary>
         /// Gets or sets how much the company earns in a year.
         /// </summary>
-        public int AnnualRevenueValue { get => AnnualRevenue.Value; set => AnnualRevenue.Value = value; }
+        public int? AnnualRevenue { get => AnnualRevenueField.Value; set => AnnualRevenueField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set how many employees are in the company.
         /// </summary>
-        public ApiProperty<int> EmployeeCount => _employeeCount ?? (_employeeCount = new ApiProperty<int>(this, "employee_count"));
-        private ApiProperty<int> _employeeCount;
+        public ApiProperty<int> EmployeeCountField => _employeeCountField ?? (_employeeCountField = new ApiProperty<int>(this, EmployeeCountKey));
+        private ApiProperty<int> _employeeCountField;
+        public const string EmployeeCountKey = "employee_count";
         /// <summary>
         /// Gets or sets how many employees are in the company.
         /// </summary>
-        public int EmployeeCountValue { get => EmployeeCount.Value; set => EmployeeCount.Value = value; }
+        public int? EmployeeCount { get => EmployeeCountField.Value; set => EmployeeCountField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's Facebook page URL.
         /// </summary>
-        public ApiPropertyString FacebookPage => _facebookPage ?? (_facebookPage = new ApiPropertyString(this, "facebook_page"));
-        private ApiPropertyString _facebookPage;
+        public ApiPropertyString FacebookPageField => _facebookPageField ?? (_facebookPageField = new ApiPropertyString(this, FacebookPageKey));
+        private ApiPropertyString _facebookPageField;
+        public const string FacebookPageKey = "facebook_page";
         /// <summary>
         /// Gets or sets the company's Facebook page URL.
         /// </summary>
-        public string FacebookPageValue { get => FacebookPage.Value; set => FacebookPage.Value = value; }
+        public string FacebookPage { get => FacebookPageField.Value; set => FacebookPageField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's Instagram username.
         /// </summary>
-        public ApiPropertyString InstagramName => _instagramName ?? (_instagramName = new ApiPropertyString(this, "instagram_name"));
-        private ApiPropertyString _instagramName;
+        public ApiPropertyString InstagramNameField => _instagramNameField ?? (_instagramNameField = new ApiPropertyString(this, InstagramNameKey));
+        private ApiPropertyString _instagramNameField;
+        public const string InstagramNameKey = "instagram_name";
         /// <summary>
         /// Gets or sets the company's Instagram username.
         /// </summary>
-        public string InstagramNameValue { get => InstagramName.Value; set => InstagramName.Value = value; }
+        public string InstagramName { get => InstagramNameField.Value; set => InstagramNameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's postal address.
         /// </summary>
-        public ApiPropertyString Address => _address ?? (_address = new ApiPropertyString(this, "address"));
-        private ApiPropertyString _address;
+        public ApiPropertyString AddressField => _addressField ?? (_addressField = new ApiPropertyString(this, AddressKey));
+        private ApiPropertyString _addressField;
+        public const string AddressKey = "address";
         /// <summary>
         /// Gets or sets the company's postal address.
         /// </summary>
-        public string AddressValue { get => Address.Value; set => Address.Value = value; }
+        public string Address { get => AddressField.Value; set => AddressField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's city.
         /// </summary>
-        public ApiPropertyString City => _city ?? (_city = new ApiPropertyString(this, "city"));
-        private ApiPropertyString _city;
+        public ApiPropertyString CityField => _cityField ?? (_cityField = new ApiPropertyString(this, CityKey));
+        private ApiPropertyString _cityField;
+        public const string CityKey = "city";
         /// <summary>
         /// Gets or sets the company's city.
         /// </summary>
-        public string CityValue { get => City.Value; set => City.Value = value; }
+        public string City { get => CityField.Value; set => CityField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's state.
         /// </summary>
-        public ApiPropertyString State => _state ?? (_state = new ApiPropertyString(this, "state"));
-        private ApiPropertyString _state;
+        public ApiPropertyString StateField => _stateField ?? (_stateField = new ApiPropertyString(this, StateKey));
+        private ApiPropertyString _stateField;
+        public const string StateKey = "state";
         /// <summary>
         /// Gets or sets the company's state.
         /// </summary>
-        public string StateValue { get => State.Value; set => State.Value = value; }
+        public string State { get => StateField.Value; set => StateField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's postal code.
         /// </summary>
-        public ApiPropertyString Zip => _zip ?? (_zip = new ApiPropertyString(this, "zipcode"));
-        private ApiPropertyString _zip;
+        public ApiPropertyString ZipField => _zipField ?? (_zipField = new ApiPropertyString(this, ZipKey));
+        private ApiPropertyString _zipField;
+        public const string ZipKey = "zipcode";
         /// <summary>
         /// Gets or sets the company's postal code.
         /// </summary>
-        public string ZipValue { get => Zip.Value; set => Zip.Value = value; }
+        public string Zip { get => ZipField.Value; set => ZipField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's country.
         /// </summary>
-        public ApiPropertyString Country => _country ?? (_country = new ApiPropertyString(this, "country"));
-        private ApiPropertyString _country;
+        public ApiPropertyString CountryField => _countryField ?? (_countryField = new ApiPropertyString(this, CountryKey));
+        private ApiPropertyString _countryField;
+        public const string CountryKey = "country";
         /// <summary>
         /// Gets or sets the company's country.
         /// </summary>
-        public string CountryValue { get => Country.Value; set => Country.Value = value; }
+        public string Country { get => CountryField.Value; set => CountryField.Value = value; }
 
     }
 }

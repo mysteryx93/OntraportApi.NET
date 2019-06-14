@@ -11,72 +11,79 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user who controls the webhook object. This field must contain a value for a webhook object to be saved properly.
         /// </summary>
-        public ApiProperty<int> Owner => _owner ?? (_owner = new ApiProperty<int>(this, "owner"));
-        private ApiProperty<int> _owner;
+        public ApiProperty<int> OwnerField => _ownerField ?? (_ownerField = new ApiProperty<int>(this, OwnerKey));
+        private ApiProperty<int> _ownerField;
+        public const string OwnerKey = "owner";
         /// <summary>
         /// Gets or sets the ID of the user who controls the webhook object. This field must contain a value for a webhook object to be saved properly.
         /// </summary>
-        public int OwnerValue { get => Owner.Value; set => Owner.Value = value; }
+        public int? OwnerValue { get => OwnerField.Value; set => OwnerField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the event triggering the webhook.
         /// </summary>
-        public ApiPropertyString Event => _event ?? (_event = new ApiPropertyString(this, "event"));
-        private ApiPropertyString _event;
+        public ApiPropertyString EventField => _eventField ?? (_eventField = new ApiPropertyString(this, EventKey));
+        private ApiPropertyString _eventField;
+        public const string EventKey = "event";
         /// <summary>
         /// Gets or sets the event triggering the webhook.
         /// </summary>
-        public string EventValue { get => Event.Value; set => Event.Value = value; }
+        public string EventValue { get => EventField.Value; set => EventField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set additional json-formatted data regarding the format of the payload.
         /// </summary>
-        public ApiPropertyString Content => _content ?? (_content = new ApiPropertyString(this, "data"));
-        private ApiPropertyString _content;
+        public ApiPropertyString ContentField => _contentField ?? (_contentField = new ApiPropertyString(this, ContentKey));
+        private ApiPropertyString _contentField;
+        public const string ContentKey = "data";
         /// <summary>
         /// Gets or sets additional json-formatted data regarding the format of the payload.
         /// </summary>
-        public string ContentValue { get => Content.Value; set => Content.Value = value; }
+        public string ContentValue { get => ContentField.Value; set => ContentField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the URL the payload should be sent to.
         /// </summary>
-        public ApiPropertyString Url => _url ?? (_url = new ApiPropertyString(this, "url"));
-        private ApiPropertyString _url;
+        public ApiPropertyString UrlField => _urlField ?? (_urlField = new ApiPropertyString(this, UrlKey));
+        private ApiPropertyString _urlField;
+        public const string UrlKey = "url";
         /// <summary>
         /// Gets or sets the URL the payload should be sent to.
         /// </summary>
-        public string UrlValue { get => Url.Value; set => Url.Value = value; }
+        public string UrlValue { get => UrlField.Value; set => UrlField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last HTTP response code.
         /// </summary>
-        public ApiPropertyString LastResponseCode => _lastResponseCode ?? (_lastResponseCode = new ApiPropertyString(this, "last_code"));
-        private ApiPropertyString _lastResponseCode;
+        public ApiPropertyString LastResponseCodeField => _lastResponseCodeField ?? (_lastResponseCodeField = new ApiPropertyString(this, LastResponseCodeKey));
+        private ApiPropertyString _lastResponseCodeField;
+        public const string LastResponseCodeKey = "last_code";
         /// <summary>
         /// Gets or sets the last HTTP response code.
         /// </summary>
-        public string LastResponseCodeValue { get => LastResponseCode.Value; set => LastResponseCode.Value = value; }
+        public string LastResponseCodeValue { get => LastResponseCodeField.Value; set => LastResponseCodeField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date and time of the last webhook, measured in seconds from the Unix Epoch.
         /// </summary>
-        public ApiPropertyDateTime DateLastHook => _dateLastHook ?? (_dateLastHook = new ApiPropertyDateTime(this, "last_hook"));
-        private ApiPropertyDateTime _dateLastHook;
+        public ApiPropertyDateTime DateLastHookField => _dateLastHookField ?? (_dateLastHookField = new ApiPropertyDateTime(this, DateLastHookKey));
+        private ApiPropertyDateTime _dateLastHookField;
+        public const string DateLastHookKey = "last_hook";
         /// <summary>
         /// Gets or sets the date and time of the last webhook, measured in seconds from the Unix Epoch.
         /// </summary>
-        public DateTimeOffset DateLastHookValue { get => DateLastHook.Value; set => DateLastHook.Value = value; }
+        public DateTimeOffset? DateLastHookValue { get => DateLastHookField.Value; set => DateLastHookField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the form-encoded contents of the last payload.
         /// </summary>
-        public ApiPropertyString LastPayload => _lastPayload ?? (_lastPayload = new ApiPropertyString(this, "last_payload"));
-        private ApiPropertyString _lastPayload;
+        public ApiPropertyString LastPayloadField => _lastPayloadField ?? (_lastPayloadField = new ApiPropertyString(this, LastPayloadKey));
+        private ApiPropertyString _lastPayloadField;
+        public const string LastPayloadKey = "last_payload";
         /// <summary>
         /// Gets or sets the form-encoded contents of the last payload.
         /// </summary>
-        public string LastPayloadValue { get => LastPayload.Value; set => LastPayload.Value = value; }
+        public string LastPayloadValue { get => LastPayloadField.Value; set => LastPayloadField.Value = value; }
 
     }
 }

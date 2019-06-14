@@ -11,282 +11,310 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the transaction is assessible.
         /// </summary>
-        public ApiPropertyBool Hidden => _hidden ?? (_hidden = new ApiPropertyBool(this, "hidden"));
-        private ApiPropertyBool _hidden;
+        public ApiPropertyBool HiddenField => _hiddenField ?? (_hiddenField = new ApiPropertyBool(this, HiddenKey));
+        private ApiPropertyBool _hiddenField;
+        public const string HiddenKey = "hidden";
         /// <summary>
         /// Gets or sets whether or not the transaction is assessible.
         /// </summary>
-        public bool HiddenValue { get => Hidden.Value; set => Hidden.Value = value; }
+        public bool? Hidden { get => HiddenField.Value; set => HiddenField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the status of the transaction.
         /// </summary>
-        public ApiPropertyIntEnum<TransactionStatus> Status => _status ?? (_status = new ApiPropertyIntEnum<TransactionStatus>(this, "status"));
-        private ApiPropertyIntEnum<TransactionStatus> _status;
+        public ApiPropertyIntEnum<TransactionStatus> StatusField => _statusField ?? (_statusField = new ApiPropertyIntEnum<TransactionStatus>(this, StatusKey));
+        private ApiPropertyIntEnum<TransactionStatus> _statusField;
+        public const string StatusKey = "status";
         /// <summary>
         /// Gets or sets the status of the transaction.
         /// </summary>
-        public TransactionStatus StatusValue { get => Status.Value; set => Status.Value = value; }
+        public TransactionStatus? Status { get => StatusField.Value; set => StatusField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the contact who made the transaction.
         /// </summary>
-        public ApiProperty<int> ContactId => _contactId ?? (_contactId = new ApiProperty<int>(this, "contact_id"));
-        private ApiProperty<int> _contactId;
+        public ApiProperty<int> ContactIdField => _contactIdField ?? (_contactIdField = new ApiProperty<int>(this, ContactIdKey));
+        private ApiProperty<int> _contactIdField;
+        public const string ContactIdKey = "contact_id";
         /// <summary>
         /// Gets or sets the ID of the contact who made the transaction.
         /// </summary>
-        public int ContactIdValue { get => ContactId.Value; set => ContactId.Value = value; }
+        public int? ContactId { get => ContactIdField.Value; set => ContactIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the full name of the contact who made the transaction.
         /// </summary>
-        public ApiPropertyString ContactName => _contactName ?? (_contactName = new ApiPropertyString(this, "contact_name"));
-        private ApiPropertyString _contactName;
+        public ApiPropertyString ContactNameField => _contactNameField ?? (_contactNameField = new ApiPropertyString(this, ContactNameKey));
+        private ApiPropertyString _contactNameField;
+        public const string ContactNameKey = "contact_name";
         /// <summary>
         /// Gets or sets the full name of the contact who made the transaction.
         /// </summary>
-        public string ContactNameValue { get => ContactName.Value; set => ContactName.Value = value; }
+        public string ContactName { get => ContactNameField.Value; set => ContactNameField.Value = value; }
 
         /// <summary>
         /// If the transaction resulted from a subscription purchase, returns a ApiProperty object to get or set the ID of the associated order.
         /// </summary>
-        public ApiProperty<int> OrderId => _orderId ?? (_orderId = new ApiProperty<int>(this, "order_id"));
-        private ApiProperty<int> _orderId;
+        public ApiProperty<int> OrderIdField => _orderIdField ?? (_orderIdField = new ApiProperty<int>(this, OrderIdKey));
+        private ApiProperty<int> _orderIdField;
+        public const string OrderIdKey = "order_id";
         /// <summary>
         /// If the transaction resulted from a subscription purchase, gets or sets the ID of the associated order.
         /// </summary>
-        public int OrderIdValue { get => OrderId.Value; set => OrderId.Value = value; }
+        public int? OrderId { get => OrderIdField.Value; set => OrderIdField.Value = value; }
 
         /// <summary>
         /// If the transaction resulted from a purchase made via a form, returns a ApiProperty object to get or set the ID of that form.
         /// </summary>
-        public ApiProperty<int> FormId => _formId ?? (_formId = new ApiProperty<int>(this, "form_id"));
-        private ApiProperty<int> _formId;
+        public ApiProperty<int> FormIdField => _formIdField ?? (_formIdField = new ApiProperty<int>(this, FormIdKey));
+        private ApiProperty<int> _formIdField;
+        public const string FormIdKey = "form_id";
         /// <summary>
         /// If the transaction resulted from a purchase made via a form, returns a ApiProperty object to get or set the ID of that form.
         /// </summary>
-        public int FormIdValue { get => FormId.Value; set => FormId.Value = value; }
+        public int? FormId { get => FormIdField.Value; set => FormIdField.Value = value; }
 
         /// <summary>
         /// If the transaction resulted from a purchase made via a landing page, returns a ApiProperty object to get or set the ID of that landing page.
         /// </summary>
-        public ApiProperty<int> LandingPageId => _landingPageId ?? (_landingPageId = new ApiProperty<int>(this, "lp_id"));
-        private ApiProperty<int> _landingPageId;
+        public ApiProperty<int> LandingPageIdField => _landingPageIdField ?? (_landingPageIdField = new ApiProperty<int>(this, LandingPageIdKey));
+        private ApiProperty<int> _landingPageIdField;
+        public const string LandingPageIdKey = "lp_id";
         /// <summary>
         /// If the transaction resulted from a purchase made via a landing page, gets or sets the ID of that landing page.
         /// </summary>
-        public int LandingPageIdValue { get => LandingPageId.Value; set => LandingPageId.Value = value; }
+        public int? LandingPageId { get => LandingPageIdField.Value; set => LandingPageIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the credit card used to charge the transaction.
         /// </summary>
-        public ApiProperty<int> CreditCardId => _creditCardId ?? (_creditCardId = new ApiProperty<int>(this, "cc_id"));
-        private ApiProperty<int> _creditCardId;
+        public ApiProperty<int> CreditCardIdField => _creditCardIdField ?? (_creditCardIdField = new ApiProperty<int>(this, CreditCardIdKey));
+        private ApiProperty<int> _creditCardIdField;
+        public const string CreditCardIdKey = "cc_id";
         /// <summary>
         /// Gets or sets the ID of the credit card used to charge the transaction.
         /// </summary>
-        public int CreditCardIdValue { get => CreditCardId.Value; set => CreditCardId.Value = value; }
+        public int? CreditCardId { get => CreditCardIdField.Value; set => CreditCardIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the payment gateway used to complete the transaction.
         /// </summary>
-        public ApiProperty<int> GatewayId => _gatewayId ?? (_gatewayId = new ApiProperty<int>(this, "gateway_id"));
-        private ApiProperty<int> _gatewayId;
+        public ApiProperty<int> GatewayIdField => _gatewayIdField ?? (_gatewayIdField = new ApiProperty<int>(this, GatewayIdKey));
+        private ApiProperty<int> _gatewayIdField;
+        public const string GatewayIdKey = "gateway_id";
         /// <summary>
         /// Gets or sets the ID of the payment gateway used to complete the transaction.
         /// </summary>
-        public int GatewayIdValue { get => GatewayId.Value; set => GatewayId.Value = value; }
+        public int? GatewayId { get => GatewayIdField.Value; set => GatewayIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date and time the transaction was made.
         /// </summary>
-        public ApiPropertyDateTime DateCreated => _date ?? (_date = new ApiPropertyDateTime(this, "date"));
-        private ApiPropertyDateTime _date;
+        public ApiPropertyDateTime DateCreatedField => _dateCreatedField ?? (_dateCreatedField = new ApiPropertyDateTime(this, DateCreatedKey));
+        private ApiPropertyDateTime _dateCreatedField;
+        public const string DateCreatedKey = "date";
         /// <summary>
         /// Gets or sets the date and time the transaction was made.
         /// </summary>
-        public DateTimeOffset DateCreatedValue { get => DateCreated.Value; set => DateCreated.Value = value; }
+        public DateTimeOffset? DateCreated { get => DateCreatedField.Value; set => DateCreatedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the invoice template sent to the contact.
         /// </summary>
-        public ApiProperty<int> TemplateId => _templateId ?? (_templateId = new ApiProperty<int>(this, "template_id"));
-        private ApiProperty<int> _templateId;
+        public ApiProperty<int> TemplateIdField => _templateIdField ?? (_templateIdField = new ApiProperty<int>(this, TemplateIdKey));
+        private ApiProperty<int> _templateIdField;
+        public const string TemplateIdKey = "template_id";
         /// <summary>
         /// Gets or sets the ID of the invoice template sent to the contact.
         /// </summary>
-        public int TemplateIdValue { get => TemplateId.Value; set => TemplateId.Value = value; }
+        public int? TemplateId { get => TemplateIdField.Value; set => TemplateIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the amount of the transaction prior to tax and shipping.
         /// </summary>
-        public ApiProperty<decimal> Subtotal => _subtotal ?? (_subtotal = new ApiProperty<decimal>(this, "subtotal"));
-        private ApiProperty<decimal> _subtotal;
+        public ApiProperty<decimal> SubtotalField => _subtotalField ?? (_subtotalField = new ApiProperty<decimal>(this, SubtotalKey));
+        private ApiProperty<decimal> _subtotalField;
+        public const string SubtotalKey = "subtotal";
         /// <summary>
         /// Gets or sets the amount of the transaction prior to tax and shipping.
         /// </summary>
-        public decimal SubtotalValue { get => Subtotal.Value; set => Subtotal.Value = value; }
+        public decimal? Subtotal { get => SubtotalField.Value; set => SubtotalField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the amount of the tax on the transaction.
         /// </summary>
-        public ApiProperty<decimal> Tax => _tax ?? (_tax = new ApiProperty<decimal>(this, "tax"));
-        private ApiProperty<decimal> _tax;
+        public ApiProperty<decimal> TaxField => _taxField ?? (_taxField = new ApiProperty<decimal>(this, TaxKey));
+        private ApiProperty<decimal> _taxField;
+        public const string TaxKey = "tax";
         /// <summary>
         /// Gets or sets the amount of the tax on the transaction.
         /// </summary>
-        public decimal TaxValue { get => Tax.Value; set => Tax.Value = value; }
+        public decimal? Tax { get => TaxField.Value; set => TaxField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the amount of any city tax on the transaction.
         /// </summary>
-        public ApiProperty<decimal> TaxCity => _taxCity ?? (_taxCity = new ApiProperty<decimal>(this, "tax_city"));
-        private ApiProperty<decimal> _taxCity;
+        public ApiProperty<decimal> TaxCityField => _taxCityField ?? (_taxCityField = new ApiProperty<decimal>(this, TaxCityKey));
+        private ApiProperty<decimal> _taxCityField;
+        public const string TaxCityKey = "tax_city";
         /// <summary>
         /// Gets or sets the amount of any city tax on the transaction.
         /// </summary>
-        public decimal TaxCityValue { get => TaxCity.Value; set => TaxCity.Value = value; }
+        public decimal? TaxCity { get => TaxCityField.Value; set => TaxCityField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the amount of any state tax on the transaction.
         /// </summary>
-        public ApiProperty<decimal> TaxState => _taxState ?? (_taxState = new ApiProperty<decimal>(this, "tax_state"));
-        private ApiProperty<decimal> _taxState;
+        public ApiProperty<decimal> TaxStateField => _taxStateField ?? (_taxStateField = new ApiProperty<decimal>(this, TaxStateKey));
+        private ApiProperty<decimal> _taxStateField;
+        public const string TaxStateKey = "tax_state";
         /// <summary>
         /// Gets or sets the amount of any state tax on the transaction.
         /// </summary>
-        public decimal TaxStateValue { get => TaxState.Value; set => TaxState.Value = value; }
+        public decimal? TaxState { get => TaxStateField.Value; set => TaxStateField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the amount of any county tax on the transaction.
         /// </summary>
-        public ApiProperty<decimal> TaxCountry => _taxCountry ?? (_taxCountry = new ApiProperty<decimal>(this, "tax_county"));
-        private ApiProperty<decimal> _taxCountry;
+        public ApiProperty<decimal> TaxCountryField => _taxCountryField ?? (_taxCountryField = new ApiProperty<decimal>(this, TaxCountryKey));
+        private ApiProperty<decimal> _taxCountryField;
+        public const string TaxCountryKey = "tax_county";
         /// <summary>
         /// Gets or sets the amount of any county tax on the transaction.
         /// </summary>
-        public decimal TaxCountryValue { get => TaxCountry.Value; set => TaxCountry.Value = value; }
+        public decimal? TaxCountry { get => TaxCountryField.Value; set => TaxCountryField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the cost of shipping for the transaction.
         /// </summary>
-        public ApiProperty<decimal> Shipping => _shipping ?? (_shipping = new ApiProperty<decimal>(this, "shipping"));
-        private ApiProperty<decimal> _shipping;
+        public ApiProperty<decimal> ShippingField => _shippingField ?? (_shippingField = new ApiProperty<decimal>(this, ShippingKey));
+        private ApiProperty<decimal> _shippingField;
+        public const string ShippingKey = "shipping";
         /// <summary>
         /// Gets or sets the cost of shipping for the transaction.
         /// </summary>
-        public decimal ShippingValue { get => Shipping.Value; set => Shipping.Value = value; }
+        public decimal? Shipping { get => ShippingField.Value; set => ShippingField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the total amount of the transaction.
         /// </summary>
-        public ApiProperty<decimal> Total => _total ?? (_total = new ApiProperty<decimal>(this, "total"));
-        private ApiProperty<decimal> _total;
+        public ApiProperty<decimal> TotalField => _totalField ?? (_totalField = new ApiProperty<decimal>(this, TotalKey));
+        private ApiProperty<decimal> _totalField;
+        public const string TotalKey = "total";
         /// <summary>
         /// Gets or sets the total amount of the transaction.
         /// </summary>
-        public decimal TotalValue { get => Total.Value; set => Total.Value = value; }
+        public decimal? Total { get => TotalField.Value; set => TotalField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the zip code for the shipping address.
         /// </summary>
-        public ApiPropertyString Zip => _zip ?? (_zip = new ApiPropertyString(this, "zip"));
-        private ApiPropertyString _zip;
+        public ApiPropertyString ZipField => _zipField ?? (_zipField = new ApiPropertyString(this, ZipKey));
+        private ApiPropertyString _zipField;
+        public const string ZipKey = "zip";
         /// <summary>
         /// Gets or sets the zip code for the shipping address.
         /// </summary>
-        public string ZipValue { get => Zip.Value; set => Zip.Value = value; }
+        public string Zip { get => ZipField.Value; set => ZipField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the city for the shipping address.
         /// </summary>
-        public ApiPropertyString City => _city ?? (_city = new ApiPropertyString(this, "city"));
-        private ApiPropertyString _city;
+        public ApiPropertyString CityField => _cityField ?? (_cityField = new ApiPropertyString(this, CityKey));
+        private ApiPropertyString _cityField;
+        public const string CityKey = "city";
         /// <summary>
         /// Gets or sets the city for the shipping address.
         /// </summary>
-        public string CityValue { get => City.Value; set => City.Value = value; }
+        public string City { get => CityField.Value; set => CityField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the state for the shipping address.
         /// </summary>
-        public ApiPropertyString State => _state ?? (_state = new ApiPropertyString(this, "state"));
-        private ApiPropertyString _state;
+        public ApiPropertyString StateField => _stateField ?? (_stateField = new ApiPropertyString(this, StateKey));
+        private ApiPropertyString _stateField;
+        public const string StateKey = "state";
         /// <summary>
         /// Gets or sets the state for the shipping address.
         /// </summary>
-        public string StateValue { get => State.Value; set => State.Value = value; }
+        public string State { get => StateField.Value; set => StateField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the county for the shipping address.
         /// </summary>
-        public ApiPropertyString County => _county ?? (_county = new ApiPropertyString(this, "county"));
-        private ApiPropertyString _county;
+        public ApiPropertyString CountryField => _countryField ?? (_countryField = new ApiPropertyString(this, CountryKey));
+        private ApiPropertyString _countryField;
+        public const string CountryKey = "county";
         /// <summary>
         /// Gets or sets the county for the shipping address.
         /// </summary>
-        public string CountyValue { get => County.Value; set => County.Value = value; }
+        public string County { get => CountryField.Value; set => CountryField.Value = value; }
 
         /// <summary>
         /// If a sale comes from another system, returns a ApiProperty object to get or set the order ID sent from that system.
         /// </summary>
-        public ApiProperty<int> ExternalOrderId => _externalOrderId ?? (_externalOrderId = new ApiProperty<int>(this, "external_order_id"));
-        private ApiProperty<int> _externalOrderId;
+        public ApiProperty<int> ExternalOrderIdField => _externalOrderIdField ?? (_externalOrderIdField = new ApiProperty<int>(this, ExternalOrderIdKey));
+        private ApiProperty<int> _externalOrderIdField;
+        public const string ExternalOrderIdKey = "external_order_id";
         /// <summary>
         /// If a sale comes from another system, gets or sets the order ID sent from that system.
         /// </summary>
-        public int ExternalOrderIdValue { get => ExternalOrderId.Value; set => ExternalOrderId.Value = value; }
+        public int? ExternalOrderId { get => ExternalOrderIdField.Value; set => ExternalOrderIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the affiliate to be credited for the transaction.
         /// </summary>
-        public ApiProperty<int> AffiliateId => _affiliateId ?? (_affiliateId = new ApiProperty<int>(this, "oprid"));
-        private ApiProperty<int> _affiliateId;
+        public ApiProperty<int> AffiliateIdField => _affiliateIdField ?? (_affiliateIdField = new ApiProperty<int>(this, AffiliateIdKey));
+        private ApiProperty<int> _affiliateIdField;
+        public const string AffiliateIdKey = "oprid";
         /// <summary>
         /// Gets or sets the ID of the affiliate to be credited for the transaction.
         /// </summary>
-        public int AffiliateIdValue { get => AffiliateId.Value; set => AffiliateId.Value = value; }
+        public int? AffiliateId { get => AffiliateIdField.Value; set => AffiliateIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the JSON encoded offer data. The offer object contains all information about products, quantities, coupons, tax and shipping.
         /// </summary>
-        public ApiPropertyString OfferData => _offerData ?? (_offerData = new ApiPropertyString(this, "offer_data"));
-        private ApiPropertyString _offerData;
+        public ApiPropertyString OfferDataField => _offerDataField ?? (_offerDataField = new ApiPropertyString(this, OfferDataKey));
+        private ApiPropertyString _offerDataField;
+        public const string OfferDataKey = "offer_data";
         /// <summary>
         /// Gets or sets the JSON encoded offer data. The offer object contains all information about products, quantities, coupons, tax and shipping.
         /// </summary>
-        public string OfferDataValue { get => OfferData.Value; set => OfferData.Value = value; }
+        public string OfferData { get => OfferDataField.Value; set => OfferDataField.Value = value; }
 
         /// <summary>
         /// If the transaction has been recharged, returns a ApiProperty object to get or set the date and time of the last attempt.
         /// </summary>
-        public ApiPropertyDateTime LastRechargeDate => _lastRechargeDate ?? (_lastRechargeDate = new ApiPropertyDateTime(this, "last_recharge_date"));
-        private ApiPropertyDateTime _lastRechargeDate;
+        public ApiPropertyDateTime LastRechargeDateField => _lastRechargeDateField ?? (_lastRechargeDateField = new ApiPropertyDateTime(this, LastRechargeDateKey));
+        private ApiPropertyDateTime _lastRechargeDateField;
+        public const string LastRechargeDateKey = "last_recharge_date";
         /// <summary>
         /// If the transaction has been recharged, gets or sets the date and time of the last attempt.
         /// </summary>
-        public DateTimeOffset LastRechargeDateValue { get => LastRechargeDate.Value; set => LastRechargeDate.Value = value; }
+        public DateTimeOffset? LastRechargeDate { get => LastRechargeDateField.Value; set => LastRechargeDateField.Value = value; }
 
         /// <summary>
         /// If the transaction has been recharged, returns a ApiProperty object to get or set the count of the number of times this has been attempted.
         /// </summary>
-        public ApiProperty<int> RechargeAttempts => _rechargeAttempts ?? (_rechargeAttempts = new ApiProperty<int>(this, "recharge_attempts"));
-        private ApiProperty<int> _rechargeAttempts;
+        public ApiProperty<int> RechargeAttemptsField => _rechargeAttemptsField ?? (_rechargeAttemptsField = new ApiProperty<int>(this, RechargeAttemptsKey));
+        private ApiProperty<int> _rechargeAttemptsField;
+        public const string RechargeAttemptsKey = "recharge_attempts";
         /// <summary>
         /// If the transaction has been recharged, gets or sets the count of the number of times this has been attempted.
         /// </summary>
-        public int RechargeAttemptsValue { get => RechargeAttempts.Value; set => RechargeAttempts.Value = value; }
+        public int? RechargeAttempts { get => RechargeAttemptsField.Value; set => RechargeAttemptsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the transaction should be recharged.
         /// </summary>
-        public ApiPropertyIntBool Recharge => _recharge ?? (_recharge = new ApiPropertyIntBool(this, "recharge"));
-        private ApiPropertyIntBool _recharge;
+        public ApiPropertyIntBool RechargeField => _rechargeField ?? (_rechargeField = new ApiPropertyIntBool(this, RechargeKey));
+        private ApiPropertyIntBool _rechargeField;
+        public const string RechargeKey = "recharge";
         /// <summary>
         /// Gets or sets whether or not the transaction should be recharged.
         /// </summary>
-        public bool RechargeValue { get => Recharge.Value; set => Recharge.Value = value; }
+        public bool? Recharge { get => RechargeField.Value; set => RechargeField.Value = value; }
 
 
 

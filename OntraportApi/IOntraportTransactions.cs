@@ -8,7 +8,7 @@ namespace EmergenceGuardian.OntraportApi
     /// Provides Ontraport API support for Transaction objects.
     /// A transaction object is created when one of your contacts purchases a product.
     /// </summary>
-    public interface IOntraportTransactions
+    public interface IOntraportTransactions : IOntraportBaseRead<ApiTransaction>
     {
         Task MarkCollectionsAsync(int transactionId);
         /// <summary>

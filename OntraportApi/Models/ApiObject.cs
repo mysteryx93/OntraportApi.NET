@@ -9,7 +9,8 @@ namespace EmergenceGuardian.OntraportApi.Models
     /// </summary>
     public class ApiObject
     {
-        private readonly string _idField;
+        private readonly string _idFieldKey;
+        public const string IdKey = "id";
 
         /// <summary>
         /// Initializes a new instance of the ApiObject class.
@@ -23,18 +24,18 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="idField">The name of the ID field for this object. Default is "id".</param>
         public ApiObject(string idField)
         {
-            _idField = idField ?? "id";
+            _idFieldKey = idField ?? IdKey;
         }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the object's ID.
         /// </summary>
-        public ApiProperty<int> Id => _id ?? (_id = new ApiProperty<int>(this, _idField));
-        private ApiProperty<int> _id;
+        public ApiProperty<int> IdField => _idField ?? (_idField = new ApiProperty<int>(this, _idFieldKey));
+        private ApiProperty<int> _idField;
         /// <summary>
         /// Gets or sets the object's ID.
         /// </summary>
-        public int IdValue { get => Id.Value; set => Id.Value = value; }
+        public int? Id { get => IdField.Value; set => IdField.Value = value; }
 
         /// <summary>
         /// Gets or sets the raw data for this object as a dictionnary of string values.

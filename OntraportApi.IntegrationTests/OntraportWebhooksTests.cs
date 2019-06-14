@@ -17,8 +17,8 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         public async Task Subscribe_ValidData_ReturnsIdAndUnsubscribe()
         {
             var api = SetupApi();
-            string url = "https://test98676342.32";
-            string eventName = "object_create(0)";
+            var url = "https://test98676342.32";
+            var eventName = "object_create(0)";
 
             var result = await api.SubscribeAsync(url, eventName, null);
 

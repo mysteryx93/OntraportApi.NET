@@ -11,275 +11,302 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the message name.
         /// </summary>
-        public ApiPropertyString Alias => _alias ?? (_alias = new ApiPropertyString(this, "alias"));
-        private ApiPropertyString _alias;
+        public ApiPropertyString AliasField => _aliasField ?? (_aliasField = new ApiPropertyString(this, AliasKey));
+        private ApiPropertyString _aliasField;
+        public const string AliasKey = "alias";
         /// <summary>
         /// Gets or sets the message name.
         /// </summary>
-        public string AliasValue { get => Alias.Value; set => Alias.Value = value; }
+        public string Alias { get => AliasField.Value; set => AliasField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the message type.
         /// </summary>
-        public ApiPropertyStringEnum<MessageType> Type => _type ?? (_type = new ApiPropertyStringEnum<MessageType>(this, "type"));
-        private ApiPropertyStringEnum<MessageType> _type;
+        public ApiPropertyStringEnum<MessageType> TypeField => _typeField ?? (_typeField = new ApiPropertyStringEnum<MessageType>(this, TypeKey));
+        private ApiPropertyStringEnum<MessageType> _typeField;
+        public const string TypeKey = "type";
         /// <summary>
         /// Gets or sets the message type.
         /// </summary>
-        public MessageType TypeValue { get => Type.Value; set => Type.Value = value; }
+        public MessageType? Type { get => TypeField.Value; set => TypeField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last time the message was manually saved.
         /// </summary>
-        public ApiPropertyDateTime LastSaveTime => _lastSaveTime ?? (_lastSaveTime = new ApiPropertyDateTime(this, "last_save"));
-        private ApiPropertyDateTime _lastSaveTime;
+        public ApiPropertyDateTime LastSaveTimeField => _lastSaveTimeField ?? (_lastSaveTimeField = new ApiPropertyDateTime(this, LastSaveTimeKey));
+        private ApiPropertyDateTime _lastSaveTimeField;
+        public const string LastSaveTimeKey = "last_save";
         /// <summary>
         /// Gets or sets the last time the message was manually saved.
         /// </summary>
-        public DateTimeOffset LastSaveTimeValue { get => LastSaveTime.Value; set => LastSaveTime.Value = value; }
+        public DateTimeOffset? LastSaveTime { get => LastSaveTimeField.Value; set => LastSaveTimeField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last time the message was automatically saved.
         /// </summary>
-        public ApiPropertyDateTime LastAutoSaveTime => _lastAutoSaveTime ?? (_lastAutoSaveTime = new ApiPropertyDateTime(this, "last_auto"));
-        private ApiPropertyDateTime _lastAutoSaveTime;
+        public ApiPropertyDateTime LastAutoSaveTimeField => _lastAutoSaveTimeField ?? (_lastAutoSaveTimeField = new ApiPropertyDateTime(this, LastAutoSaveTimeKey));
+        private ApiPropertyDateTime _lastAutoSaveTimeField;
+        public const string LastAutoSaveTimeKey = "last_auto";
         /// <summary>
         /// Gets or sets the last time the message was automatically saved.
         /// </summary>
-        public DateTimeOffset LastAutoSaveTimeValue { get => LastAutoSaveTime.Value; set => LastAutoSaveTime.Value = value; }
+        public DateTimeOffset? LastAutoSaveTime { get => LastAutoSaveTimeField.Value; set => LastAutoSaveTimeField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the content of the last autosave.
         /// </summary>
-        public ApiPropertyString AutoSaveContent => _autoSaveContent ?? (_autoSaveContent = new ApiPropertyString(this, "autosave"));
-        private ApiPropertyString _autoSaveContent;
+        public ApiPropertyString AutoSaveContentField => _autoSaveContentField ?? (_autoSaveContentField = new ApiPropertyString(this, AutoSaveContentKey));
+        private ApiPropertyString _autoSaveContentField;
+        public const string AutoSaveContentKey = "autosave";
         /// <summary>
         /// Gets or sets the content of the last autosave.
         /// </summary>
-        public string AutoSaveContentValue { get => AutoSaveContent.Value; set => AutoSaveContent.Value = value; }
+        public string AutoSaveContent { get => AutoSaveContentField.Value; set => AutoSaveContentField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date the message was created.
         /// </summary>
-        public ApiPropertyDateTime DateCreated => _dateCreated ?? (_dateCreated = new ApiPropertyDateTime(this, "date"));
-        private ApiPropertyDateTime _dateCreated;
+        public ApiPropertyDateTime DateCreatedField => _dateCreatedField ?? (_dateCreatedField = new ApiPropertyDateTime(this, DateCreatedKey));
+        private ApiPropertyDateTime _dateCreatedField;
+        public const string DateCreatedKey = "date";
         /// <summary>
         /// Gets or sets the date the message was created.
         /// </summary>
-        public DateTimeOffset DateCreatedValue { get => DateCreated.Value; set => DateCreated.Value = value; }
+        public DateTimeOffset? DateCreated { get => DateCreatedField.Value; set => DateCreatedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the number of times the message has been sent.
         /// </summary>
-        public ApiProperty<int> StatSent => _statSent ?? (_statSent = new ApiProperty<int>(this, "mcsent"));
-        private ApiProperty<int> _statSent;
+        public ApiProperty<int> StatSentField => _statSentField ?? (_statSentField = new ApiProperty<int>(this, StatSentKey));
+        private ApiProperty<int> _statSentField;
+        public const string StatSentKey = "mcsent";
         /// <summary>
         /// Gets or sets the number of times the message has been sent.
         /// </summary>
-        public int StatSentValue { get => StatSent.Value; set => StatSent.Value = value; }
+        public int? StatSent { get => StatSentField.Value; set => StatSentField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the rate of messages that have been opened versus sent, represented as a percentage.
         /// </summary>
-        public ApiProperty<int> StatOpened => _statOpened ?? (_statOpened = new ApiProperty<int>(this, "mcopened"));
-        private ApiProperty<int> _statOpened;
+        public ApiProperty<int> StatOpenedField => _statOpenedField ?? (_statOpenedField = new ApiProperty<int>(this, StatOpenedKey));
+        private ApiProperty<int> _statOpenedField;
+        public const string StatOpenedKey = "mcopened";
         /// <summary>
         /// Gets or sets the rate of messages that have been opened versus sent, represented as a percentage.
         /// </summary>
-        public int StatOpenedValue { get => StatOpened.Value; set => StatOpened.Value = value; }
+        public int? StatOpened { get => StatOpenedField.Value; set => StatOpenedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the rate of clickthroughs in opened messages, represented as a percentage.
         /// </summary>
-        public ApiProperty<int> StatClicked => _statClicked ?? (_statClicked = new ApiProperty<int>(this, "mcclicked"));
-        private ApiProperty<int> _statClicked;
+        public ApiProperty<int> StatClickedField => _statClickedField ?? (_statClickedField = new ApiProperty<int>(this, StatClickedKey));
+        private ApiProperty<int> _statClickedField;
+        public const string StatClickedKey = "mcclicked";
         /// <summary>
         /// Gets or sets the rate of clickthroughs in opened messages, represented as a percentage.
         /// </summary>
-        public int StatClickedValue { get => StatClicked.Value; set => StatClicked.Value = value; }
+        public int? StatClicked { get => StatClickedField.Value; set => StatClickedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the rate of complaints about sent messages, represented as a percentage.
         /// </summary>
-        public ApiProperty<int> StatAbuse => _statAbuse ?? (_statAbuse = new ApiProperty<int>(this, "mcabuse"));
-        private ApiProperty<int> _statAbuse;
+        public ApiProperty<int> StatAbuseField => _statAbuseField ?? (_statAbuseField = new ApiProperty<int>(this, StatAbuseKey));
+        private ApiProperty<int> _statAbuseField;
+        public const string StatAbuseKey = "mcabuse";
         /// <summary>
         /// Gets or sets the rate of complaints about sent messages, represented as a percentage.
         /// </summary>
-        public int StatAbuseValue { get => StatAbuse.Value; set => StatAbuse.Value = value; }
+        public int? StatAbuse { get => StatAbuseField.Value; set => StatAbuseField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the rate of opt-outs on this message, represented as a percentage.
         /// </summary>
-        public ApiProperty<int> StatUnsubscribed => _statUnsubscribed ?? (_statUnsubscribed = new ApiProperty<int>(this, "mcunsub"));
-        private ApiProperty<int> _statUnsubscribed;
+        public ApiProperty<int> StatUnsubscribedField => _statUnsubscribedField ?? (_statUnsubscribedField = new ApiProperty<int>(this, StatUnsubscribedKey));
+        private ApiProperty<int> _statUnsubscribedField;
+        public const string StatUnsubscribedKey = "mcunsub";
         /// <summary>
         /// Gets or sets the rate of opt-outs on this message, represented as a percentage.
         /// </summary>
-        public int StatUnsubscribedValue { get => StatUnsubscribed.Value; set => StatUnsubscribed.Value = value; }
+        public int? StatUnsubscribed { get => StatUnsubscribedField.Value; set => StatUnsubscribedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the SpamAssassin spam score of the message. The lower the score, the better the rating. Messages with a spam score of 5 or higher will not be sent.
         /// </summary>
-        public ApiProperty<float> SpamScore => _spamScore ?? (_spamScore = new ApiProperty<float>(this, "spam_score"));
-        private ApiProperty<float> _spamScore;
+        public ApiProperty<float> SpamScoreField => _spamScoreField ?? (_spamScoreField = new ApiProperty<float>(this, SpamScoreKey));
+        private ApiProperty<float> _spamScoreField;
+        public const string SpamScoreKey = "spam_score";
         /// <summary>
         /// Gets or sets the SpamAssassin spam score of the message. The lower the score, the better the rating. Messages with a spam score of 5 or higher will not be sent.
         /// </summary>
-        public float SpamScoreValue { get => SpamScore.Value; set => SpamScore.Value = value; }
+        public float? SpamScore { get => SpamScoreField.Value; set => SpamScoreField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the email subject line.
         /// </summary>
-        public ApiPropertyString Subject => _subject ?? (_subject = new ApiPropertyString(this, "subject"));
-        private ApiPropertyString _subject;
+        public ApiPropertyString SubjectField => _subjectField ?? (_subjectField = new ApiPropertyString(this, SubjectKey));
+        private ApiPropertyString _subjectField;
+        public const string SubjectKey = "subject";
         /// <summary>
         /// Gets or sets the email subject line.
         /// </summary>
-        public string SubjectValue { get => Subject.Value; set => Subject.Value = value; }
+        public string Subject { get => SubjectField.Value; set => SubjectField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the object type associated with the message. The default is 0 for contact objects. This field should only be changed if you are using custom objects.
         /// </summary>
-        public ApiProperty<int> ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiProperty<int>(this, "object_type_id"));
-        private ApiProperty<int> _objectTypeId;
+        public ApiProperty<int> ObjectTypeIdField => _objectTypeIdField ?? (_objectTypeIdField = new ApiProperty<int>(this, ObjectTypeIdKey));
+        private ApiProperty<int> _objectTypeIdField;
+        public const string ObjectTypeIdKey = "object_type_id";
         /// <summary>
         /// Gets or sets the ID of the object type associated with the message. The default is 0 for contact objects. This field should only be changed if you are using custom objects.
         /// </summary>
-        public int ObjectTypeIdValue { get => ObjectTypeId.Value; set => ObjectTypeId.Value = value; }
+        public int? ObjectTypeId { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the data and time the message was last modified.
         /// </summary>
-        public ApiPropertyDateTime DateLastModified => _dateLastModified ?? (_dateLastModified = new ApiPropertyDateTime(this, "dlm"));
-        private ApiPropertyDateTime _dateLastModified;
+        public ApiPropertyDateTime DateLastModifiedField => _dateLastModifiedField ?? (_dateLastModifiedField = new ApiPropertyDateTime(this, DateLastModifiedKey));
+        private ApiPropertyDateTime _dateLastModifiedField;
+        public const string DateLastModifiedKey = "dlm";
         /// <summary>
         /// Gets or sets the data and time the message was last modified.
         /// </summary>
-        public DateTimeOffset DateLastModifiedValue { get => DateLastModified.Value; set => DateLastModified.Value = value; }
+        public DateTimeOffset? DateLastModified { get => DateLastModifiedField.Value; set => DateLastModifiedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not this message is transactional email.
         /// </summary>
-        public ApiPropertyIntBool TransactionEmail => _transactionEmail ?? (_transactionEmail = new ApiPropertyIntBool(this, "transactional_email"));
-        private ApiPropertyIntBool _transactionEmail;
+        public ApiPropertyIntBool TransactionEmailField => _transactionEmailField ?? (_transactionEmailField = new ApiPropertyIntBool(this, TransactionEmailKey));
+        private ApiPropertyIntBool _transactionEmailField;
+        public const string TransactionEmailKey = "transactional_email";
         /// <summary>
         /// Gets or sets whether or not this message is transactional email.
         /// </summary>
-        public bool TransactionEmailValue { get => TransactionEmail.Value; set => TransactionEmail.Value = value; }
+        public bool? TransactionEmail { get => TransactionEmailField.Value; set => TransactionEmailField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the content of an ONTRAmail message.
         /// </summary>
-        public ApiPropertyString Content => _content ?? (_content = new ApiPropertyString(this, "json_data"));
-        private ApiPropertyString _content;
+        public ApiPropertyString ContentField => _contentField ?? (_contentField = new ApiPropertyString(this, ContentKey));
+        private ApiPropertyString _contentField;
+        public const string ContentKey = "json_data";
         /// <summary>
         /// Gets or sets the content of an ONTRAmail message.
         /// </summary>
-        public string ContentValue { get => Content.Value; set => Content.Value = value; }
+        public string Content { get => ContentField.Value; set => ContentField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user having ownership of the message.
         /// </summary>
-        public ApiProperty<int> Owner => _owner ?? (_owner = new ApiProperty<int>(this, "owner"));
-        private ApiProperty<int> _owner;
+        public ApiProperty<int> OwnerField => _ownerField ?? (_ownerField = new ApiProperty<int>(this, OwnerKey));
+        private ApiProperty<int> _ownerField;
+        public const string OwnerKey = "owner";
         /// <summary>
         /// Gets or sets the ID of the user having ownership of the message.
         /// </summary>
-        public int OwnerValue { get => Owner.Value; set => Owner.Value = value; }
+        public int? Owner { get => OwnerField.Value; set => OwnerField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set who the message will be sent from. Options are owner, custom, or the desired user ID.
         /// </summary>
-        public ApiPropertyString From => _from ?? (_from = new ApiPropertyString(this, "from"));
-        private ApiPropertyString _from;
+        public ApiPropertyString FromField => _fromField ?? (_fromField = new ApiPropertyString(this, FromKey));
+        private ApiPropertyString _fromField;
+        public const string FromKey = "from";
         /// <summary>
         /// Gets or sets who the message will be sent from. Options are owner, custom, or the desired user ID.
         /// </summary>
-        public string FromValue { get => From.Value; set => From.Value = value; }
+        public string From { get => FromField.Value; set => FromField.Value = value; }
 
         /// <summary>
         /// For legacy emails only, returns a ApiProperty object to get or set the HTML content of the message.
         /// </summary>
-        public ApiPropertyString MessageBody => _messageBody ?? (_messageBody = new ApiPropertyString(this, "message_body"));
-        private ApiPropertyString _messageBody;
+        public ApiPropertyString MessageBodyField => _messageBodyField ?? (_messageBodyField = new ApiPropertyString(this, MessageBodyKey));
+        private ApiPropertyString _messageBodyField;
+        public const string MessageBodyKey = "message_body";
         /// <summary>
         /// For legacy emails only, gets or sets the HTML content of the message.
         /// </summary>
-        public string MessageBodyValue { get => MessageBody.Value; set => MessageBody.Value = value; }
+        public string MessageBody { get => MessageBodyField.Value; set => MessageBodyField.Value = value; }
 
         /// <summary>
         /// If the from field is set to custom, returns a ApiProperty object to get or set the name the message should come from.
         /// </summary>
-        public ApiPropertyString FromName => _fromName ?? (_fromName = new ApiPropertyString(this, "send_out_name"));
-        private ApiPropertyString _fromName;
+        public ApiPropertyString FromNameField => _fromNameField ?? (_fromNameField = new ApiPropertyString(this, FromNameKey));
+        private ApiPropertyString _fromNameField;
+        public const string FromNameKey = "send_out_name";
         /// <summary>
         /// If the from field is set to custom, gets or sets the name the message should come from.
         /// </summary>
-        public string FromNameValue { get => FromName.Value; set => FromName.Value = value; }
+        public string FromName { get => FromNameField.Value; set => FromNameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the "reply to" email address.
         /// </summary>
-        public ApiPropertyString ReplyToEmail => _replyToEmail ?? (_replyToEmail = new ApiPropertyString(this, "reply_to_email"));
-        private ApiPropertyString _replyToEmail;
+        public ApiPropertyString ReplyToEmailField => _replyToEmailField ?? (_replyToEmailField = new ApiPropertyString(this, ReplyToEmailKey));
+        private ApiPropertyString _replyToEmailField;
+        public const string ReplyToEmailKey = "reply_to_email";
         /// <summary>
         /// Gets or sets the "reply to" email address.
         /// </summary>
-        public string ReplyToEmailValue { get => ReplyToEmail.Value; set => ReplyToEmail.Value = value; }
+        public string ReplyToEmail { get => ReplyToEmailField.Value; set => ReplyToEmailField.Value = value; }
 
         /// <summary>
         /// For email messages, returns a ApiProperty object to get or set the plain text version of your email. For SMS messages, the content to be sent.
         /// </summary>
-        public ApiPropertyString PlainText => _plainText ?? (_plainText = new ApiPropertyString(this, "plaintext"));
-        private ApiPropertyString _plainText;
+        public ApiPropertyString PlainTextField => _plainTextField ?? (_plainTextField = new ApiPropertyString(this, PlainTextKey));
+        private ApiPropertyString _plainTextField;
+        public const string PlainTextKey = "plaintext";
         /// <summary>
         /// For email messages, gets or sets the plain text version of your email. For SMS messages, the content to be sent.
         /// </summary>
-        public string PlainTextValue { get => PlainText.Value; set => PlainText.Value = value; }
+        public string PlainText { get => PlainTextField.Value; set => PlainTextField.Value = value; }
 
         /// <summary>
         /// Emails are automatically sent from your default email address. If you would like to send from another email address, this field can contain any validated email address.
         /// </summary>
-        public ApiPropertyString FromEmail => _fromEmail ?? (_fromEmail = new ApiPropertyString(this, "send_from"));
-        private ApiPropertyString _fromEmail;
+        public ApiPropertyString FromEmailField => _fromEmailField ?? (_fromEmailField = new ApiPropertyString(this, FromEmailKey));
+        private ApiPropertyString _fromEmailField;
+        public const string FromEmailKey = "send_from";
         /// <summary>
         /// Emails are automatically sent from your default email address. If you would like to send from another email address, this field can contain any validated email address.
         /// </summary>
-        public string FromEmailValue { get => FromEmail.Value; set => FromEmail.Value = value; }
+        public string FromEmail { get => FromEmailField.Value; set => FromEmailField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the SendTo address.
         /// </summary>
-        public ApiPropertyString SendTo => _sendTo ?? (_sendTo = new ApiPropertyString(this, "send_to"));
-        private ApiPropertyString _sendTo;
+        public ApiPropertyString SendToField => _sendToField ?? (_sendToField = new ApiPropertyString(this, SendToKey));
+        private ApiPropertyString _sendToField;
+        public const string SendToKey = "send_to";
         /// <summary>
         /// Used only with custom objects and SMS messages. In custom objects, you can use this field to send to another email in a parent/child relationship. 
         /// For example, you could send to a related child object instead of the contact's default email address. The field is stored in the 
         /// format {related_field}//{child_field}, where related_field is the parent field relating one object to another and child_field is 
         /// the actual email field in the related object you would like to send to. For SMS messages, this field defaults to sms_number.
         /// </summary>
-        public string SendToValue { get => SendTo.Value; set => SendTo.Value = value; }
+        public string SendTo { get => SendToField.Value; set => SendToField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set custom HTML email header data.
         /// </summary>
-        public ApiPropertyString EmailHeaderData => _emailHeaderData ?? (_emailHeaderData = new ApiPropertyString(this, "email_header_data"));
-        private ApiPropertyString _emailHeaderData;
+        public ApiPropertyString EmailHeaderDataField => _emailHeaderDataField ?? (_emailHeaderDataField = new ApiPropertyString(this, EmailHeaderDataKey));
+        private ApiPropertyString _emailHeaderDataField;
+        public const string EmailHeaderDataKey = "email_header_data";
         /// <summary>
         /// Gets or sets custom HTML email header data.
         /// </summary>
-        public string EmailHeaderDataValue { get => EmailHeaderData.Value; set => EmailHeaderData.Value = value; }
+        public string EmailHeaderData { get => EmailHeaderDataField.Value; set => EmailHeaderDataField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or setes whether or not long lines are being wrapped.
         /// </summary>
-        public ApiProperty<int> WordWrap => _wordWrap ?? (_wordWrap = new ApiProperty<int>(this, "word_wrap_checkbox"));
-        private ApiProperty<int> _wordWrap;
+        public ApiProperty<int> WordWrapField => _wordWrapField ?? (_wordWrapField = new ApiProperty<int>(this, WordWrapKey));
+        private ApiProperty<int> _wordWrapField;
+        public const string WordWrapKey = "word_wrap_checkbox";
         /// <summary>
         /// Gets or setes whether or not long lines are being wrapped.
         /// </summary>
-        public int WordWrapValue { get => WordWrap.Value; set => WordWrap.Value = value; }
+        public int? WordWrap { get => WordWrapField.Value; set => WordWrapField.Value = value; }
 
         //public ApiProperty<int> UtmTracking => _utmTracking ?? (_utmTracking = new ApiProperty<int>(this, "utm_tracking"));
         //private ApiProperty<int> _utmTracking;

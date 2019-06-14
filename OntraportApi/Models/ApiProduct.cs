@@ -11,62 +11,68 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user who controls the product. This field must contain a value for a product object to be saved properly.
         /// </summary>
-        public ApiProperty<int> Owner => _owner ?? (_owner = new ApiProperty<int>(this, "owner"));
-        private ApiProperty<int> _owner;
+        public ApiProperty<int> OwnerField => _ownerField ?? (_ownerField = new ApiProperty<int>(this, OwnerKey));
+        private ApiProperty<int> _ownerField;
+        public const string OwnerKey = "owner";
         /// <summary>
         /// Gets or sets the ID of the user who controls the product. This field must contain a value for a product object to be saved properly.
         /// </summary>
-        public int OwnerValue { get => Owner.Value; set => Owner.Value = value; }
+        public int? Owner { get => OwnerField.Value; set => OwnerField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the product's name.
         /// </summary>
-        public ApiPropertyString Name => _name ?? (_name = new ApiPropertyString(this, "name"));
-        private ApiPropertyString _name;
+        public ApiPropertyString NameField => _nameField ?? (_nameField = new ApiPropertyString(this, NameKey));
+        private ApiPropertyString _nameField;
+        public const string NameKey = "name";
         /// <summary>
         /// Gets or sets the product's name.
         /// </summary>
-        public string NameValue { get => Name.Value; set => Name.Value = value; }
+        public string Name { get => NameField.Value; set => NameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the product's price.
         /// </summary>
-        public ApiProperty<decimal> Price => _price ?? (_price = new ApiProperty<decimal>(this, "price"));
-        private ApiProperty<decimal> _price;
+        public ApiProperty<decimal> PriceField => _priceField ?? (_priceField = new ApiProperty<decimal>(this, PriceKey));
+        private ApiProperty<decimal> _priceField;
+        public const string PriceKey = "price";
         /// <summary>
         /// Gets or sets the product's price.
         /// </summary>
-        public decimal PriceValue { get => Price.Value; set => Price.Value = value; }
+        public decimal? Price { get => PriceField.Value; set => PriceField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date the product was added.
         /// </summary>
-        public ApiPropertyDateTime DateAdded => _dateAdded ?? (_dateAdded = new ApiPropertyDateTime(this, "date"));
-        private ApiPropertyDateTime _dateAdded;
+        public ApiPropertyDateTime DateAddedField => _dateAddedField ?? (_dateAddedField = new ApiPropertyDateTime(this, DateAddedKey));
+        private ApiPropertyDateTime _dateAddedField;
+        public const string DateAddedKey = "date";
         /// <summary>
         /// Gets or sets the date the product was added.
         /// </summary>
-        public DateTimeOffset DateAddedValue { get => DateAdded.Value; set => DateAdded.Value = value; }
+        public DateTimeOffset? DateAdded { get => DateAddedField.Value; set => DateAddedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date the product was last modified.
         /// </summary>
-        public ApiPropertyDateTime DateLastModified => _dateLastModified ?? (_dateLastModified = new ApiPropertyDateTime(this, "dlm"));
-        private ApiPropertyDateTime _dateLastModified;
+        public ApiPropertyDateTime DateLastModifiedField => _dateLastModifiedField ?? (_dateLastModifiedField = new ApiPropertyDateTime(this, DateLastModifiedKey));
+        private ApiPropertyDateTime _dateLastModifiedField;
+        public const string DateLastModifiedKey = "dlm";
         /// <summary>
         /// Gets or sets the date the product was last modified.
         /// </summary>
-        public DateTimeOffset DateLastModifiedValue { get => DateLastModified.Value; set => DateLastModified.Value = value; }
+        public DateTimeOffset? DateLastModified { get => DateLastModifiedField.Value; set => DateLastModifiedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the product has been deleted.
         /// </summary>
-        public ApiPropertyBool Deleted => _deleted ?? (_deleted = new ApiPropertyBool(this, "deleted"));
-        private ApiPropertyBool _deleted;
+        public ApiPropertyBool DeletedField => _deletedField ?? (_deletedField = new ApiPropertyBool(this, DeletedKey));
+        private ApiPropertyBool _deletedField;
+        public const string DeletedKey = "deleted";
         /// <summary>
         /// Gets or sets whether or not the product has been deleted.
         /// </summary>
-        public bool DeletedValue { get => Deleted.Value; set => Deleted.Value = value; }
+        public bool? Deleted { get => DeletedField.Value; set => DeletedField.Value = value; }
 
     }
 }

@@ -14,192 +14,214 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set an arbitrary name for the form.
         /// </summary>
-        public ApiPropertyString FormName => _formName ?? (_formName = new ApiPropertyString(this, "formname"));
-        private ApiPropertyString _formName;
+        public ApiPropertyString FormNameField => _formNameField ?? (_formNameField = new ApiPropertyString(this, FormNameKey));
+        private ApiPropertyString _formNameField;
+        public const string FormNameKey = "formname";
         /// <summary>
         /// Gets or sets an arbitrary name for the form.
         /// </summary>
-        public string FormNameValue { get=> FormName.Value; set => FormName.Value = value; }
+        public string FormName { get => FormNameField.Value; set => FormNameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the type of form.
         /// </summary>
-        public ApiProperty<FormType> Type => _type ?? (_type = new ApiPropertyIntEnum<FormType>(this, "type"));
-        private ApiProperty<FormType> _type;
+        public ApiProperty<FormType> TypeField => _typeField ?? (_typeField = new ApiPropertyIntEnum<FormType>(this, TypeKey));
+        private ApiProperty<FormType> _typeField;
+        public const string TypeKey = "type";
         /// <summary>
         /// Gets or sets the type of form.
         /// </summary>
-        public FormType TypeValue { get=> Type.Value; set => Type.Value = value; }
+        public FormType? Type { get => TypeField.Value; set => TypeField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the tags a contact should be added to upon form fillout.
         /// </summary>
-        public ApiPropertyString Tags => _tags ?? (_tags = new ApiPropertyString(this, "tags"));
-        private ApiPropertyString _tags;
+        public ApiPropertyString TagsField => _tagsField ?? (_tagsField = new ApiPropertyString(this, TagsKey));
+        private ApiPropertyString _tagsField;
+        public const string TagsKey = "tags";
         /// <summary>
         /// Gets or sets the tags a contact should be added to upon form fillout.
         /// </summary>
-        public string TagsValue { get=> Tags.Value; set => Tags.Value = value; }
+        public string Tags { get => TagsField.Value; set => TagsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the sequences a contact should be added to upon form fillout.
         /// </summary>
-        public ApiPropertyString Sequences => _sequences ?? (_sequences = new ApiPropertyString(this, "sequences"));
-        private ApiPropertyString _sequences;
+        public ApiPropertyString SequencesField => _sequencesField ?? (_sequencesField = new ApiPropertyString(this, SequencesKey));
+        private ApiPropertyString _sequencesField;
+        public const string SequencesKey = "sequences";
         /// <summary>
         /// Gets or sets the sequences a contact should be added to upon form fillout.
         /// </summary>
-        public string SequencesValue { get=> Sequences.Value; set => Sequences.Value = value; }
+        public string Sequences { get => SequencesField.Value; set => SequencesField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the URL for the thank you page the user is redirected to upon form fillout.
         /// </summary>
-        public ApiPropertyString RedirectUrl => _redirectUrl ?? (_redirectUrl = new ApiPropertyString(this, "redirect"));
-        private ApiPropertyString _redirectUrl;
+        public ApiPropertyString RedirectUrlField => _redirectUrlField ?? (_redirectUrlField = new ApiPropertyString(this, RedirectUrlKey));
+        private ApiPropertyString _redirectUrlField;
+        public const string RedirectUrlKey = "redirect";
         /// <summary>
         /// Gets or sets the URL for the thank you page the user is redirected to upon form fillout.
         /// </summary>
-        public string RedirectUrlValue { get=> RedirectUrl.Value; set => RedirectUrl.Value = value; }
+        public string RedirectUrl { get => RedirectUrlField.Value; set => RedirectUrlField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user controlling the form.
         /// </summary>
-        public ApiProperty<int> Owner => _owner ?? (_owner = new ApiProperty<int>(this, "owner"));
-        private ApiProperty<int> _owner;
+        public ApiProperty<int> OwnerField => _ownerField ?? (_ownerField = new ApiProperty<int>(this, OwnerKey));
+        private ApiProperty<int> _ownerField;
+        public const string OwnerKey = "owner";
         /// <summary>
         /// Gets or sets the ID of the user controlling the form.
         /// </summary>
-        public int OwnerValue { get=> Owner.Value; set => Owner.Value = value; }
+        public int? Owner { get => OwnerField.Value; set => OwnerField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the form includes a Captcha.
         /// </summary>
-        public ApiPropertyIntBool HasCatcha => _hasCaptcha ?? (_hasCaptcha = new ApiPropertyIntBool(this, "captcha"));
-        private ApiPropertyIntBool _hasCaptcha;
+        public ApiPropertyIntBool HasCatchaField => _hasCaptchaField ?? (_hasCaptchaField = new ApiPropertyIntBool(this, HasCatchaKey));
+        private ApiPropertyIntBool _hasCaptchaField;
+        public const string HasCatchaKey = "captcha";
         /// <summary>
         /// Gets or sets whether or not the form includes a Captcha.
         /// </summary>
-        public bool HasCatchaValue { get=> HasCatcha.Value; set => HasCatcha.Value = value; }
+        public bool? HasCatcha { get => HasCatchaField.Value; set => HasCatchaField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the email address to send notififications when the form is filled out.
         /// </summary>
-        public ApiPropertyString NotificationEmail => _notificationEmail ?? (_notificationEmail = new ApiPropertyString(this, "notif"));
-        private ApiPropertyString _notificationEmail;
+        public ApiPropertyString NotificationEmailField => _notificationEmailField ?? (_notificationEmailField = new ApiPropertyString(this, NotificationEmailKey));
+        private ApiPropertyString _notificationEmailField;
+        public const string NotificationEmailKey = "notif";
         /// <summary>
         /// Gets or sets the email address to send notififications when the form is filled out.
         /// </summary>
-        public string NotificationEmailValue { get=> NotificationEmail.Value; set => NotificationEmail.Value = value; }
+        public string NotificationEmail { get => NotificationEmailField.Value; set => NotificationEmailField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the number of times the form has been filled out.
         /// </summary>
-        public ApiProperty<int> Fillouts => _fillouts ?? (_fillouts = new ApiProperty<int>(this, "fillouts"));
-        private ApiProperty<int> _fillouts;
+        public ApiProperty<int> FilloutsField => _filloutsField ?? (_filloutsField = new ApiProperty<int>(this, FilloutsKey));
+        private ApiProperty<int> _filloutsField;
+        public const string FilloutsKey = "fillouts";
         /// <summary>
         /// Gets or sets the number of times the form has been filled out.
         /// </summary>
-        public int FilloutsValue { get=> Fillouts.Value; set => Fillouts.Value = value; }
+        public int? Fillouts { get => FilloutsField.Value; set => FilloutsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the JSON-encoded form data.
         /// </summary>
-        public ApiPropertyString JsonRawData => _jsonRawData ?? (_jsonRawData = new ApiPropertyString(this, "json_raw_object"));
-        private ApiPropertyString _jsonRawData;
+        public ApiPropertyString JsonRawDataField => _jsonRawDataField ?? (_jsonRawDataField = new ApiPropertyString(this, JsonRawDataKey));
+        private ApiPropertyString _jsonRawDataField;
+        public const string JsonRawDataKey = "json_raw_object";
         /// <summary>
         /// Gets or sets the JSON-encoded form data.
         /// </summary>
-        public string JsonRawDataValue { get=> JsonRawData.Value; set => JsonRawData.Value = value; }
+        public string JsonRawData { get => JsonRawDataField.Value; set => JsonRawDataField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the form has been deleted.
         /// </summary>
-        public ApiPropertyIntBool Deleted => _deleted ?? (_deleted = new ApiPropertyIntBool(this, "deleted"));
-        private ApiPropertyIntBool _deleted;
+        public ApiPropertyIntBool DeletedField => _deletedField ?? (_deletedField = new ApiPropertyIntBool(this, DeletedKey));
+        private ApiPropertyIntBool _deletedField;
+        public const string DeletedKey = "deleted";
         /// <summary>
         /// Gets or sets whether or not the form has been deleted.
         /// </summary>
-        public bool DeletedValue { get=> Deleted.Value; set => Deleted.Value = value; }
+        public bool? Deleted { get => DeletedField.Value; set => DeletedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the object type associated with the form.
         /// </summary>
-        public ApiProperty<int> ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiProperty<int>(this, "object_type_id"));
-        private ApiProperty<int> _objectTypeId;
+        public ApiProperty<int> ObjectTypeIdField => _objectTypeIdField ?? (_objectTypeIdField = new ApiProperty<int>(this, ObjectTypeIdKey));
+        private ApiProperty<int> _objectTypeIdField;
+        public const string ObjectTypeIdKey = "object_type_id";
         /// <summary>
         /// Gets or sets the ID of the object type associated with the form.
         /// </summary>
-        public int ObjectTypeIdValue { get=> ObjectTypeId.Value; set => ObjectTypeId.Value = value; }
+        public int? ObjectTypeId { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the form has a responsive layout.
         /// </summary>
-        public ApiPropertyIntBool ResponsiveLayout => _responsiveLayout ?? (_responsiveLayout = new ApiPropertyIntBool(this, "responsive"));
-        private ApiPropertyIntBool _responsiveLayout;
+        public ApiPropertyIntBool ResponsiveLayoutField => _responsiveLayoutField ?? (_responsiveLayoutField = new ApiPropertyIntBool(this, ResponsiveLayoutKey));
+        private ApiPropertyIntBool _responsiveLayoutField;
+        public const string ResponsiveLayoutKey = "responsive";
         /// <summary>
         /// Gets or sets whether or not the form has a responsive layout.
         /// </summary>
-        public bool ResponsiveLayoutValue { get=> ResponsiveLayout.Value; set => ResponsiveLayout.Value = value; }
+        public bool? ResponsiveLayout { get => ResponsiveLayoutField.Value; set => ResponsiveLayoutField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the number of times the form has been visited.
         /// </summary>
-        public ApiProperty<int> Visits => _visits ?? (_visits = new ApiProperty<int>(this, "visits"));
-        private ApiProperty<int> _visits;
+        public ApiProperty<int> VisitsField => _visitsField ?? (_visitsField = new ApiProperty<int>(this, VisitsKey));
+        private ApiProperty<int> _visitsField;
+        public const string VisitsKey = "visits";
         /// <summary>
         /// Gets or sets the number of times the form has been visited.
         /// </summary>
-        public int VisitsValue { get=> Visits.Value; set => Visits.Value = value; }
+        public int? Visits { get => VisitsField.Value; set => VisitsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the number of times unique visitors have visited the form.
         /// </summary>
-        public ApiProperty<int> UniqueVisits => _uniqueVisits ?? (_uniqueVisits = new ApiProperty<int>(this, "unique_visits"));
-        private ApiProperty<int> _uniqueVisits;
+        public ApiProperty<int> UniqueVisitsField => _uniqueVisitsField ?? (_uniqueVisitsField = new ApiProperty<int>(this, UniqueVisitsKey));
+        private ApiProperty<int> _uniqueVisitsField;
+        public const string UniqueVisitsKey = "unique_visits";
         /// <summary>
         /// Gets or sets the number of times unique visitors have visited the form.
         /// </summary>
-        public int UniqueVisitsValue { get=> UniqueVisits.Value; set => UniqueVisits.Value = value; }
+        public int? UniqueVisits { get => UniqueVisitsField.Value; set => UniqueVisitsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date and time the form was created. Note that this field will not contain data for any forms created prior to November 7, 2017.
         /// </summary>
-        public ApiPropertyDateTime DateCreated => _dateCreated ?? (_dateCreated = new ApiPropertyDateTime(this, "date"));
-        private ApiPropertyDateTime _dateCreated;
+        public ApiPropertyDateTime DateCreatedField => _dateCreatedField ?? (_dateCreatedField = new ApiPropertyDateTime(this, DateCreatedKey));
+        private ApiPropertyDateTime _dateCreatedField;
+        public const string DateCreatedKey = "date";
         /// <summary>
         /// Gets or sets the date and time the form was created. Note that this field will not contain data for any forms created prior to November 7, 2017.
         /// </summary>
-        public DateTimeOffset DateCreatedValue { get=> DateCreated.Value; set => DateCreated.Value = value; }
+        public DateTimeOffset? DateCreated { get => DateCreatedField.Value; set => DateCreatedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date and time the form was last modified.
         /// </summary>
-        public ApiPropertyDateTime DateModified => _dateModified ?? (_dateModified = new ApiPropertyDateTime(this, "dlm"));
-        private ApiPropertyDateTime _dateModified;
+        public ApiPropertyDateTime DateModifiedField => _dateModifiedField ?? (_dateModifiedField = new ApiPropertyDateTime(this, DateModifiedKey));
+        private ApiPropertyDateTime _dateModifiedField;
+        public const string DateModifiedKey = "dlm";
         /// <summary>
         /// Gets or sets the date and time the form was last modified.
         /// </summary>
-        public DateTimeOffset DateModifiedValue { get=> DateModified.Value; set => DateModified.Value = value; }
+        public DateTimeOffset? DateModified { get => DateModifiedField.Value; set => DateModifiedField.Value = value; }
 
-        public ApiPropertyString Campaigns => _campaigns ?? (_campaigns = new ApiPropertyString(this, "campaigns"));
-        private ApiPropertyString _campaigns;
-        public string CampaignsValue { get=> Campaigns.Value; set => Campaigns.Value = value; }
+        public ApiPropertyString CampaignsField => _campaignsField ?? (_campaignsField = new ApiPropertyString(this, CampaignsKey));
+        private ApiPropertyString _campaignsField;
+        public const string CampaignsKey = "campaigns";
+        public string Campaigns { get => CampaignsField.Value; set => CampaignsField.Value = value; }
 
-        public ApiProperty<int> UniqueFillouts => _uniqueFillouts ?? (_uniqueFillouts = new ApiProperty<int>(this, "unique_fillouts"));
-        private ApiProperty<int> _uniqueFillouts;
-        public int UniqueFilloutsValue { get=> UniqueFillouts.Value; set => UniqueFillouts.Value = value; }
+        public ApiProperty<int> UniqueFilloutsField => _uniqueFilloutsField ?? (_uniqueFilloutsField = new ApiProperty<int>(this, UniqueFilloutsKey));
+        private ApiProperty<int> _uniqueFilloutsField;
+        public const string UniqueFilloutsKey = "unique_fillouts";
+        public int? UniqueFillouts { get => UniqueFilloutsField.Value; set => UniqueFilloutsField.Value = value; }
 
-        public ApiProperty<decimal> Revenue => _revenue ?? (_revenue = new ApiProperty<decimal>(this, "revenue"));
-        private ApiProperty<decimal> _revenue;
-        public decimal RevenueValue { get=> Revenue.Value; set => Revenue.Value = value; }
+        public ApiProperty<decimal> RevenueField => _revenueField ?? (_revenueField = new ApiProperty<decimal>(this, RevenueKey));
+        private ApiProperty<decimal> _revenueField;
+        public const string RevenueKey = "revenue";
+        public decimal? Revenue { get => RevenueField.Value; set => RevenueField.Value = value; }
 
-        public ApiPropertyBool SkipBackgroundAutomation => _skipBackgroundAutomation ?? (_skipBackgroundAutomation = new ApiPropertyBool(this, "skip_bg_automation"));
-        private ApiPropertyBool _skipBackgroundAutomation;
-        public bool SkipBackgroundAutomationValue { get=> SkipBackgroundAutomation.Value; set => SkipBackgroundAutomation.Value = value; }
+        public ApiPropertyBool SkipBackgroundAutomationField => _skipBackgroundAutomationField ?? (_skipBackgroundAutomationField = new ApiPropertyBool(this, SkipBackgroundAutomationKey));
+        private ApiPropertyBool _skipBackgroundAutomationField;
+        public const string SkipBackgroundAutomationKey = "skip_bg_automation";
+        public bool? SkipBackgroundAutomation { get => SkipBackgroundAutomationField.Value; set => SkipBackgroundAutomationField.Value = value; }
 
-        public ApiProperty<int> RuleHash => _ruleHash ?? (_ruleHash = new ApiProperty<int>(this, "rule_hash"));
-        private ApiProperty<int> _ruleHash;
-        public int RuleHashValue { get=> RuleHash.Value; set => RuleHash.Value = value; }
+        public ApiProperty<int> RuleHashField => _ruleHashField ?? (_ruleHashField = new ApiProperty<int>(this, RuleHashKey));
+        private ApiProperty<int> _ruleHashField;
+        public const string RuleHashKey = "rule_hash";
+        public int? RuleHash { get => RuleHashField.Value; set => RuleHashField.Value = value; }
 
 
 

@@ -11,62 +11,68 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the campaign name.
         /// </summary>
-        public ApiPropertyString Name => _name ?? (_name = new ApiPropertyString(this, "name"));
-        private ApiPropertyString _name;
+        public ApiPropertyString NameField => _nameField ?? (_nameField = new ApiPropertyString(this, NameKey));
+        private ApiPropertyString _nameField;
+        public const string NameKey = "name";
         /// <summary>
         /// Gets or sets the campaign name.
         /// </summary>
-        public string NameValue { get => Name.Value; set => Name.Value = value; }
+        public string Name { get => NameField.Value; set => NameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date the campaign was created.
         /// </summary>
-        public ApiPropertyDateTime DateCreated => _date ?? (_date = new ApiPropertyDateTime(this, "date"));
-        private ApiPropertyDateTime _date;
+        public ApiPropertyDateTime DateCreatedField => _dateField ?? (_dateField = new ApiPropertyDateTime(this, DateCreatedKey));
+        private ApiPropertyDateTime _dateField;
+        public const string DateCreatedKey = "date";
         /// <summary>
         /// Returns a ApiProperty object to get or set the date the campaign was created.
         /// </summary>
-        public DateTimeOffset DateCreatedValue { get => DateCreated.Value; set => DateCreated.Value = value; }
+        public DateTimeOffset? DateCreated { get => DateCreatedField.Value; set => DateCreatedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date the campaign was last modified.
         /// </summary>
-        public ApiPropertyDateTime DateLastModified => _dateLastModified ?? (_dateLastModified = new ApiPropertyDateTime(this, "dlm"));
-        private ApiPropertyDateTime _dateLastModified;
+        public ApiPropertyDateTime DateLastModifiedField => _dateLastModifiedField ?? (_dateLastModifiedField = new ApiPropertyDateTime(this, DateLastModifiedKey));
+        private ApiPropertyDateTime _dateLastModifiedField;
+        public const string DateLastModifiedKey = "dlm";
         /// <summary>
         /// Returns a ApiProperty object to get or set the date the campaign was last modified.
         /// </summary>
-        public DateTimeOffset DateLastModifiedValue { get => DateLastModified.Value; set => DateLastModified.Value = value; }
+        public DateTimeOffset? DateLastModified { get => DateLastModifiedField.Value; set => DateLastModifiedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the object type the campaign relates to.
         /// </summary>
-        public ApiProperty<int> ObjectTypeId => _objectTypeId ?? (_objectTypeId = new ApiProperty<int>(this, "object_type_id"));
-        private ApiProperty<int> _objectTypeId;
+        public ApiProperty<int> ObjectTypeIdField => _objectTypeIdField ?? (_objectTypeIdField = new ApiProperty<int>(this, ObjectTypeIdKey));
+        private ApiProperty<int> _objectTypeIdField;
+        public const string ObjectTypeIdKey = "object_type_id";
         /// <summary>
         /// Gets or sets the ID of the object type the campaign relates to.
         /// </summary>
-        public int ObjectTypeIdValue { get => ObjectTypeId.Value; set => ObjectTypeId.Value = value; }
+        public int? ObjectTypeId { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the campaign is paused.
         /// </summary>
-        public ApiPropertyIntBool Pause => _pause ?? (_pause = new ApiPropertyIntBool(this, "pause"));
-        private ApiPropertyIntBool _pause;
+        public ApiPropertyIntBool PauseField => _pauseField ?? (_pauseField = new ApiPropertyIntBool(this, PauseKey));
+        private ApiPropertyIntBool _pauseField;
+        public const string PauseKey = "pause";
         /// <summary>
         /// Gets or sets whether or not the campaign is paused.
         /// </summary>
-        public bool PauseValue { get => Pause.Value; set => Pause.Value = value; }
+        public bool? Pause { get => PauseField.Value; set => PauseField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the campaign has been deleted.
         /// </summary>
-        public ApiPropertyBool Deleted => _deleted ?? (_deleted = new ApiPropertyBool(this, "deleted"));
-        private ApiPropertyBool _deleted;
+        public ApiPropertyBool DeletedField => _deletedField ?? (_deletedField = new ApiPropertyBool(this, DeletedKey));
+        private ApiPropertyBool _deletedField;
+        public const string DeletedKey = "deleted";
         /// <summary>
         /// Gets or sets whether or not the campaign has been deleted.
         /// </summary>
-        public bool DeletedValue { get => Deleted.Value; set => Deleted.Value = value; }
+        public bool? Deleted { get => DeletedField.Value; set => DeletedField.Value = value; }
 
     }
 }

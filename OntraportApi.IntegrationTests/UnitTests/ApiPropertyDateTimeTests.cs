@@ -51,7 +51,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 
             var result = prop.Value;
 
-            Assert.True(Math.Abs((expected.UtcDateTime - result.UtcDateTime).TotalSeconds) < 1);
+            Assert.True(Math.Abs((expected.UtcDateTime - result.Value.UtcDateTime).TotalSeconds) < 1);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var prop = SetupProperty();
 
-            var result = prop.NullableValue;
+            var result = prop.Value;
 
             Assert.Null(result);
         }
@@ -70,7 +70,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             var prop = SetupProperty();
             Set(null);
 
-            var result = prop.NullableValue;
+            var result = prop.Value;
 
             Assert.Null(result);
         }
@@ -82,7 +82,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             var prop = SetupProperty();
             Set(value);
 
-            var result = prop.NullableValue;
+            var result = prop.Value;
 
             Assert.True(Math.Abs((expected.UtcDateTime - result.Value.UtcDateTime).TotalSeconds) < 1);
         }
@@ -93,7 +93,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var prop = SetupProperty();
 
-            prop.NullableValue = value;
+            prop.Value = value;
 
             Assert.Equal(expected, prop.RawValue);
         }
@@ -158,7 +158,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             var prop = SetupProperty();
             Set("0");
 
-            var result = prop.NullableValue;
+            var result = prop.Value;
 
             Assert.Null(result);
         }
@@ -168,7 +168,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var prop = SetupProperty();
 
-            prop.NullableValue = null;
+            prop.Value = null;
 
             Assert.Equal("0", _host.Data[_key]);
         }

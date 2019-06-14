@@ -10,61 +10,74 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the deal's name.
         /// </summary>
-        public ApiPropertyString Name => _name ?? (_name = new ApiPropertyString(this, "name"));
-        private ApiPropertyString _name;
+        public ApiPropertyString NameField => _nameField ?? (_nameField = new ApiPropertyString(this, NameKey));
+        private ApiPropertyString _nameField;
+        public const string NameKey = "name";
         /// <summary>
         /// Gets or sets the deal's name.
         /// </summary>
-        public string NameValue { get => Name.Value; set => Name.Value = value; }
+        public string Name { get => NameField.Value; set => NameField.Value = value; }
 
-        public ApiProperty<decimal> Value => _value ?? (_value = new ApiProperty<decimal>(this, "value"));
-        private ApiProperty<decimal> _value;
-        public decimal ValueValue { get => Value.Value; set => Value.Value = value; }
+        public ApiProperty<decimal> ValueField => _valueField ?? (_valueField = new ApiProperty<decimal>(this, ValueKey));
+        private ApiProperty<decimal> _valueField;
+        public const string ValueKey = "value";
+        public decimal? Value { get => ValueField.Value; set => ValueField.Value = value; }
 
-        public ApiPropertyDateTime ExpectedCloseDate => _expectedCloseDate ?? (_expectedCloseDate = new ApiPropertyDateTime(this, "expected_close_date"));
-        private ApiPropertyDateTime _expectedCloseDate;
-        public DateTimeOffset ExpectedCloseDateValue { get => ExpectedCloseDate.Value; set => ExpectedCloseDate.Value = value; }
+        public ApiPropertyDateTime ExpectedCloseDateField => _expectedCloseDateField ?? (_expectedCloseDateField = new ApiPropertyDateTime(this, ExpectedCloseDateKey));
+        private ApiPropertyDateTime _expectedCloseDateField;
+        public const string ExpectedCloseDateKey = "expected_close_date";
+        public DateTimeOffset? ExpectedCloseDate { get => ExpectedCloseDateField.Value; set => ExpectedCloseDateField.Value = value; }
 
-        public ApiProperty<int> ExpectedWinPercent => _expectedWinPercent ?? (_expectedWinPercent = new ApiProperty<int>(this, "expected_win_percent"));
-        private ApiProperty<int> _expectedWinPercent;
-        public int ExpectedWinPercentValue { get => ExpectedWinPercent.Value; set => ExpectedWinPercent.Value = value; }
+        public ApiProperty<int> ExpectedWinPercentField => _expectedWinPercentField ?? (_expectedWinPercentField = new ApiProperty<int>(this, ExpectedWinPercentKey));
+        private ApiProperty<int> _expectedWinPercentField;
+        public const string ExpectedWinPercentKey = "expected_win_percent";
+        public int? ExpectedWinPercent { get => ExpectedWinPercentField.Value; set => ExpectedWinPercentField.Value = value; }
 
-        public ApiProperty<int> Calc => _calc ?? (_calc = new ApiProperty<int>(this, "calc"));
-        private ApiProperty<int> _calc;
-        public int CalcValue { get => Calc.Value; set => Calc.Value = value; }
+        public ApiProperty<int> CalcField => _calcField ?? (_calcField = new ApiProperty<int>(this, CalcKey));
+        private ApiProperty<int> _calcField;
+        public const string CalcKey = "calc";
+        public int? Calc { get => CalcField.Value; set => CalcField.Value = value; }
 
-        public ApiProperty<int> PrimaryContact => _primaryContact ?? (_primaryContact = new ApiProperty<int>(this, "primary_contact"));
-        private ApiProperty<int> _primaryContact;
-        public int PrimaryContactValue { get => PrimaryContact.Value; set => PrimaryContact.Value = value; }
+        public ApiProperty<int> PrimaryContactField => _primaryContactField ?? (_primaryContactField = new ApiProperty<int>(this, PrimaryContactKey));
+        private ApiProperty<int> _primaryContactField;
+        public const string PrimaryContactKey = "primary_contact";
+        public int? PrimaryContact { get => PrimaryContactField.Value; set => PrimaryContactField.Value = value; }
 
-        public ApiProperty<int> Company => _company ?? (_company = new ApiProperty<int>(this, "company"));
-        private ApiProperty<int> _company;
-        public int CompanyValue { get => Company.Value; set => Company.Value = value; }
+        public ApiProperty<int> CompanyField => _companyField ?? (_companyField = new ApiProperty<int>(this, CompanyKey));
+        private ApiProperty<int> _companyField;
+        public const string CompanyKey = "company";
+        public int? Company { get => CompanyField.Value; set => CompanyField.Value = value; }
 
-        public ApiProperty<decimal> WeightedValue => _weightedValue ?? (_weightedValue = new ApiProperty<decimal>(this, "weighted_value"));
-        private ApiProperty<decimal> _weightedValue;
-        public decimal WeightedValueValue { get => WeightedValue.Value; set => WeightedValue.Value = value; }
+        public ApiProperty<decimal> WeightedValueField => _weightedValueField ?? (_weightedValueField = new ApiProperty<decimal>(this, WeightedValueKey));
+        private ApiProperty<decimal> _weightedValueField;
+        public const string WeightedValueKey = "weighted_value";
+        public decimal? WeightedValue { get => WeightedValueField.Value; set => WeightedValueField.Value = value; }
 
-        public ApiProperty<SaleStatus> SaleStage => _saleStage ?? (_saleStage = new ApiPropertyIntEnum<SaleStatus>(this, "sales_stage"));
-        private ApiProperty<SaleStatus> _saleStage;
-        public SaleStatus SaleStageValue { get => SaleStage.Value; set => SaleStage.Value = value; }
+        public ApiProperty<SaleStatus> SaleStageField => _saleStageField ?? (_saleStageField = new ApiPropertyIntEnum<SaleStatus>(this, SaleStageKey));
+        private ApiProperty<SaleStatus> _saleStageField;
+        public const string SaleStageKey = "sales_stage";
+        public SaleStatus? SaleStage { get => SaleStageField.Value; set => SaleStageField.Value = value; }
 
-        public ApiPropertyDateTime ActualCloseDate => _actualCloseDate ?? (_actualCloseDate = new ApiPropertyDateTime(this, "actual_close_date"));
-        private ApiPropertyDateTime _actualCloseDate;
-        public DateTimeOffset ActualCloseDateValue { get => ActualCloseDate.Value; set => ActualCloseDate.Value = value; }
+        public ApiPropertyDateTime ActualCloseDateField => _actualCloseDateField ?? (_actualCloseDateField = new ApiPropertyDateTime(this, ActualCloseDateKey));
+        private ApiPropertyDateTime _actualCloseDateField;
+        public const string ActualCloseDateKey = "actual_close_date";
+        public DateTimeOffset? ActualCloseDate { get => ActualCloseDateField.Value; set => ActualCloseDateField.Value = value; }
 
         // This is an enum.
-        public ApiPropertyString ExpectedCloseTimeFrame => _expectedCloseTimeFrame ?? (_expectedCloseTimeFrame = new ApiPropertyString(this, "expected_close_timeframe"));
-        private ApiPropertyString _expectedCloseTimeFrame;
-        public string ExpectedCloseTimeFrameValue { get => ExpectedCloseTimeFrame.Value; set => ExpectedCloseTimeFrame.Value = value; }
+        public ApiPropertyString ExpectedCloseTimeFrameField => _expectedCloseTimeFrameField ?? (_expectedCloseTimeFrameField = new ApiPropertyString(this, ExpectedCloseTimeFrameKey));
+        private ApiPropertyString _expectedCloseTimeFrameField;
+        public const string ExpectedCloseTimeFrameKey = "expected_close_timeframe";
+        public string ExpectedCloseTimeFrame { get => ExpectedCloseTimeFrameField.Value; set => ExpectedCloseTimeFrameField.Value = value; }
 
-        public ApiProperty<DealSizeEnum> DealSize => _dealSize ?? (_dealSize = new ApiPropertyIntEnum<DealSizeEnum>(this, "deal_size"));
-        private ApiProperty<DealSizeEnum> _dealSize;
-        public DealSizeEnum DealSizeValue { get => DealSize.Value; set => DealSize.Value = value; }
+        public ApiProperty<DealSizeEnum> DealSizeField => _dealSizeField ?? (_dealSizeField = new ApiPropertyIntEnum<DealSizeEnum>(this, DealSizeKey));
+        private ApiProperty<DealSizeEnum> _dealSizeField;
+        public const string DealSizeKey = "deal_size";
+        public DealSizeEnum? DealSize { get => DealSizeField.Value; set => DealSizeField.Value = value; }
 
-        public ApiPropertyDateTime RecentActivity => _recentActivity ?? (_recentActivity = new ApiPropertyDateTime(this, "recent_activity"));
-        private ApiPropertyDateTime _recentActivity;
-        public DateTimeOffset RecentActivityValue { get => RecentActivity.Value; set => RecentActivity.Value = value; }
+        public ApiPropertyDateTime RecentActivityField => _recentActivityField ?? (_recentActivityField = new ApiPropertyDateTime(this, RecentActivityKey));
+        private ApiPropertyDateTime _recentActivityField;
+        public const string RecentActivityKey = "recent_activity";
+        public DateTimeOffset? RecentActivity { get => RecentActivityField.Value; set => RecentActivityField.Value = value; }
 
 
 

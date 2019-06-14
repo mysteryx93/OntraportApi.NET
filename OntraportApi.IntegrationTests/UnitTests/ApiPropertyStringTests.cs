@@ -43,7 +43,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var prop = SetupProperty();
 
-            var result = prop.NullableValue;
+            var result = prop.Value;
 
             Assert.Null(result);
         }
@@ -57,7 +57,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             var prop = SetupProperty();
             Set(value);
 
-            var result = prop.NullableValue;
+            var result = prop.Value;
 
             Assert.Equal(value, result);
         }
@@ -70,7 +70,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var prop = SetupProperty();
 
-            prop.NullableValue = value;
+            prop.Value = value;
 
             Assert.Equal(expected, prop.RawValue);
         }
