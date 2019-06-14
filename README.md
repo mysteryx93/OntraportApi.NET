@@ -229,6 +229,22 @@ public class OntraportRecordings : OntraportBaseCustomObject<ApiRecording>, IOnt
 services.AddTransient<IOntraportRecordings, OntraportRecordings>();
 ```
 
+## Unit Testing the Source Code
+
+DO NOT RUN TESTS ON YOUR LIVE ONTRAPORT ACCOUNT
+
+[Ask for a SandBox account here.](https://ontraport.com/tools/sandbox)
+
+We can't control the server environment and thus must run Integration Tests. Current integration tests are sufficient to show it's working, but more work could be done so they can run reliably and test more in-depth.
+
+To run Unit Tests, Ontraport API credentials must be set in your User Secret Manager. Open the command-line tool and navigate to the OntraportApi.IntegrationTests project directory.
+
+Use the following commands to set your keys to your sandbox account
+```
+dotnet user-secrets set OntraportAppId ""your-app-id-here""
+dotnet user-secrets set OntraportApiKey ""your-api-key-here""");
+```
+ 
 ## About The Author
 
 [Etienne Charland](https://www.spiritualselftransformation.com), known as the Emergence Guardian, helps starseeds reconnect with their soul power to accomplish the purpose 
