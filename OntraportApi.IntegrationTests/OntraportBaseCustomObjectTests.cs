@@ -34,9 +34,13 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectCustomFieldsAsync();
+            var result = await api.GetCustomFieldsAsync();
 
             Assert.NotNull(result);
+            foreach (var item in result.Fields)
+            {
+                Output.WriteLine($"{item.Key} {item.Value}");
+            }
         }
     }
 }

@@ -44,7 +44,7 @@ namespace EmergenceGuardian.OntraportApi
         /// Retrieves the custom fields data.
         /// </summary>
         /// <returns>A ResponseMetadata object.</returns>
-        public async Task<ResponseMetadata> SelectCustomFieldsAsync()
+        public async Task<ResponseMetadata> GetCustomFieldsAsync()
         {
             var query = new Dictionary<string, object>
             {

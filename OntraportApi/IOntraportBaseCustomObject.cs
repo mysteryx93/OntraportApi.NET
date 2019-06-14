@@ -20,6 +20,6 @@ namespace EmergenceGuardian.OntraportApi
         /// Retrieves the custom fields data.
         /// </summary>
         /// <returns>A ResponseMetadata object.</returns>
-        Task<ResponseMetadata> SelectCustomFieldsAsync();
+        Task<ResponseMetadata> GetCustomFieldsAsync();
     }
 }

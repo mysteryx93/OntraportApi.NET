@@ -10,8 +10,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
     {
         public OntraportCompaniesTests(ITestOutputHelper output) :
             base(output, 1, "abc")
-        {
-        }
+        { }
 
     }
 }
