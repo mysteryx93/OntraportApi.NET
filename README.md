@@ -156,15 +156,15 @@ public class ApiCustomContact : ApiContact
 Then, use *OntraportContacts\<ApiCustomContact\>* instead of *OntraportContacts*. That's it.
     
 Supprted ApiProperty types (and you can easily implement your own parser):
-- ApiProperty<int>
-- ApiProperty<decimal>
-- ApiProperty<float>
+- ApiProperty\<int\>
+- ApiProperty\<decimal\>
+- ApiProperty\<float\>
 - ApiPropertyString
 - ApiPropertyBool ("true", "false" parsed as Boolean)
 - ApiPropertyDateTime (Unix Epoch seconds date parsed as DateTimeOffset)
 - ApiPropertyIntBool ("1", "0", parsed as Boolean)
-- ApiPropertyIntEnum<T> (Numeric field parsed as enumeration of type T)
-- ApiPropertyStringEnum<T> (string parsed as enumeration of type T)
+- ApiPropertyIntEnum\<T\> (Numeric field parsed as enumeration of type T)
+- ApiPropertyStringEnum\<T\> (string parsed as enumeration of type T)
 - ApiPropertyTimeSpan (seconds parsed as Timespan)
 
 ## Adding Strongly-Typed Support for Custom Objects
