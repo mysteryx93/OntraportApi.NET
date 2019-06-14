@@ -155,7 +155,7 @@ public class ApiCustomContact : ApiContact
 
 Then, use *OntraportContacts\<ApiCustomContact\>* instead of *OntraportContacts*. That's it.
     
-Supprted ApiProperty objects:
+Supprted ApiProperty types (and you can easily implement your own parser):
 - ApiProperty<int>
 - ApiProperty<decimal>
 - ApiProperty<float>
