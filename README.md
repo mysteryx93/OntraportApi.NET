@@ -95,7 +95,7 @@ Each typed ApiObject has integrated changes-tracking support. You can return a d
 
 All data formatting and parsing, such as Unix Epoch date time format to DateTimeOffset, is done automatically.
 
-[Ontraport supports many other objects](https://api.ontraport.com/doc/#accessible-objects) which can be used via IOntraportObjects.
+[Ontraport supports many other (undocumented) objects](https://api.ontraport.com/doc/#accessible-objects) which can be used via IOntraportObjects.
 
 
 ## How to Configure in ASP.NET Core
