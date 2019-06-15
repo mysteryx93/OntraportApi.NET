@@ -121,6 +121,8 @@ Add this to appsettings.json
 }
 ```
 
+#### Adding Polly
+
 For better reliability of communication,  you can use [Polly](http://www.thepollyproject.org/) to automatically retry API requests on timeout or failure.
 
 Add *Polly* and *Microsoft.Extensions.Http.Polly* to your project via NuGet.
@@ -132,6 +134,10 @@ services.AddHttpClient<OntraportHttpClient>()
     .AddTransientHttpErrorPolicy(p =>
         p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(600)));
 ```
+
+#### Using a different version of .NET or a different IoC container?
+
+No problem, [this is the only class](https://github.com/mysteryx93/EmergenceGuardian.OntraportApi/blob/master/OntraportApi.AspNetCore/OntraportApiServiceCollectionExtensions.cs) that depends on .NET Core so you can easily rewrite it for whatever technology you use.
 
 
 ## Posting SmartForms
