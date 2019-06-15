@@ -101,27 +101,6 @@ All data formatting and parsing, such as Unix Epoch date time format to DateTime
 [Ontraport supports many other (undocumented) objects](https://api.ontraport.com/doc/#accessible-objects) which can be used via IOntraportObjects.
 
 
-## Posting SmartForms
-
-In many cases, a simpler way to send data to Ontraport is to simply submit a SmartForm. Then, you can perform additional actions in your form via Ontraport. You can obtain the form id and custom field names (that look like f0000) by clicking Publish and looking at the HTML view.
-
-Posting forms doesn't have any kind of security so it works in many cases but don't use this for important management data.
-
-To post forms, use *IOntraportPostForms*. It supports posting via the client's browser or via the server.
-
-You do not need an API key to submit forms. If you wish to only post forms without using the rest of the API, you can register it with *services.AddOntraportPostForms*
-
-```c#
-public void PostForm(string email, string firstName)
-{
-    _ontraPostForms.ServerPost("my-form-id", new ApiContact()
-    {
-        Email = email,
-        FirstName = firstName
-    }.GetChanges());
-}
-```
-
 ## How to Configure in ASP.NET Core
 
 Add *EmergenceGuardian.OntraportApi* and *EmergenceGuardian.OntraportApi.AspNetCore* to your project via NuGet.
@@ -153,6 +132,29 @@ services.AddHttpClient<OntraportHttpClient>()
     .AddTransientHttpErrorPolicy(p =>
         p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(600)));
 ```
+
+
+## Posting SmartForms
+
+In many cases, a simpler way to send data to Ontraport is to simply submit a SmartForm. Then, you can perform additional actions in your form via Ontraport. You can obtain the form id and custom field names (that look like f0000) by clicking Publish and looking at the HTML view.
+
+Posting forms doesn't have any kind of security so it works in many cases but don't use this for important management data.
+
+To post forms, use *IOntraportPostForms*. It supports posting via the client's browser or via the server.
+
+You do not need an API key to submit forms. If you wish to only post forms without using the rest of the API, you can register it with *services.AddOntraportPostForms*
+
+```c#
+public void PostForm(string email, string firstName)
+{
+    _ontraPostForms.ServerPost("my-form-id", new ApiContact()
+    {
+        Email = email,
+        FirstName = firstName
+    }.GetChanges());
+}
+```
+
 
 ## Adding Custom Fields
 
