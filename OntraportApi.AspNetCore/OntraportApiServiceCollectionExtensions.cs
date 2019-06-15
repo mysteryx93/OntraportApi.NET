@@ -43,5 +43,14 @@ namespace Microsoft.Extensions.DependencyInjection
 
             return services;
         }
+
+        public static IServiceCollection AddOntraportPostForms(this IServiceCollection services)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+
+            services.AddHttpClient<IOntraportPostForms, OntraportPostForms>();
+
+            return services;
+        }
     }
 }

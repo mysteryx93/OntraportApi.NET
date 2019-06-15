@@ -14,7 +14,7 @@ namespace EmergenceGuardian.OntraportApi
         /// </summary>
         /// <param name="formId">The Ontraport UID of the form.</param>
         /// <param name="formParams">The list of form data to send.</param>
-        void ServerPost(string formId, IDictionary<string, string> formParams);
+        void ServerPost(string formId, IDictionary<string, object> formParams);
 
         /// <summary>
         /// Posts an Ontraport form with specified data from the client.
@@ -23,6 +23,6 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="formId">The Ontraport UID of the form.</param>
         /// <param name="formParams">The list of form data to send.</param>
         /// <returns>The HTML page that performs the post and redirect.</returns>
-        string ClientPost(string formId, IDictionary<string, string> formParams);
+        string ClientPost(string formId, IDictionary<string, object> formParams);
     }
 }

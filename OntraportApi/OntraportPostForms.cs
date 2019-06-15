@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -26,11 +27,12 @@ namespace EmergenceGuardian.OntraportApi
         /// </summary>
         /// <param name="formId">The Ontraport UID of the form.</param>
         /// <param name="formParams">The list of form data to send.</param>
-        public async void ServerPost(string formId, IDictionary<string, string> formParams)
+        public async void ServerPost(string formId, IDictionary<string, object> formParams)
         {
-            formParams = formParams ?? new Dictionary<string, string>();
+            formParams = formParams ?? new Dictionary<string, object>();
             formParams.Add("uid", formId);
-            await _httpClient.PostAsync("", new FormUrlEncodedContent(formParams));
+            var formString = formParams.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString()));
+            await _httpClient.PostAsync("", new FormUrlEncodedContent(formString));
         }
 
         /// <summary>
@@ -40,9 +42,9 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="formId">The Ontraport UID of the form.</param>
         /// <param name="formParams">The list of form data to send.</param>
         /// <returns>The HTML page that performs the post and redirect.</returns>
-        public string ClientPost(string formId, IDictionary<string, string> formParams)
+        public string ClientPost(string formId, IDictionary<string, object> formParams)
         {
-            formParams = formParams ?? new Dictionary<string, string>();
+            formParams = formParams ?? new Dictionary<string, object>();
             formParams.Add("uid", formId);
 
             var response = new StringBuilder()
@@ -52,7 +54,7 @@ namespace EmergenceGuardian.OntraportApi
             foreach (var item in formParams)
             {
                 var key = WebUtility.HtmlEncode(item.Key);
-                var value = WebUtility.HtmlEncode(item.Value);
+                var value = WebUtility.HtmlEncode(item.Value.ToString());
                 response.AppendLine($"<input type=\"hidden\" name=\"{key}\" value=\"{value}\"/>");
             }
             response.AppendLine("</form>")
