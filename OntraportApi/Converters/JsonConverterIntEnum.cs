@@ -9,17 +9,10 @@ namespace EmergenceGuardian.OntraportApi.Converters
     public class JsonConverterIntEnum<T> : JsonConverterBase<T>
         where T : struct
     {
-        public override string NullString => "";
+        public override T? Parse(string value) =>
+            !IsNullValue(value) ? (T?)Enum.Parse(typeof(T), value) : (T?)null;
 
-        public override P Parse<P>(string value, string jsonPath = null)
-        {
-            if (!string.IsNullOrEmpty(value))
-            {
-                return (P)(object)Enum.Parse(typeof(T), value);
-            }
-            return CreateNull<P>(jsonPath);
-        }
-
-        public override object Format(T? value) => value != null ? (int)(object)value : (int?)null;
+        public override string Format(T? value) => 
+            value != null ? ((int)(object)value).ToString() : null;
     }
 }

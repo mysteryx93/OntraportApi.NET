@@ -1,6 +1,5 @@
 ﻿using System;
 using EmergenceGuardian.OntraportApi.Models;
-using Newtonsoft.Json.Serialization;
 
 namespace EmergenceGuardian.OntraportApi.Converters
 {

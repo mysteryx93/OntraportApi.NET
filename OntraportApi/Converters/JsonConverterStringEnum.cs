@@ -5,30 +5,28 @@ using EmergenceGuardian.OntraportApi.Models;
 namespace EmergenceGuardian.OntraportApi.Converters
 {
     /// <summary>
-    /// Converts a string field into an enumeration.
+    /// Converts a string field into an enumeration, using SnakeCase naming strategy by default.
     /// </summary>
     /// <typeparam name="T">The enumeration type.</typeparam>
     public class JsonConverterStringEnum<T> : JsonConverterBase<T>
         where T : struct
     {
-        private readonly NamingStrategy _namingStrategy = new SnakeCaseNamingStrategy();
+        private readonly NamingStrategy _namingStrategy;
 
-        public override string NullString => "";
+        public JsonConverterStringEnum() : this(null)
+        { }
 
-        public override P Parse<P>(string value, string jsonPath = null)
+        public JsonConverterStringEnum(NamingStrategy namingStrategy)
         {
-            if (!string.IsNullOrEmpty(value))
-            {
-                var result = value.Convert<P>();
-                if (result != null)
-                {
-                    return (P)(object)result;
-                }
-            }
-            return CreateNull<P>(jsonPath);
+            _namingStrategy = namingStrategy ?? new SnakeCaseNamingStrategy();
         }
 
-        public override object Format(T? value) => 
-            value != null ? _namingStrategy.GetPropertyName(value.ToString(), false) : null;
+        public override string NullString => null;
+
+        public override Nullable<T> Parse(string value) =>
+            !IsNullValue(value) ? value.Replace("_", "").Convert<T?>() : (T?)null;
+
+        public override string Format(T? value) => 
+            value != null ? _namingStrategy.GetPropertyName(value.ToStringInvariant(), false) : null;
     }
 }

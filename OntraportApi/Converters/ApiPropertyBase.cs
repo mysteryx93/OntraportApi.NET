@@ -13,7 +13,6 @@ namespace EmergenceGuardian.OntraportApi.Converters
     public abstract class ApiPropertyBase<T, N>
     {
         private readonly ApiObject _host;
-        private readonly string _nullString;
 
         public ApiPropertyBase() { }
 
@@ -22,11 +21,10 @@ namespace EmergenceGuardian.OntraportApi.Converters
         /// </summary>
         /// <param name="host">The ApiObject containing the data.</param>
         /// <param name="key">The field key represented by this property.</param>
-        public ApiPropertyBase(ApiObject host, string key, string nullString = null)
+        public ApiPropertyBase(ApiObject host, string key)
         {
             _host = host;
             Key = key;
-            _nullString = nullString;
         }
 
         /// <summary>
@@ -34,18 +32,20 @@ namespace EmergenceGuardian.OntraportApi.Converters
         /// </summary>
         public string Key { get; private set; }
 
-
         /// <summary>
         /// Gets whether the property contains a value.
         /// </summary>
-        public virtual bool HasValue
-        {
-            get
-            {
-                var value = RawValue;
-                return (value != null && value != _nullString);
-            }
-        }
+        public bool HasValue => !IsNullValue(RawValue);
+
+        /// <summary>
+        /// Return whether specific value is to be considered null.
+        /// </summary>
+        protected bool IsNullValue(string value) => value == null || value == NullString;
+
+        /// <summary>
+        /// Returns the string that represents a null value.
+        /// </summary>
+        public virtual string NullString => "";
 
         /// <summary>
         /// Gets whether the property key is in the dictionary.
@@ -53,20 +53,11 @@ namespace EmergenceGuardian.OntraportApi.Converters
         public bool HasKey => _host.Data.ContainsKey(Key);
 
         /// <summary>
-        /// Gets or sets the value of the property.
-        /// </summary>
-        //public T Value
-        //{
-        //    get => Get<T>();
-        //    set => Set(value);
-        //}
-
-        /// <summary>
         /// Gets or sets the nullable value of the property.
         /// </summary>
         public N Value
         {
-            get => Get<N>();
+            get => Parse(RawValue);
             set => Set(value);
         }
 
@@ -76,35 +67,30 @@ namespace EmergenceGuardian.OntraportApi.Converters
         public string RawValue => HasKey ? _host.Data[Key] : null;
 
         /// <summary>
-        /// Returns Value as a string representation, or null if value is not set.
+        /// Returns Value as a string representation, or "null" if value is not set.
         /// </summary>
+        /// <remarks>If it returned null, the debugger would display the full class name instead of "null" value.</remarks>
         public override string ToString() => HasValue ? Convert.ToString(Value, CultureInfo.InvariantCulture) : "null";
 
         /// <summary>
         /// Gets the value of the property parsed as specified type.
         /// </summary>
-        /// <typeparam name="P">The type in which to return the value.</typeparam>
         /// <returns>The parsed value.</returns>
         /// <exception cref="NullReferenceException">Value is null and P is non-nullable.</exception>
-        protected virtual P Get<P>()
-        {
-            var value = RawValue;
-            return value != null ? RawValue.Convert<P>() :
-                default(P) == null ? default(P) : throw new NullReferenceException();
-        }
+        protected virtual N Parse(string value) => !IsNullValue(value) ? value.Convert<N>() : default;
 
         /// <summary>
         /// Sets the value of the property and tracks changes.
         /// </summary>
         /// <param name="value">The value to set.</param>
-        protected void Set(object value)
+        protected void Set(N value)
         {
             if (!_host.EditedKeys.Contains(Key))
             {
                 _host.EditedKeys.Add(Key);
             }
-            value = FormatValue(value);
-            _host.Data[Key] = value != null ? Convert.ToString(value, CultureInfo.InvariantCulture) : null;
+            var conv = Format(value);
+            _host.Data[Key] = conv != null ? Convert.ToString(conv, CultureInfo.InvariantCulture) : NullString;
         }
 
         /// <summary>
@@ -112,7 +98,7 @@ namespace EmergenceGuardian.OntraportApi.Converters
         /// </summary>
         /// <param name="value">The value to format.</param>
         /// <returns>The formatted value.</returns>
-        public virtual object FormatValue(object value) => value;
+        public virtual string Format(N value) => value?.ToStringInvariant();
     }
 
 }

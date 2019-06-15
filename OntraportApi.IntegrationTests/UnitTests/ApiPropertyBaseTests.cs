@@ -1,60 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using EmergenceGuardian.OntraportApi.Converters;
 using EmergenceGuardian.OntraportApi.Models;
 using Xunit;
 
 namespace EmergenceGuardian.OntraportApi.IntegrationTests
 {
-    public class ApiPropertyIntBoolTests
+    public abstract class ApiPropertyBaseTests<P, T, N>
+        where P : ApiPropertyBase<T, N>
     {
         private readonly string _key = "key1";
         private readonly ApiObject _host = new ApiObject();
 
-        private ApiPropertyIntBool SetupProperty() => new ApiPropertyIntBool(_host, _key);
+        private P SetupProperty() => (P)Activator.CreateInstance(typeof(P), _host, _key);
 
         private void Set(string value) => _host.Data[_key] = value;
 
         [Fact]
-        public void Value_NotSet_ThrowsException()
-        {
-            var prop = SetupProperty();
-
-            void Act() => _ = prop.Value;
-
-            Assert.Throws<NullReferenceException>(Act);
-        }
-
-        [Fact]
-        public void Value_SetNull_ThrowsException()
-        {
-            var prop = SetupProperty();
-            Set(null);
-
-            void Act() => _ = prop.Value;
-
-            Assert.Throws<NullReferenceException>(Act);
-        }
-
-        [Theory]
-        [InlineData("0", false)]
-        [InlineData("1", true)]
-        [InlineData("-1", false)]
-        [InlineData("false", false)]
-        [InlineData("true", true)]
-        [InlineData("False", false)]
-        [InlineData("True", true)]
-        public void Value_Set_ReturnsExpectedValue(string value, bool expected)
-        {
-            var prop = SetupProperty();
-            Set(value);
-
-            var result = prop.Value;
-
-            Assert.Equal(expected, result);
-        }
-
-        [Fact]
-        public void NullableValue_NotSet_ReturnsNull()
+        public void Value_NotSet_ReturnsNull()
         {
             var prop = SetupProperty();
 
@@ -63,23 +26,36 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             Assert.Null(result);
         }
 
-        [Theory]
-        [InlineData(null, null)]
-        [InlineData("0", false)]
-        [InlineData("1", true)]
-        [InlineData("-1", false)]
-        [InlineData("false", false)]
-        [InlineData("true", true)]
-        [InlineData("False", false)]
-        [InlineData("True", true)]
-        public void NullableValue_Set_ReturnsExpectedValue(string value, bool? expectedValue)
+        [Fact]
+        public void Value_SetRawNull_ReturnsNull()
         {
             var prop = SetupProperty();
-            Set(value);
+            Set(null);
 
             var result = prop.Value;
 
-            Assert.Equal(expectedValue, result);
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void Value_SetRawEmpty_ReturnsNull()
+        {
+            var prop = SetupProperty();
+            Set(prop.NullString);
+
+            var result = prop.Value;
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void Value_SetNull_ReturnsRawEmpty()
+        {
+            var prop = SetupProperty();
+
+            prop.Value = default(N);
+
+            Assert.Equal(prop.NullString, _host.Data[_key]);
         }
 
         [Fact]
@@ -124,18 +100,15 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             Assert.False(result);
         }
 
-        [Theory]
-        [InlineData("0")]
-        [InlineData("1")]
-        [InlineData("-1")]
-        public void HasValue_Set_ReturnsTrue(string value)
+        [Fact]
+        public void HasValue_SetEmpty_ReturnsFalse()
         {
             var prop = SetupProperty();
-            Set(value);
+            Set(prop.NullString);
 
             var result = prop.HasValue;
 
-            Assert.True(result);
+            Assert.False(result);
         }
     }
 }

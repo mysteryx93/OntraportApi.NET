@@ -7,9 +7,7 @@ namespace EmergenceGuardian.OntraportApi.Converters
     /// </summary>
     public class JsonConverterBool : JsonConverterBase<bool>
     {
-        public override string NullString => "";
-
-        public override object Format(bool? value) => 
-            value.HasValue ? (value == true ? "true" : "false") : null;
+        public override string Format(bool? value) => 
+            value.HasValue ? (value == true ? "true" : "false") : "";
     }
 }

@@ -20,22 +20,21 @@ namespace EmergenceGuardian.OntraportApi.Converters
 
         public override string NullString => "0";
 
-        public override P Parse<P>(string value, string jsonPath = null)
+        public override DateTimeOffset? Parse(string value)
         {
-            var valueLong = value.Convert<long?>();
-            if (valueLong.HasValue && valueLong > 0)
+            if (!IsNullValue(value))
             {
-                return (P)(object)
-                    (Milliseconds ? 
-                    DateTimeOffset.FromUnixTimeMilliseconds(valueLong.Value) : 
-                    DateTimeOffset.FromUnixTimeSeconds(valueLong.Value));
+                var valueLong = value.Convert<long>();
+                return Milliseconds ?
+                    DateTimeOffset.FromUnixTimeMilliseconds(valueLong) :
+                    DateTimeOffset.FromUnixTimeSeconds(valueLong);
             }
-            return CreateNull<P>(jsonPath);
+            return null;
         }
 
-        public override object Format(DateTimeOffset? value) => 
+        public override string Format(DateTimeOffset? value) => 
             value != null ? Milliseconds ?
-                ((DateTimeOffset)value).ToUnixTimeMilliseconds() :
-                ((DateTimeOffset)value).ToUnixTimeSeconds() : 0;
+                ((DateTimeOffset)value).ToUnixTimeMilliseconds().ToString() :
+                ((DateTimeOffset)value).ToUnixTimeSeconds().ToString() : "0";
     }
 }

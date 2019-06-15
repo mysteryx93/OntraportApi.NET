@@ -17,5 +17,6 @@ namespace EmergenceGuardian.OntraportApi.Converters
             base(host, key)
         { }
 
+        public override string NullString => null;
     }
 }

@@ -9,9 +9,7 @@ namespace EmergenceGuardian.OntraportApi.Converters
     /// </summary>
     public class JsonConverterIntBool : JsonConverterBase<bool>
     {
-        public override string NullString => "";
-
-        public override P Parse<P>(string value, string jsonPath = null)
+        public override bool? Parse(string value)
         {
             // Different forms may use either a binary integer or boolean value for deleted field.
             int? valueInt = null;
@@ -23,18 +21,14 @@ namespace EmergenceGuardian.OntraportApi.Converters
             {
                 valueInt = 0;
             }
-            else if (!string.IsNullOrEmpty(value))
+            else if (!IsNullValue(value))
             {
                 valueInt = value.Convert<int?>();
             }
-
-            if (valueInt.HasValue)
-            {
-                return (P)(object)(valueInt == 1);
-            }
-            return CreateNull<P>(jsonPath);
+            return valueInt.HasValue ? valueInt == 1 : (bool?)null;
         }
 
-        public override object Format(bool? value) => value.HasValue ? (value == true ? 1 : 0) : (object)null;
+        public override string Format(bool? value) => 
+            value.HasValue ? (value == true ? "1" : "0") : "";
     }
 }
