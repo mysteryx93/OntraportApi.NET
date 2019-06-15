@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace EmergenceGuardian.OntraportApi.IntegrationTests
 {
-    public class OntraportContactsTests : OntraportBaseCustomObjectTests<OntraportContacts, ApiContact>
+    public class OntraportContactsTests : OntraportBaseCustomObjectTests<OntraportContacts<ApiContact>, ApiContact>
     {
         public OntraportContactsTests(ITestOutputHelper output) :
             base(output, 19, "a@test.com")

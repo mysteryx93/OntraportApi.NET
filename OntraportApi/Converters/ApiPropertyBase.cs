@@ -89,7 +89,7 @@ namespace EmergenceGuardian.OntraportApi.Converters
         protected virtual P Get<P>()
         {
             var value = RawValue;
-            return value != null ? Parse<P>() :
+            return value != null ? RawValue.Convert<P>() :
                 default(P) == null ? default(P) : throw new NullReferenceException();
         }
 
@@ -113,13 +113,6 @@ namespace EmergenceGuardian.OntraportApi.Converters
         /// <param name="value">The value to format.</param>
         /// <returns>The formatted value.</returns>
         public virtual object FormatValue(object value) => value;
-
-        /// <summary>
-        /// Parses the property value into specified type.
-        /// </summary>
-        /// <typeparam name="P">The data type to convert the value to.</typeparam>
-        /// <returns>The converted value.</returns>
-        protected P Parse<P>() => (P)TypeDescriptor.GetConverter(typeof(P)).ConvertFromString(null, CultureInfo.InvariantCulture, RawValue);
     }
 
 }

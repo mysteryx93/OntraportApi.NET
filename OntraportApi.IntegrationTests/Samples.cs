@@ -9,14 +9,14 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 {
     public class Samples
     {
-        private readonly IOntraportContacts _ontraContacts;
+        private readonly IOntraportContacts<ApiContact> _ontraContacts;
         private readonly IOntraportProducts _ontraProducts;
         private readonly IOntraportTransactions _ontraTransactions;
 
         public Samples()
         {
             var httpClient = new ConfigHelper().GetHttpClient();
-            _ontraContacts = new OntraportContacts(httpClient);
+            _ontraContacts = new OntraportContacts<ApiContact>(httpClient);
             _ontraProducts = new OntraportProducts(httpClient);
             _ontraTransactions = new OntraportTransactions(httpClient);
         }

@@ -6,7 +6,7 @@ using Xunit.Abstractions;
 
 namespace EmergenceGuardian.OntraportApi.IntegrationTests
 {
-    public class OntraportCompaniesTests : OntraportBaseCustomObjectTests<OntraportCompanies, ApiCompany>
+    public class OntraportCompaniesTests : OntraportBaseCustomObjectTests<OntraportCompanies<ApiCompany>, ApiCompany>
     {
         public OntraportCompaniesTests(ITestOutputHelper output) :
             base(output, 1, "abc")

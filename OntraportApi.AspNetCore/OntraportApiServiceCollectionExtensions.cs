@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using EmergenceGuardian.OntraportApi;
+using EmergenceGuardian.OntraportApi.Models;
 using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace - MS guidelines say put DI registration in this NS
@@ -21,14 +22,14 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddHttpClient<IOntraportPostForms, OntraportPostForms>();
 
             services.TryAddTransient<IOntraportCampaignBuilderItems, OntraportCampaignBuilderItems>();
-            services.TryAddTransient<IOntraportCompanies, OntraportCompanies>();
-            services.TryAddTransient<IOntraportContacts, OntraportContacts>();
+            services.TryAddTransient<IOntraportCompanies<ApiCompany>, OntraportCompanies<ApiCompany>>();
+            services.TryAddTransient<IOntraportContacts<ApiContact>, OntraportContacts<ApiContact>>();
             services.TryAddTransient<IOntraportCoupons, OntraportCoupons>();
             services.TryAddTransient<IOntraportCouponCodes, OntraportCouponCodes>();
             services.TryAddTransient<IOntraportCouponProducts, OntraportCouponProducts>();
             services.TryAddTransient<IOntraportCreditCards, OntraportCreditCards>();
             services.TryAddTransient<IOntraportCustomObjects, OntraportCustomObjects>();
-            services.TryAddTransient<IOntraportDeals, OntraportDeals>();
+            services.TryAddTransient<IOntraportDeals<ApiDeal>, OntraportDeals<ApiDeal>>();
             services.TryAddTransient<IOntraportForms, OntraportForms>();
             services.TryAddTransient<IOntraportLandingPages, OntraportLandingPages>();
             services.TryAddTransient<IOntraportMessages, OntraportMessages>();
