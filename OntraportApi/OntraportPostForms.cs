@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using EmergenceGuardian.OntraportApi.Models;
 
 namespace EmergenceGuardian.OntraportApi
 {
@@ -31,7 +32,7 @@ namespace EmergenceGuardian.OntraportApi
         {
             formParams = formParams ?? new Dictionary<string, object>();
             formParams.Add("uid", formId);
-            var formString = formParams.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString()));
+            var formString = formParams.Select(x => new KeyValuePair<string, string>(x.Key, x.Value?.ToStringInvariant()));
             await _httpClient.PostAsync("", new FormUrlEncodedContent(formString));
         }
 
