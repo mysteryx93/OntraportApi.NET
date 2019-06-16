@@ -121,6 +121,8 @@ Add this to appsettings.json
 }
 ```
 
+#### Adding Polly
+
 For better reliability of communication,  you can use [Polly](http://www.thepollyproject.org/) to automatically retry API requests on timeout or failure.
 
 Add *Polly* and *Microsoft.Extensions.Http.Polly* to your project via NuGet.
@@ -132,6 +134,10 @@ services.AddHttpClient<OntraportHttpClient>()
     .AddTransientHttpErrorPolicy(p =>
         p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(600)));
 ```
+
+#### Using a different version of .NET or a different IoC container?
+
+No problem, [this is the only class](https://github.com/mysteryx93/EmergenceGuardian.OntraportApi/blob/master/OntraportApi.AspNetCore/OntraportApiServiceCollectionExtensions.cs) that depends on .NET Core so you can easily rewrite it for whatever technology you use.
 
 
 ## Posting SmartForms
@@ -188,6 +194,11 @@ public class OntraportContacts : OntraportContacts\<ApiCustomContact\>, IOntrapo
 public interface IOntraportContacts : IOntraportContacts\<ApiCustomContact\>
 { }
 ```
+
+Don't forget to register your new class in Startup.cs
+```c#
+services.AddTransient<IOntraportContacts, OntraportContacts>();
+```
     
 Supprted ApiProperty types (and you can easily implement your own parser):
 - ApiProperty\<int\>
@@ -215,7 +226,7 @@ To add strongly-typed support for a custom object:
 public class OntraportRecordings : OntraportBaseCustomObject<ApiCustomObjectBase>
 {
     public OntraportRecordings(OntraportHttpClient apiRequest) :
-        base(apiRequest, "Recording", "Recordings", "name")
+        base(apiRequest, "Recording", "Recordings", ObjectTypeId, "name")
     { }
     
     public static int ObjectTypeId = 10000;
