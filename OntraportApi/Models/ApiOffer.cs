@@ -52,5 +52,10 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// </summary>
         public string Content { get => ContentField.Value; set => ContentField.Value = value; }
 
+        public ApiProperty<int> ReferencedField => _referencedField ?? (_referencedField = new ApiProperty<int>(this, ReferencedKey));
+        private ApiProperty<int> _referencedField;
+        public const string ReferencedKey = "referenced";
+        public int? Referenced { get => ReferencedField.Value; set => ReferencedField.Value = value; }
+
     }
 }

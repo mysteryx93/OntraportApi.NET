@@ -17,7 +17,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the user who has control of the task.
         /// </summary>
-        public int? OwnerValue { get => OwnerField.Value; set => OwnerField.Value = value; }
+        public int? Owner { get => OwnerField.Value; set => OwnerField.Value = value; }
 
         /// <summary>
         /// If the task is a step in a sequence, returns a ApiProperty object to get or set the ID of that sequence.
@@ -28,7 +28,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the task is a step in a sequence, gets or sets the ID of that sequence.
         /// </summary>
-        public int? DripIdValue { get => DripIdField.Value; set => DripIdField.Value = value; }
+        public int? DripId { get => DripIdField.Value; set => DripIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the contact the task is related to.
@@ -39,7 +39,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the ID of the contact the task is related to.
         /// </summary>
-        public int? ContactIdValue { get => ContactIdField.Value; set => ContactIdField.Value = value; }
+        public int? ContactId { get => ContactIdField.Value; set => ContactIdField.Value = value; }
 
         /// <summary>
         /// If the task is a step in a sequence, returns a ApiProperty object to get or set the order in the sequence of that step.
@@ -50,7 +50,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the task is a step in a sequence, gets or sets the order in the sequence of that step.
         /// </summary>
-        public int? StepNumValue { get => StepNumField.Value; set => StepNumField.Value = value; }
+        public int? StepNum { get => StepNumField.Value; set => StepNumField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the product's name.
@@ -61,7 +61,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the product's name.
         /// </summary>
-        public string SubjectValue { get => SubjectField.Value; set => SubjectField.Value = value; }
+        public string Subject { get => SubjectField.Value; set => SubjectField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date and time the task was assigned.
@@ -72,7 +72,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the date and time the task was assigned.
         /// </summary>
-        public DateTimeOffset? DateAssignedValue { get => DateAssignedField.Value; set => DateAssignedField.Value = value; }
+        public DateTimeOffset? DateAssigned { get => DateAssignedField.Value; set => DateAssignedField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date and time the task should be completed by.
@@ -83,7 +83,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the date and time the task should be completed by.
         /// </summary>
-        public DateTimeOffset? DateDueValue { get => DateDueField.Value; set => DateDueField.Value = value; }
+        public DateTimeOffset? DateDue { get => DateDueField.Value; set => DateDueField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date and time the task was marked as completed.
@@ -94,7 +94,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the date and time the task was marked as completed.
         /// </summary>
-        public DateTimeOffset? DateCompleteValue { get => DateCompleteField.Value; set => DateCompleteField.Value = value; }
+        public DateTimeOffset? DateComplete { get => DateCompleteField.Value; set => DateCompleteField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the task completion status.
@@ -105,7 +105,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the task completion status.
         /// </summary>
-        public TaskStatus? StatusValue { get => StatusField.Value; set => StatusField.Value = value; }
+        public TaskStatus? Status { get => StatusField.Value; set => StatusField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the task type.
@@ -116,7 +116,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the task type.
         /// </summary>
-        public TaskStatus? TypeValue { get => TypeField.Value; set => TypeField.Value = value; }
+        public TaskStatus? Type { get => TypeField.Value; set => TypeField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the content of the task message.
@@ -127,7 +127,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the content of the task message.
         /// </summary>
-        public string DetailsValue { get => DetailsField.Value; set => DetailsField.Value = value; }
+        public string Details { get => DetailsField.Value; set => DetailsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the task is accessible.
@@ -138,7 +138,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets whether or not the task is accessible.
         /// </summary>
-        public bool? HiddenValue { get => HiddenField.Value; set => HiddenField.Value = value; }
+        public bool? Hidden { get => HiddenField.Value; set => HiddenField.Value = value; }
 
         /// <summary>
         /// If the task has an outcome, returns a ApiProperty object to get or set the ID of that outcome. Task outcomes are user-defined and stored as a related object.
@@ -149,7 +149,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the task has an outcome, gets or sets the ID of that outcome. Task outcomes are user-defined and stored as a related object.
         /// </summary>
-        public int? CallOutcomeIdValue { get => CallOutcomeIdField.Value; set => CallOutcomeIdField.Value = value; }
+        public int? CallOutcomeId { get => CallOutcomeIdField.Value; set => CallOutcomeIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the task message. The task message is the generic template the task was created from.
@@ -160,7 +160,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the ID of the task message. The task message is the generic template the task was created from.
         /// </summary>
-        public int? TaskTemplateIdValue { get => TaskTemplateIdField.Value; set => TaskTemplateIdField.Value = value; }
+        public int? TaskTemplateId { get => TaskTemplateIdField.Value; set => TaskTemplateIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set a JSON encoded string including information about sent notifications.
@@ -171,7 +171,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets a JSON encoded string including information about sent notifications.
         /// </summary>
-        public string NotificationsValue { get => NotificationsField.Value; set => NotificationsField.Value = value; }
+        public string Notifications { get => NotificationsField.Value; set => NotificationsField.Value = value; }
 
         /// <summary>
         /// If the task has rules associated with it, returns a ApiProperty object to get or set the events, conditions and actions of those rules.
@@ -182,7 +182,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// If the task has rules associated with it, gets or sets the events, conditions and actions of those rules.
         /// </summary>
-        public string RulesValue { get => RulesField.Value; set => RulesField.Value = value; }
+        public string Rules { get => RulesField.Value; set => RulesField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID for the type of object the task is associated with.
@@ -193,7 +193,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the ID for the type of object the task is associated with.
         /// </summary>
-        public int? ObjectTypeIdValue { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
+        public int? ObjectTypeId { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the name of the type of object the task is associated with.
@@ -204,7 +204,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the name of the type of object the task is associated with.
         /// </summary>
-        public string ObjectNameValue { get => ObjectNameField.Value; set => ObjectNameField.Value = value; }
+        public string ObjectName { get => ObjectNameField.Value; set => ObjectNameField.Value = value; }
 
 
 

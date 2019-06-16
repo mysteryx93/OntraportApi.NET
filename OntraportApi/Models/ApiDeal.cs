@@ -43,10 +43,10 @@ namespace EmergenceGuardian.OntraportApi.Models
         public const string PrimaryContactKey = "primary_contact";
         public int? PrimaryContact { get => PrimaryContactField.Value; set => PrimaryContactField.Value = value; }
 
-        public ApiProperty<int> CompanyField => _companyField ?? (_companyField = new ApiProperty<int>(this, CompanyKey));
-        private ApiProperty<int> _companyField;
+        public ApiPropertyString CompanyField => _companyField ?? (_companyField = new ApiPropertyString(this, CompanyKey));
+        private ApiPropertyString _companyField;
         public const string CompanyKey = "company";
-        public int? Company { get => CompanyField.Value; set => CompanyField.Value = value; }
+        public string Company { get => CompanyField.Value; set => CompanyField.Value = value; }
 
         public ApiProperty<decimal> WeightedValueField => _weightedValueField ?? (_weightedValueField = new ApiProperty<decimal>(this, WeightedValueKey));
         private ApiProperty<decimal> _weightedValueField;
@@ -78,7 +78,6 @@ namespace EmergenceGuardian.OntraportApi.Models
         private ApiPropertyDateTime _recentActivityField;
         public const string RecentActivityKey = "recent_activity";
         public DateTimeOffset? RecentActivity { get => RecentActivityField.Value; set => RecentActivityField.Value = value; }
-
 
 
 

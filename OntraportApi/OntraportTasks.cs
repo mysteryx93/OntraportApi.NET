@@ -53,7 +53,7 @@ namespace EmergenceGuardian.OntraportApi
             {
                 { "object_type_id", (int)objectType },
             }
-                .AddSearchOptions(searchOptions)
+                .AddSearchOptions(searchOptions, true)
                 .AddIfHasValue("message", message);
 
             await ApiRequest.PostAsync<object>(
@@ -71,7 +71,7 @@ namespace EmergenceGuardian.OntraportApi
             {
                 { "objectID", (int)objectType }
             }
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, true);
 
             await ApiRequest.PostAsync<object>(
                 "task/cancel", query);
@@ -90,7 +90,7 @@ namespace EmergenceGuardian.OntraportApi
             {
                 { "objectID", (int)objectType }
             }
-                .AddSearchOptions(searchOptions)
+                .AddSearchOptions(searchOptions, true)
                 .AddIfHasValue("data", data);
 
             await ApiRequest.PostAsync<object>(

@@ -26,7 +26,15 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         protected T SetupApi()
         {
             var httpClient = new ConfigHelper().GetHttpClient();
-            return (T)Activator.CreateInstance(typeof(T), new[] { httpClient });
+            var ontraObjects = new OntraportObjects(httpClient);
+            if (IsGenericTypeOf(typeof(OntraportBaseCustomObject<>), typeof(T)))
+            {
+                return (T)Activator.CreateInstance(typeof(T), httpClient, ontraObjects);
+            }
+            else
+            {
+                return (T)Activator.CreateInstance(typeof(T), httpClient);
+            }
         }
 
         protected OntraportObjects SetupObjectsApi()

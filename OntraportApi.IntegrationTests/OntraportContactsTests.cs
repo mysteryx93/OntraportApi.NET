@@ -55,7 +55,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         public async Task CreateOrMergeAsync_EmailFirstName_ReturnsSameFirstName()
         {
             var api = SetupApi();
-            var firstName = "cc";
+            var firstName = "cc2";
 
             var result = await api.CreateOrMergeAsync(new
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using EmergenceGuardian.OntraportApi.Models;
 using Xunit;
@@ -316,7 +317,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         public async Task UpdateAsync_SetName_ReturnsSameName()
         {
             var api = SetupApi();
-            var name = "NewName";
+            var name = "NewName2";
 
             var result = await api.UpdateAsync(ApiObjectType.Contact, 19, new { firstname = name });
 
@@ -364,7 +365,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             await api.DeleteAsync(ApiObjectType.Contact, contactId);
 
             // Should throw Object Not Found.
-            await Assert.ThrowsAsync<System.Net.WebException>(() => api.SelectAsync(ApiObjectType.Contact, contactId));
+            await Assert.ThrowsAsync<HttpRequestException>(() => api.SelectAsync(ApiObjectType.Contact, contactId));
         }
 
         [Fact]

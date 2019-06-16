@@ -18,11 +18,12 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         public async Task UpdateAsync_SetStatus_ReturnsTask()
         {
             var api = SetupApi();
-            var status = ApiTask.TaskStatus.Cancelled;
+            var status = ApiTask.TaskStatus.Pending;
 
             var result = await api.UpdateAsync(ValidId, status: status);
 
-            Assert.Equal(status, result.StatusField.Value);
+            var task = await api.SelectAsync(result.Id.Value);
+            Assert.Equal(status, task.StatusField.Value);
         }
 
         [Fact]

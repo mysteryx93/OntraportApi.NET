@@ -308,11 +308,16 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// </summary>
         public int? WordWrap { get => WordWrapField.Value; set => WordWrapField.Value = value; }
 
-        //public ApiProperty<int> UtmTracking => _utmTracking ?? (_utmTracking = new ApiProperty<int>(this, "utm_tracking"));
-        //private ApiProperty<int> _utmTracking;
+        public ApiProperty<int> UtmTrackingField => _utmTrackingField ?? (_utmTrackingField = new ApiProperty<int>(this, UtmTrackingKey));
+        private ApiProperty<int> _utmTrackingField;
+        public const string UtmTrackingKey = "utm_tracking";
+        public int? UtmTracking { get => _utmTrackingField.Value; set => _utmTrackingField.Value = value; }
 
-        //public ApiProperty Resource => _resource ?? (_resource = new ApiProperty(this, "resource"));
-        //private ApiProperty _resource;
+        public ApiPropertyString ResourceField => _resourceField ?? (_resourceField = new ApiPropertyString(this, ResourceKey));
+        private ApiPropertyString _resourceField;
+        public const string ResourceKey = "resource";
+        public string Resource { get => _resourceField.Value; set => _resourceField.Value = value; }
+
 
 
 

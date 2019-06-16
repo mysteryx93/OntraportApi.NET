@@ -54,10 +54,7 @@ namespace EmergenceGuardian.OntraportApi.Models
                 }
                 if (performsAction && options.Ids == null)
                 {
-                    if (options.GroupIds == null || options.Range == null)
-                    {
-                        list.Add("performAll", "1");
-                    }
+                    list.Add("performAll",  "1");
                 }
             }
             else
