@@ -194,6 +194,11 @@ public class OntraportContacts : OntraportContacts\<ApiCustomContact\>, IOntrapo
 public interface IOntraportContacts : IOntraportContacts\<ApiCustomContact\>
 { }
 ```
+
+Don't forget to register your new class in Startup.cs
+```c#
+services.AddTransient<IOntraportContacts, OntraportContacts>();
+```
     
 Supprted ApiProperty types (and you can easily implement your own parser):
 - ApiProperty\<int\>
@@ -221,7 +226,7 @@ To add strongly-typed support for a custom object:
 public class OntraportRecordings : OntraportBaseCustomObject<ApiCustomObjectBase>
 {
     public OntraportRecordings(OntraportHttpClient apiRequest) :
-        base(apiRequest, "Recording", "Recordings", "name")
+        base(apiRequest, "Recording", "Recordings", ObjectTypeId, "name")
     { }
     
     public static int ObjectTypeId = 10000;
