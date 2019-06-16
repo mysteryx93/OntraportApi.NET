@@ -27,7 +27,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="externs">If you have a relationship between your object and another object, you may want to include the data from a related field in your results. Each external field is listed in the format {object}//{field}.</param>
         /// <param name="listFields">A string array of the fields which should be returned in your results.</param>
         /// <returns>A list of objects matching the query.</returns>
-        Task<IList<T>> SelectMultipleAsync(ApiSearchOptions searchOptions = null, ApiSortOptions sortOptions = null, IEnumerable<string> externs = null, IEnumerable<string> listFields = null);
+        Task<IList<T>> SelectAsync(ApiSearchOptions searchOptions = null, ApiSortOptions sortOptions = null, IEnumerable<string> externs = null, IEnumerable<string> listFields = null);
 
         /// <summary>
         /// Retrieves the field meta data for the specified object type.

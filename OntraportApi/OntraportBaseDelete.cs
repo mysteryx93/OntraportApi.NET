@@ -36,7 +36,7 @@ namespace EmergenceGuardian.OntraportApi
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
         /// <returns>A list of objects matching the query.</returns>
-        public virtual async Task DeleteMultipleAsync(ApiSearchOptions searchOptions)
+        public virtual async Task DeleteAsync(ApiSearchOptions searchOptions)
         {
             var query = new Dictionary<string, object>()
                 .AddSearchOptions(searchOptions);

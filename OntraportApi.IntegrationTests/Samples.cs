@@ -18,10 +18,10 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         public Samples()
         {
             var httpClient = new ConfigHelper().GetHttpClient();
-            _ontraContacts = new OntraportContacts<ApiContact>(httpClient);
+            _ontraContacts = new OntraportContacts<ApiContact>(httpClient, new OntraportObjects(httpClient));
             _ontraProducts = new OntraportProducts(httpClient);
             _ontraTransactions = new OntraportTransactions(httpClient);
-            _ontraPostForms = new OntraportPostForms(new HttpClient);
+            _ontraPostForms = new OntraportPostForms(new HttpClient());
         }
 
         public async Task<string> GetCustomerNameAndBirthday(string email)
@@ -43,7 +43,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
 
         public async Task EditCompanyField(string oldName, string newName)
         {
-            var contacts = await _ontraContacts.SelectMultipleAsync(
+            var contacts = await _ontraContacts.SelectAsync(
                 new ApiSearchOptions().AddCondition(ApiContact.CompanyKey, "=", oldName));
             var tasks = contacts.Select(async x =>
             {

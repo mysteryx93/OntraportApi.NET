@@ -143,7 +143,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Deprecated. Gets or sets the sequences a contact is subscribed to.
         /// </summary>
-        public string ListSequencesValue { get => ListSequencesField.Value; set => ListSequencesField.Value = value; }
+        public string ListSequences { get => ListSequencesField.Value; set => ListSequencesField.Value = value; }
 
         /// <summary>
         /// Deprecated. Returns a ApiProperty object to get or set the campaigns a contact is subscribed to.
@@ -154,7 +154,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Deprecated. Gets or sets the campaigns a contact is subscribed to.
         /// </summary>
-        public string ListCampaignsValue { get => ListCampaignsField.Value; set => ListCampaignsField.Value = value; }
+        public string ListCampaigns { get => ListCampaignsField.Value; set => ListCampaignsField.Value = value; }
 
         public ApiProperty<int> BIndexField => _bindexField ?? (_bindexField = new ApiProperty<int>(this, BIndexKey));
         private ApiProperty<int> _bindexField;

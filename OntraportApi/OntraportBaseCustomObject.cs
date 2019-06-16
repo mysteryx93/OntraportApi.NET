@@ -14,9 +14,17 @@ namespace EmergenceGuardian.OntraportApi
     public abstract class OntraportBaseCustomObject<T> : OntraportBaseDelete<T>, IOntraportBaseCustomObject<T> 
         where T : ApiCustomObjectBase
     {
-        public OntraportBaseCustomObject(OntraportHttpClient apiRequest, string endpointSingular, string endpointPlural, string primarySearchKey) :
+        private readonly IOntraportObjects _ontraObjects;
+        private readonly int _objectTypeId;
+
+        public OntraportBaseCustomObject(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects,
+            string endpointSingular, string endpointPlural, 
+            int objectTypeId, string primarySearchKey) :
             base(apiRequest, endpointSingular, endpointPlural, primarySearchKey)
-        { }
+        {
+            _ontraObjects = ontraObjects;
+            _objectTypeId = objectTypeId;
+        }
 
         /// <summary>
         /// Looks for an existing object with a matching unique field and merges supplied data with existing data.
@@ -72,5 +80,83 @@ namespace EmergenceGuardian.OntraportApi
             }
             return result;
         }
+
+        /// <summary>
+        /// Adds one or more objects to one or more sequences.
+        /// </summary>
+        /// <param name="sequenceIds">A list of the sequence(s) to which objects should be added.</param>
+        /// <param name="searchOptions">The search options.</param>
+        public async Task AddToSequenceAsync(IEnumerable<int> sequenceIds, ApiSearchOptions searchOptions = null) =>
+            await _ontraObjects.AddToSequenceAsync((ApiObjectType)_objectTypeId, sequenceIds, searchOptions);
+
+        /// <summary>
+        /// Adds one or more tags to one or more objects.
+        /// </summary>
+        /// <param name="tagIds">A list of the IDs of the tag(s) which should be added to objects.</param>
+        /// <param name="searchOptions">The search options.</param>
+        public async Task AddTagAsync(IEnumerable<int> tagIds, ApiSearchOptions searchOptions = null) =>
+            await _ontraObjects.AddTagAsync((ApiObjectType)_objectTypeId, tagIds, searchOptions);
+
+        /// <summary>
+        /// Adds one or more tags to one or more objects by the tag name. This endpoint will create the tag if it doesn't exist.
+        /// </summary>
+        /// <param name="tagNames">A list of the names of the tag(s) which should be added to objects.</param>
+        /// <param name="searchOptions">The search options.</param>
+        public async Task AddTagNamesAsync(IEnumerable<string> tagNames, ApiSearchOptions searchOptions = null) =>
+            await _ontraObjects.AddTagNamesAsync((ApiObjectType)_objectTypeId, tagNames, searchOptions);
+
+        /// <summary>
+        /// Adds one or more objects to one or more campaigns.
+        /// </summary>
+        /// <param name="campaignIds">A list of the campaign(s) to which objects should be added.</param>
+        /// <param name="searchOptions">The search options.</param>
+        public async Task AddToCampaignAsync(IEnumerable<int> campaignIds, ApiSearchOptions searchOptions = null) =>
+            await _ontraObjects.AddToCampaignAsync((ApiObjectType)_objectTypeId, campaignIds, searchOptions);
+
+        /// <summary>
+        /// Removes one or more objects from one or more sequences.
+        /// </summary>
+        /// <param name="sequenceIds">A list of the sequence(s) from which objects should be removed.</param>
+        /// <param name="searchOptions">The search options.</param>
+        public async Task RemoveFromSequenceAsync(IEnumerable<int> sequenceIds, ApiSearchOptions searchOptions = null) =>
+            await _ontraObjects.RemoveFromSequenceAsync((ApiObjectType)_objectTypeId, sequenceIds, searchOptions);
+
+        /// <summary>
+        /// Removes one or more tags from one or more objects.
+        /// </summary>
+        /// <param name="tagIds">A list of the IDs of the tag(s) which should be removed from objects.</param>
+        /// <param name="searchOptions">The search options.</param>
+        public async Task RemoveTagAsync(IEnumerable<int> tagIds, ApiSearchOptions searchOptions = null) =>
+            await _ontraObjects.RemoveTagAsync((ApiObjectType)_objectTypeId, tagIds, searchOptions);
+
+        /// <summary>
+        /// Removes one or more tags from one or more objects by the tag name.
+        /// </summary>
+        /// <param name="tagNames">A list of the names of the tag(s) which should be removed from objects.</param>
+        /// <param name="searchOptions">The search options.</param>
+        public async Task RemoveTagNamesAsync(IEnumerable<string> tagNames, ApiSearchOptions searchOptions = null) =>
+            await _ontraObjects.RemoveTagNamesAsync((ApiObjectType)_objectTypeId, tagNames, searchOptions);
+
+        /// <summary>
+        /// Removes one or more objects from one or more campaigns.
+        /// </summary>
+        /// <param name="campaignIds">A list of the campaign(s) from which objects should be removed.</param>
+        /// <param name="searchOptions">The search options.</param>
+        public async Task RemoveFromCampaignAsync(IEnumerable<int> campaignIds, ApiSearchOptions searchOptions = null) =>
+            await _ontraObjects.RemoveFromCampaignAsync((ApiObjectType)_objectTypeId, campaignIds, searchOptions);
+
+        /// <summary>
+        /// Pauses rules, sequences, and sequence subscribers.
+        /// </summary>
+        /// <param name="searchOptions">The search options.</param>
+        public async Task PauseRuleOrSequenceAsync(ApiSearchOptions searchOptions = null) =>
+            await _ontraObjects.PauseRuleOrSequenceAsync((ApiObjectType)_objectTypeId, searchOptions);
+
+        /// <summary>
+        /// Unpauses rules, sequences, and sequence subscribers.
+        /// </summary>
+        /// <param name="searchOptions">The search options.</param>
+        public async Task UnpauseRuleOrSequenceAsync(ApiSearchOptions searchOptions = null) =>
+            await _ontraObjects.UnpauseRuleOrSequenceAsync((ApiObjectType)_objectTypeId, searchOptions);
     }
 }

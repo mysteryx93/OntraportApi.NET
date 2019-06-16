@@ -4,7 +4,7 @@ using EmergenceGuardian.OntraportApi.Converters;
 using EmergenceGuardian.OntraportApi.Models;
 using Xunit;
 
-namespace EmergenceGuardian.OntraportApi.IntegrationTests
+namespace EmergenceGuardian.OntraportApi.UnitTests
 {
     public class ApiPropertyDataTimeSpanTests
     {

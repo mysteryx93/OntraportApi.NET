@@ -21,6 +21,6 @@ namespace EmergenceGuardian.OntraportApi
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
         /// <returns>A list of objects matching the query.</returns>
-        Task DeleteMultipleAsync(ApiSearchOptions searchOptions);
+        Task DeleteAsync(ApiSearchOptions searchOptions);
     }
 }

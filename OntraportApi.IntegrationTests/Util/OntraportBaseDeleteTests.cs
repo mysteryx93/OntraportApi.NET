@@ -35,7 +35,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             var api = SetupApi();
             var obj = await api.CreateAsync();
 
-            await api.DeleteMultipleAsync(new ApiSearchOptions(obj.Id.Value));
+            await api.DeleteAsync(new ApiSearchOptions(obj.Id.Value));
 
             // Should throw Object Not Found.
             await Assert.ThrowsAsync<HttpRequestException>(() => api.SelectAsync(obj.Id.Value));

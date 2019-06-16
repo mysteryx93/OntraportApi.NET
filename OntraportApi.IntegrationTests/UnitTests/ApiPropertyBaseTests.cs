@@ -4,7 +4,7 @@ using EmergenceGuardian.OntraportApi.Converters;
 using EmergenceGuardian.OntraportApi.Models;
 using Xunit;
 
-namespace EmergenceGuardian.OntraportApi.IntegrationTests
+namespace EmergenceGuardian.OntraportApi.UnitTests
 {
     public abstract class ApiPropertyBaseTests<P, T, N>
         where P : ApiPropertyBase<T, N>

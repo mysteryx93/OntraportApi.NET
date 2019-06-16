@@ -585,10 +585,10 @@ namespace EmergenceGuardian.OntraportApi.Models
         public const string NMediaKey = "n_media";
         public int? NMedia { get => NMediaField.Value; set => NMediaField.Value = value; }
 
-        public ApiPropertyTimeSpan TimeSinceLastActivityField => _timeSinceLastActivityField ?? (_timeSinceLastActivityField = new ApiPropertyTimeSpan(this, TimeSinceLastActivityDateKey));
+        public ApiPropertyTimeSpan TimeSinceLastActivityField => _timeSinceLastActivityField ?? (_timeSinceLastActivityField = new ApiPropertyTimeSpan(this, TimeSinceLastActivityKey));
         private ApiPropertyTimeSpan _timeSinceLastActivityField;
-        public const string TimeSinceLastActivityDateKey = "time_since_dla";
-        public TimeSpan? TimeSinceLastActivityDate { get => TimeSinceLastActivityField.Value; set => TimeSinceLastActivityField.Value = value; }
+        public const string TimeSinceLastActivityKey = "time_since_dla";
+        public TimeSpan? TimeSinceLastActivity { get => TimeSinceLastActivityField.Value; set => TimeSinceLastActivityField.Value = value; }
 
 
 

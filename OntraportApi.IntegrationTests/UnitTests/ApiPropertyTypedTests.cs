@@ -2,7 +2,7 @@
 using EmergenceGuardian.OntraportApi.Converters;
 using EmergenceGuardian.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi.IntegrationTests
+namespace EmergenceGuardian.OntraportApi.UnitTests
 {
     public class ApiPropertyBoolTests : ApiPropertyBaseTests<ApiPropertyBool, bool, bool?>
     { }

@@ -49,7 +49,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectMultipleAsync(new ApiSearchOptions(ValidId));
+            var result = await api.SelectAsync(new ApiSearchOptions(ValidId));
 
             Assert.NotEmpty(result);
         }
@@ -59,7 +59,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectMultipleAsync();
+            var result = await api.SelectAsync();
 
             Assert.NotEmpty(result);
         }
@@ -115,7 +115,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         }
 
         [Fact]
-        public async Task SelectAsync_ValidId_AllPropertiesHaveValueProperty()
+        public async Task SelectAsync_ValidId_AllApiPropertiesEndWithField()
         {
             var api = SetupApi();
             var hasError = false;
@@ -126,7 +126,29 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             {
                 if (IsGenericTypeOf(typeof(ApiPropertyBase<,>), propInfo.PropertyType))
                 {
-                    var valuePropName = propInfo.Name + "Value";
+                    if (!propInfo.Name.EndsWith("Field", StringComparison.InvariantCulture))
+                    {
+                        hasError = true;
+                        Output.WriteLine(propInfo.Name);
+                    }
+                }
+            }
+            Assert.False(hasError, "Some ApiProperty members don't end with Field.");
+        }
+
+        [Fact]
+        public async Task SelectAsync_ValidId_AllFieldPropertiesHaveMatchingValueProperty()
+        {
+            var api = SetupApi();
+            var hasError = false;
+
+            var result = await api.SelectAsync(ValidId);
+
+            foreach (var propInfo in result.GetType().GetProperties())
+            {
+                if (IsGenericTypeOf(typeof(ApiPropertyBase<,>), propInfo.PropertyType))
+                {
+                    var valuePropName = propInfo.Name.Substring(0, propInfo.Name.Length - "Field".Length);
                     var valueProp = result.GetType().GetProperty(valuePropName);
 
                     if (valueProp == null)
@@ -136,7 +158,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
                     }
                 }
             }
-            Assert.False(hasError, "Some properties don't have a matching Value property.");
+            Assert.False(hasError, "Some Field properties don't have a matching value property without 'Field'.");
         }
 
         private bool IsGenericTypeOf(Type genericType, Type someType)

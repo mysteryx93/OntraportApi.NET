@@ -147,7 +147,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectMultipleAsync(ApiObjectType.Contact);
+            var result = await api.SelectAsync(ApiObjectType.Contact);
 
             Assert.NotEmpty(result);
         }
@@ -157,7 +157,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectMultipleAsync(ApiObjectType.Contact, new ApiSearchOptions(new[] { 19, 20 }));
+            var result = await api.SelectAsync(ApiObjectType.Contact, new ApiSearchOptions(new[] { 19, 20 }));
 
             Assert.Equal(2, result.Count);
         }
@@ -167,7 +167,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectMultipleAsync(ApiObjectType.Contact, searchOptions:
+            var result = await api.SelectAsync(ApiObjectType.Contact, searchOptions:
                 new ApiSearchOptions()
                     .AddCondition("email", "=", "a@test.com")
                     .AddCondition("firstname", "=", "a", false)
@@ -181,7 +181,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectMultipleAsync(ApiObjectType.Contact, searchOptions:
+            var result = await api.SelectAsync(ApiObjectType.Contact, searchOptions:
                 new ApiSearchOptions()
                     .AddCondition("lastname", "=", null)
             );
@@ -194,7 +194,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectMultipleAsync(ApiObjectType.Contact, searchOptions:
+            var result = await api.SelectAsync(ApiObjectType.Contact, searchOptions:
                 new ApiSearchOptions()
                     .AddConditionInList("id", new[] { 20, 21 })
             );

@@ -248,7 +248,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the county for the shipping address.
         /// </summary>
-        public string County { get => CountryField.Value; set => CountryField.Value = value; }
+        public string Country { get => CountryField.Value; set => CountryField.Value = value; }
 
         /// <summary>
         /// If a sale comes from another system, returns a ApiProperty object to get or set the order ID sent from that system.

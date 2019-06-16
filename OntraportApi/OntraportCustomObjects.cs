@@ -26,7 +26,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>The selected object.</returns>
         public async Task<ApiCustomObject> SelectAsync(string pluralName)
         {
-            var result = await SelectMultipleAsync(new ApiSearchOptions().AddCondition("plural", "=", pluralName));
+            var result = await SelectAsync(new ApiSearchOptions().AddCondition("plural", "=", pluralName));
             return result.FirstOrDefault();
         }
     }

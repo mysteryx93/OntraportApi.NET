@@ -31,7 +31,7 @@ namespace EmergenceGuardian.OntraportApi
         {
             if (string.IsNullOrEmpty(PrimarySearchKey)) throw new InvalidOperationException("This method is not available for this object type.");
 
-            var result = await SelectMultipleAsync(new ApiSearchOptions().AddCondition(PrimarySearchKey, "=", keyValue));
+            var result = await SelectAsync(new ApiSearchOptions().AddCondition(PrimarySearchKey, "=", keyValue));
             return result.FirstOrDefault();
         }
 
