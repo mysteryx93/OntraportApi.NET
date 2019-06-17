@@ -191,7 +191,11 @@ Then, use *OntraportContacts\<ApiCustomContact\>* instead of *OntraportContacts<
 
 ```c#
 public class OntraportContacts : OntraportContacts<ApiCustomContact>, IOntraportContacts
-{ }
+{
+    public OntraportContacts(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) :
+        base(apiRequest, ontraObjects)
+    { }
+}
 
 public interface IOntraportContacts : IOntraportContacts<ApiCustomContact>
 { }
