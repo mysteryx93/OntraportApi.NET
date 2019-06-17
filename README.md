@@ -245,7 +245,7 @@ public class ApiRecording : ApiCustomObjectBase
 { }
 ```
 
-You can obtain ObjectTypeId in Ontraport by clicking on the custom object. It's ID will appear in the address bar (ex: /#!/o_recording10000/listAll), starting at 10000.
+You can obtain ObjectTypeId in Ontraport by clicking on the custom object section. It's ID will appear in the address bar.
 
 2. Register it in ConfigureServices in Startup.cs
 
