@@ -1,5 +1,5 @@
 # EmergenceGuardian.OntraportApi
-Strongly-Typed .NET Wrapper for Ontraport API.
+.NET Library to Consume Ontraport API in a Strongly-Typed Way
 
 Fully supports .NET Core and Dependency Injection.
 
