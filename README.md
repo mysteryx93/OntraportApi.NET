@@ -229,7 +229,7 @@ To add strongly-typed support for a custom object:
 1. Create a class to expose all API methods related to custom objects. All methods are implemented through the base class.
 
 ```c#
-public class OntraportRecordings : OntraportBaseCustomObject<ApiCustomObjectBase>, IOntraportRecordings
+public class OntraportRecordings : OntraportBaseCustomObject<ApiRecording>, IOntraportRecordings
 {
     public OntraportRecordings(OntraportHttpClient apiRequest, OntraportObjects ontraObjects) :
         base(apiRequest, ontraObjects, "Recording", "Recordings", ObjectTypeId, "name")
@@ -238,19 +238,22 @@ public class OntraportRecordings : OntraportBaseCustomObject<ApiCustomObjectBase
     public static int ObjectTypeId = 10000;
 }
 
-public interface IOntraportRecordings : IOntraportBaseCustomObject<ApiCustomObjectBase>
+public interface IOntraportRecordings : IOntraportBaseCustomObject<ApiRecording>
+{ }
+
+public class ApiRecording : ApiCustomObjectBase
 { }
 ```
 
 2. Register it in ConfigureServices in Startup.cs
 
 ```c#
-services.AddTransient<OntraportRecordings>();
+services.AddTransient<IOntraportRecordings, OntraportRecordings>();
 ```
 
 3. Obtain your list of custom fields using the *OntraportRecordings.GetCustomFieldsAsync* method. Obtain your ObjectTypeId using *IOntraportCustomObjects.SelectAsync*.
 
-4. Create a typed object exposing all your custom fields. Your class will inherit from ApiCustomObjectBase.
+4. Add all custom fields to your custom object. Your class inherits from ApiCustomObjectBase.
 
 ```c#
 public class ApiRecording : ApiCustomObjectBase
@@ -262,13 +265,6 @@ public class ApiRecording : ApiCustomObjectBase
 }
 ```
 
-5. Change your OntraportRecordings and IOntraportRecordings definition to return ApiRecording
-
-6. Update your service registration in Startup.cs
-
-```c#
-services.AddTransient<IOntraportRecordings, OntraportRecordings>();
-```
 
 ## Unit Testing the Source Code
 
