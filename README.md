@@ -231,7 +231,7 @@ To add strongly-typed support for a custom object:
 ```c#
 public class OntraportRecordings : OntraportBaseCustomObject<ApiRecording>, IOntraportRecordings
 {
-    public OntraportRecordings(OntraportHttpClient apiRequest, OntraportObjects ontraObjects) :
+    public OntraportRecordings(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) :
         base(apiRequest, ontraObjects, "Recording", "Recordings", ObjectTypeId, "name")
     { }
 
