@@ -229,14 +229,17 @@ To add strongly-typed support for a custom object:
 1. Create a class to expose all API methods related to custom objects. All methods are implemented through the base class.
 
 ```c#
-public class OntraportRecordings : OntraportBaseCustomObject<ApiCustomObjectBase>
+public class OntraportRecordings : OntraportBaseCustomObject<ApiCustomObjectBase>, IOntraportRecordings
 {
-    public OntraportRecordings(OntraportHttpClient apiRequest) :
-        base(apiRequest, "Recording", "Recordings", ObjectTypeId, "name")
+    public OntraportRecordings(OntraportHttpClient apiRequest, OntraportObjects ontraObjects) :
+        base(apiRequest, ontraObjects, "Recording", "Recordings", ObjectTypeId, "name")
     { }
-    
+
     public static int ObjectTypeId = 10000;
 }
+
+public interface IOntraportRecordings : IOntraportBaseCustomObject<ApiCustomObjectBase>
+{ }
 ```
 
 2. Register it in ConfigureServices in Startup.cs
@@ -259,22 +262,9 @@ public class ApiRecording : ApiCustomObjectBase
 }
 ```
 
-5. Change your OntraportRecordings class definition to return ApiRecording
+5. Change your OntraportRecordings and IOntraportRecordings definition to return ApiRecording
 
-6. Add an Interface for your class
-
-```c#
-public interface IOntraportRecordings : IOntraportBaseCustomObject<ApiRecording>
-{ }
-```
-
-Your class definition will now look like this:
-
-```c#
-public class OntraportRecordings : OntraportBaseCustomObject<ApiRecording>, IOntraportRecordings
-```
-
-7. Update your service registration in Startup.cs
+6. Update your service registration in Startup.cs
 
 ```c#
 services.AddTransient<IOntraportRecordings, OntraportRecordings>();
