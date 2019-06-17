@@ -166,7 +166,7 @@ _ontraPostForms.ServerPost("my-form-id", new ApiContact()
 
 ## Adding Custom Fields
 
-Simple way: you can access all custom property using the Data property of the object returned by the API. It exposes all raw data returned from Ontraport.
+Simple way: you can access all custom properties using the Data property of the object returned by the API. It exposes all raw data returned from Ontraport.
 
 To add strongly-typed support for your custom fields for Contact, Company and Deal objects, create a class defining your extra fields.
 
