@@ -255,7 +255,7 @@ services.AddTransient<IOntraportRecordings, OntraportRecordings>();
 
 3. Add all custom fields to your custom object. Your class inherits from ApiCustomObjectBase.
 
-Obtain your list of custom fields using the *OntraportRecordings.GetCustomFieldsAsync()* method.
+Obtain your list of custom fields using the *OntraportRecordings.GetCustomFieldsAsync()* method. The parent field is of type Int.
 
 ```c#
 public class ApiRecording : ApiCustomObjectBase
