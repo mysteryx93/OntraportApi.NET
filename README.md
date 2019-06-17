@@ -190,10 +190,10 @@ public class ApiCustomContact : ApiContact
 Then, use *OntraportContacts\<ApiCustomContact\>* instead of *OntraportContacts<ApiContact>*. You may want to create this class for convenience.
 
 ```c#
-public class OntraportContacts : OntraportContacts\<ApiCustomContact\>, IOntraportContacts
+public class OntraportContacts : OntraportContacts<ApiCustomContact>, IOntraportContacts
 { }
 
-public interface IOntraportContacts : IOntraportContacts\<ApiCustomContact\>
+public interface IOntraportContacts : IOntraportContacts<ApiCustomContact>
 { }
 ```
 
