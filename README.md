@@ -148,17 +148,15 @@ Posting forms doesn't have any kind of security so it works in many cases but do
 
 To post forms, use *IOntraportPostForms*. It supports posting via the client's browser or via the server.
 
-You do not need an API key to submit forms. If you wish to only post forms without using the rest of the API, you can register it with *services.AddOntraportPostForms*
+You do not need an API key to submit forms. If you wish to only post forms without using the rest of the API, you can register it with *services.AddOntraportPostForms()*
 
 ```c#
-public void PostForm(string email, string firstName)
+// Post and don't wait.
+_ontraPostForms.ServerPost("my-form-id", new ApiContact()
 {
-    _ontraPostForms.ServerPost("my-form-id", new ApiContact()
-    {
-        Email = email,
-        FirstName = firstName
-    }.GetChanges());
-}
+    Email = email,
+    FirstName = firstName
+}.GetChanges());
 ```
 
 
