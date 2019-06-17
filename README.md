@@ -245,15 +245,17 @@ public class ApiRecording : ApiCustomObjectBase
 { }
 ```
 
+You can obtain ObjectTypeId in Ontraport by clicking on the custom object. It's ID will appear in the address bar (ex: https://app.ontraport.com/#!/o_recording10000/listAll), starting at 10000.
+
 2. Register it in ConfigureServices in Startup.cs
 
 ```c#
 services.AddTransient<IOntraportRecordings, OntraportRecordings>();
 ```
 
-3. Obtain your list of custom fields using the *OntraportRecordings.GetCustomFieldsAsync* method. Obtain your ObjectTypeId using *IOntraportCustomObjects.SelectAsync*.
+3. Add all custom fields to your custom object. Your class inherits from ApiCustomObjectBase.
 
-4. Add all custom fields to your custom object. Your class inherits from ApiCustomObjectBase.
+Obtain your list of custom fields using the *OntraportRecordings.GetCustomFieldsAsync()* method.
 
 ```c#
 public class ApiRecording : ApiCustomObjectBase
