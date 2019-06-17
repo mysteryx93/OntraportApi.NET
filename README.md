@@ -144,7 +144,11 @@ No problem, [this is the only class](https://github.com/mysteryx93/EmergenceGuar
 
 In many cases, a simpler way to send data to Ontraport is to simply submit a SmartForm. Then, you can perform additional actions in your form via Ontraport. You can obtain the form id and custom field names (that look like f0000) by clicking Publish and looking at the HTML view.
 
-Posting forms doesn't have any kind of security so it works in many cases but don't use this for important management data.
+Advantages: simpler, and gives you form fillout statistics.
+
+Disadvantages: it doesn't have any kind of security so don't use this for important management data.
+
+You can use this to provide forms to the user that perform additional server-side actions, such as uploading files and resizing pictures.
 
 To post forms, use *IOntraportPostForms*. It supports posting via the client's browser or via the server.
 
