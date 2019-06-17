@@ -228,6 +228,8 @@ To add strongly-typed support for a custom object:
 
 1. Create a class to expose all API methods related to custom objects. All methods are implemented through the base class.
 
+You can obtain ObjectTypeId in Ontraport by clicking on the custom object section. It's ID will appear in the address bar.
+
 ```c#
 public class OntraportRecordings : OntraportBaseCustomObject<ApiRecording>, IOntraportRecordings
 {
@@ -244,8 +246,6 @@ public interface IOntraportRecordings : IOntraportBaseCustomObject<ApiRecording>
 public class ApiRecording : ApiCustomObjectBase
 { }
 ```
-
-You can obtain ObjectTypeId in Ontraport by clicking on the custom object section. It's ID will appear in the address bar.
 
 2. Register it in ConfigureServices in Startup.cs
 
