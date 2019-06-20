@@ -11,7 +11,7 @@ namespace EmergenceGuardian.OntraportApi
         where T : ApiCompany
     {
         public OntraportCompanies(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) : 
-            base(apiRequest, ontraObjects, "Company", "Companies", (int)ApiObjectType.Company, "name")
+            base(apiRequest, ontraObjects, "Company", "Companies", (int)ApiObjectType.Company, ApiCompany.NameKey)
         { }
 
     }

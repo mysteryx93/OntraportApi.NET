@@ -15,7 +15,7 @@ namespace EmergenceGuardian.OntraportApi
     public class OntraportProducts : OntraportBaseDelete<ApiProduct>, IOntraportProducts
     {
         public OntraportProducts(OntraportHttpClient apiRequest) : 
-            base(apiRequest, "Product", "Products", "name")
+            base(apiRequest, "Product", "Products", ApiProduct.NameKey)
         { }
 
     }

@@ -15,7 +15,7 @@ namespace EmergenceGuardian.OntraportApi
     public class OntraportMessages : OntraportBaseWrite<ApiMessage>, IOntraportMessages
     {
         public OntraportMessages(OntraportHttpClient apiRequest) : 
-            base(apiRequest, "Message", "Messages", "alias")
+            base(apiRequest, "Message", "Messages", ApiMessage.AliasKey)
         { }
 
         // It's normally under data/attrs.

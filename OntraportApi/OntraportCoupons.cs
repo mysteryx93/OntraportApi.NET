@@ -12,7 +12,7 @@ namespace EmergenceGuardian.OntraportApi
     public class OntraportCoupons : OntraportBaseDelete<ApiCoupon>, IOntraportCoupons
     {
         public OntraportCoupons(OntraportHttpClient apiRequest) :
-            base(apiRequest, "Coupon", "Coupons", "name")
+            base(apiRequest, "Coupon", "Coupons", ApiCoupon.NameKey)
         {
         }
 

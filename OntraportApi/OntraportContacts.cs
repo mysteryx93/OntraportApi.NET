@@ -16,7 +16,7 @@ namespace EmergenceGuardian.OntraportApi
         where T : ApiContact
     {
         public OntraportContacts(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) : 
-            base(apiRequest, ontraObjects, "Contact", "Contacts", (int)ApiObjectType.Contact, "email")
+            base(apiRequest, ontraObjects, "Contact", "Contacts", (int)ApiObjectType.Contact, ApiContact.EmailKey)
         { }
 
         protected override async Task<T> OnParseCreateOrMergeAsync(JObject json) =>

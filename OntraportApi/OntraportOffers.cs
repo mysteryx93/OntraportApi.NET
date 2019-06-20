@@ -15,7 +15,7 @@ namespace EmergenceGuardian.OntraportApi
     public class OntraportOffers : OntraportBaseWrite<ApiOffer>, IOntraportOffers
     {
         public OntraportOffers(OntraportHttpClient apiRequest) : 
-            base(apiRequest, "Offer", "Offers", "name")
+            base(apiRequest, "Offer", "Offers", ApiOffer.NameKey)
         { }
 
         // Tool available to build an offer
