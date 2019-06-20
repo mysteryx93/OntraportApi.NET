@@ -1,5 +1,5 @@
 # EmergenceGuardian.OntraportApi
-Strongly-Typed .NET Wrapper for Ontraport API.
+.NET Library to Consume Ontraport API in a Strongly-Typed Way
 
 Fully supports .NET Core and Dependency Injection.
 
@@ -144,27 +144,29 @@ No problem, [this is the only class](https://github.com/mysteryx93/EmergenceGuar
 
 In many cases, a simpler way to send data to Ontraport is to simply submit a SmartForm. Then, you can perform additional actions in your form via Ontraport. You can obtain the form id and custom field names (that look like f0000) by clicking Publish and looking at the HTML view.
 
-Posting forms doesn't have any kind of security so it works in many cases but don't use this for important management data.
+Advantages: simpler, and it gives you form fillout statistics.
+
+Disadvantages: it doesn't have any kind of security so don't use this for important management data.
+
+You can use this to provide forms to the user that perform additional server-side actions, such as uploading files and resizing pictures.
 
 To post forms, use *IOntraportPostForms*. It supports posting via the client's browser or via the server.
 
-You do not need an API key to submit forms. If you wish to only post forms without using the rest of the API, you can register it with *services.AddOntraportPostForms*
+You do not need an API key to submit forms. If you wish to only post forms without using the rest of the API, you can register it with *services.AddOntraportPostForms()*
 
 ```c#
-public void PostForm(string email, string firstName)
+// Post and don't wait.
+_ontraPostForms.ServerPost("my-form-id", new ApiContact()
 {
-    _ontraPostForms.ServerPost("my-form-id", new ApiContact()
-    {
-        Email = email,
-        FirstName = firstName
-    }.GetChanges());
-}
+    Email = email,
+    FirstName = firstName
+}.GetChanges());
 ```
 
 
 ## Adding Custom Fields
 
-Simple way: you can access all custom property using the Data property of the object returned by the API. It exposes all raw data returned from Ontraport.
+Simple way: you can access all custom properties using the Data property of the object returned by the API. It exposes all raw data returned from Ontraport.
 
 To add strongly-typed support for your custom fields for Contact, Company and Deal objects, create a class defining your extra fields.
 
@@ -188,10 +190,14 @@ public class ApiCustomContact : ApiContact
 Then, use *OntraportContacts\<ApiCustomContact\>* instead of *OntraportContacts<ApiContact>*. You may want to create this class for convenience.
 
 ```c#
-public class OntraportContacts : OntraportContacts\<ApiCustomContact\>, IOntraportContacts
-{ }
+public class OntraportContacts : OntraportContacts<ApiCustomContact>, IOntraportContacts
+{
+    public OntraportContacts(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) :
+        base(apiRequest, ontraObjects)
+    { }
+}
 
-public interface IOntraportContacts : IOntraportContacts\<ApiCustomContact\>
+public interface IOntraportContacts : IOntraportContacts<ApiCustomContact>
 { }
 ```
 
@@ -222,26 +228,34 @@ To add strongly-typed support for a custom object:
 
 1. Create a class to expose all API methods related to custom objects. All methods are implemented through the base class.
 
+You can obtain ObjectTypeId in Ontraport by clicking on the custom object section. It's ID will appear in the address bar.
+
 ```c#
-public class OntraportRecordings : OntraportBaseCustomObject<ApiCustomObjectBase>
+public class OntraportRecordings : OntraportBaseCustomObject<ApiRecording>, IOntraportRecordings
 {
-    public OntraportRecordings(OntraportHttpClient apiRequest) :
-        base(apiRequest, "Recording", "Recordings", ObjectTypeId, "name")
+    public OntraportRecordings(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) :
+        base(apiRequest, ontraObjects, "Recording", "Recordings", ObjectTypeId, "name")
     { }
-    
+
     public static int ObjectTypeId = 10000;
 }
+
+public interface IOntraportRecordings : IOntraportBaseCustomObject<ApiRecording>
+{ }
+
+public class ApiRecording : ApiCustomObjectBase
+{ }
 ```
 
 2. Register it in ConfigureServices in Startup.cs
 
 ```c#
-services.AddTransient<OntraportRecordings>();
+services.AddTransient<IOntraportRecordings, OntraportRecordings>();
 ```
 
-3. Obtain your list of custom fields using the *OntraportRecordings.GetCustomFieldsAsync* method. Obtain your ObjectTypeId using *IOntraportCustomObjects.SelectAsync*.
+3. Add all custom fields to your custom object. Your class inherits from ApiCustomObjectBase.
 
-4. Create a typed object exposing all your custom fields. Your class will inherit from ApiCustomObjectBase.
+Obtain your list of custom fields using the *OntraportRecordings.GetCustomFieldsAsync()* method. The parent field is of type Int.
 
 ```c#
 public class ApiRecording : ApiCustomObjectBase
@@ -253,26 +267,8 @@ public class ApiRecording : ApiCustomObjectBase
 }
 ```
 
-5. Change your OntraportRecordings class definition to return ApiRecording
+That's it.
 
-6. Add an Interface for your class
-
-```c#
-public interface IOntraportRecordings : IOntraportBaseCustomObject<ApiRecording>
-{ }
-```
-
-Your class definition will now look like this:
-
-```c#
-public class OntraportRecordings : OntraportBaseCustomObject<ApiRecording>, IOntraportRecordings
-```
-
-7. Update your service registration in Startup.cs
-
-```c#
-services.AddTransient<IOntraportRecordings, OntraportRecordings>();
-```
 
 ## Unit Testing the Source Code
 
