@@ -63,11 +63,11 @@ namespace EmergenceGuardian.OntraportApi.Models
         public const string ActualCloseDateKey = "actual_close_date";
         public DateTimeOffset? ActualCloseDate { get => ActualCloseDateField.Value; set => ActualCloseDateField.Value = value; }
 
-        // This is an enum.
-        public ApiPropertyString ExpectedCloseTimeFrameField => _expectedCloseTimeFrameField ?? (_expectedCloseTimeFrameField = new ApiPropertyString(this, ExpectedCloseTimeFrameKey));
-        private ApiPropertyString _expectedCloseTimeFrameField;
+        // This is a configurable enum.
+        public ApiProperty<int> ExpectedCloseTimeFrameField => _expectedCloseTimeFrameField ?? (_expectedCloseTimeFrameField = new ApiProperty<int>(this, ExpectedCloseTimeFrameKey));
+        private ApiProperty<int> _expectedCloseTimeFrameField;
         public const string ExpectedCloseTimeFrameKey = "expected_close_timeframe";
-        public string ExpectedCloseTimeFrame { get => ExpectedCloseTimeFrameField.Value; set => ExpectedCloseTimeFrameField.Value = value; }
+        public int? ExpectedCloseTimeFrame { get => ExpectedCloseTimeFrameField.Value; set => ExpectedCloseTimeFrameField.Value = value; }
 
         public ApiProperty<DealSizeEnum> DealSizeField => _dealSizeField ?? (_dealSizeField = new ApiPropertyIntEnum<DealSizeEnum>(this, DealSizeKey));
         private ApiProperty<DealSizeEnum> _dealSizeField;

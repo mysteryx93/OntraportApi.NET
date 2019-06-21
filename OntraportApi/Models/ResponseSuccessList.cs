@@ -20,11 +20,11 @@ namespace EmergenceGuardian.OntraportApi.Models
         {
             var jsonSuccess = json["data"]["success"];
             var jsonError = json["data"]["error"];
-            if (jsonSuccess.Any())
+            if (jsonSuccess?.Any() == true)
             {
                 Success = jsonSuccess.ToObject<IDictionary<string, string>>();
             }
-            if (jsonError.Any())
+            if (jsonError?.Any() == true)
             {
                 Error = jsonError.ToObject<IDictionary<string, string>>();
             }

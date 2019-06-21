@@ -333,8 +333,8 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
                 new List<ApiFieldEditor>() {
                     new ApiFieldEditor()
                     {
-                        Field = "f1584",
-                        //Alias = "Field1",
+                        //Field = "f1584",
+                        Alias = "Field1",
                         Type = ApiFieldType.drop
                     }.ListReplace(new[] { "a", "b", "c" })
                 },
@@ -342,8 +342,8 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
                 new List<ApiFieldEditor>() {
                     new ApiFieldEditor()
                     {
-                        Field = "f1585",
-                        //Alias = "Field2",
+                        //Field = "f1585",
+                        Alias = "Field2",
                         Type = ApiFieldType.check
                     }
                 }

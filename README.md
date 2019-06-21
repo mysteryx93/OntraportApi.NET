@@ -216,7 +216,6 @@ Supprted ApiProperty types (and you can easily implement your own parser):
 - ApiPropertyIntBool ("1", "0", parsed as Boolean)
 - ApiPropertyIntEnum\<T\> (Numeric field parsed as enumeration of type T)
 - ApiPropertyStringEnum\<T\> (string parsed as enumeration of type T)
-- ApiPropertyTimeSpan (seconds parsed as Timespan)
 
 ## Adding Strongly-Typed Support for Custom Objects
 

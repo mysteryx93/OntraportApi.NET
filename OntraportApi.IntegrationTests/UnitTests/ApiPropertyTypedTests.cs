@@ -23,9 +23,6 @@ namespace EmergenceGuardian.OntraportApi.UnitTests
     public class ApiPropertyStringEnumTests : ApiPropertyBaseTests<ApiPropertyStringEnum<BulkMailStatus>, BulkMailStatus, BulkMailStatus?>
     { }
 
-    public class ApiPropertyTimeSpanTests : ApiPropertyBaseTests<ApiPropertyTimeSpan, TimeSpan, TimeSpan?>
-    { }
-
     public class ApiPropertyintTests : ApiPropertyBaseTests<ApiProperty<int>, int, int?>
     { }
 
