@@ -6,7 +6,13 @@
     <AssemblyName>EmergenceGuardian.OntraportApi</AssemblyName>
     <Authors>Etienne Charland</Authors>
     <Company>Emergence Guardian</Company>
-    <Copyright></Copyright>
+    <Copyright>Emergence Guardian, 2019</Copyright>
+    <Description>.NET Marketing Automation Strongly-Typed API via Ontraport</Description>
+    <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/mysteryx93/EmergenceGuardian.OntraportApi</PackageProjectUrl>
+    <RepositoryUrl></RepositoryUrl>
+    <PackageTags>Ontraport API marketing automation email sender smtp</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

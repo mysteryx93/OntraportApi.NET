@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Authors>Etienne Charland</Authors>
+    <Company>Emergence Guardian</Company>
+    <Description>Registers EmergenceGuardian.OntraportApi in an ASP.NET Core Web project to add API-managed marketing automation</Description>
+    <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
+    <Copyright>Emergence Guardian, 2019</Copyright>
+    <PackageProjectUrl>https://github.com/mysteryx93/EmergenceGuardian.OntraportApi</PackageProjectUrl>
+    <PackageTags>Ontraport API marketing automation email sender smtp</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

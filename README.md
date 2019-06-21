@@ -1,5 +1,5 @@
 # EmergenceGuardian.OntraportApi
-.NET Library to Consume Ontraport API in a Strongly-Typed Way
+.NET Marketing Automation Strongly-Typed API via Ontraport
 
 Fully supports .NET Core and Dependency Injection.
 
@@ -9,7 +9,7 @@ If you want to support this project, [subscribe to Ontraport via my affiliate li
 
 Ontraport is essentially the engine that powers all the interactions between you and your customers online — in ways that wouldn’t be possible manually.
 
-It does everything related to email marketing and automation for your business, just like InfusionSoft, but it's cheaper and more user-friendly.
+It does everything related to email marketing and automation for your business, just like InfusionSoft/Keap, but it's cheaper and more user-friendly.
 
 Their [API documentation is available here](https://api.ontraport.com/doc/), but it is very complex and difficult to use manually. This library makes it very simple, allowing you to focus on your .NET web application while letting Ontraport manage the business-side of it and all email communications campaigns.
 
