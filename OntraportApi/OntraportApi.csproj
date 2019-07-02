@@ -7,7 +7,7 @@
     <Authors>Etienne Charland</Authors>
     <Company>Spiritual Self Transformation</Company>
     <Copyright>Etienne Charland, 2019</Copyright>
-    <Description>.NET Marketing Automation Strongly-Typed API via Ontraport</Description>
+    <Description>Strongly-Typed .NET API for Ontraport (Marketing Automation System)</Description>
     <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/mysteryx93/OntraportApi.NET</PackageProjectUrl>
     <RepositoryUrl></RepositoryUrl>
@@ -15,6 +15,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>OntraportApi</PackageId>
     <Version>1.0.1</Version>
+    <PackageReleaseNotes>https://github.com/mysteryx93/OntraportApi.NET/releases</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

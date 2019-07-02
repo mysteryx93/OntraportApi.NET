@@ -1,5 +1,5 @@
-# EmergenceGuardian.OntraportApi
-.NET Marketing Automation Strongly-Typed API via Ontraport
+# OntraportApi.NET
+Strongly-Typed .NET API for Ontraport (Marketing Automation System)
 
 Fully supports .NET Core and Dependency Injection.
 
@@ -103,7 +103,7 @@ All data formatting and parsing, such as Unix Epoch date time format to DateTime
 
 ## How to Configure in ASP.NET Core
 
-Add *EmergenceGuardian.OntraportApi* and *EmergenceGuardian.OntraportApi.AspNetCore* to your project via NuGet.
+Add *OntraportApi* and *OntraportApi.AspNetCore* to your project via NuGet.
 
 Add this to ConfigureServices in Startup.cs
 
@@ -137,7 +137,7 @@ services.AddHttpClient<OntraportHttpClient>()
 
 #### Using a different version of .NET or a different IoC container?
 
-No problem, [this is the only class](https://github.com/mysteryx93/EmergenceGuardian.OntraportApi/blob/master/OntraportApi.AspNetCore/OntraportApiServiceCollectionExtensions.cs) that depends on .NET Core so you can easily rewrite it for whatever technology you use.
+No problem, [this is the only class](https://github.com/mysteryx93/OntraportApi.NET/blob/master/OntraportApi.AspNetCore/OntraportApiServiceCollectionExtensions.cs) that depends on .NET Core so you can easily rewrite it for whatever technology you use.
 
 
 ## Posting SmartForms
