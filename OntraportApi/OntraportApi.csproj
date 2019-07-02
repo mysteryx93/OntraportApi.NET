@@ -3,16 +3,18 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>EmergenceGuardian.OntraportApi</RootNamespace>
-    <AssemblyName>EmergenceGuardian.OntraportApi</AssemblyName>
+    <AssemblyName>OntraportApi</AssemblyName>
     <Authors>Etienne Charland</Authors>
-    <Company>Emergence Guardian</Company>
-    <Copyright>Emergence Guardian, 2019</Copyright>
+    <Company>Spiritual Self Transformation</Company>
+    <Copyright>Etienne Charland, 2019</Copyright>
     <Description>.NET Marketing Automation Strongly-Typed API via Ontraport</Description>
     <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/mysteryx93/EmergenceGuardian.OntraportApi</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/mysteryx93/OntraportApi.NET</PackageProjectUrl>
     <RepositoryUrl></RepositoryUrl>
     <PackageTags>Ontraport API marketing automation email sender smtp</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>OntraportApi</PackageId>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -3,16 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmergenceGuardian.OntraportApi.IntegrationTests", "OntraportApi.IntegrationTests\EmergenceGuardian.OntraportApi.IntegrationTests.csproj", "{979208D7-EFE6-4A30-A625-E2E18DB16605}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OntraportApi.IntegrationTests", "OntraportApi.IntegrationTests\OntraportApi.IntegrationTests.csproj", "{979208D7-EFE6-4A30-A625-E2E18DB16605}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D2E51F7F-9F79-4A3E-9B92-0DDAFE6A3DAF}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmergenceGuardian.OntraportApi", "OntraportApi\EmergenceGuardian.OntraportApi.csproj", "{4F140409-BF74-469C-B8E0-276B0279C784}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OntraportApi", "OntraportApi\OntraportApi.csproj", "{4F140409-BF74-469C-B8E0-276B0279C784}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmergenceGuardian.OntraportApi.AspNetCore", "OntraportApi.AspNetCore\EmergenceGuardian.OntraportApi.AspNetCore.csproj", "{257D0683-D974-45CB-8EF6-CE1B255B441F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OntraportApi.AspNetCore", "OntraportApi.AspNetCore\OntraportApi.AspNetCore.csproj", "{257D0683-D974-45CB-8EF6-CE1B255B441F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
