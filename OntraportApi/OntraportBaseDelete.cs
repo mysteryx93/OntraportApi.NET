@@ -39,7 +39,7 @@ namespace EmergenceGuardian.OntraportApi
         public virtual async Task DeleteAsync(ApiSearchOptions searchOptions)
         {
             var query = new Dictionary<string, object>()
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, true);
 
             await ApiRequest.DeleteAsync<object>(
                 EndpointPlural, query);

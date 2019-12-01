@@ -37,7 +37,8 @@ namespace EmergenceGuardian.OntraportApi
 
             var json = await ApiRequest.PostAsync<JObject>(
                 $"{EndpointPlural}/saveorupdate", query.AddObject(values));
-            return await OnParseCreateOrMergeAsync(json);
+            return await CreateApiObjectAsync(json["data"]["attrs"] ?? json["data"]);
+            // return await OnParseCreateOrMergeAsync(json);
         }
 
         /// <summary>
@@ -45,8 +46,8 @@ namespace EmergenceGuardian.OntraportApi
         /// </summary>
         /// <param name="json">The JSON data to parse.</param>
         /// <returns>A T or object derived from it.</returns>
-        protected virtual async Task<T> OnParseCreateOrMergeAsync(JObject json) =>
-            await CreateApiObjectAsync(json["data"]);
+        //protected virtual async Task<T> OnParseCreateOrMergeAsync(JObject json) =>
+        //    await CreateApiObjectAsync(json["data"]);
 
         /// <summary>
         /// Retrieves the custom fields data.

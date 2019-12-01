@@ -55,7 +55,7 @@ namespace EmergenceGuardian.OntraportApi
             foreach (var item in formParams)
             {
                 var key = WebUtility.HtmlEncode(item.Key);
-                var value = WebUtility.HtmlEncode(item.Value.ToString());
+                var value = WebUtility.HtmlEncode(item.Value?.ToString());
                 response.AppendLine($"<input type=\"hidden\" name=\"{key}\" value=\"{value}\"/>");
             }
             response.AppendLine("</form>")

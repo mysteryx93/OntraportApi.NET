@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using EmergenceGuardian.OntraportApi.Models;
 using Xunit;
@@ -70,15 +71,15 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         public async Task CreateOrMergeContact_WithTypedObject_ObjectHasRightValues()
         {
             var api = SetupApi();
-            var newName = "Etienne2";
+            var newName = "Etienne";
             var newStatus = SaleStatus.Consideration;
             var contact = new ApiContact()
             {
-                Email = "typed@test.com",
+                Email = "LogTest@test.com",
                 FirstName = newName,
                 LastName = "Charland"
             };
-            contact.StatusField.Value = newStatus;
+            // contact.StatusField.Value = newStatus;
 
             var result = await api.CreateOrMergeAsync(contact.GetChanges());
 
@@ -104,6 +105,22 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
             var newContact = await api.SelectAsync("typed@test.com");
             Assert.Equal(newStatus, newContact.StatusField.Value);
             Assert.Equal(newName, newContact.FirstName);
+        }
+
+        [Fact]
+        public async Task DeleteAsync_ByEmail_ThrowsNoException()
+        {
+            var api = SetupApi();
+            var email = "delete_by_emailtest@test.com";
+            var obj = await api.CreateAsync(new ApiContact()
+            {
+                Email = email
+            }.GetChanges());
+
+            await api.DeleteAsync(new ApiSearchOptions().AddCondition("email", "=", email));
+
+            // Should throw Object Not Found.
+            await Assert.ThrowsAsync<HttpRequestException>(() => api.SelectAsync(obj.Id.Value));
         }
     }
 }

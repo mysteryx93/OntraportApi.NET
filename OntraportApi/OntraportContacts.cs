@@ -19,7 +19,7 @@ namespace EmergenceGuardian.OntraportApi
             base(apiRequest, ontraObjects, "Contact", "Contacts", (int)ApiObjectType.Contact, ApiContact.EmailKey)
         { }
 
-        protected override async Task<T> OnParseCreateOrMergeAsync(JObject json) =>
-            await CreateApiObjectAsync(json["data"]["attrs"]);
+        //protected override async Task<T> OnParseCreateOrMergeAsync(JObject json) =>
+        //    await CreateApiObjectAsync(json["data"]["attrs"]);
     }
 }

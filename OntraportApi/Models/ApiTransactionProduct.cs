@@ -12,6 +12,15 @@ namespace EmergenceGuardian.OntraportApi.Models
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy), ItemNullValueHandling = NullValueHandling.Ignore)]
     public class ApiTransactionProduct
     {
+        public ApiTransactionProduct() { }
+
+        public ApiTransactionProduct(int productId, int quantity, decimal price)
+        {
+            ProductId = productId;
+            Quantity = quantity;
+            AddPrice(price);
+        }
+
         [JsonProperty("id")]
         public int ProductId { get; set; }
 
@@ -40,7 +49,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets a list of pricing elements associated with this product. 
         /// </summary>
-        public IList<ApiTransactionPrice> Price { get; set; }
+        public IList<ApiTransactionPrice> Price { get; private set; }
 
         /// <summary>
         /// Gets or sets the type of product.

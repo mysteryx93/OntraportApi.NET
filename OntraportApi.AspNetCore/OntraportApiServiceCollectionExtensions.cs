@@ -10,16 +10,28 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class OntraportApiServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers OntraportApi classes into the IoC container. If options is null, only IWebRequestService will be registered.
+        /// Registers OntraportApi classes into the IoC container.
         /// </summary>
         /// <param name="services">The IoC services container.</param>
-        /// <param name="options">The OntraportApi configuration with API keys.</param>
-        public static IServiceCollection AddOntraportApi(this IServiceCollection services)
+        public static IServiceCollection AddOntraportApi(this IServiceCollection services) =>
+            AddOntraportApi(services);
+
+        /// <summary>
+        /// Registers OntraportApi classes into the IoC container.
+        /// </summary>
+        /// <param name="services">The IoC services container.</param>
+        /// <param name="additionalHttpConfig">Additional configuration to be applied to HttpClient connections.</param>
+        public static IServiceCollection AddOntraportApi(this IServiceCollection services, Action<IHttpClientBuilder> additionalHttpConfig)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddHttpClient<OntraportHttpClient>();
-            services.AddHttpClient<IOntraportPostForms, OntraportPostForms>();
+            var ontraClient = services.AddHttpClient<OntraportHttpClient>();
+            var formsClient = services.AddHttpClient<IOntraportPostForms, OntraportPostForms>();
+            if (additionalHttpConfig != null)
+            {
+                additionalHttpConfig(ontraClient);
+                additionalHttpConfig(formsClient);
+            }
 
             services.TryAddTransient<IOntraportCampaignBuilderItems, OntraportCampaignBuilderItems>();
             services.TryAddTransient<IOntraportCompanies<ApiCompany>, OntraportCompanies<ApiCompany>>();
@@ -44,11 +56,27 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection AddOntraportPostForms(this IServiceCollection services)
+        /// <summary>
+        /// Registers only OntraportApi classes to post forms, without adding the API.
+        /// </summary>
+        /// <param name="services">The IoC services container.</param>
+        public static IServiceCollection AddOntraportPostForms(this IServiceCollection services) =>
+            AddOntraportPostForms(services);
+
+        /// <summary>
+        /// Registers only OntraportApi classes to post forms, without adding the API.
+        /// </summary>
+        /// <param name="services">The IoC services container.</param>
+        /// <param name="additionalHttpConfig">Additional configuration to be applied to HttpClient connections.</param>
+        public static IServiceCollection AddOntraportPostForms(this IServiceCollection services, Action<IHttpClientBuilder> additionalHttpConfig)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddHttpClient<IOntraportPostForms, OntraportPostForms>();
+            var formsClient = services.AddHttpClient<IOntraportPostForms, OntraportPostForms>();
+            if (additionalHttpConfig != null)
+            {
+                additionalHttpConfig(formsClient);
+            }
 
             return services;
         }
