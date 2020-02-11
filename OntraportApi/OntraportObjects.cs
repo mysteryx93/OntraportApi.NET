@@ -612,7 +612,7 @@ namespace EmergenceGuardian.OntraportApi
             var query = new Dictionary<string, object>
             {
                 { "objectID", (int)objectType },
-                { "remove_list", campaignIds },
+                { "remove_list", campaignIds }
             }
                 .AddSearchOptions(searchOptions);
 

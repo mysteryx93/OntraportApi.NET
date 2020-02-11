@@ -72,14 +72,14 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
             var newName = "Etienne";
-            var newStatus = SaleStatus.Consideration;
+            var newStatus = SaleStatus.Committed;
             var contact = new ApiContact()
             {
                 Email = "LogTest@test.com",
                 FirstName = newName,
                 LastName = "Charland"
             };
-            // contact.StatusField.Value = newStatus;
+            contact.StatusField.Value = newStatus;
 
             var result = await api.CreateOrMergeAsync(contact.GetChanges());
 

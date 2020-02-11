@@ -59,7 +59,7 @@ namespace EmergenceGuardian.OntraportApi.Models
             }
             else
             {
-                list.Add("performAll", "1");
+                // list.Add("performAll", "1");
             }
             return list;
         }
