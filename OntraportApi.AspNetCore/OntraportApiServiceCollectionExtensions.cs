@@ -14,7 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services">The IoC services container.</param>
         public static IServiceCollection AddOntraportApi(this IServiceCollection services) =>
-            AddOntraportApi(services);
+            AddOntraportApi(services, null);
 
         /// <summary>
         /// Registers OntraportApi classes into the IoC container.
@@ -61,7 +61,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services">The IoC services container.</param>
         public static IServiceCollection AddOntraportPostForms(this IServiceCollection services) =>
-            AddOntraportPostForms(services);
+            AddOntraportPostForms(services, null);
 
         /// <summary>
         /// Registers only OntraportApi classes to post forms, without adding the API.
@@ -72,6 +72,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
+            var ontraClient = services.AddHttpClient<OntraportHttpClient>();
             var formsClient = services.AddHttpClient<IOntraportPostForms, OntraportPostForms>();
             if (additionalHttpConfig != null)
             {

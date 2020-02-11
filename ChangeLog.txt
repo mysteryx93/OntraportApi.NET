@@ -1,0 +1,8 @@
+OntraportApi.NET
+
+What's New
+
+v1.0.2 (2020-02-11)
+- Fixed minor bugs
+- No longer set 'performAll' in query when search options aren't set
+- Fixed AddOntraportPostForms for services registration
