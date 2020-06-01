@@ -1,6 +1,7 @@
 ﻿using System;
+using HanumanInstitute.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi.Converters
+namespace HanumanInstitute.OntraportApi.Converters
 {
     /// <summary>
     /// Converts an integer field into an enumeration.
@@ -9,10 +10,10 @@ namespace EmergenceGuardian.OntraportApi.Converters
     public class JsonConverterIntEnum<T> : JsonConverterBase<T>
         where T : struct
     {
-        public override T? Parse(string value) =>
+        public override T? Parse(string? value) =>
             !IsNullValue(value) ? (T?)Enum.Parse(typeof(T), value) : (T?)null;
 
-        public override string Format(T? value) => 
-            value != null ? ((int)(object)value).ToString() : null;
+        public override string? Format(T? value) => 
+            value != null ? ((int)(object)value).ToStringInvariant() : null;
     }
 }

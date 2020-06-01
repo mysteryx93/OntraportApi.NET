@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// The contact's credit card type.

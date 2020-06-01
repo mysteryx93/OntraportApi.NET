@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Converters;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Converters;
+using HanumanInstitute.OntraportApi.Models;
 using Newtonsoft.Json.Linq;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides Ontraport API support for Transaction objects.
@@ -23,13 +23,13 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="transactionId">The transaction ID.</param>
         public async Task MarkCollectionsAsync(int transactionId)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "id", transactionId }
             };
 
             await ApiRequest.PutAsync<object>(
-                "transaction/convertToCollections", query);
+                "transaction/convertToCollections", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -38,13 +38,13 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="transactionId">The transaction ID.</param>
         public async Task MarkDeclinedAsync(int transactionId)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "id", transactionId }
             };
 
             await ApiRequest.PutAsync<object>(
-                "transaction/convertToDecline", query);
+                "transaction/convertToDecline", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -53,13 +53,13 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="transactionId">The transaction ID.</param>
         public async Task MarkPaidAsync(int transactionId)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "id", transactionId }
             };
 
             await ApiRequest.PutAsync<object>(
-                "transaction/markPaid", query);
+                "transaction/markPaid", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -68,13 +68,13 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="offer">The product and pricing offer for the transaction.</param>
         public async Task UpdateOrderAsync(ApiOffer offer)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "offer", offer}
             };
 
             await ApiRequest.PutAsync<object>(
-                "transaction/order", query);
+                "transaction/order", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -91,10 +91,10 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="invoiceTemplate">The ID of the invoice template to use for this transaction. The default invoice ID is 1.</param>
         /// <returns>The transaction result.</returns>
         public async Task<ApiTransactionResult> ProcessManualAsync(int contactId, int gatewayId,
-            ApiTransactionOffer offer, ApiTransactionAddress billingAddress = null, ApiTransactionPayer payer = null,
-            int? creditCardId = null, string externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1)
+            ApiTransactionOffer offer, ApiTransactionAddress? billingAddress = null, ApiTransactionPayer? payer = null,
+            int? creditCardId = null, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "contact_id", contactId },
                 { "chargeNow", "chargeNow" },
@@ -109,7 +109,7 @@ namespace EmergenceGuardian.OntraportApi
                 .AddIfHasValue("cc_id", creditCardId);
 
             return await ApiRequest.PostAsync<ApiTransactionResult>(
-                "transaction/processManual", query);
+                "transaction/processManual", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -123,9 +123,9 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="invoiceTemplate">The ID of the invoice template to use for this transaction. The default invoice ID is 1.</param>
         /// <returns>The invoice ID.</returns>
         public async Task<int> LogTransactionAsync(int contactId, ApiTransactionOffer offer,
-            string externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1)
+            string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "contact_id", contactId },
                 { "chargeNow", "chargeLog" },
@@ -136,8 +136,8 @@ namespace EmergenceGuardian.OntraportApi
                 .AddIfHasValue("trans_date", new JsonConverterDateTime(true).Format(transactionDate));
 
             var json = await ApiRequest.PostAsync<JObject>(
-                "transaction/processManual", query);
-            return json["data"]["invoice_id"].Value<int>();
+                "transaction/processManual", query).ConfigureAwait(false);
+            return JsonData(json)["invoice_id"]?.Value<int>() ?? 0;
         }
 
         /// <summary>
@@ -146,11 +146,11 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         public async Task RefundAsync(ApiSearchOptions searchOptions)
         {
-            var query = new Dictionary<string, object>()
+            var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);
 
             await ApiRequest.PutAsync<object>(
-                "transaction/refund", query);
+                "transaction/refund", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -159,11 +159,11 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         public async Task RerunAsync(ApiSearchOptions searchOptions)
         {
-            var query = new Dictionary<string, object>()
+            var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);
 
             await ApiRequest.PostAsync<object>(
-                "transaction/rerun", query);
+                "transaction/rerun", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -172,11 +172,11 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         public async Task RerunCommissionsAsync(ApiSearchOptions searchOptions)
         {
-            var query = new Dictionary<string, object>()
+            var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);
 
             await ApiRequest.PutAsync<object>(
-                "transaction/rerunCommission", query);
+                "transaction/rerunCommission", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -185,11 +185,11 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         public async Task ResendInvoiceAsync(ApiSearchOptions searchOptions)
         {
-            var query = new Dictionary<string, object>()
+            var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);
 
             await ApiRequest.PostAsync<object>(
-                "transaction/resendInvoice", query);
+                "transaction/resendInvoice", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -198,11 +198,11 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         public async Task VoidAsync(ApiSearchOptions searchOptions)
         {
-            var query = new Dictionary<string, object>()
+            var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);
 
             await ApiRequest.PutAsync<object>(
-                "transaction/void", query);
+                "transaction/void", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -211,11 +211,11 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         public async Task WriteOffAsync(ApiSearchOptions searchOptions)
         {
-            var query = new Dictionary<string, object>()
+            var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);
 
             await ApiRequest.PutAsync<object>(
-                "transaction/writeOff", query);
+                "transaction/writeOff", query).ConfigureAwait(false);
         }
     }
 }

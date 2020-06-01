@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides Ontraport API support for Task objects.
@@ -27,14 +27,14 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="searchOptions">The search options.</param>
         /// <param name="message">Data for the task message to assign to contacts.</param>
-        Task AssignAsync(ApiObjectType objectType, ApiSearchOptions searchOptions = null, AssignTaskMessage message = null);
+        Task AssignAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, AssignTaskMessage? message = null);
 
         /// <summary>
         /// Cancels one or more tasks.
         /// </summary>
         /// <param name="objectType">The object type.</param>
         /// <param name="searchOptions">The search options.</param>
-        Task CancelAsync(ApiObjectType objectType, ApiSearchOptions searchOptions = null);
+        Task CancelAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null);
 
         /// <summary>
         /// Marks one or more tasks as completed.
@@ -43,7 +43,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="data">Additional data to set, see documentation.</param>
         /// <returns></returns>
-        Task CompleteAsync(ApiObjectType objectType, ApiSearchOptions searchOptions = null, IDictionary<string, object> data = null);
+        Task CompleteAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, IDictionary<string, object?>? data = null);
 
         /// <summary>
         /// Reschedules a task for a different date and time.

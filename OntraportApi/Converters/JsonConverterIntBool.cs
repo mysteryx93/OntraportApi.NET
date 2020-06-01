@@ -1,15 +1,15 @@
 ﻿using System;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 using Newtonsoft.Json;
 
-namespace EmergenceGuardian.OntraportApi.Converters
+namespace HanumanInstitute.OntraportApi.Converters
 {
     /// <summary>
     /// Converts a "0" or "1" field into a boolean property.
     /// </summary>
     public class JsonConverterIntBool : JsonConverterBase<bool>
     {
-        public override bool? Parse(string value)
+        public override bool? Parse(string? value)
         {
             // Different forms may use either a binary integer or boolean value for deleted field.
             int? valueInt = null;
@@ -23,7 +23,7 @@ namespace EmergenceGuardian.OntraportApi.Converters
             }
             else if (!IsNullValue(value))
             {
-                valueInt = value.Convert<int?>();
+                valueInt = value?.Convert<int?>();
             }
             return valueInt.HasValue ? valueInt == 1 : (bool?)null;
         }

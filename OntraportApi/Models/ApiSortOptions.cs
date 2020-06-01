@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Contains common sort options.
@@ -19,7 +19,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the field results should be sorted on.
         /// </summary>
-        public string Sort { get; set; }
+        public string Sort { get; set; } = string.Empty;
         /// <summary>
         /// Gets or sets the direction your results should be sorted.
         /// </summary>

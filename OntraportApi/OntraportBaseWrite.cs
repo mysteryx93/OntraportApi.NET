@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 using Newtonsoft.Json.Linq;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides common API endpoints for all objects with update methods.
@@ -14,9 +14,9 @@ namespace EmergenceGuardian.OntraportApi
     public abstract class OntraportBaseWrite<T> : OntraportBaseRead<T>, IOntraportBaseWrite<T> 
         where T : ApiObject
     {
-        protected readonly string PrimarySearchKey;
+        protected string? PrimarySearchKey { get; }
 
-        public OntraportBaseWrite(OntraportHttpClient apiRequest, string endpointSingular, string endpointPlural, string primarySearchKey) :
+        public OntraportBaseWrite(OntraportHttpClient apiRequest, string endpointSingular, string endpointPlural, string? primarySearchKey) :
             base(apiRequest, endpointSingular, endpointPlural)
         {
             PrimarySearchKey = primarySearchKey;
@@ -29,9 +29,9 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>The selected object.</returns>
         public async Task<T> SelectAsync(string keyValue)
         {
-            if (string.IsNullOrEmpty(PrimarySearchKey)) throw new InvalidOperationException("This method is not available for this object type.");
+            if (string.IsNullOrEmpty(PrimarySearchKey)) throw new InvalidOperationException(Properties.Resources.InvalidMethodForObjectType);
 
-            var result = await SelectAsync(new ApiSearchOptions().AddCondition(PrimarySearchKey, "=", keyValue));
+            var result = await SelectAsync(new ApiSearchOptions().AddCondition(PrimarySearchKey, "=", keyValue)).ConfigureAwait(false);
             return result.FirstOrDefault();
         }
 
@@ -40,12 +40,12 @@ namespace EmergenceGuardian.OntraportApi
         /// </summary>
         /// <param name="values">Fields to set on the object.</param>
         /// <returns>The created object.</returns>
-        public async Task<T> CreateAsync(object values = null)
+        public async Task<T> CreateAsync(object? values = null)
         {
             var json = await ApiRequest.PostAsync<JObject>(
                 EndpointPlural,
-                new Dictionary<string, object>().AddObject(values));
-            return await OnParseCreateAsync(json);
+                new Dictionary<string, object?>().AddObject(values)).ConfigureAwait(false);
+            return await OnParseCreateAsync(json).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -53,8 +53,8 @@ namespace EmergenceGuardian.OntraportApi
         /// </summary>
         /// <param name="json">The JSON data to parse.</param>
         /// <returns>A T or object derived from it.</returns>
-        protected virtual async Task<T> OnParseCreateAsync(JObject json) =>
-            await CreateApiObjectAsync(json["data"]);
+        protected virtual async Task<T> OnParseCreateAsync(JObject json) => 
+            await CreateApiObjectAsync(JsonData(json)).ConfigureAwait(false);
 
         /// <summary>
         /// Updates an existing object with given data.
@@ -62,16 +62,16 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="objectId">The ID of the object to update.</param>
         /// <param name="values">Fields to set on the object.</param>
         /// <returns>A dictionary of updated fields.</returns>
-        public async Task<T> UpdateAsync(int objectId, object values = null)
+        public async Task<T> UpdateAsync(int objectId, object? values = null)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "id", objectId }
             };
 
             var json = await ApiRequest.PutAsync<JObject>(
-                EndpointPlural, query.AddObject(values));
-            return await OnParseUpdateAsync(json);
+                EndpointPlural, query.AddObject(values)).ConfigureAwait(false);
+            return await OnParseUpdateAsync(json).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -80,6 +80,6 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="json">The JSON data to parse.</param>
         /// <returns>A T or object derived from it.</returns>
         protected virtual async Task<T> OnParseUpdateAsync(JObject json) =>
-            await CreateApiObjectAsync(json["data"]["attrs"]);
+            await CreateApiObjectAsync(JsonData(json)["attrs"]).ConfigureAwait(false);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides common API endpoints for all objects with update methods.
@@ -22,7 +22,7 @@ namespace EmergenceGuardian.OntraportApi
         /// </summary>
         /// <param name="values">Fields to set on the object.</param>
         /// <returns>The created object.</returns>
-        Task<T> CreateAsync(object values = null);
+        Task<T> CreateAsync(object? values = null);
 
         /// <summary>
         /// Updates an existing object with given data.
@@ -30,6 +30,6 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="objectId">The ID of the object to update.</param>
         /// <param name="values">Fields to set on the object.</param>
         /// <returns>An object containing updated fields.</returns>
-        Task<T> UpdateAsync(int objectId, object values = null);
+        Task<T> UpdateAsync(int objectId, object? values = null);
     }
 }

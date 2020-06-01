@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace EmergenceGuardian.OntraportApi.IntegrationTests
+namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
     public class OntraportMessagesTests : OntraportBaseWriteTests<OntraportMessages, ApiMessage>
     {

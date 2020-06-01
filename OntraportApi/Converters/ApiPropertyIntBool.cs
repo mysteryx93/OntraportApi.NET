@@ -1,7 +1,7 @@
 ﻿using System;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi.Converters
+namespace HanumanInstitute.OntraportApi.Converters
 {
     /// <summary>
     /// Represents a boolean field stored as "1" or "0". ApiProperty of type bool would store as "True" or "False".

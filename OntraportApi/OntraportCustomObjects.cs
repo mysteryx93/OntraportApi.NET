@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Models;
-using Newtonsoft.Json.Linq;
+using HanumanInstitute.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides Ontraport API support for CustomObject objects.
@@ -26,7 +24,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>The selected object.</returns>
         public async Task<ApiCustomObject> SelectAsync(string pluralName)
         {
-            var result = await SelectAsync(new ApiSearchOptions().AddCondition("plural", "=", pluralName));
+            var result = await SelectAsync(new ApiSearchOptions().AddCondition("plural", "=", pluralName)).ConfigureAwait(false);
             return result.FirstOrDefault();
         }
     }

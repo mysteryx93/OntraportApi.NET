@@ -1,9 +1,8 @@
 ﻿using System;
-using EmergenceGuardian.OntraportApi.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Contains the data sent back from a manual transaction request.
@@ -13,8 +12,8 @@ namespace EmergenceGuardian.OntraportApi.Models
     {
         public int ResultCode { get; set; }
         public int TransactionId { get; set; }
-        public string ExternalTxn { get; set; }
-        public string Message { get; set; }
+        public string ExternalTxn { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
         public int InvoiceId { get; set; }
     }
 }

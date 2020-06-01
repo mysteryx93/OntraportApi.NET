@@ -1,9 +1,9 @@
 ﻿using System;
-using EmergenceGuardian.OntraportApi.Converters;
+using HanumanInstitute.OntraportApi.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Any array of price data should be included with products.
@@ -24,7 +24,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets the name of the tax to be applied.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets whether or not shipping charges should be taxed.

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides Ontraport API support for Transaction objects.
@@ -47,7 +47,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="transactionDate">The date and time of the transaction.</param>
         /// <param name="invoiceTemplate">The ID of the invoice template to use for this transaction. The default invoice ID is 1.</param>
         /// <returns>The transaction result.</returns>
-        Task<ApiTransactionResult> ProcessManualAsync(int contactId, int gatewayId, ApiTransactionOffer offer, ApiTransactionAddress billingAddress = null, ApiTransactionPayer payer = null, int? creditCardId = null, string externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1);
+        Task<ApiTransactionResult> ProcessManualAsync(int contactId, int gatewayId, ApiTransactionOffer offer, ApiTransactionAddress? billingAddress = null, ApiTransactionPayer? payer = null, int? creditCardId = null, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1);
 
         /// <summary>
         /// Far less data is needed to simply log a transaction than to manually process one. The gateway, payer, and billing details are unnecessary 
@@ -59,7 +59,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="transactionDate">The date and time of the transaction.</param>
         /// <param name="invoiceTemplate">The ID of the invoice template to use for this transaction. The default invoice ID is 1.</param>
         /// <returns>The invoice ID.</returns>
-        Task<int> LogTransactionAsync(int contactId, ApiTransactionOffer offer, string externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1);
+        Task<int> LogTransactionAsync(int contactId, ApiTransactionOffer offer, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1);
 
         /// <summary>
         /// Refunds a previously charged transaction.

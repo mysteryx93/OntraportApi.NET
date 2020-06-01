@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// The Ontraport field type when creating custom fields. System fields can be of additional types.

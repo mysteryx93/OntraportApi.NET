@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Indicates the units of length of the trial period.

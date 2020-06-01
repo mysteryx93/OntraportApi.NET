@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Converters;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Converters;
+using HanumanInstitute.OntraportApi.Models;
 using Newtonsoft.Json.Linq;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides Ontraport API support for Task objects.
@@ -28,7 +27,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>An object containing updated fields.</returns>
         public async Task<ApiTask> UpdateAsync(int taskId, int? owner = null, DateTimeOffset? dateDue = null, ApiTask.TaskStatus? status = null)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "id", taskId },
             }
@@ -37,8 +36,8 @@ namespace EmergenceGuardian.OntraportApi
                 .AddIfHasValue("status", new JsonConverterStringEnum<ApiTask.TaskStatus>().Format(status));
 
             var json = await ApiRequest.PutAsync<JObject>(
-                "Tasks", query);
-            return await CreateApiObjectAsync(json["data"]["attrs"]);
+                "Tasks", query).ConfigureAwait(false);
+            return await CreateApiObjectAsync(JsonData(json)["attrs"]).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -47,9 +46,9 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="searchOptions">The search options.</param>
         /// <param name="message">Data for the task message to assign to contacts.</param>
-        public async Task AssignAsync(ApiObjectType objectType, ApiSearchOptions searchOptions = null, AssignTaskMessage message = null)
+        public async Task AssignAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, AssignTaskMessage? message = null)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "object_type_id", (int)objectType },
             }
@@ -57,7 +56,7 @@ namespace EmergenceGuardian.OntraportApi
                 .AddIfHasValue("message", message);
 
             await ApiRequest.PostAsync<object>(
-                "task/assign", query);
+                "task/assign", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -65,16 +64,16 @@ namespace EmergenceGuardian.OntraportApi
         /// </summary>
         /// <param name="objectType">The object type.</param>
         /// <param name="searchOptions">The search options.</param>
-        public async Task CancelAsync(ApiObjectType objectType, ApiSearchOptions searchOptions = null)
+        public async Task CancelAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType }
             }
                 .AddSearchOptions(searchOptions, true);
 
             await ApiRequest.PostAsync<object>(
-                "task/cancel", query);
+                "task/cancel", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -84,9 +83,9 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="data">Additional data to set, see documentation.</param>
         /// <returns></returns>
-        public async Task CompleteAsync(ApiObjectType objectType, ApiSearchOptions searchOptions = null, IDictionary<string, object> data = null)
+        public async Task CompleteAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, IDictionary<string, object?>? data = null)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType }
             }
@@ -94,7 +93,7 @@ namespace EmergenceGuardian.OntraportApi
                 .AddIfHasValue("data", data);
 
             await ApiRequest.PostAsync<object>(
-                "task/complete", query);
+                "task/complete", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -105,14 +104,14 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns></returns>
         public async Task RescheduleAsync(int id, DateTimeOffset newTime)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "id", id },
                 { "newtime", new JsonConverterDateTime().Format(newTime) }
             };
 
             await ApiRequest.PostAsync<object>(
-                "task/reschedule", query);
+                "task/reschedule", query).ConfigureAwait(false);
         }
     }
 }

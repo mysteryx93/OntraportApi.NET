@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     public class ResponseSuccessList
     {
@@ -18,19 +17,24 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="json"></param>
         public ResponseSuccessList(JObject json)
         {
-            var jsonSuccess = json["data"]["success"];
-            var jsonError = json["data"]["error"];
-            if (jsonSuccess?.Any() == true)
+            json.CheckNotNull(nameof(json));
+            var data = json["data"];
+            if (data != null)
             {
-                Success = jsonSuccess.ToObject<IDictionary<string, string>>();
-            }
-            if (jsonError?.Any() == true)
-            {
-                Error = jsonError.ToObject<IDictionary<string, string>>();
+                var jsonSuccess = data["success"];
+                var jsonError = data["error"];
+                if (jsonSuccess?.Any() == true)
+                {
+                    Success = jsonSuccess.ToObject<IDictionary<string, string>>()!;
+                }
+                if (jsonError?.Any() == true)
+                {
+                    Error = jsonError.ToObject<IDictionary<string, string>>()!;
+                }
             }
         }
 
-        public IDictionary<string, string> Success { get; set; } = new Dictionary<string, string>();
-        public IDictionary<string, string> Error { get; set; } = new Dictionary<string, string>();
+        public IDictionary<string, string> Success { get; private set; } = new Dictionary<string, string>();
+        public IDictionary<string, string> Error { get; private set; } = new Dictionary<string, string>();
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using EmergenceGuardian.OntraportApi.Converters;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Converters;
+using HanumanInstitute.OntraportApi.Models;
 using Xunit;
 
-namespace EmergenceGuardian.OntraportApi.UnitTests
+namespace HanumanInstitute.OntraportApi.UnitTests
 {
     public abstract class ApiPropertyBaseTests<P, T, N>
         where P : ApiPropertyBase<T, N>

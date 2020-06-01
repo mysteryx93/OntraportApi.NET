@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 using Newtonsoft.Json.Linq;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides Ontraport API support for Webhook objects.
@@ -25,7 +25,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>The created WebHook.</returns>
         public async Task<ApiWebhook> SubscribeAsync(string url, string eventName, string data)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "url", url },
                 { "event", eventName },
@@ -33,8 +33,8 @@ namespace EmergenceGuardian.OntraportApi
                 .AddIfHasValue("data", data);
 
             var json = await ApiRequest.PostAsync<JObject>(
-                "Webhook/subscribe", query);
-            return await CreateApiObjectAsync(json["data"]);
+                "Webhook/subscribe", query).ConfigureAwait(false);
+            return await CreateApiObjectAsync(json["data"]).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -43,13 +43,13 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="webhookId">The ID of the webhook to unsubscribe from. Required.</param>
         public async Task UnsubscribeAsync(int webhookId)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "id", webhookId }
             };
 
             await ApiRequest.DeleteAsync<object>(
-                "Webhook/unsubscribe", query);
+                "Webhook/unsubscribe", query).ConfigureAwait(false);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi.Converters
+namespace HanumanInstitute.OntraportApi.Converters
 {
     /// <summary>
     /// Represents a String property on an ApiObject. Changes are tracked and can be returned with ApiObject.GetChanges().
@@ -17,6 +17,6 @@ namespace EmergenceGuardian.OntraportApi.Converters
             base(host, key)
         { }
 
-        public override string NullString => null;
+        public override string? NullString => null;
     }
 }

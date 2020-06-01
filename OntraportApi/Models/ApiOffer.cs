@@ -1,7 +1,7 @@
 ﻿using System;
-using EmergenceGuardian.OntraportApi.Converters;
+using HanumanInstitute.OntraportApi.Converters;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Offer objects allow you to save the details of products, quantities, and prices of frequently used transactions as offers for rapid processing with other Contacts.
@@ -11,8 +11,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user who controls the offer. This field must contain a value for an offer object to be saved properly.
         /// </summary>
-        public ApiProperty<int> OwnerField => _ownerField ?? (_ownerField = new ApiProperty<int>(this, OwnerKey));
-        private ApiProperty<int> _ownerField;
+        public ApiProperty<int> OwnerField => _ownerField ??= new ApiProperty<int>(this, OwnerKey);
+        private ApiProperty<int>? _ownerField;
         public const string OwnerKey = "owner";
         /// <summary>
         /// Gets or sets the ID of the user who controls the offer. This field must contain a value for an offer object to be saved properly.
@@ -22,8 +22,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the offer's name.
         /// </summary>
-        public ApiPropertyString NameField => _nameField ?? (_nameField = new ApiPropertyString(this, NameKey));
-        private ApiPropertyString _nameField;
+        public ApiPropertyString NameField => _nameField ??= new ApiPropertyString(this, NameKey);
+        private ApiPropertyString? _nameField;
         public const string NameKey = "name";
         /// <summary>
         /// Gets or sets the offer's name.
@@ -33,8 +33,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set whether the offer is accessible for processing manual transactions. 
         /// </summary>
-        public ApiPropertyIntBool PublicField => _publicField ?? (_publicField = new ApiPropertyIntBool(this, PublicKey));
-        private ApiPropertyIntBool _publicField;
+        public ApiPropertyIntBool PublicField => _publicField ??= new ApiPropertyIntBool(this, PublicKey);
+        private ApiPropertyIntBool? _publicField;
         public const string PublicKey = "public";
         /// <summary>
         /// Gets or sets whether the offer is accessible for processing manual transactions. 
@@ -44,16 +44,16 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set a json encoded string containing an offer's data.
         /// </summary>
-        public ApiPropertyString ContentField => _contentField ?? (_contentField = new ApiPropertyString(this, ContentKey));
-        private ApiPropertyString _contentField;
+        public ApiPropertyString ContentField => _contentField ??= new ApiPropertyString(this, ContentKey);
+        private ApiPropertyString? _contentField;
         public const string ContentKey = "data";
         /// <summary>
         /// Gets or sets a json encoded string containing an offer's data.
         /// </summary>
         public string Content { get => ContentField.Value; set => ContentField.Value = value; }
 
-        public ApiProperty<int> ReferencedField => _referencedField ?? (_referencedField = new ApiProperty<int>(this, ReferencedKey));
-        private ApiProperty<int> _referencedField;
+        public ApiProperty<int> ReferencedField => _referencedField ??= new ApiProperty<int>(this, ReferencedKey);
+        private ApiProperty<int>? _referencedField;
         public const string ReferencedKey = "referenced";
         public int? Referenced { get => ReferencedField.Value; set => ReferencedField.Value = value; }
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi.Converters
+namespace HanumanInstitute.OntraportApi.Converters
 {
     /// <summary>
     /// Converts [] into a new object. Ontraport API returns [] instead of {} for empty dictinoaries.
@@ -16,8 +16,11 @@ namespace EmergenceGuardian.OntraportApi.Converters
             //return objectType.IsAssignableFrom(typeof(Dictionary<string, object>));
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
+            reader.CheckNotNull(nameof(reader));
+            objectType.CheckNotNull(nameof(objectType));
+
             var token = JToken.Load(reader);
             if (token.Type == JTokenType.Object)
             {
@@ -43,8 +46,9 @@ namespace EmergenceGuardian.OntraportApi.Converters
             throw new JsonSerializationException($"Object, empty array or null expected at \"{reader.Path}\"");
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
+            serializer.CheckNotNull(nameof(serializer));
             serializer.Serialize(writer, value);
         }
     }

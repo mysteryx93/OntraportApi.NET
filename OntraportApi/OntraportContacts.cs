@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Models;
-using Newtonsoft.Json.Linq;
+using HanumanInstitute.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides Ontraport API support for Contact objects.
@@ -19,7 +17,5 @@ namespace EmergenceGuardian.OntraportApi
             base(apiRequest, ontraObjects, "Contact", "Contacts", (int)ApiObjectType.Contact, ApiContact.EmailKey)
         { }
 
-        //protected override async Task<T> OnParseCreateOrMergeAsync(JObject json) =>
-        //    await CreateApiObjectAsync(json["data"]["attrs"]);
     }
 }

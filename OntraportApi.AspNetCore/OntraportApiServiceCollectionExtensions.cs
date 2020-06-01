@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using EmergenceGuardian.OntraportApi;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi;
+using HanumanInstitute.OntraportApi.Models;
 using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace - MS guidelines say put DI registration in this NS
@@ -74,10 +74,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             var ontraClient = services.AddHttpClient<OntraportHttpClient>();
             var formsClient = services.AddHttpClient<IOntraportPostForms, OntraportPostForms>();
-            if (additionalHttpConfig != null)
-            {
-                additionalHttpConfig(formsClient);
-            }
+            additionalHttpConfig?.Invoke(formsClient);
 
             return services;
         }

@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Net.Http;
+using HanumanInstitute.OntraportApi.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Moq;
 
-namespace EmergenceGuardian.OntraportApi.IntegrationTests
+namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
     public class ConfigHelper
     {
         public OntraportHttpClient GetHttpClient()
         {
             // var factory = Mock.Of<IHttpClientFactory>(x => x.CreateClient(It.IsAny<string>()) == new HttpClient());
-            return new OntraportHttpClient(GetConfig(), new HttpClient());
+            return new OntraportHttpClient(new HttpClient(), GetConfig(), null);
         }
 
         public IOptions<OntraportConfig> GetConfig()

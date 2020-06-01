@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.ComponentModel;
-using System.Globalization;
-using EmergenceGuardian.OntraportApi.Models;
-using System.Xml;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using HanumanInstitute.OntraportApi.Models;
+using Newtonsoft.Json;
 
-namespace EmergenceGuardian.OntraportApi.Converters
+namespace HanumanInstitute.OntraportApi.Converters
 {
     /// <summary>
     /// Provides a simple way to convert between Ontraport API data and .NET types. Simply override Parse and Format.
@@ -16,34 +14,34 @@ namespace EmergenceGuardian.OntraportApi.Converters
         where T : struct
     {
         public override T? ReadJson(JsonReader reader, Type objectType, T? existingValue, bool hasExistingValue, JsonSerializer serializer) =>
-            Parse(reader.Value?.ToStringInvariant());
+            Parse(reader?.Value?.ToStringInvariant());
 
         public override void WriteJson(JsonWriter writer, T? value, JsonSerializer serializer) =>
-            writer.WriteValue(Format(value));
+            writer?.WriteValue(Format(value));
 
         /// <summary>
         /// Return whether specific value is to be considered null.
         /// </summary>
-        public bool IsNullValue(string value) => value == null || value == NullString;
+        public bool IsNullValue([NotNullWhen(false)] string? value) => value == null || value == NullString;
 
         /// <summary>
         /// Returns the string that represents a null value.
         /// </summary>
-        public virtual string NullString => "";
+        public virtual string? NullString => "";
 
         /// <summary>
         /// When overriden in a derived class, parses Ontraport API data into data type T.
         /// </summary>
         /// <param name="value">The value to parse.</param>
         /// <returns>The parsed value.</returns>
-        public virtual T? Parse(string value) => value != null ? value.Convert<T?>() : default;
+        public virtual T? Parse(string? value) => value != null ? value.Convert<T?>() : default;
 
         /// <summary>
         /// When overriden in a derived class, formats data of type T into Ontraport API format.
         /// </summary>
         /// <param name="value">The value to format.</param>
         /// <returns>The formatted value, usually a string or int.</returns>
-        public virtual string Format(T? value) => value?.ToStringInvariant();
+        public virtual string? Format(T? value) => value?.ToStringInvariant();
 
         /// <summary>
         /// Creates a null object if P is nullable, otherwise throws a NullReferenceException.

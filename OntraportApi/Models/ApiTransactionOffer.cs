@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using EmergenceGuardian.OntraportApi.Converters;
+using HanumanInstitute.OntraportApi.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// An offer needs to be included with each manual transaction. This includes information on products, tax, and shipping.
@@ -73,7 +73,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// Gets or sets the expiration date of the credit card on file.
         /// </summary>
         [JsonProperty("ccExpirationDate")]
-        public string CreditCardExpirationDate { get; set; }
+        public string CreditCardExpirationDate { get; set; } = string.Empty;
 
 
 
@@ -88,21 +88,21 @@ namespace EmergenceGuardian.OntraportApi.Models
 
         public ApiTransactionOffer Add(ApiTransactionProduct product)
         {
-            Products = Products ?? new List<ApiTransactionProduct>();
+            Products ??= new List<ApiTransactionProduct>();
             Products.Add(product);
             return this;
         }
 
         public ApiTransactionOffer Add(ApiTransactionTax tax)
         {
-            Taxes = Taxes ?? new List<ApiTransactionTax>();
+            Taxes ??= new List<ApiTransactionTax>();
             Taxes.Add(tax);
             return this;
         }
 
         public ApiTransactionOffer Add(ApiTransactionShipping shipping)
         {
-            Shipping = Shipping ?? new List<ApiTransactionShipping>();
+            Shipping ??= new List<ApiTransactionShipping>();
             Shipping.Add(shipping);
             return this;
         }

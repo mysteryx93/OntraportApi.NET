@@ -1,9 +1,9 @@
 ﻿using System;
-using EmergenceGuardian.OntraportApi.Converters;
+using HanumanInstitute.OntraportApi.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Any array of price data should be included with products.

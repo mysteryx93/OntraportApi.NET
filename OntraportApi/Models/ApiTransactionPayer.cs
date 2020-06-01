@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Payer information is stored for contacts with credit card information on file. 
@@ -15,11 +15,11 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// Gets or sets the contact's full credit card number.
         /// </summary>
         [JsonProperty("ccnumber")]
-        public string CardNumber { get; set; }
+        public string CardNumber { get; set; } = string.Empty;
         /// <summary>
         /// Gets or sets the CVV code for the contact's credit card.
         /// </summary>
-        public string CvvCode { get; set; }
+        public string CvvCode { get; set; } = string.Empty;
         /// <summary>
         /// Gets or sets the expiration month, in digits, of the credit card to be processed.
         /// </summary>

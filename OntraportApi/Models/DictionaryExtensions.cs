@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
-using EmergenceGuardian.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Facilitates building Ontraport queries by adding common parameters.
@@ -21,7 +18,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="key">The key to add.</param>
         /// <param name="value">The value to add if not null.</param>
         /// <returns>The query dictionary.</returns>
-        internal static Dictionary<string, object> AddIfHasValue(this Dictionary<string, object> list, string key, object value)
+        internal static Dictionary<string, object?> AddIfHasValue(this Dictionary<string, object?> list, string key, object? value)
         {
             if (value != null)
             {
@@ -37,7 +34,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="options">An ApiSearchOptions object containing search options.</param>
         /// <param name="performsAction">Whether the query performs an action other than selecting data.</param>
         /// <returns></returns>
-        internal static Dictionary<string, object> AddSearchOptions(this Dictionary<string, object> list, ApiSearchOptions options, bool performsAction = false)
+        internal static Dictionary<string, object?> AddSearchOptions(this Dictionary<string, object?> list, ApiSearchOptions? options, bool performsAction = false)
         {
             if (options != null)
             {
@@ -54,7 +51,7 @@ namespace EmergenceGuardian.OntraportApi.Models
                 }
                 if (performsAction && options.Ids == null)
                 {
-                    list.Add("performAll",  "1");
+                    list.Add("performAll", "1");
                 }
             }
             else
@@ -69,7 +66,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// </summary>
         /// <param name="list">The dictionary of query parameters.</param>
         /// <param name="options">An ApiSortOptions object containing sort options.</param>
-        internal static Dictionary<string, object> AddSortOptions(this Dictionary<string, object> list, ApiSortOptions options)
+        internal static Dictionary<string, object?> AddSortOptions(this Dictionary<string, object?> list, ApiSortOptions? options)
         {
             if (options != null)
             {
@@ -89,7 +86,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="start">The offset to start your search from.</param>
         /// <param name="range">The number of objects you want to retrieve. The maximum and default range is 50.</param>
         /// <returns>The query dictionary.</returns>
-        internal static Dictionary<string, object> AddStartRange(this Dictionary<string, object> list, int? start = null, int? range = null)
+        internal static Dictionary<string, object?> AddStartRange(this Dictionary<string, object?> list, int? start = null, int? range = null)
         {
             if (start.HasValue)
             {
@@ -109,11 +106,11 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="sort">The field results should be sorted on.</param>
         /// <param name="sortDirection">The direction your results should be sorted.</param>
         /// <returns>The query dictionary.</returns>
-        internal static Dictionary<string, object> AddSort(this Dictionary<string, object> list, string sort = null, ListSortDirection sortDirection = ListSortDirection.Ascending)
+        internal static Dictionary<string, object?> AddSort(this Dictionary<string, object?> list, string? sort = null, ListSortDirection sortDirection = ListSortDirection.Ascending)
         {
             if (!string.IsNullOrEmpty(sort))
             {
-                list.Add("sort", sort);
+                list.Add("sort", sort!);
                 list.Add("sortDir", sortDirection == ListSortDirection.Ascending ? "asc" : "desc");
             }
             return list;
@@ -127,7 +124,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="search">A string to search your objects for.</param>
         /// <param name="searchNotes">Used in conjunction with the search parameter to indicate whether or not object notes should be searched for the specified string in addition to other object fields.</param>
         /// <returns>The query dictionary.</returns>
-        internal static Dictionary<string, object> AddConditions(this Dictionary<string, object> list, ApiSearchOptions condition = null, string search = null, bool searchNotes = false)
+        internal static Dictionary<string, object?> AddConditions(this Dictionary<string, object?> list, ApiSearchOptions? condition = null, string? search = null, bool searchNotes = false)
         {
             if (condition != null)
             {
@@ -135,7 +132,7 @@ namespace EmergenceGuardian.OntraportApi.Models
             }
             if (!string.IsNullOrEmpty(search))
             {
-                list.Add("search", search);
+                list.Add("search", search!);
                 if (searchNotes)
                 {
                     list.Add("searchNotes", searchNotes);
@@ -151,7 +148,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="groupIds">List of the group ids of objects to retrieve</param>
         /// <param name="performAll">Used in conjunction with group_ids to indicates wether specified action should be performed on all members of a group.</param>
         /// <returns>The query dictionnary.</returns>
-        internal static Dictionary<string, object> AddGroupIds(this Dictionary<string, object> list, IEnumerable<int> groupIds = null, bool? performAll = null)
+        internal static Dictionary<string, object?> AddGroupIds(this Dictionary<string, object?> list, IEnumerable<int>? groupIds = null, bool? performAll = null)
         {
             if (groupIds != null)
             {
@@ -171,7 +168,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="externs">If you have a relationship between your object and another object, you may want to include the data from a related field in your results. Each external field is listed in the format {object}//{field}.</param>
         /// <param name="listFields">A string array of the fields which should be returned in your results.</param>
         /// <returns>The query dictionary.</returns>
-        internal static Dictionary<string, object> AddFields(this Dictionary<string, object> list, IEnumerable<string> externs = null, IEnumerable<string> listFields = null)
+        internal static Dictionary<string, object?> AddFields(this Dictionary<string, object?> list, IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null)
         {
             if (externs != null)
             {
@@ -191,7 +188,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="list">The dictionary of query parameters.</param>
         /// <param name="values">An object containing the values to add.</param>
         /// <returns>The query dictionary.</returns>
-        internal static IDictionary<string, object> AddObject(this IDictionary<string, object> list, object values)
+        internal static IDictionary<string, object?> AddObject(this IDictionary<string, object?> list, object? values)
         {
             if (values != null)
             {
@@ -206,7 +203,7 @@ namespace EmergenceGuardian.OntraportApi.Models
                     foreach (var item in properties)
                     {
                         var itemName = item.Name;
-                        var itemValue = values.GetType().GetProperty(item.Name).GetValue(values, null);
+                        var itemValue = item.GetValue(values, null);
                         list.Add(itemName, itemValue);
                     }
                 }
@@ -240,9 +237,13 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// </summary>
         /// <param name="value">The value to convert to string.</param>
         /// <returns>The formatted string.</returns>
-        internal static string ValueToQueryString(object value) =>
-            value is IEnumerable && !(value is string) ?
-            string.Join(",", (((IEnumerable)value).Cast<object>())) :
-            value.ToString();
+        internal static string ValueToQueryString(object value)
+        {
+            if (value is IEnumerable enumValue && !(value is string))
+            {
+                return string.Join(",", ((enumValue).Cast<object>()));
+            }
+            return value.ToStringInvariant();
+        }
     }
 }

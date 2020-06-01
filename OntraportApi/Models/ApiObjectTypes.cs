@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Represents the valid types of objects for Ontraport API. https://api.ontraport.com/doc/#accessible-objects

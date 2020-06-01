@@ -5,7 +5,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Contains all common search options and constructs a condition query for Ontraport API.
@@ -17,12 +17,12 @@ namespace EmergenceGuardian.OntraportApi.Models
 
         public ApiSearchOptions(int id)
         {
-            Ids = new[] { id };
+            Ids.Add(id);
         }
 
         public ApiSearchOptions(IList<int> ids)
         {
-            Ids = ids;
+            Ids.AddRange(ids);
         }
 
         private readonly JArray _content = new JArray();
@@ -30,12 +30,12 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets a list of the IDs of the objects to retrieve.
         /// </summary>
-        public IList<int> Ids { get; set; }
+        public List<int> Ids { get; private set; } = new List<int>();
 
         /// <summary>
         /// Gets or sets the list of the group ids of objects to retrieve.
         /// </summary>
-        public IList<int> GroupIds { get; set; }
+        public List<int> GroupIds { get; private set; } = new List<int>();
 
         /// <summary>
         /// Gets or sets the offset to start your search from.
@@ -50,7 +50,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets a string to search your objects for.
         /// </summary>
-        public string Search { get; set; }
+        public string? Search { get; set; }
 
         /// <summary>
         /// Used in conjunction with the search parameter to indicate whether or not object notes should be searched for the specified string 
@@ -64,7 +64,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="ids">A list of the IDs of the objects to retrieve.</param>
         public ApiSearchOptions SetId(int id)
         {
-            Ids = new[] { id };
+            Ids.Add(id);
             return this;
         }
 
@@ -74,7 +74,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="ids">A list of the IDs of the objects to retrieve.</param>
         public ApiSearchOptions SetIds(IList<int> ids)
         {
-            Ids = ids;
+            Ids.AddRange(ids);
             return this;
         }
 
@@ -84,7 +84,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="groupIds">List of the group ids of objects to retrieve.</param>
         public ApiSearchOptions SetGroupId(int groupId)
         {
-            GroupIds = new[] { groupId };
+            GroupIds.Add(groupId);
             return this;
         }
 
@@ -94,7 +94,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <param name="groupIds">List of the group ids of objects to retrieve.</param>
         public ApiSearchOptions SetGroupIds(IList<int> groupIds)
         {
-            GroupIds = groupIds;
+            GroupIds.AddRange(groupIds);
             return this;
         }
 
@@ -218,6 +218,6 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// Returns the conditions as a JSON-encoded string.
         /// </summary>
         /// <returns></returns>
-        public string GetCondition() => _content.Any() ? JsonConvert.SerializeObject(_content, Formatting.None) : null;
+        public string? GetCondition() => _content.Any() ? JsonConvert.SerializeObject(_content, Formatting.None) : null;
     }
 }

@@ -4,9 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using EmergenceGuardian.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Sends data to Ontraport by posting a SmartForm which can then perform additional actions. 
@@ -19,21 +18,24 @@ namespace EmergenceGuardian.OntraportApi
 
         public OntraportPostForms(HttpClient httpClient)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClient.CheckNotNull(nameof(httpClient));
             _httpClient.BaseAddress = new Uri(FormPosttUrl);
         }
+
 
         /// <summary>
         /// Posts an Ontraport form with specified data from the server. This method does not lock the thread.
         /// </summary>
         /// <param name="formId">The Ontraport UID of the form.</param>
         /// <param name="formParams">The list of form data to send.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2234:Pass system uri objects instead of strings", Justification = "Reviewed: can't pass null Uri or it can't recognize form string.")]
         public async void ServerPost(string formId, IDictionary<string, object> formParams)
         {
-            formParams = formParams ?? new Dictionary<string, object>();
+            formParams ??= new Dictionary<string, object>();
             formParams.Add("uid", formId);
-            var formString = formParams.Select(x => new KeyValuePair<string, string>(x.Key, x.Value?.ToStringInvariant()));
-            await _httpClient.PostAsync("", new FormUrlEncodedContent(formString));
+            var formString = formParams.Select(x => new KeyValuePair<string, string>(x.Key, x.Value?.ToStringInvariant() ?? string.Empty));
+            using var content = new FormUrlEncodedContent(formString);
+            await _httpClient.PostAsync(string.Empty, content).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -45,7 +47,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>The HTML page that performs the post and redirect.</returns>
         public string ClientPost(string formId, IDictionary<string, object> formParams)
         {
-            formParams = formParams ?? new Dictionary<string, object>();
+            formParams ??= new Dictionary<string, object>();
             formParams.Add("uid", formId);
 
             var response = new StringBuilder()

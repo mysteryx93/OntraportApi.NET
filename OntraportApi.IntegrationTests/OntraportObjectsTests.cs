@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 using Xunit;
 
-namespace EmergenceGuardian.OntraportApi.IntegrationTests
+namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
     public class OntraportObjectsTests
     {
@@ -317,7 +317,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         public async Task UpdateAsync_SetName_ReturnsSameName()
         {
             var api = SetupApi();
-            var name = "NewName2";
+            var name = "NewName3";
 
             var result = await api.UpdateAsync(ApiObjectType.Contact, 19, new { firstname = name });
 
@@ -414,7 +414,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            await api.AddToSequenceAsync(ApiObjectType.Contact, new[] { ValidSequenceId }, new ApiSearchOptions(ValidContactId));
+            await api.AddToSequenceAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidSequenceId });
         }
 
         [Fact]
@@ -422,7 +422,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            await api.AddTagAsync(ApiObjectType.Contact, new[] { ValidTagId, ValidTagId2 }, new ApiSearchOptions(ValidContactId));
+            await api.AddTagAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidTagId, ValidTagId2 });
         }
 
         [Fact]
@@ -430,7 +430,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            await api.AddTagNamesAsync(ApiObjectType.Contact, new[] { "tag10", "tag11" }, new ApiSearchOptions(ValidContactId));
+            await api.AddTagNamesAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { "tag10", "tag11" });
         }
 
         [Fact]
@@ -438,7 +438,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            await api.AddToCampaignAsync(ApiObjectType.Contact, new[] { ValidSequenceId }, new ApiSearchOptions(ValidContactId));
+            await api.AddToCampaignAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidSequenceId });
         }
 
 
@@ -447,7 +447,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            await api.RemoveFromSequenceAsync(ApiObjectType.Contact, new[] { ValidSequenceId }, new ApiSearchOptions(ValidContactId));
+            await api.RemoveFromSequenceAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidSequenceId });
         }
 
         [Fact]
@@ -455,7 +455,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            await api.RemoveTagAsync(ApiObjectType.Contact, new[] { ValidTagId, ValidTagId2 }, new ApiSearchOptions(ValidContactId));
+            await api.RemoveTagAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidTagId, ValidTagId2 });
         }
 
         [Fact]
@@ -463,7 +463,7 @@ namespace EmergenceGuardian.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            await api.RemoveTagNamesAsync(ApiObjectType.Contact, new[] { "tag10", "tag11" }, new ApiSearchOptions(ValidContactId));
+            await api.RemoveTagNamesAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { "tag10", "tag11" });
         }
 
         [Fact]

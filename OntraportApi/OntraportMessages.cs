@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 using Newtonsoft.Json.Linq;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides API support for Message objects.
@@ -19,6 +18,7 @@ namespace EmergenceGuardian.OntraportApi
         { }
 
         // It's normally under data/attrs.
-        protected override async Task<ApiMessage> OnParseUpdateAsync(JObject json) => await CreateApiObjectAsync(json["data"]);
+        protected override async Task<ApiMessage> OnParseUpdateAsync(JObject json) => 
+            await CreateApiObjectAsync(JsonData(json)).ConfigureAwait(false);
     }
 }

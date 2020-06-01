@@ -1,7 +1,7 @@
 ﻿using System;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi.Converters
+namespace HanumanInstitute.OntraportApi.Converters
 {
     /// <summary>
     /// Converts a Unix Epoch seconds field into a DateTimeOffset property.
@@ -20,11 +20,11 @@ namespace EmergenceGuardian.OntraportApi.Converters
 
         public override string NullString => "0";
 
-        public override DateTimeOffset? Parse(string value)
+        public override DateTimeOffset? Parse(string? value)
         {
             if (!IsNullValue(value))
             {
-                var valueLong = value.Convert<long>();
+                var valueLong = value!.Convert<long>();
                 return Milliseconds ?
                     DateTimeOffset.FromUnixTimeMilliseconds(valueLong) :
                     DateTimeOffset.FromUnixTimeSeconds(valueLong);
@@ -34,7 +34,7 @@ namespace EmergenceGuardian.OntraportApi.Converters
 
         public override string Format(DateTimeOffset? value) => 
             value != null ? Milliseconds ?
-                ((DateTimeOffset)value).ToUnixTimeMilliseconds().ToString() :
-                ((DateTimeOffset)value).ToUnixTimeSeconds().ToString() : "0";
+                ((DateTimeOffset)value).ToUnixTimeMilliseconds().ToStringInvariant() :
+                ((DateTimeOffset)value).ToUnixTimeSeconds().ToStringInvariant() : "0";
     }
 }

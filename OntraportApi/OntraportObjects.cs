@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides common Ontraport API support for all object types.
@@ -27,15 +27,15 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="values">Fields to set on the object.</param>
         /// <returns>The created object.</returns>
-        public async Task<Dictionary<string, string>> CreateAsync(ApiObjectType objectType, object values = null)
+        public async Task<Dictionary<string, string>> CreateAsync(ApiObjectType objectType, object? values = null)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType }
             };
 
             return await _apiRequest.PostAsync<Dictionary<string, string>>(
-                "objects", query.AddObject(values));
+                "objects", query.AddObject(values)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -45,17 +45,18 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="ignoreBlanks">Whether or not blank strings should be ignored upon update. Defaults to false: blank strings passed to this endpoint will overwrite existing value.</param>
         /// <param name="values">Additional properties to set on the object.</param>
         /// <returns>The created or updated object.</returns>
-        public async Task<Dictionary<string, string>> CreateOrMergeAsync(ApiObjectType objectType, bool ignoreBlanks = false, object values = null)
+        public async Task<Dictionary<string, string>> CreateOrMergeAsync(ApiObjectType objectType, bool ignoreBlanks = false, object? values = null)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "ignore_blanks", ignoreBlanks }
             };
 
-            var result = await _apiRequest.PostAsync<JObject>(
-                "objects/saveorupdate", query.AddObject(values));
-            return result["data"]["attrs"].ToObject<Dictionary<string, string>>();
+            var json = await _apiRequest.PostAsync<JObject>(
+                "objects/saveorupdate", query.AddObject(values)).ConfigureAwait(false);
+            return JsonData(json)["attrs"]?.ToObject<Dictionary<string, string>>()
+                ?? throw new NullReferenceException(Properties.Resources.ResponseDataNull);
         }
 
         /// <summary>
@@ -65,18 +66,18 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="sectionName">The name of the section.</param>
         /// <param name="fields">An array of 3 columns containing fields containing arrays of field objects.</param>
         /// <returns>A list of field operations in a successful or error state.</returns>
-        public async Task<ResponseSuccessList> CreateFieldsAsync(ApiObjectType objectType, string sectionName, IEnumerable<IEnumerable<ApiFieldEditor>> fields = null)
+        public async Task<ResponseSuccessList> CreateFieldsAsync(ApiObjectType objectType, string sectionName, IEnumerable<IEnumerable<ApiFieldEditor>>? fields = null)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "name", sectionName},
                 { "fields", fields }
             };
 
-            var result = await _apiRequest.PostAsync<JObject>(
-                "objects/fieldeditor", query);
-            return new ResponseSuccessList(result);
+            var json = await _apiRequest.PostAsync<JObject>(
+                "objects/fieldeditor", query).ConfigureAwait(false);
+            return new ResponseSuccessList(json);
         }
 
         /// <summary>
@@ -87,14 +88,14 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>The selected object.</returns>
         public async Task<Dictionary<string, string>> SelectAsync(ApiObjectType objectType, int objectId)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "id", objectId }
             };
 
             return await _apiRequest.GetAsync<Dictionary<string, string>>(
-                "object", query);
+                "object", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -107,10 +108,10 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="listFields">A string array of the fields which should be returned in your results.</param>
         /// <returns>A list of objects matching the query.</returns>
         public async Task<List<Dictionary<string, string>>> SelectAsync(ApiObjectType objectType,
-            ApiSearchOptions searchOptions = null, ApiSortOptions sortOptions = null,
-            IEnumerable<string> externs = null, IEnumerable<string> listFields = null)
+            ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null,
+            IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType }
             }
@@ -120,7 +121,7 @@ namespace EmergenceGuardian.OntraportApi
                 .AddIfHasValue("listFields", listFields);
 
             return await _apiRequest.GetAsync<List<Dictionary<string, string>>>(
-                "objects", query);
+                "objects", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -135,12 +136,12 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="listFields">A string array of the fields which should be returned in your results.</param>
         /// <returns>The number of objects matching the query.</returns>
         public async Task<int> GetCountByTagAsync(ApiObjectType objectType,
-            int? tagId = null, string tagName = null,
-            ApiSearchOptions searchOptions = null, ApiSortOptions sortOptions = null,
-            IEnumerable<string> externs = null, IEnumerable<string> listFields = null)
+            int? tagId = null, string? tagName = null,
+            ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null,
+            IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null)
         {
-            var json = await SelectByTagAsync(objectType, tagId, tagName, searchOptions, sortOptions, externs, listFields, true);
-            return json["data"]["count"].Value<string>().Convert<int>();
+            var json = await SelectByTagAsync(objectType, tagId, tagName, searchOptions, sortOptions, externs, listFields, true).ConfigureAwait(false);
+            return JsonData(json)["count"]?.Value<string>()?.Convert<int>() ?? 0;
         }
 
         /// <summary>
@@ -155,23 +156,23 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="listFields">A string array of the fields which should be returned in your results.</param>
         /// <returns>A list of objects matching the query.</returns>
         public async Task<List<Dictionary<string, string>>> SelectByTagAsync(ApiObjectType objectType,
-            int? tagId = null, string tagName = null,
-            ApiSearchOptions searchOptions = null, ApiSortOptions sortOptions = null,
-            IEnumerable<string> externs = null, IEnumerable<string> listFields = null)
+            int? tagId = null, string? tagName = null,
+            ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null,
+            IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null)
         {
-            var json = await SelectByTagAsync(objectType, tagId, tagName, searchOptions, sortOptions, externs, listFields, false);
-            return json["data"].ToObject<List<Dictionary<string, string>>>();
+            var json = await SelectByTagAsync(objectType, tagId, tagName, searchOptions, sortOptions, externs, listFields, false).ConfigureAwait(false);
+            return JsonData(json).ToObject<List<Dictionary<string, string>>>()!;
         }
 
         private async Task<JObject> SelectByTagAsync(ApiObjectType objectType,
-            int? tagId = null, string tagName = null,
-            ApiSearchOptions searchOptions = null, ApiSortOptions sortOptions = null,
-            IEnumerable<string> externs = null, IEnumerable<string> listFields = null, bool count = false)
+            int? tagId = null, string? tagName = null,
+            ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null,
+            IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, bool count = false)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
-                { tagId.HasValue ? "tag_id" : "tag_name", (object)tagId ?? tagName },
+                { tagId.HasValue ? "tag_id" : "tag_name", (object?)tagId ?? tagName },
                 { "count", count ? "true" : "false" },
             }
                 .AddSearchOptions(searchOptions)
@@ -180,7 +181,7 @@ namespace EmergenceGuardian.OntraportApi
                 .AddIfHasValue("listFields", listFields);
 
             return await _apiRequest.GetAsync<JObject>(
-                "objects/tag", query);
+                "objects/tag", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -191,8 +192,8 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>The object ID.</returns>
         public async Task<int?> GetObjectIdByEmailAsync(ApiObjectType objectType, string email)
         {
-            var json = await GetObjectIdByEmailAsync(objectType, email, false);
-            var result = json["data"]["id"].Value<string>();
+            var json = await GetObjectIdByEmailAsync(objectType, email, false).ConfigureAwait(false);
+            var result = JsonData(json)["id"]?.Value<string>();
             return result != null ? result.Convert<int>() : (int?)null;
         }
 
@@ -205,13 +206,13 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>A list of object IDs.</returns>
         public async Task<IEnumerable<int>> GetObjectIdByEmailAllAsync(ApiObjectType objectType, string email)
         {
-            var json = await GetObjectIdByEmailAsync(objectType, email, true);
-            return json["data"]["ids"].Values<int>();
+            var json = await GetObjectIdByEmailAsync(objectType, email, true).ConfigureAwait(false);
+            return JsonData(json)["ids"]?.Values<int>() ?? Enumerable.Empty<int>();
         }
 
         private async Task<JObject> GetObjectIdByEmailAsync(ApiObjectType objectType, string email, bool all = false)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "email", email },
@@ -219,7 +220,7 @@ namespace EmergenceGuardian.OntraportApi
             };
 
             return await _apiRequest.GetAsync<JObject>(
-                "object/getByEmail", query);
+                "object/getByEmail", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -230,13 +231,13 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>A JObject providing raw access to the JSON data.</returns>
         public async Task<Dictionary<int, ResponseMetadata>> GetAllMetadataAsync()
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "format", "byId" }
             };
 
             return await _apiRequest.GetAsync<Dictionary<int, ResponseMetadata>>(
-                "objects/meta", query);
+                "objects/meta", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -246,15 +247,16 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>A JObject providing raw access to the JSON data.</returns>
         public async Task<ResponseMetadata> GetMetadataAsync(ApiObjectType objectType)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "format", "byId" }
             };
 
-            var result = await _apiRequest.GetAsync<JObject>(
-                "objects/meta", query);
-            return result["data"].First.First.ToObject<ResponseMetadata>();
+            var json = await _apiRequest.GetAsync<JObject>(
+                "objects/meta", query).ConfigureAwait(false);
+            return JsonData(json).First?.First?.ToObject<ResponseMetadata>()
+                ?? throw new NullReferenceException(Properties.Resources.ResponseDataNull);
         }
 
         /// <summary>
@@ -263,16 +265,16 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="searchOptions">The search options.</param>
         /// <returns>A ResponseCollectionInfo object.</returns>
-        public async Task<ResponseCollectionInfo> GetCollectionInfoAsync(ApiObjectType objectType, ApiSearchOptions searchOptions = null)
+        public async Task<ResponseCollectionInfo> GetCollectionInfoAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
             }
                 .AddSearchOptions(searchOptions);
 
             return await _apiRequest.GetAsync<ResponseCollectionInfo>(
-                "objects/getInfo", query);
+                "objects/getInfo", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -283,16 +285,16 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>A list of fields in that section.</returns>
         public async Task<ResponseSectionFields> SelectFieldsBySectionAsync(ApiObjectType objectType, string sectionName)
         {
-            if (string.IsNullOrEmpty(sectionName)) throw new ArgumentException("sectionName is required.");
+            sectionName.CheckNotNullOrEmpty(nameof(sectionName));
 
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "section", sectionName }
             };
 
             return await _apiRequest.GetAsync<ResponseSectionFields>(
-                "objects/fieldeditor", query);
+                "objects/fieldeditor", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -302,13 +304,13 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>A dictionary of sections each containing their fields.</returns>
         public async Task<Dictionary<int, ResponseSectionFields>> SelectAllFieldsAsync(ApiObjectType objectType)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
             };
 
             return await _apiRequest.GetAsync<Dictionary<int, ResponseSectionFields>>(
-                "objects/fieldeditor", query);
+                "objects/fieldeditor", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -319,16 +321,16 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>A object containing the field information.</returns>
         public async Task<ApiFieldInfo> SelectFieldByNameAsync(ApiObjectType objectType, string fieldName)
         {
-            if (string.IsNullOrEmpty(fieldName)) throw new ArgumentException("fieldName is required.");
+            fieldName.CheckNotNullOrEmpty(nameof(fieldName));
 
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "field", fieldName }
             };
 
             return await _apiRequest.GetAsync<ApiFieldInfo>(
-                "objects/fieldeditor", query);
+                "objects/fieldeditor", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -338,17 +340,18 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="objectId">The ID of the object to update.</param>
         /// <param name="values">Fields to set on the object.</param>
         /// <returns>A dictionary of updated fields.</returns>
-        public async Task<Dictionary<string, string>> UpdateAsync(ApiObjectType objectType, int objectId, object values = null)
+        public async Task<Dictionary<string, string>> UpdateAsync(ApiObjectType objectType, int objectId, object? values = null)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "id", objectId }
             };
 
-            var result = await _apiRequest.PutAsync<JObject>(
-                "objects", query.AddObject(values));
-            return result["data"]["attrs"].ToObject<Dictionary<string, string>>();
+            var json = await _apiRequest.PutAsync<JObject>(
+                "objects", query.AddObject(values)).ConfigureAwait(false);
+            return JsonData(json)["attrs"]?.ToObject<Dictionary<string, string>>()
+                ?? throw new NullReferenceException(Properties.Resources.ResponseDataNull);
         }
 
         /// <summary>
@@ -360,9 +363,9 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="fields">An array of columns containing fields containing arrays of Field objects.</param>
         /// <param name="sectionDescription">A description for the new Section.</param>
         /// <returns></returns>
-        public async Task<ResponseSuccessList> UpdateFieldsAsync(ApiObjectType objectType, string sectionName, IEnumerable<IEnumerable<ApiFieldEditor>> fields, string sectionDescription = null)
+        public async Task<ResponseSuccessList> UpdateFieldsAsync(ApiObjectType objectType, string sectionName, IEnumerable<IEnumerable<ApiFieldEditor>> fields, string? sectionDescription = null)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "name", sectionName},
@@ -370,9 +373,9 @@ namespace EmergenceGuardian.OntraportApi
             }
                 .AddIfHasValue("description", sectionDescription);
 
-            var result = await _apiRequest.PutAsync<JObject>(
-                "objects/fieldeditor", query);
-            return new ResponseSuccessList(result);
+            var json = await _apiRequest.PutAsync<JObject>(
+                "objects/fieldeditor", query).ConfigureAwait(false);
+            return new ResponseSuccessList(json);
         }
 
         /// <summary>
@@ -382,14 +385,14 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="objectId">The ID of the specific object.</param>
         public async Task DeleteAsync(ApiObjectType objectType, int objectId)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "id", objectId }
             };
 
             await _apiRequest.DeleteAsync<object>(
-                "object", query, encodeJson: false);
+                "object", query, encodeJson: false).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -398,16 +401,16 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="searchOptions">The search options.</param>
         /// <returns>A list of objects matching the query.</returns>
-        public async Task DeleteMultipleAsync(ApiObjectType objectType, ApiSearchOptions searchOptions = null)
+        public async Task DeleteMultipleAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
             }
                 .AddSearchOptions(searchOptions, true);
 
             await _apiRequest.DeleteAsync<object>(
-                "objects", query);
+                "objects", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -417,14 +420,14 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="sectionName">The name of the section.</param>
         public async Task DeleteSectionAsync(ApiObjectType objectType, string sectionName)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "section", sectionName}
             };
 
             await _apiRequest.DeleteAsync<string>(
-                "objects/fieldeditor", query);
+                "objects/fieldeditor", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -434,28 +437,27 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="fieldName">The name of the field e.g f1234.</param>
         public async Task DeleteFieldAsync(ApiObjectType objectType, string fieldName)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "field", fieldName}
             };
 
             await _apiRequest.DeleteAsync<string>(
-                "objects/fieldeditor", query);
+                "objects/fieldeditor", query).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Adds one or more objects to one or more sequences.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        /// <param name="sequenceIds">A list of the sequence(s) to which objects should be added.</param>
         /// <param name="searchOptions">The search options.</param>
-        public async Task AddToSequenceAsync(ApiObjectType objectType,
-            IEnumerable<int> sequenceIds, ApiSearchOptions searchOptions = null)
+        /// <param name="sequenceIds">A list of the sequence(s) to which objects should be added.</param>
+        public async Task AddToSequenceAsync(ApiObjectType objectType, ApiSearchOptions searchOptions, IEnumerable<int> sequenceIds)
         {
-            if (sequenceIds == null || !sequenceIds.Any()) throw new ArgumentException("sequenceIds is required.");
+            sequenceIds.CheckNotNullOrEmpty(nameof(sequenceIds));
 
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "add_list", sequenceIds },
@@ -463,21 +465,21 @@ namespace EmergenceGuardian.OntraportApi
                 .AddSearchOptions(searchOptions, true);
 
             await _apiRequest.PutAsync<object>(
-                "objects/sequence", query);
+                "objects/sequence", query).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Adds one or more tags to one or more objects.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        /// <param name="tagIds">A list of the IDs of the tag(s) which should be added to objects.</param>
         /// <param name="searchOptions">The search options.</param>
+        /// <param name="tagIds">A list of the IDs of the tag(s) which should be added to objects.</param>
         public async Task AddTagAsync(ApiObjectType objectType,
-            IEnumerable<int> tagIds, ApiSearchOptions searchOptions = null)
+            ApiSearchOptions? searchOptions, IEnumerable<int> tagIds)
         {
-            if (tagIds == null || !tagIds.Any()) throw new ArgumentException("tagIds is required.");
+            tagIds.CheckNotNullOrEmpty(nameof(tagIds));
 
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "add_list", tagIds },
@@ -485,21 +487,21 @@ namespace EmergenceGuardian.OntraportApi
                 .AddSearchOptions(searchOptions, true);
 
             await _apiRequest.PutAsync<object>(
-                "objects/tag", query);
+                "objects/tag", query).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Adds one or more tags to one or more objects by the tag name. This endpoint will create the tag if it doesn't exist.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        /// <param name="tagNames">A list of the names of the tag(s) which should be added to objects.</param>
         /// <param name="searchOptions">The search options.</param>
+        /// <param name="tagNames">A list of the names of the tag(s) which should be added to objects.</param>
         public async Task AddTagNamesAsync(ApiObjectType objectType,
-            IEnumerable<string> tagNames, ApiSearchOptions searchOptions = null)
+            ApiSearchOptions? searchOptions, IEnumerable<string> tagNames)
         {
-            if (tagNames == null || !tagNames.Any()) throw new ArgumentException("tagNames is required.");
+            tagNames.CheckNotNullOrEmpty(nameof(tagNames));
 
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "add_names", tagNames },
@@ -507,21 +509,21 @@ namespace EmergenceGuardian.OntraportApi
                 .AddSearchOptions(searchOptions, true);
 
             await _apiRequest.PutAsync<object>(
-                "objects/tagByName", query);
+                "objects/tagByName", query).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Adds one or more objects to one or more campaigns.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        /// <param name="campaignIds">A list of the campaign(s) to which objects should be added.</param>
         /// <param name="searchOptions">The search options.</param>
+        /// <param name="campaignIds">A list of the campaign(s) to which objects should be added.</param>
         public async Task AddToCampaignAsync(ApiObjectType objectType,
-            IEnumerable<int> campaignIds, ApiSearchOptions searchOptions = null)
+            ApiSearchOptions? searchOptions, IEnumerable<int> campaignIds)
         {
-            if (campaignIds == null || !campaignIds.Any()) throw new ArgumentException("campaignIds is required.");
+            campaignIds.CheckNotNullOrEmpty(nameof(campaignIds));
 
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "add_list", campaignIds },
@@ -529,21 +531,21 @@ namespace EmergenceGuardian.OntraportApi
                 .AddSearchOptions(searchOptions, true);
 
             await _apiRequest.PutAsync<object>(
-                "objects/subscribe", query);
+                "objects/subscribe", query).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Removes one or more objects from one or more sequences.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        /// <param name="sequenceIds">A list of the sequence(s) from which objects should be removed.</param>
         /// <param name="searchOptions">The search options.</param>
+        /// <param name="sequenceIds">A list of the sequence(s) from which objects should be removed.</param>
         public async Task RemoveFromSequenceAsync(ApiObjectType objectType,
-            IEnumerable<int> sequenceIds, ApiSearchOptions searchOptions = null)
+            ApiSearchOptions? searchOptions, IEnumerable<int> sequenceIds)
         {
-            if (sequenceIds == null || !sequenceIds.Any()) throw new ArgumentException("sequenceIds is required.");
+            sequenceIds.CheckNotNullOrEmpty(nameof(sequenceIds));
 
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "remove_list", sequenceIds }
@@ -551,21 +553,21 @@ namespace EmergenceGuardian.OntraportApi
                 .AddSearchOptions(searchOptions);
 
             await _apiRequest.DeleteAsync<object>(
-                "objects/sequence", query);
+                "objects/sequence", query).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Removes one or more tags from one or more objects.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        /// <param name="tagIds">A list of the IDs of the tag(s) which should be removed from objects.</param>
         /// <param name="searchOptions">The search options.</param>
+        /// <param name="tagIds">A list of the IDs of the tag(s) which should be removed from objects.</param>
         public async Task RemoveTagAsync(ApiObjectType objectType,
-            IEnumerable<int> tagIds, ApiSearchOptions searchOptions = null)
+            ApiSearchOptions? searchOptions, IEnumerable<int> tagIds)
         {
-            if (tagIds == null || !tagIds.Any()) throw new ArgumentException("tagIds is required.");
+            tagIds.CheckNotNullOrEmpty(nameof(tagIds));
 
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "remove_list", tagIds },
@@ -573,21 +575,21 @@ namespace EmergenceGuardian.OntraportApi
                 .AddSearchOptions(searchOptions);
 
             await _apiRequest.DeleteAsync<object>(
-                "objects/tag", query);
+                "objects/tag", query).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Removes one or more tags from one or more objects by the tag name.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        /// <param name="tagNames">A list of the names of the tag(s) which should be removed from objects.</param>
         /// <param name="searchOptions">The search options.</param>
+        /// <param name="tagNames">A list of the names of the tag(s) which should be removed from objects.</param>
         public async Task RemoveTagNamesAsync(ApiObjectType objectType,
-            IEnumerable<string> tagNames, ApiSearchOptions searchOptions = null)
+            ApiSearchOptions? searchOptions, IEnumerable<string> tagNames)
         {
-            if (tagNames == null || !tagNames.Any()) throw new ArgumentException("tagNames is required.");
+            tagNames.CheckNotNullOrEmpty(nameof(tagNames));
 
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "remove_names", tagNames },
@@ -595,21 +597,21 @@ namespace EmergenceGuardian.OntraportApi
                 .AddSearchOptions(searchOptions);
 
             await _apiRequest.DeleteAsync<object>(
-                "objects/tagByName", query);
+                "objects/tagByName", query).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Removes one or more objects from one or more campaigns.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        /// <param name="campaignIds">A list of the campaign(s) from which objects should be removed.</param>
         /// <param name="searchOptions">The search options.</param>
+        /// <param name="campaignIds">A list of the campaign(s) from which objects should be removed.</param>
         public async Task RemoveFromCampaignAsync(ApiObjectType objectType,
-            IEnumerable<int> campaignIds, ApiSearchOptions searchOptions = null)
+            ApiSearchOptions? searchOptions, IEnumerable<int> campaignIds)
         {
-            if (campaignIds == null || !campaignIds.Any()) throw new ArgumentException("campaignIds is required.");
+            campaignIds.CheckNotNullOrEmpty(nameof(campaignIds));
 
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
                 { "remove_list", campaignIds }
@@ -617,7 +619,7 @@ namespace EmergenceGuardian.OntraportApi
                 .AddSearchOptions(searchOptions);
 
             await _apiRequest.DeleteAsync<object>(
-                "objects/subscribe", query);
+                "objects/subscribe", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -625,21 +627,21 @@ namespace EmergenceGuardian.OntraportApi
         /// </summary>
         /// <param name="objectType">The object type: Rule, Sequence or Sequence Subscriber.</param>
         /// <param name="searchOptions">The search options.</param>
-        public async Task PauseRuleOrSequenceAsync(ApiObjectType objectType, ApiSearchOptions searchOptions = null)
+        public async Task PauseRuleOrSequenceAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions)
         {
             if (objectType != ApiObjectType.Rule && objectType != ApiObjectType.Sequence && objectType != ApiObjectType.SequenceSubscriber)
             {
-                throw new ArgumentException("objectType must be Rule, Sequence or SequenceSubscriber.");
+                throw new ArgumentException(Properties.Resources.ObjectTypeMustBeSequence);
             }
 
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
             }
                 .AddSearchOptions(searchOptions);
 
             await _apiRequest.PostAsync<object>(
-                "objects/pause", query);
+                "objects/pause", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -647,21 +649,35 @@ namespace EmergenceGuardian.OntraportApi
         /// </summary>
         /// <param name="objectType">The object type: Rule, Sequence or Sequence Subscriber.</param>
         /// <param name="searchOptions">The search options.</param>
-        public async Task UnpauseRuleOrSequenceAsync(ApiObjectType objectType, ApiSearchOptions searchOptions = null)
+        public async Task UnpauseRuleOrSequenceAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions)
         {
             if (objectType != ApiObjectType.Rule && objectType != ApiObjectType.Sequence && objectType != ApiObjectType.SequenceSubscriber)
             {
-                throw new ArgumentException("objectType must be Rule, Sequence or SequenceSubscriber.");
+                throw new ArgumentException(Properties.Resources.ObjectTypeMustBeSequence);
             }
 
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
             }
                 .AddSearchOptions(searchOptions);
 
             await _apiRequest.PostAsync<object>(
-                "objects/unpause", query);
+                "objects/unpause", query).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Returns the content of JsonData(json) and throws exceptions if it's null.
+        /// </summary>
+        /// <param name="json">The Json to retrieve data for.</param>
+        /// <returns>The content of JsonData(json).</returns>
+        /// <exception cref="ArgumentNullException">json was null, or JsonData(json) was null.</exception>
+        protected static JToken JsonData(JObject? json)
+        {
+            json.CheckNotNull(nameof(json));
+            var data = json!["data"];
+            data.CheckNotNull("json[\"data\"]");
+            return data!;
         }
     }
 }

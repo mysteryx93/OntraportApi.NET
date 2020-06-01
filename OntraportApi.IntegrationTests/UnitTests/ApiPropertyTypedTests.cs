@@ -1,8 +1,8 @@
 ﻿using System;
-using EmergenceGuardian.OntraportApi.Converters;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Converters;
+using HanumanInstitute.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi.UnitTests
+namespace HanumanInstitute.OntraportApi.UnitTests
 {
     public class ApiPropertyBoolTests : ApiPropertyBaseTests<ApiPropertyBool, bool, bool?>
     { }

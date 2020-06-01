@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides common API endpoints for all objects with read methods.
@@ -27,7 +27,7 @@ namespace EmergenceGuardian.OntraportApi
         /// <param name="externs">If you have a relationship between your object and another object, you may want to include the data from a related field in your results. Each external field is listed in the format {object}//{field}.</param>
         /// <param name="listFields">A string array of the fields which should be returned in your results.</param>
         /// <returns>A list of objects matching the query.</returns>
-        Task<IList<T>> SelectAsync(ApiSearchOptions searchOptions = null, ApiSortOptions sortOptions = null, IEnumerable<string> externs = null, IEnumerable<string> listFields = null);
+        Task<IList<T>> SelectAsync(ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null, IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null);
 
         /// <summary>
         /// Retrieves the field meta data for the specified object type.
@@ -40,6 +40,6 @@ namespace EmergenceGuardian.OntraportApi
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
         /// <returns>A ResponseCollectionInfo object.</returns>
-        Task<ResponseCollectionInfo> GetCollectionInfoAsync(ApiSearchOptions searchOptions = null);
+        Task<ResponseCollectionInfo> GetCollectionInfoAsync(ApiSearchOptions? searchOptions = null);
     }
 }

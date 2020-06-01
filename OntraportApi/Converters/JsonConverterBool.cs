@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmergenceGuardian.OntraportApi.Converters
+namespace HanumanInstitute.OntraportApi.Converters
 {
     /// <summary>
     /// Converts a "true" or "false" field into a boolean property.

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using EmergenceGuardian.OntraportApi.Converters;
+using HanumanInstitute.OntraportApi.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// An array of products is included with every offer. If valid, existing products are not included, a transaction can't be processed.
@@ -49,7 +49,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Gets or sets a list of pricing elements associated with this product. 
         /// </summary>
-        public IList<ApiTransactionPrice> Price { get; private set; }
+        public IList<ApiTransactionPrice>? Price { get; private set; }
 
         /// <summary>
         /// Gets or sets the type of product.
@@ -133,7 +133,7 @@ namespace EmergenceGuardian.OntraportApi.Models
 
         public ApiTransactionProduct AddPrice(decimal price)
         {
-            Price = Price ?? new List<ApiTransactionPrice>();
+            Price ??= new List<ApiTransactionPrice>();
             Price.Add(new ApiTransactionPrice()
             {
                 Price = price

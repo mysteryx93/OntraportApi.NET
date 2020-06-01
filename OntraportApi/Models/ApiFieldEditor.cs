@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using EmergenceGuardian.OntraportApi.Converters;
+using HanumanInstitute.OntraportApi.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// An Ontraport field for editing queries.
@@ -13,9 +13,9 @@ namespace EmergenceGuardian.OntraportApi.Models
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy), ItemNullValueHandling = NullValueHandling.Ignore)]
     public class ApiFieldEditor
     {
-        public string Field { get; set; }
+        public string Field { get; set; } = string.Empty;
 
-        public string Alias { get; set; }
+        public string Alias { get; set; } = string.Empty;
 
         [JsonConverter(typeof(StringEnumConverter))]
         public ApiFieldType? Type { get; set; }
@@ -26,7 +26,7 @@ namespace EmergenceGuardian.OntraportApi.Models
         [JsonConverter(typeof(JsonConverterIntBool))]
         public bool? Unique { get; set; }
 
-        public ApiFieldOptions Options { get; set; }
+        public ApiFieldOptions? Options { get; set; }
 
         public ApiFieldEditor ListAdd(IEnumerable<string> listValues)
         {
@@ -53,14 +53,6 @@ namespace EmergenceGuardian.OntraportApi.Models
                 Replace = listValues
             };
             return this;
-        }
-
-        [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy), ItemNullValueHandling = NullValueHandling.Ignore)]
-        public class ApiFieldOptions
-        {
-            public IEnumerable<string> Add { get; set; }
-            public IEnumerable<string> Remove { get; set; }
-            public IEnumerable<string> Replace { get; set; }
         }
     }
 }

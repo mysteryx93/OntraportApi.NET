@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Converters;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Converters;
+using HanumanInstitute.OntraportApi.Models;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace EmergenceGuardian.OntraportApi.IntegrationTests
+namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
     public abstract class OntraportBaseDeleteTests<T, U> : OntraportBaseWriteTests<T, U>
         where T : OntraportBaseDelete<U>

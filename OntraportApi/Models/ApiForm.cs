@@ -1,7 +1,7 @@
 ﻿using System;
-using EmergenceGuardian.OntraportApi.Converters;
+using HanumanInstitute.OntraportApi.Converters;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Forms are used to simply and easily gather information from your contacts.
@@ -14,8 +14,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set an arbitrary name for the form.
         /// </summary>
-        public ApiPropertyString FormNameField => _formNameField ?? (_formNameField = new ApiPropertyString(this, FormNameKey));
-        private ApiPropertyString _formNameField;
+        public ApiPropertyString FormNameField => _formNameField ??= new ApiPropertyString(this, FormNameKey);
+        private ApiPropertyString? _formNameField;
         public const string FormNameKey = "formname";
         /// <summary>
         /// Gets or sets an arbitrary name for the form.
@@ -25,8 +25,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the type of form.
         /// </summary>
-        public ApiProperty<FormType> TypeField => _typeField ?? (_typeField = new ApiPropertyIntEnum<FormType>(this, TypeKey));
-        private ApiProperty<FormType> _typeField;
+        public ApiProperty<FormType> TypeField => _typeField ??= new ApiPropertyIntEnum<FormType>(this, TypeKey);
+        private ApiProperty<FormType>? _typeField;
         public const string TypeKey = "type";
         /// <summary>
         /// Gets or sets the type of form.
@@ -36,8 +36,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the tags a contact should be added to upon form fillout.
         /// </summary>
-        public ApiPropertyString TagsField => _tagsField ?? (_tagsField = new ApiPropertyString(this, TagsKey));
-        private ApiPropertyString _tagsField;
+        public ApiPropertyString TagsField => _tagsField ??= new ApiPropertyString(this, TagsKey);
+        private ApiPropertyString? _tagsField;
         public const string TagsKey = "tags";
         /// <summary>
         /// Gets or sets the tags a contact should be added to upon form fillout.
@@ -47,8 +47,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the sequences a contact should be added to upon form fillout.
         /// </summary>
-        public ApiPropertyString SequencesField => _sequencesField ?? (_sequencesField = new ApiPropertyString(this, SequencesKey));
-        private ApiPropertyString _sequencesField;
+        public ApiPropertyString SequencesField => _sequencesField ??= new ApiPropertyString(this, SequencesKey);
+        private ApiPropertyString? _sequencesField;
         public const string SequencesKey = "sequences";
         /// <summary>
         /// Gets or sets the sequences a contact should be added to upon form fillout.
@@ -58,19 +58,20 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the URL for the thank you page the user is redirected to upon form fillout.
         /// </summary>
-        public ApiPropertyString RedirectUrlField => _redirectUrlField ?? (_redirectUrlField = new ApiPropertyString(this, RedirectUrlKey));
-        private ApiPropertyString _redirectUrlField;
+        public ApiPropertyString RedirectUrlField => _redirectUrlField ??= new ApiPropertyString(this, RedirectUrlKey);
+        private ApiPropertyString? _redirectUrlField;
         public const string RedirectUrlKey = "redirect";
         /// <summary>
         /// Gets or sets the URL for the thank you page the user is redirected to upon form fillout.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1056:Uri properties should not be strings", Justification = "Reviewed: we only work with raw Ontraport data")]
         public string RedirectUrl { get => RedirectUrlField.Value; set => RedirectUrlField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user controlling the form.
         /// </summary>
-        public ApiProperty<int> OwnerField => _ownerField ?? (_ownerField = new ApiProperty<int>(this, OwnerKey));
-        private ApiProperty<int> _ownerField;
+        public ApiProperty<int> OwnerField => _ownerField ??= new ApiProperty<int>(this, OwnerKey);
+        private ApiProperty<int>? _ownerField;
         public const string OwnerKey = "owner";
         /// <summary>
         /// Gets or sets the ID of the user controlling the form.
@@ -80,8 +81,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the form includes a Captcha.
         /// </summary>
-        public ApiPropertyIntBool HasCatchaField => _hasCaptchaField ?? (_hasCaptchaField = new ApiPropertyIntBool(this, HasCatchaKey));
-        private ApiPropertyIntBool _hasCaptchaField;
+        public ApiPropertyIntBool HasCatchaField => _hasCaptchaField ??= new ApiPropertyIntBool(this, HasCatchaKey);
+        private ApiPropertyIntBool? _hasCaptchaField;
         public const string HasCatchaKey = "captcha";
         /// <summary>
         /// Gets or sets whether or not the form includes a Captcha.
@@ -91,8 +92,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the email address to send notififications when the form is filled out.
         /// </summary>
-        public ApiPropertyString NotificationEmailField => _notificationEmailField ?? (_notificationEmailField = new ApiPropertyString(this, NotificationEmailKey));
-        private ApiPropertyString _notificationEmailField;
+        public ApiPropertyString NotificationEmailField => _notificationEmailField ??= new ApiPropertyString(this, NotificationEmailKey);
+        private ApiPropertyString? _notificationEmailField;
         public const string NotificationEmailKey = "notif";
         /// <summary>
         /// Gets or sets the email address to send notififications when the form is filled out.
@@ -102,8 +103,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the number of times the form has been filled out.
         /// </summary>
-        public ApiProperty<int> FilloutsField => _filloutsField ?? (_filloutsField = new ApiProperty<int>(this, FilloutsKey));
-        private ApiProperty<int> _filloutsField;
+        public ApiProperty<int> FilloutsField => _filloutsField ??= new ApiProperty<int>(this, FilloutsKey);
+        private ApiProperty<int>? _filloutsField;
         public const string FilloutsKey = "fillouts";
         /// <summary>
         /// Gets or sets the number of times the form has been filled out.
@@ -113,8 +114,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the JSON-encoded form data.
         /// </summary>
-        public ApiPropertyString JsonRawDataField => _jsonRawDataField ?? (_jsonRawDataField = new ApiPropertyString(this, JsonRawDataKey));
-        private ApiPropertyString _jsonRawDataField;
+        public ApiPropertyString JsonRawDataField => _jsonRawDataField ??= new ApiPropertyString(this, JsonRawDataKey);
+        private ApiPropertyString? _jsonRawDataField;
         public const string JsonRawDataKey = "json_raw_object";
         /// <summary>
         /// Gets or sets the JSON-encoded form data.
@@ -124,8 +125,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the form has been deleted.
         /// </summary>
-        public ApiPropertyIntBool DeletedField => _deletedField ?? (_deletedField = new ApiPropertyIntBool(this, DeletedKey));
-        private ApiPropertyIntBool _deletedField;
+        public ApiPropertyIntBool DeletedField => _deletedField ??= new ApiPropertyIntBool(this, DeletedKey);
+        private ApiPropertyIntBool? _deletedField;
         public const string DeletedKey = "deleted";
         /// <summary>
         /// Gets or sets whether or not the form has been deleted.
@@ -135,8 +136,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the object type associated with the form.
         /// </summary>
-        public ApiProperty<int> ObjectTypeIdField => _objectTypeIdField ?? (_objectTypeIdField = new ApiProperty<int>(this, ObjectTypeIdKey));
-        private ApiProperty<int> _objectTypeIdField;
+        public ApiProperty<int> ObjectTypeIdField => _objectTypeIdField ??= new ApiProperty<int>(this, ObjectTypeIdKey);
+        private ApiProperty<int>? _objectTypeIdField;
         public const string ObjectTypeIdKey = "object_type_id";
         /// <summary>
         /// Gets or sets the ID of the object type associated with the form.
@@ -146,8 +147,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the form has a responsive layout.
         /// </summary>
-        public ApiPropertyIntBool ResponsiveLayoutField => _responsiveLayoutField ?? (_responsiveLayoutField = new ApiPropertyIntBool(this, ResponsiveLayoutKey));
-        private ApiPropertyIntBool _responsiveLayoutField;
+        public ApiPropertyIntBool ResponsiveLayoutField => _responsiveLayoutField ??= new ApiPropertyIntBool(this, ResponsiveLayoutKey);
+        private ApiPropertyIntBool? _responsiveLayoutField;
         public const string ResponsiveLayoutKey = "responsive";
         /// <summary>
         /// Gets or sets whether or not the form has a responsive layout.
@@ -157,8 +158,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the number of times the form has been visited.
         /// </summary>
-        public ApiProperty<int> VisitsField => _visitsField ?? (_visitsField = new ApiProperty<int>(this, VisitsKey));
-        private ApiProperty<int> _visitsField;
+        public ApiProperty<int> VisitsField => _visitsField ??= new ApiProperty<int>(this, VisitsKey);
+        private ApiProperty<int>? _visitsField;
         public const string VisitsKey = "visits";
         /// <summary>
         /// Gets or sets the number of times the form has been visited.
@@ -168,8 +169,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the number of times unique visitors have visited the form.
         /// </summary>
-        public ApiProperty<int> UniqueVisitsField => _uniqueVisitsField ?? (_uniqueVisitsField = new ApiProperty<int>(this, UniqueVisitsKey));
-        private ApiProperty<int> _uniqueVisitsField;
+        public ApiProperty<int> UniqueVisitsField => _uniqueVisitsField ??= new ApiProperty<int>(this, UniqueVisitsKey);
+        private ApiProperty<int>? _uniqueVisitsField;
         public const string UniqueVisitsKey = "unique_visits";
         /// <summary>
         /// Gets or sets the number of times unique visitors have visited the form.
@@ -179,8 +180,8 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the date and time the form was created. Note that this field will not contain data for any forms created prior to November 7, 2017.
         /// </summary>
-        public ApiPropertyDateTime DateCreatedField => _dateCreatedField ?? (_dateCreatedField = new ApiPropertyDateTime(this, DateCreatedKey));
-        private ApiPropertyDateTime _dateCreatedField;
+        public ApiPropertyDateTime DateCreatedField => _dateCreatedField ??= new ApiPropertyDateTime(this, DateCreatedKey);
+        private ApiPropertyDateTime? _dateCreatedField;
         public const string DateCreatedKey = "date";
         /// <summary>
         /// Gets or sets the date and time the form was created. Note that this field will not contain data for any forms created prior to November 7, 2017.
@@ -190,36 +191,36 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the date and time the form was last modified.
         /// </summary>
-        public ApiPropertyDateTime DateModifiedField => _dateModifiedField ?? (_dateModifiedField = new ApiPropertyDateTime(this, DateModifiedKey));
-        private ApiPropertyDateTime _dateModifiedField;
+        public ApiPropertyDateTime DateModifiedField => _dateModifiedField ??= new ApiPropertyDateTime(this, DateModifiedKey);
+        private ApiPropertyDateTime? _dateModifiedField;
         public const string DateModifiedKey = "dlm";
         /// <summary>
         /// Gets or sets the date and time the form was last modified.
         /// </summary>
         public DateTimeOffset? DateModified { get => DateModifiedField.Value; set => DateModifiedField.Value = value; }
 
-        public ApiPropertyString CampaignsField => _campaignsField ?? (_campaignsField = new ApiPropertyString(this, CampaignsKey));
-        private ApiPropertyString _campaignsField;
+        public ApiPropertyString CampaignsField => _campaignsField ??= new ApiPropertyString(this, CampaignsKey);
+        private ApiPropertyString? _campaignsField;
         public const string CampaignsKey = "campaigns";
         public string Campaigns { get => CampaignsField.Value; set => CampaignsField.Value = value; }
 
-        public ApiProperty<int> UniqueFilloutsField => _uniqueFilloutsField ?? (_uniqueFilloutsField = new ApiProperty<int>(this, UniqueFilloutsKey));
-        private ApiProperty<int> _uniqueFilloutsField;
+        public ApiProperty<int> UniqueFilloutsField => _uniqueFilloutsField ??= new ApiProperty<int>(this, UniqueFilloutsKey);
+        private ApiProperty<int>? _uniqueFilloutsField;
         public const string UniqueFilloutsKey = "unique_fillouts";
         public int? UniqueFillouts { get => UniqueFilloutsField.Value; set => UniqueFilloutsField.Value = value; }
 
-        public ApiProperty<decimal> RevenueField => _revenueField ?? (_revenueField = new ApiProperty<decimal>(this, RevenueKey));
-        private ApiProperty<decimal> _revenueField;
+        public ApiProperty<decimal> RevenueField => _revenueField ??= new ApiProperty<decimal>(this, RevenueKey);
+        private ApiProperty<decimal>? _revenueField;
         public const string RevenueKey = "revenue";
         public decimal? Revenue { get => RevenueField.Value; set => RevenueField.Value = value; }
 
-        public ApiPropertyBool SkipBackgroundAutomationField => _skipBackgroundAutomationField ?? (_skipBackgroundAutomationField = new ApiPropertyBool(this, SkipBackgroundAutomationKey));
-        private ApiPropertyBool _skipBackgroundAutomationField;
+        public ApiPropertyBool SkipBackgroundAutomationField => _skipBackgroundAutomationField ??= new ApiPropertyBool(this, SkipBackgroundAutomationKey);
+        private ApiPropertyBool? _skipBackgroundAutomationField;
         public const string SkipBackgroundAutomationKey = "skip_bg_automation";
         public bool? SkipBackgroundAutomation { get => SkipBackgroundAutomationField.Value; set => SkipBackgroundAutomationField.Value = value; }
 
-        public ApiProperty<int> RuleHashField => _ruleHashField ?? (_ruleHashField = new ApiProperty<int>(this, RuleHashKey));
-        private ApiProperty<int> _ruleHashField;
+        public ApiProperty<int> RuleHashField => _ruleHashField ??= new ApiProperty<int>(this, RuleHashKey);
+        private ApiProperty<int>? _ruleHashField;
         public const string RuleHashKey = "rule_hash";
         public int? RuleHash { get => RuleHashField.Value; set => RuleHashField.Value = value; }
 

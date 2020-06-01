@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 using Newtonsoft.Json.Linq;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides Ontraport API support for CreditCard objects.
@@ -23,14 +23,14 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>An ApiCreditCard containing updated fields.</returns>
         public async Task<ApiCreditCard> SetDefaultAsync(int creditCardId)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "id", creditCardId }
             };
 
             var json = await ApiRequest.PutAsync<JObject>(
-                $"{EndpointSingular}/default", query);
-            return await CreateApiObjectAsync(json);
+                $"{EndpointSingular}/default", query).ConfigureAwait(false);
+            return await CreateApiObjectAsync(json).ConfigureAwait(false);
         }
 
     }

@@ -1,9 +1,9 @@
 ﻿using System;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace EmergenceGuardian.OntraportApi.IntegrationTests
+namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
     public class OntraportCampaignItemBuildersTests : OntraportBaseReadTests<OntraportCampaignBuilderItems, ApiCampaignBuilderItem>
     {

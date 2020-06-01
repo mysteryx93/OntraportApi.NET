@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using EmergenceGuardian.OntraportApi.Converters;
+using HanumanInstitute.OntraportApi.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Contains information about an Ontraport field metadata information.
@@ -12,9 +12,9 @@ namespace EmergenceGuardian.OntraportApi.Models
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class ApiFieldMetadata
     {
-        public string Alias { get; set; }
+        public string Alias { get; set; } = string.Empty;
 
-        public string Type { get; set; }
+        public string Type { get; set; } = string.Empty;
 
         [JsonConverter(typeof(JsonConverterIntBool))]
         public bool Required { get; set; }
@@ -30,7 +30,7 @@ namespace EmergenceGuardian.OntraportApi.Models
 
         public int? ParentObject { get; set; }
 
-        public Dictionary<string, string> Options { get; set; }
+        public IDictionary<string, string> Options { get; private set; } = new Dictionary<string, string>();
 
         public override string ToString() => $"\"{Alias}\", \"{Type}\"";
     }

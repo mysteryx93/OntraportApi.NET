@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using EmergenceGuardian.OntraportApi.Models;
+using HanumanInstitute.OntraportApi.Models;
 using Newtonsoft.Json.Linq;
 
-namespace EmergenceGuardian.OntraportApi
+namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides Ontraport API support for Form objects.
@@ -24,13 +25,13 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>The form HTML.</returns>
         public async Task<string> SelectSmartFormHtmlAsync(int formId)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "id", formId }
             };
 
             return await ApiRequest.GetAsync<string>(
-                "form", query);
+                "form", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -40,11 +41,11 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>A dictionary of form blocks.</returns>
         public async Task<IDictionary<string, string>> SelectAllFormBlocksAsync(int? page = null)
         {
-            var query = new Dictionary<string, object>()
+            var query = new Dictionary<string, object?>()
                 .AddIfHasValue("page", page);
 
             return await ApiRequest.GetAsync<Dictionary<string, string>>(
-                "Form/getAllFormBlocks", query);
+                "Form/getAllFormBlocks", query).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -54,14 +55,14 @@ namespace EmergenceGuardian.OntraportApi
         /// <returns>The list of block IDs.</returns>
         public async Task<IEnumerable<string>> SelectBlocksByFormNameAsync(string formName)
         {
-            var query = new Dictionary<string, object>
+            var query = new Dictionary<string, object?>
             {
                 { "name", formName }
             };
 
             var json = await ApiRequest.GetAsync<JObject>(
-                "Form/getBlocksByFormName", query);
-            return json["data"]["block_ids"].ToObject<IEnumerable<string>>();
+                "Form/getBlocksByFormName", query).ConfigureAwait(false);
+            return JsonData(json)["block_ids"]?.ToObject<IEnumerable<string>>() ?? Enumerable.Empty<string>();
         }
     }
 }
