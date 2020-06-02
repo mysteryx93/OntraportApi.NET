@@ -24,6 +24,13 @@ namespace HanumanInstitute.OntraportApi
         Task<ResponseMetadata> GetCustomFieldsAsync();
 
         /// <summary>
+        /// Adds an object to a sequence.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="sequenceId">The id of the sequence to which the object should be added.</param>
+        Task AddToSequenceAsync(int id, int sequenceId);
+
+        /// <summary>
         /// Adds an object to one or more sequences.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
@@ -36,6 +43,13 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="sequenceIds">A list of the sequence(s) to which objects should be added.</param>
         Task AddToSequenceAsync(ApiSearchOptions searchOptions, IEnumerable<int> sequenceIds);
+
+        /// <summary>
+        /// Adds a tag to an object.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="tagId">The ID of the tag which should be added to the object.</param>
+        Task AddTagAsync(int id, int tagId);
 
         /// <summary>
         /// Adds one or more tags to an object.
@@ -52,6 +66,13 @@ namespace HanumanInstitute.OntraportApi
         Task AddTagAsync(ApiSearchOptions searchOptions, IEnumerable<int> tagIds);
 
         /// <summary>
+        /// Adds a tag to an object by the tag name. This endpoint will create the tag if it doesn't exist.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="tagName">The name of the tag which should be added to the object.</param>
+        Task AddTagNamesAsync(int id, string tagName);
+
+        /// <summary>
         /// Adds one or more tags to an object by the tag name. This endpoint will create the tag if it doesn't exist.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
@@ -64,6 +85,13 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="tagNames">A list of the names of the tag(s) which should be added to objects.</param>
         Task AddTagNamesAsync(ApiSearchOptions searchOptions, IEnumerable<string> tagNames);
+
+        /// <summary>
+        /// Adds an object to a campaign.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="campaignId">The campaign to which the object should be added.</param>
+        Task AddToCampaignAsync(int id, int campaignId);
 
         /// <summary>
         /// Adds an object to one or more campaigns.
@@ -80,7 +108,14 @@ namespace HanumanInstitute.OntraportApi
         Task AddToCampaignAsync(ApiSearchOptions searchOptions, IEnumerable<int> campaignIds);
 
         /// <summary>
-        /// Removes an objects from one or more sequences.
+        /// Removes an object from a sequence.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="sequenceId">The sequence from which the object should be removed.</param>
+        Task RemoveFromSequenceAsync(int id, int sequenceId);
+
+        /// <summary>
+        /// Removes an object from one or more sequences.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="sequenceIds">A list of the sequence(s) from which objects should be removed.</param>
@@ -92,6 +127,13 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="sequenceIds">A list of the sequence(s) from which objects should be removed.</param>
         Task RemoveFromSequenceAsync(ApiSearchOptions searchOptions, IEnumerable<int> sequenceIds);
+
+        /// <summary>
+        /// Removes a tag from an object.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="tagId">The ID of the tag which should be removed from the object.</param>
+        Task RemoveTagAsync(int id, int tagId);
 
         /// <summary>
         /// Removes one or more tags from an object.
@@ -108,6 +150,13 @@ namespace HanumanInstitute.OntraportApi
         Task RemoveTagAsync(ApiSearchOptions searchOptions, IEnumerable<int> tagIds);
 
         /// <summary>
+        /// Removes a tag from an object by the tag name.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="tagName">The name of the tag which should be removed from the object.</param>
+        Task RemoveTagNamesAsync(int id, string tagName);
+
+        /// <summary>
         /// Removes one or more tags from an object by the tag name.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
@@ -120,6 +169,13 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="tagNames">A list of the names of the tag(s) which should be removed from objects.</param>
         Task RemoveTagNamesAsync(ApiSearchOptions searchOptions, IEnumerable<string> tagNames);
+
+        /// <summary>
+        /// Removes an object from a campaign.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="campaignId">The campaign from which the object should be removed.</param>
+        Task RemoveFromCampaignAsync(int id, int campaignId);
 
         /// <summary>
         /// Removes an object from one or more campaigns.

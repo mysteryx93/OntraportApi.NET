@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using HanumanInstitute.OntraportApi.Models;
 
@@ -13,6 +13,7 @@ namespace HanumanInstitute.OntraportApi.Converters
     public abstract class ApiPropertyBase<T, TNull>
     {
         private readonly ApiObject _host;
+        private readonly JsonConverterBase<TNull>? _converter;
 
         //public ApiPropertyBase() { }
 
@@ -21,10 +22,11 @@ namespace HanumanInstitute.OntraportApi.Converters
         /// </summary>
         /// <param name="host">The ApiObject containing the data.</param>
         /// <param name="key">The field key represented by this property.</param>
-        public ApiPropertyBase(ApiObject host, string key)
+        public ApiPropertyBase(ApiObject host, string key, JsonConverterBase<TNull>? converter = null)
         {
             _host = host;
             Key = key;
+            _converter = converter;
         }
 
         /// <summary>
@@ -40,12 +42,12 @@ namespace HanumanInstitute.OntraportApi.Converters
         /// <summary>
         /// Return whether specific value is to be considered null.
         /// </summary>
-        protected bool IsNullValue(string? value) => value == null || value == NullString;
+        protected virtual bool IsNullValue([NotNullWhen(false)] string? value) => value == null || value == NullString;
 
         /// <summary>
         /// Returns the string that represents a null value.
         /// </summary>
-        public virtual string? NullString => "";
+        public virtual string? NullString => _converter != null ? _converter.NullString : string.Empty;
 
         /// <summary>
         /// Gets whether the property key is in the dictionary.
@@ -57,9 +59,13 @@ namespace HanumanInstitute.OntraportApi.Converters
         /// </summary>
         public TNull Value
         {
-            get => Parse(RawValue);
+            get => ValueCache!;
             set => Set(value);
         }
+
+        [MaybeNull]
+        private TNull ValueCache => _valueCache ??= Parse(RawValue) ?? default!;
+        private TNull _valueCache = default!;
 
         /// <summary>
         /// Returns the raw property value as a string.
@@ -77,7 +83,10 @@ namespace HanumanInstitute.OntraportApi.Converters
         /// </summary>
         /// <returns>The parsed value.</returns>
         /// <exception cref="NullReferenceException">Value is null and P is non-nullable.</exception>
-        protected virtual TNull Parse(string? value) => !IsNullValue(value) ? value!.Convert<TNull>() : default!;
+        [return: MaybeNull]
+        protected virtual TNull Parse(string? value) => 
+            _converter != null ? _converter.Parse(value) : 
+            (!IsNullValue(value) ? value.Convert<TNull>() : default!);
 
         /// <summary>
         /// Sets the value of the property and tracks changes.
@@ -91,6 +100,7 @@ namespace HanumanInstitute.OntraportApi.Converters
             }
             var conv = Format(value);
             _host.Data[Key] = conv != null ? conv.ToStringInvariant() : NullString;
+            _valueCache = value;
         }
 
         /// <summary>
@@ -98,7 +108,7 @@ namespace HanumanInstitute.OntraportApi.Converters
         /// </summary>
         /// <param name="value">The value to format.</param>
         /// <returns>The formatted value.</returns>
-        public virtual string? Format(TNull value) => value?.ToStringInvariant();
+        public virtual string? Format(TNull value) => _converter != null ? _converter.Format((TNull)value) : value?.ToStringInvariant();
     }
 
 }

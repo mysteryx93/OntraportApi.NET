@@ -6,7 +6,7 @@ namespace HanumanInstitute.OntraportApi.Converters
     /// <summary>
     /// Converts a Unix Epoch seconds field into a DateTimeOffset property.
     /// </summary>
-    public class JsonConverterDateTime : JsonConverterBase<DateTimeOffset>
+    public class JsonConverterDateTime : JsonConverterBase<DateTimeOffset?>
     {
         public bool Milliseconds { get; private set; } = false;
 

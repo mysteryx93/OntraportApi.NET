@@ -10,10 +10,13 @@ namespace HanumanInstitute.OntraportApi.Converters
     public class ApiProperty<T> : ApiPropertyBase<T, T?>
         where T : struct
     {
-        private readonly JsonConverterBase<T>? _converter;
-
+        /// <summary>
+        /// Initializes a new instance of the ApiProperty class for specified ApiObject host and field key.
+        /// </summary>
+        /// <param name="host">The ApiObject containing the data.</param>
+        /// <param name="key">The field key represented by this property.</param>
         public ApiProperty(ApiObject host, string key) :
-            base(host, key)
+            base(host, key, null)
         { }
 
         /// <summary>
@@ -22,16 +25,8 @@ namespace HanumanInstitute.OntraportApi.Converters
         /// <param name="host">The ApiObject containing the data.</param>
         /// <param name="key">The field key represented by this property.</param>
         /// <param name="converter">A JsonConverter object to format and parse the data, if special formatting is needed.</param>
-        public ApiProperty(ApiObject host, string key, JsonConverterBase<T>? converter = null) :
-            base(host, key)
-        {
-            _converter = converter;
-        }
-
-        public override string? NullString => _converter != null ? _converter.NullString : base.NullString;
-
-        protected override T? Parse(string? value) => _converter != null ? _converter.Parse(value) : base.Parse(value);
-
-        public override string? Format(T? value) => _converter != null ? _converter.Format((T?)value) : base.Format(value);
+        public ApiProperty(ApiObject host, string key, JsonConverterBase<T?>? converter) :
+            base(host, key, converter)
+        { }
     }
 }

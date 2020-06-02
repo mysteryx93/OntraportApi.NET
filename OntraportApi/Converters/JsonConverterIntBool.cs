@@ -1,13 +1,11 @@
 ﻿using System;
-using HanumanInstitute.OntraportApi.Models;
-using Newtonsoft.Json;
 
 namespace HanumanInstitute.OntraportApi.Converters
 {
     /// <summary>
     /// Converts a "0" or "1" field into a boolean property.
     /// </summary>
-    public class JsonConverterIntBool : JsonConverterBase<bool>
+    public class JsonConverterIntBool : JsonConverterBase<bool?>
     {
         public override bool? Parse(string? value)
         {
@@ -28,7 +26,7 @@ namespace HanumanInstitute.OntraportApi.Converters
             return valueInt.HasValue ? valueInt == 1 : (bool?)null;
         }
 
-        public override string Format(bool? value) => 
+        public override string Format(bool? value) =>
             value.HasValue ? (value == true ? "1" : "0") : "";
     }
 }

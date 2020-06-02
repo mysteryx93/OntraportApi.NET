@@ -1,7 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json.Serialization;
-using HanumanInstitute.OntraportApi.Models;
-using System.Globalization;
 
 namespace HanumanInstitute.OntraportApi.Converters
 {
@@ -9,7 +7,7 @@ namespace HanumanInstitute.OntraportApi.Converters
     /// Converts a string field into an enumeration, using SnakeCase naming strategy by default.
     /// </summary>
     /// <typeparam name="T">The enumeration type.</typeparam>
-    public class JsonConverterStringEnum<T> : JsonConverterBase<T>
+    public class JsonConverterStringEnum<T> : JsonConverterBase<T?>
         where T : struct
     {
         private readonly NamingStrategy _namingStrategy;
@@ -29,7 +27,7 @@ namespace HanumanInstitute.OntraportApi.Converters
             !IsNullValue(value) ? value?.Replace("_", "")?.Convert<T?>() : (T?)null;
 #pragma warning restore CA1307
 
-        public override string? Format(T? value) => 
+        public override string? Format(T? value) =>
             value != null ? _namingStrategy.GetPropertyName(value.ToStringInvariant(), false) : null;
     }
 }

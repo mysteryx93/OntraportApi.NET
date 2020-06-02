@@ -83,6 +83,14 @@ namespace HanumanInstitute.OntraportApi
         }
 
         /// <summary>
+        /// Adds an object to a sequence.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="sequenceId">The id of the sequence to which the object should be added.</param>
+        public async Task AddToSequenceAsync(int id, int sequenceId) =>
+            await _ontraObjects.AddToSequenceAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { sequenceId }).ConfigureAwait(false);
+
+        /// <summary>
         /// Adds an object to one or more sequences.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
@@ -97,6 +105,14 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="sequenceIds">A list of the sequence(s) to which objects should be added.</param>
         public async Task AddToSequenceAsync(ApiSearchOptions searchOptions, IEnumerable<int> sequenceIds) =>
             await _ontraObjects.AddToSequenceAsync((ApiObjectType)_objectTypeId, searchOptions, sequenceIds).ConfigureAwait(false);
+
+        /// <summary>
+        /// Adds a tag to an object.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="tagId">The ID of the tag which should be added to the object.</param>
+        public async Task AddTagAsync(int id, int tagId) =>
+            await _ontraObjects.AddTagAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { tagId }).ConfigureAwait(false);
 
         /// <summary>
         /// Adds one or more tags to an object.
@@ -115,6 +131,14 @@ namespace HanumanInstitute.OntraportApi
             await _ontraObjects.AddTagAsync((ApiObjectType)_objectTypeId, searchOptions, tagIds).ConfigureAwait(false);
 
         /// <summary>
+        /// Adds a tag to an object by the tag name. This endpoint will create the tag if it doesn't exist.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="tagName">The name of the tag which should be added to the object.</param>
+        public async Task AddTagNamesAsync(int id, string tagName) =>
+            await _ontraObjects.AddTagNamesAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { tagName }).ConfigureAwait(false);
+
+        /// <summary>
         /// Adds one or more tags to an object by the tag name. This endpoint will create the tag if it doesn't exist.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
@@ -129,6 +153,14 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="tagNames">A list of the names of the tag(s) which should be added to objects.</param>
         public async Task AddTagNamesAsync(ApiSearchOptions searchOptions, IEnumerable<string> tagNames) =>
             await _ontraObjects.AddTagNamesAsync((ApiObjectType)_objectTypeId, searchOptions, tagNames).ConfigureAwait(false);
+
+        /// <summary>
+        /// Adds an object to a campaign.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="campaignId">The campaign to which the object should be added.</param>
+        public async Task AddToCampaignAsync(int id, int campaignId) =>
+            await _ontraObjects.AddToCampaignAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { campaignId }).ConfigureAwait(false);
 
         /// <summary>
         /// Adds an object to one or more campaigns.
@@ -147,6 +179,14 @@ namespace HanumanInstitute.OntraportApi
             await _ontraObjects.AddToCampaignAsync((ApiObjectType)_objectTypeId, searchOptions, campaignIds).ConfigureAwait(false);
 
         /// <summary>
+        /// Removes an object from a sequence.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="sequenceId">The sequence from which the object should be removed.</param>
+        public async Task RemoveFromSequenceAsync(int id, int sequenceId) =>
+            await _ontraObjects.RemoveFromSequenceAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { sequenceId }).ConfigureAwait(false);
+
+        /// <summary>
         /// Removes an objects from one or more sequences.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
@@ -161,6 +201,14 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="sequenceIds">A list of the sequence(s) from which objects should be removed.</param>
         public async Task RemoveFromSequenceAsync(ApiSearchOptions searchOptions, IEnumerable<int> sequenceIds) =>
             await _ontraObjects.RemoveFromSequenceAsync((ApiObjectType)_objectTypeId, searchOptions, sequenceIds).ConfigureAwait(false);
+
+        /// <summary>
+        /// Removes a tag from an object.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="tagId">The ID of the tag which should be removed from the object.</param>
+        public async Task RemoveTagAsync(int id, int tagId) =>
+            await _ontraObjects.RemoveTagAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { tagId }).ConfigureAwait(false);
 
         /// <summary>
         /// Removes one or more tags from an object.
@@ -179,6 +227,14 @@ namespace HanumanInstitute.OntraportApi
             await _ontraObjects.RemoveTagAsync((ApiObjectType)_objectTypeId, searchOptions, tagIds).ConfigureAwait(false);
 
         /// <summary>
+        /// Removes a tag from an object by the tag name.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="tagName">The name of the tag which should be removed from the object.</param>
+        public async Task RemoveTagNamesAsync(int id, string tagName) =>
+            await _ontraObjects.RemoveTagNamesAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { tagName }).ConfigureAwait(false);
+
+        /// <summary>
         /// Removes one or more tags from an object by the tag name.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
@@ -193,6 +249,14 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="tagNames">A list of the names of the tag(s) which should be removed from objects.</param>
         public async Task RemoveTagNamesAsync(ApiSearchOptions searchOptions, IEnumerable<string> tagNames) =>
             await _ontraObjects.RemoveTagNamesAsync((ApiObjectType)_objectTypeId, searchOptions, tagNames).ConfigureAwait(false);
+
+        /// <summary>
+        /// Removes an object from a campaign.
+        /// </summary>
+        /// <param name="id">The id of the object to affect.</param>
+        /// <param name="campaignId">The campaign from which the object should be removed.</param>
+        public async Task RemoveFromCampaignAsync(int id, int campaignId) =>
+            await _ontraObjects.RemoveFromCampaignAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { campaignId }).ConfigureAwait(false);
 
         /// <summary>
         /// Removes an object from one or more campaigns.

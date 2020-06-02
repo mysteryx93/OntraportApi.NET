@@ -1,7 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using HanumanInstitute.OntraportApi.Models;
 
 namespace HanumanInstitute.OntraportApi.Converters
 {
@@ -42,7 +41,7 @@ namespace HanumanInstitute.OntraportApi.Converters
                     return Activator.CreateInstance(objectType);
                 }
             }
-            
+
             throw new JsonSerializationException($"Object, empty array or null expected at \"{reader.Path}\"");
         }
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using HanumanInstitute.OntraportApi.Converters;
 
 namespace HanumanInstitute.OntraportApi.Models
@@ -126,35 +128,35 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Deprecated. Returns a ApiProperty object to get or set the tags a contact is subscribed to.
         /// </summary>
-        public ApiPropertyString ListTagsField => _listTagsField ??= new ApiPropertyString(this, ListTagsKey);
-        private ApiPropertyString? _listTagsField;
+        public ApiPropertyList ListTagsField => _listTagsField ??= new ApiPropertyList(this, ListTagsKey);
+        private ApiPropertyList? _listTagsField;
         public const string ListTagsKey = "contact_cat";
         /// <summary>
         /// Deprecated. Gets or sets the tags a contact is subscribed to.
         /// </summary>
-        public string ListTags { get => ListTagsField.Value; set => ListTagsField.Value = value; }
+        public IList<int> ListTags { get => ListTagsField.Value; }
 
         /// <summary>
         /// Deprecated. Returns a ApiProperty object to get or set the sequences a contact is subscribed to.
         /// </summary>
-        public ApiPropertyString ListSequencesField => _listSequencesField ??= new ApiPropertyString(this, ListSequencesKey);
-        private ApiPropertyString? _listSequencesField;
+        public ApiPropertyList ListSequencesField => _listSequencesField ??= new ApiPropertyList(this, ListSequencesKey);
+        private ApiPropertyList? _listSequencesField;
         public const string ListSequencesKey = "updateSequence";
         /// <summary>
         /// Deprecated. Gets or sets the sequences a contact is subscribed to.
         /// </summary>
-        public string ListSequences { get => ListSequencesField.Value; set => ListSequencesField.Value = value; }
+        public IList<int> ListSequences { get => ListSequencesField.Value; }
 
         /// <summary>
         /// Deprecated. Returns a ApiProperty object to get or set the campaigns a contact is subscribed to.
         /// </summary>
-        public ApiPropertyString ListCampaignsField => _listCampaignsField ??= new ApiPropertyString(this, ListCampaignsKey);
-        private ApiPropertyString? _listCampaignsField;
+        public ApiPropertyList ListCampaignsField => _listCampaignsField ??= new ApiPropertyList(this, ListCampaignsKey);
+        private ApiPropertyList? _listCampaignsField;
         public const string ListCampaignsKey = "updateCampaign";
         /// <summary>
         /// Deprecated. Gets or sets the campaigns a contact is subscribed to.
         /// </summary>
-        public string ListCampaigns { get => ListCampaignsField.Value; set => ListCampaignsField.Value = value; }
+        public IList<int> ListCampaigns { get => ListCampaignsField.Value; }
 
         public ApiProperty<int> BIndexField => _bindexField ??= new ApiProperty<int>(this, BIndexKey);
         private ApiProperty<int>? _bindexField;

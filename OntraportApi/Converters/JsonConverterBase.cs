@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using HanumanInstitute.OntraportApi.Models;
 using Newtonsoft.Json;
 
 namespace HanumanInstitute.OntraportApi.Converters
@@ -9,15 +8,19 @@ namespace HanumanInstitute.OntraportApi.Converters
     /// Provides a simple way to convert between Ontraport API data and .NET types. Simply override Parse and Format.
     /// This class has a dual purpose. It is used as attributes on properties to serialize, and it is used by ApiProperty.
     /// </summary>
-    /// <typeparam name="T">The .NET type to parse the data into.</typeparam>
-    public class JsonConverterBase<T> : JsonConverter<T?>
-        where T : struct
+    /// <typeparam name="TNull">The .NET nullable type to parse the data into.</typeparam>
+    public class JsonConverterBase<TNull> : JsonConverter<TNull>
     {
-        public override T? ReadJson(JsonReader reader, Type objectType, T? existingValue, bool hasExistingValue, JsonSerializer serializer) =>
+#pragma warning disable CS8764 // Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
+#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
+        [return: MaybeNull]
+        public override TNull ReadJson(JsonReader reader, Type objectType, TNull existingValue, bool hasExistingValue, JsonSerializer serializer) =>
             Parse(reader?.Value?.ToStringInvariant());
 
-        public override void WriteJson(JsonWriter writer, T? value, JsonSerializer serializer) =>
+        public override void WriteJson(JsonWriter writer, TNull value, JsonSerializer serializer) =>
             writer?.WriteValue(Format(value));
+#pragma warning restore CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
+#pragma warning restore CS8764 // Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
 
         /// <summary>
         /// Return whether specific value is to be considered null.
@@ -34,14 +37,15 @@ namespace HanumanInstitute.OntraportApi.Converters
         /// </summary>
         /// <param name="value">The value to parse.</param>
         /// <returns>The parsed value.</returns>
-        public virtual T? Parse(string? value) => value != null ? value.Convert<T?>() : default;
+        [return: MaybeNull]
+        public virtual TNull Parse(string? value) => value != null ? value.Convert<TNull>() : default;
 
         /// <summary>
         /// When overriden in a derived class, formats data of type T into Ontraport API format.
         /// </summary>
         /// <param name="value">The value to format.</param>
         /// <returns>The formatted value, usually a string or int.</returns>
-        public virtual string? Format(T? value) => value?.ToStringInvariant();
+        public virtual string? Format(TNull value) => value?.ToStringInvariant();
 
         /// <summary>
         /// Creates a null object if P is nullable, otherwise throws a NullReferenceException.

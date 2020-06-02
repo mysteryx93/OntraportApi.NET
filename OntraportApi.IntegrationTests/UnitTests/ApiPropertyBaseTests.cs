@@ -6,15 +6,15 @@ using Xunit;
 
 namespace HanumanInstitute.OntraportApi.UnitTests
 {
-    public abstract class ApiPropertyBaseTests<P, T, N>
-        where P : ApiPropertyBase<T, N>
+    public abstract class ApiPropertyBaseTests<TProp, T, TNull>
+        where TProp : ApiPropertyBase<T, TNull>
     {
         private readonly string _key = "key1";
         private readonly ApiObject _host = new ApiObject();
 
-        private P SetupProperty() => (P)Activator.CreateInstance(typeof(P), _host, _key);
+        private TProp SetupProperty() => (TProp)Activator.CreateInstance(typeof(TProp), _host, _key)!;
 
-        private void Set(string value) => _host.Data[_key] = value;
+        private void Set(string? value) => _host.Data[_key] = value;
 
         [Fact]
         public void Value_NotSet_ReturnsNull()
@@ -53,7 +53,7 @@ namespace HanumanInstitute.OntraportApi.UnitTests
         {
             var prop = SetupProperty();
 
-            prop.Value = default(N);
+            prop.Value = default(TNull)!;
 
             Assert.Equal(prop.NullString, _host.Data[_key]);
         }
