@@ -19,7 +19,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the name of the shipping method being used.
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string? Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the cost of charges incurred for this shipping method.

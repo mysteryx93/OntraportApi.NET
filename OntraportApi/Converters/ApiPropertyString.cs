@@ -6,7 +6,7 @@ namespace HanumanInstitute.OntraportApi.Converters
     /// <summary>
     /// Represents a String property on an ApiObject. Changes are tracked and can be returned with ApiObject.GetChanges().
     /// </summary>
-    public class ApiPropertyString : ApiPropertyBase<string, string>
+    public class ApiPropertyString : ApiPropertyBase<string, string?>
     {
         /// <summary>
         /// Initializes a new instance of the ApiPropertyString class for specified ApiObject host and field key.

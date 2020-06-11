@@ -28,7 +28,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the JSON encoded data containing the entire structure of the landing page.
         /// </summary>
-        public string Resource { get => ResourceField.Value; set => ResourceField.Value = value; }
+        public string? Resource { get => ResourceField.Value; set => ResourceField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the landing page's design type.
@@ -50,7 +50,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the landing page's name.
         /// </summary>
-        public string Name { get => NameField.Value; set => NameField.Value = value; }
+        public string? Name { get => NameField.Value; set => NameField.Value = value; }
 
         /// <summary>
         /// If using split testing, returns a ApiProperty object to get or set the ID of the next split test in line for rotation.
@@ -94,7 +94,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the content of the last autosave.
         /// </summary>
-        public string AutoSaveContent { get => AutoSaveContentField.Value; set => AutoSaveContentField.Value = value; }
+        public string? AutoSaveContent { get => AutoSaveContentField.Value; set => AutoSaveContentField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set count of visits for split test A.
@@ -149,7 +149,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the URL where the landing page is hosted.
         /// </summary>
-        public string Domain { get => DomainField.Value; set => DomainField.Value = value; }
+        public string? Domain { get => DomainField.Value; set => DomainField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not ssl certification is enabled.
@@ -319,7 +319,7 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString SeoSettingsField => _seoSettingsField ??= new ApiPropertyString(this, SeoSettingsKey);
         private ApiPropertyString? _seoSettingsField;
         public const string SeoSettingsKey = "seo_settings";
-        public string SeoSettings { get => SeoSettingsField.Value; set => SeoSettingsField.Value = value; }
+        public string? SeoSettings { get => SeoSettingsField.Value; set => SeoSettingsField.Value = value; }
 
 
 

@@ -23,6 +23,13 @@ namespace HanumanInstitute.OntraportApi
         /// Retrieves a collection of objects based on a set of parameters.
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
+        /// <returns>A list of objects matching the query.</returns>
+        Task<IList<T>> SelectAsync(ApiSearchOptions searchOptions);
+
+        /// <summary>
+        /// Retrieves a collection of objects based on a set of parameters.
+        /// </summary>
+        /// <param name="searchOptions">The search options.</param>
         /// <param name="sortOptions">The sort options.</param>
         /// <param name="externs">If you have a relationship between your object and another object, you may want to include the data from a related field in your results. Each external field is listed in the format {object}//{field}.</param>
         /// <param name="listFields">A string array of the fields which should be returned in your results.</param>

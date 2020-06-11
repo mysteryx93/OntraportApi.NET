@@ -14,7 +14,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the company's name.
         /// </summary>
-        public string Name { get => NameField.Value; set => NameField.Value = value; }
+        public string? Name { get => NameField.Value; set => NameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's phone number.
@@ -25,7 +25,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the company's phone number.
         /// </summary>
-        public string Phone { get => PhoneField.Value; set => PhoneField.Value = value; }
+        public string? Phone { get => PhoneField.Value; set => PhoneField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's industry.
@@ -36,7 +36,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the company's industry.
         /// </summary>
-        public string Industry { get => IndustryField.Value; set => IndustryField.Value = value; }
+        public string? Industry { get => IndustryField.Value; set => IndustryField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's description.
@@ -47,7 +47,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the company's description.
         /// </summary>
-        public string Description { get => DescriptionField.Value; set => DescriptionField.Value = value; }
+        public string? Description { get => DescriptionField.Value; set => DescriptionField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set how much the company earns in a year.
@@ -80,7 +80,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the company's Facebook page URL.
         /// </summary>
-        public string FacebookPage { get => FacebookPageField.Value; set => FacebookPageField.Value = value; }
+        public string? FacebookPage { get => FacebookPageField.Value; set => FacebookPageField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's Instagram username.
@@ -91,7 +91,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the company's Instagram username.
         /// </summary>
-        public string InstagramName { get => InstagramNameField.Value; set => InstagramNameField.Value = value; }
+        public string? InstagramName { get => InstagramNameField.Value; set => InstagramNameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's postal address.
@@ -102,7 +102,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the company's postal address.
         /// </summary>
-        public string Address { get => AddressField.Value; set => AddressField.Value = value; }
+        public string? Address { get => AddressField.Value; set => AddressField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's city.
@@ -113,7 +113,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the company's city.
         /// </summary>
-        public string City { get => CityField.Value; set => CityField.Value = value; }
+        public string? City { get => CityField.Value; set => CityField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's state.
@@ -124,7 +124,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the company's state.
         /// </summary>
-        public string State { get => StateField.Value; set => StateField.Value = value; }
+        public string? State { get => StateField.Value; set => StateField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's postal code.
@@ -135,7 +135,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the company's postal code.
         /// </summary>
-        public string Zip { get => ZipField.Value; set => ZipField.Value = value; }
+        public string? Zip { get => ZipField.Value; set => ZipField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company's country.
@@ -146,7 +146,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the company's country.
         /// </summary>
-        public string Country { get => CountryField.Value; set => CountryField.Value = value; }
+        public string? Country { get => CountryField.Value; set => CountryField.Value = value; }
 
     }
 }

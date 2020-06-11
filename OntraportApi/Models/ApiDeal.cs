@@ -16,7 +16,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the deal's name.
         /// </summary>
-        public string Name { get => NameField.Value; set => NameField.Value = value; }
+        public string? Name { get => NameField.Value; set => NameField.Value = value; }
 
         public ApiProperty<decimal> ValueField => _valueField ??= new ApiProperty<decimal>(this, ValueKey);
         private ApiProperty<decimal>? _valueField;
@@ -46,7 +46,7 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString CompanyField => _companyField ??= new ApiPropertyString(this, CompanyKey);
         private ApiPropertyString? _companyField;
         public const string CompanyKey = "company";
-        public string Company { get => CompanyField.Value; set => CompanyField.Value = value; }
+        public string? Company { get => CompanyField.Value; set => CompanyField.Value = value; }
 
         public ApiProperty<decimal> WeightedValueField => _weightedValueField ??= new ApiProperty<decimal>(this, WeightedValueKey);
         private ApiProperty<decimal>? _weightedValueField;

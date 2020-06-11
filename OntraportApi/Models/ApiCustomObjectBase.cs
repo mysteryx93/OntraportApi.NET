@@ -74,7 +74,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the specific location from which the custom object was added to the database.
         /// </summary>
-        public string SourceLocation { get => SourceLocationField.Value; set => SourceLocationField.Value = value; }
+        public string? SourceLocation { get => SourceLocationField.Value; set => SourceLocationField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the custom object's IP address.
@@ -85,12 +85,12 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the custom object's IP address.
         /// </summary>
-        public string IpAddress { get => IpAddressField.Value; set => IpAddressField.Value = value; }
+        public string? IpAddress { get => IpAddressField.Value; set => IpAddressField.Value = value; }
 
         public ApiPropertyString IpAddressDisplayField => _ipAddressDisplayField ??= new ApiPropertyString(this, IpAddressDisplayKey);
         private ApiPropertyString? _ipAddressDisplayField;
         public const string IpAddressDisplayKey = "ip_addy_display";
-        public string IpAddressDisplay { get => IpAddressDisplayField.Value; set => IpAddressDisplayField.Value = value; }
+        public string? IpAddressDisplay { get => IpAddressDisplayField.Value; set => IpAddressDisplayField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the import batch the custom object was imported with, if any.

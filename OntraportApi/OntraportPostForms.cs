@@ -29,9 +29,9 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="formId">The Ontraport UID of the form.</param>
         /// <param name="formParams">The list of form data to send.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2234:Pass system uri objects instead of strings", Justification = "Reviewed: can't pass null Uri or it can't recognize form string.")]
-        public async void ServerPost(string formId, IDictionary<string, object> formParams)
+        public async void ServerPost(string formId, IDictionary<string, object?> formParams)
         {
-            formParams ??= new Dictionary<string, object>();
+            formParams ??= new Dictionary<string, object?>();
             formParams.Add("uid", formId);
             var formString = formParams.Select(x => new KeyValuePair<string, string>(x.Key, x.Value?.ToStringInvariant() ?? string.Empty));
             using var content = new FormUrlEncodedContent(formString);
@@ -45,9 +45,9 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="formId">The Ontraport UID of the form.</param>
         /// <param name="formParams">The list of form data to send.</param>
         /// <returns>The HTML page that performs the post and redirect.</returns>
-        public string ClientPost(string formId, IDictionary<string, object> formParams)
+        public string ClientPost(string formId, IDictionary<string, object?> formParams)
         {
-            formParams ??= new Dictionary<string, object>();
+            formParams ??= new Dictionary<string, object?>();
             formParams.Add("uid", formId);
 
             var response = new StringBuilder()

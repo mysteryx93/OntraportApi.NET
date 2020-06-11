@@ -12,8 +12,8 @@ namespace HanumanInstitute.OntraportApi.Models
     {
         public int ResultCode { get; set; }
         public int TransactionId { get; set; }
-        public string ExternalTxn { get; set; } = string.Empty;
-        public string Message { get; set; } = string.Empty;
+        public string? ExternalTxn { get; set; } = string.Empty;
+        public string? Message { get; set; } = string.Empty;
         public int InvoiceId { get; set; }
     }
 }

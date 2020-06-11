@@ -73,7 +73,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// Gets or sets the expiration date of the credit card on file.
         /// </summary>
         [JsonProperty("ccExpirationDate")]
-        public string CreditCardExpirationDate { get; set; } = string.Empty;
+        public string? CreditCardExpirationDate { get; set; } = string.Empty;
 
 
 

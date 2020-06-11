@@ -49,7 +49,7 @@ namespace HanumanInstitute.OntraportApi.Models
                 {
                     list.Add("searchNotes", options.SearchNotes);
                 }
-                if (performsAction && options.Ids == null)
+                if (performsAction && !options.Ids.Any())
                 {
                     list.Add("performAll", "1");
                 }

@@ -68,5 +68,10 @@ namespace HanumanInstitute.OntraportApi.Models
             }
             return result;
         }
+
+        /// <summary>
+        /// Clears changes-tracking data.
+        /// </summary>
+        public void ClearChanges() => EditedKeys.Clear();
     }
 }

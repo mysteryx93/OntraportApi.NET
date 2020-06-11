@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using HanumanInstitute.OntraportApi.Models;
@@ -84,8 +85,8 @@ namespace HanumanInstitute.OntraportApi.Converters
         /// <returns>The parsed value.</returns>
         /// <exception cref="NullReferenceException">Value is null and P is non-nullable.</exception>
         [return: MaybeNull]
-        protected virtual TNull Parse(string? value) => 
-            _converter != null ? _converter.Parse(value) : 
+        protected virtual TNull Parse(string? value) =>
+            _converter != null ? _converter.Parse(value) :
             (!IsNullValue(value) ? value.Convert<TNull>() : default!);
 
         /// <summary>
@@ -110,5 +111,4 @@ namespace HanumanInstitute.OntraportApi.Converters
         /// <returns>The formatted value.</returns>
         public virtual string? Format(TNull value) => _converter != null ? _converter.Format((TNull)value) : value?.ToStringInvariant();
     }
-
 }

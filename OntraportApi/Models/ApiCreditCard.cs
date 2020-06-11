@@ -17,7 +17,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the first name of the credit card owner.
         /// </summary>
-        public string FirstNameValue { get => FirstNameField.Value; set => FirstNameField.Value = value; }
+        public string? FirstNameValue { get => FirstNameField.Value; set => FirstNameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the last name of the credit card owner.
@@ -28,7 +28,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the last name of the credit card owner.
         /// </summary>
-        public string LastnameValue { get => LastnameField.Value; set => LastnameField.Value = value; }
+        public string? LastnameValue { get => LastnameField.Value; set => LastnameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the contact associated with the credit card.
@@ -94,7 +94,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the credit card's billing address.
         /// </summary>
-        public string AddressValue { get => AddressField.Value; set => AddressField.Value = value; }
+        public string? AddressValue { get => AddressField.Value; set => AddressField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set additional information about the credit card's billing address, such as unit number.
@@ -105,7 +105,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets additional information about the credit card's billing address, such as unit number.
         /// </summary>
-        public string Address2Value { get => Address2Field.Value; set => Address2Field.Value = value; }
+        public string? Address2Value { get => Address2Field.Value; set => Address2Field.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the credit card's billing address city.
@@ -116,7 +116,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the credit card's billing address city.
         /// </summary>
-        public string CityValue { get => CityField.Value; set => CityField.Value = value; }
+        public string? CityValue { get => CityField.Value; set => CityField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the credit card's billing address state.
@@ -127,7 +127,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the credit card's billing address state.
         /// </summary>
-        public string StateValue { get => StateField.Value; set => StateField.Value = value; }
+        public string? StateValue { get => StateField.Value; set => StateField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the credit card's billing address zip code.
@@ -138,7 +138,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the credit card's billing address zip code.
         /// </summary>
-        public string ZipValue { get => ZipField.Value; set => ZipField.Value = value; }
+        public string? ZipValue { get => ZipField.Value; set => ZipField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the credit card's billing address country.
@@ -149,7 +149,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the credit card's billing address country.
         /// </summary>
-        public string CountryValue { get => CountryField.Value; set => CountryField.Value = value; }
+        public string? CountryValue { get => CountryField.Value; set => CountryField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the current status of the credit card.

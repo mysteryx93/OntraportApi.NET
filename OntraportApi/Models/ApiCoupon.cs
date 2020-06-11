@@ -11,7 +11,7 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString NameField => _nameField ??= new ApiPropertyString(this, NameKey);
         private ApiPropertyString? _nameField;
         public const string NameKey = "name";
-        public string Name { get => NameField.Value; set => NameField.Value = value; }
+        public string? Name { get => NameField.Value; set => NameField.Value = value; }
 
         public ApiPropertyStringEnum<CouponType> TypeField => _typeField ??= new ApiPropertyStringEnum<CouponType>(this, TypeKey);
         private ApiPropertyStringEnum<CouponType>? _typeField;
@@ -46,7 +46,7 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString ProductSelectionField => _productSelectionField ??= new ApiPropertyString(this, ProductSelectionKey);
         private ApiPropertyString? _productSelectionField;
         public const string ProductSelectionKey = "product_selection";
-        public string ProductSelection { get => ProductSelectionField.Value; set => ProductSelectionField.Value = value; }
+        public string? ProductSelection { get => ProductSelectionField.Value; set => ProductSelectionField.Value = value; }
 
         public ApiPropertyStringEnum<CouponDiscountType> DiscountTypeField => _discountTypeField ??= new ApiPropertyStringEnum<CouponDiscountType>(this, DiscountTypeKey);
         private ApiPropertyStringEnum<CouponDiscountType>? _discountTypeField;
@@ -61,7 +61,7 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString DiscountDescriptionField => _discountDescriptionField ??= new ApiPropertyString(this, DiscountDescriptionKey);
         private ApiPropertyString? _discountDescriptionField;
         public const string DiscountDescriptionKey = "discount_description";
-        public string DiscountDescription { get => DiscountDescriptionField.Value; set => DiscountDescriptionField.Value = value; }
+        public string? DiscountDescription { get => DiscountDescriptionField.Value; set => DiscountDescriptionField.Value = value; }
 
         public ApiPropertyStringEnum<CouponValidType> ValidTypeField => _validTypeField ??= new ApiPropertyStringEnum<CouponValidType>(this, ValidTypeKey);
         private ApiPropertyStringEnum<CouponValidType>? _validTypeField;
@@ -109,7 +109,7 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString CouponCodeField => _couponCodeField ??= new ApiPropertyString(this, CouponCodeKey);
         private ApiPropertyString? _couponCodeField;
         public const string CouponCodeKey = "coupon_code";
-        public string CouponCode { get => CouponCodeField.Value; set => CouponCodeField.Value = value; }
+        public string? CouponCode { get => CouponCodeField.Value; set => CouponCodeField.Value = value; }
 
 
 

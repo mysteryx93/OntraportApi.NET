@@ -15,11 +15,11 @@ namespace HanumanInstitute.OntraportApi.Models
         /// Gets or sets the contact's full credit card number.
         /// </summary>
         [JsonProperty("ccnumber")]
-        public string CardNumber { get; set; } = string.Empty;
+        public string? CardNumber { get; set; } = string.Empty;
         /// <summary>
         /// Gets or sets the CVV code for the contact's credit card.
         /// </summary>
-        public string CvvCode { get; set; } = string.Empty;
+        public string? CvvCode { get; set; } = string.Empty;
         /// <summary>
         /// Gets or sets the expiration month, in digits, of the credit card to be processed.
         /// </summary>

@@ -24,7 +24,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the name of the tax to be applied.
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string? Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets whether or not shipping charges should be taxed.

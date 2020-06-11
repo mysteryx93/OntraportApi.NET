@@ -13,11 +13,11 @@ namespace HanumanInstitute.OntraportApi.Models
     {
         public int? Id { get; set; }
 
-        public string Alias { get; set; } = string.Empty;
+        public string? Alias { get; set; } = string.Empty;
 
-        public string Field { get; set; } = string.Empty;
+        public string? Field { get; set; } = string.Empty;
 
-        public string Type { get; set; } = string.Empty;
+        public string? Type { get; set; } = string.Empty;
 
         [JsonConverter(typeof(JsonConverterIntBool))]
         public bool Required { get; set; }
@@ -31,7 +31,7 @@ namespace HanumanInstitute.OntraportApi.Models
         [JsonConverter(typeof(JsonConverterIntBool))]
         public bool Deletable { get; set; }
 
-        public string Options { get; set; } = string.Empty;
+        public string? Options { get; set; } = string.Empty;
 
         public override string ToString() => $"\"{Alias}\", \"{Type}\"";
     }

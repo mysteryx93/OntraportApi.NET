@@ -29,7 +29,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the events that trigger rule execution.
         /// </summary>
-        public string Events { get => EventsField.Value; set => EventsField.Value = value; }
+        public string? Events { get => EventsField.Value; set => EventsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the criteria that must be met for the rule to act after it is triggered.
@@ -40,7 +40,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the criteria that must be met for the rule to act after it is triggered.
         /// </summary>
-        public string Conditions { get => ConditionsField.Value; set => ConditionsField.Value = value; }
+        public string? Conditions { get => ConditionsField.Value; set => ConditionsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the action to perform when rule is triggered.
@@ -51,7 +51,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the action to perform when rule is triggered.
         /// </summary>
-        public string Actions { get => ActionsField.Value; set => ActionsField.Value = value; }
+        public string? Actions { get => ActionsField.Value; set => ActionsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the name of the rule.
@@ -62,7 +62,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the name of the rule.
         /// </summary>
-        public string Name { get => NameField.Value; set => NameField.Value = value; }
+        public string? Name { get => NameField.Value; set => NameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the rule is paused.

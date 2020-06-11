@@ -22,7 +22,10 @@ namespace HanumanInstitute.OntraportApi.UnitTests
 
         public static IEnumerable<object[]> GetValues2() => new[] {
             new object[] { "True", true },
-            new object[] { "False", false }
+            new object[] { "False", false },
+            new object[] { "0", false },
+            new object[] { "1", true },
+            new object[] { "", false}
         };
 
         [Theory]

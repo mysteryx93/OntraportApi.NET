@@ -19,7 +19,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the field results should be sorted on.
         /// </summary>
-        public string Sort { get; set; } = string.Empty;
+        public string? Sort { get; set; } = string.Empty;
         /// <summary>
         /// Gets or sets the direction your results should be sorted.
         /// </summary>

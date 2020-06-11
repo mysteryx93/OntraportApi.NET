@@ -14,26 +14,26 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's billing address.
         /// </summary>
-        public string Address { get; set; } = string.Empty;
+        public string? Address { get; set; } = string.Empty;
         /// <summary>
         /// Gets or sets any additional address information for the contact, such as building or suite number.
         /// </summary>
-        public string Address2 { get; set; } = string.Empty;
+        public string? Address2 { get; set; } = string.Empty;
         /// <summary>
         /// Gets or sets the contact's city.
         /// </summary>
-        public string City { get; set; } = string.Empty;
+        public string? City { get; set; } = string.Empty;
         /// <summary>
         /// Gets or sets the contact's state.
         /// </summary>
-        public string State { get; set; } = string.Empty;
+        public string? State { get; set; } = string.Empty;
         /// <summary>
         /// Gets or sets the contact's zip code.
         /// </summary>
-        public string Zip { get; set; } = string.Empty;
+        public string? Zip { get; set; } = string.Empty;
         /// <summary>
         /// Gets or sets the contact's country.
         /// </summary>
-        public string Country { get; set; } = string.Empty;
+        public string? Country { get; set; } = string.Empty;
     }
 }

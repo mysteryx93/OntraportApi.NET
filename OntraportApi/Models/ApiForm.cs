@@ -20,7 +20,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets an arbitrary name for the form.
         /// </summary>
-        public string FormName { get => FormNameField.Value; set => FormNameField.Value = value; }
+        public string? FormName { get => FormNameField.Value; set => FormNameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the type of form.
@@ -42,7 +42,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the tags a contact should be added to upon form fillout.
         /// </summary>
-        public string Tags { get => TagsField.Value; set => TagsField.Value = value; }
+        public string? Tags { get => TagsField.Value; set => TagsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the sequences a contact should be added to upon form fillout.
@@ -53,7 +53,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the sequences a contact should be added to upon form fillout.
         /// </summary>
-        public string Sequences { get => SequencesField.Value; set => SequencesField.Value = value; }
+        public string? Sequences { get => SequencesField.Value; set => SequencesField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the URL for the thank you page the user is redirected to upon form fillout.
@@ -65,7 +65,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// Gets or sets the URL for the thank you page the user is redirected to upon form fillout.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1056:Uri properties should not be strings", Justification = "Reviewed: we only work with raw Ontraport data")]
-        public string RedirectUrl { get => RedirectUrlField.Value; set => RedirectUrlField.Value = value; }
+        public string? RedirectUrl { get => RedirectUrlField.Value; set => RedirectUrlField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user controlling the form.
@@ -98,7 +98,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the email address to send notififications when the form is filled out.
         /// </summary>
-        public string NotificationEmail { get => NotificationEmailField.Value; set => NotificationEmailField.Value = value; }
+        public string? NotificationEmail { get => NotificationEmailField.Value; set => NotificationEmailField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the number of times the form has been filled out.
@@ -120,7 +120,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the JSON-encoded form data.
         /// </summary>
-        public string JsonRawData { get => JsonRawDataField.Value; set => JsonRawDataField.Value = value; }
+        public string? JsonRawData { get => JsonRawDataField.Value; set => JsonRawDataField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the form has been deleted.
@@ -202,7 +202,7 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString CampaignsField => _campaignsField ??= new ApiPropertyString(this, CampaignsKey);
         private ApiPropertyString? _campaignsField;
         public const string CampaignsKey = "campaigns";
-        public string Campaigns { get => CampaignsField.Value; set => CampaignsField.Value = value; }
+        public string? Campaigns { get => CampaignsField.Value; set => CampaignsField.Value = value; }
 
         public ApiProperty<int> UniqueFilloutsField => _uniqueFilloutsField ??= new ApiProperty<int>(this, UniqueFilloutsKey);
         private ApiProperty<int>? _uniqueFilloutsField;

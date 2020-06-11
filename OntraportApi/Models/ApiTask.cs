@@ -61,7 +61,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the product's name.
         /// </summary>
-        public string Subject { get => SubjectField.Value; set => SubjectField.Value = value; }
+        public string? Subject { get => SubjectField.Value; set => SubjectField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date and time the task was assigned.
@@ -127,7 +127,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the content of the task message.
         /// </summary>
-        public string Details { get => DetailsField.Value; set => DetailsField.Value = value; }
+        public string? Details { get => DetailsField.Value; set => DetailsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the task is accessible.
@@ -171,7 +171,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets a JSON encoded string including information about sent notifications.
         /// </summary>
-        public string Notifications { get => NotificationsField.Value; set => NotificationsField.Value = value; }
+        public string? Notifications { get => NotificationsField.Value; set => NotificationsField.Value = value; }
 
         /// <summary>
         /// If the task has rules associated with it, returns a ApiProperty object to get or set the events, conditions and actions of those rules.
@@ -182,7 +182,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// If the task has rules associated with it, gets or sets the events, conditions and actions of those rules.
         /// </summary>
-        public string Rules { get => RulesField.Value; set => RulesField.Value = value; }
+        public string? Rules { get => RulesField.Value; set => RulesField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID for the type of object the task is associated with.
@@ -204,7 +204,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the name of the type of object the task is associated with.
         /// </summary>
-        public string ObjectName { get => ObjectNameField.Value; set => ObjectNameField.Value = value; }
+        public string? ObjectName { get => ObjectNameField.Value; set => ObjectNameField.Value = value; }
 
 
 

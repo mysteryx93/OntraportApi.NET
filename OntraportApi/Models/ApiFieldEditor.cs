@@ -13,9 +13,9 @@ namespace HanumanInstitute.OntraportApi.Models
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy), ItemNullValueHandling = NullValueHandling.Ignore)]
     public class ApiFieldEditor
     {
-        public string Field { get; set; } = string.Empty;
+        public string? Field { get; set; } = string.Empty;
 
-        public string Alias { get; set; } = string.Empty;
+        public string? Alias { get; set; } = string.Empty;
 
         [JsonConverter(typeof(StringEnumConverter))]
         public ApiFieldType? Type { get; set; }

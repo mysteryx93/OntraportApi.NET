@@ -21,7 +21,7 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString CodeField => _codeField ??= new ApiPropertyString(this, CodeKey);
         private ApiPropertyString? _codeField;
         public const string CodeKey = "code";
-        public string Code { get => CodeField.Value; set => CodeField.Value = value; }
+        public string? Code { get => CodeField.Value; set => CodeField.Value = value; }
 
         public ApiPropertyDateTime ExpirationField => _expirationField ??= new ApiPropertyDateTime(this, ExpirationKey);
         private ApiPropertyDateTime? _expirationField;

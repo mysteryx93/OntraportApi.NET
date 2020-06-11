@@ -20,9 +20,9 @@ namespace HanumanInstitute.OntraportApi
         private const string ContentJson = "application/json";
         private const string ContentUrl = "application/x-www-form-urlencoded";
         private readonly HttpClient _httpClient;
-        private readonly ILogger<OntraportHttpClient> _logger;
+        private readonly ILogger<OntraportHttpClient>? _logger;
 
-        public OntraportHttpClient(HttpClient httpClient, IOptions<OntraportConfig> config, ILogger<OntraportHttpClient> logger)
+        public OntraportHttpClient(HttpClient httpClient, IOptions<OntraportConfig> config, ILogger<OntraportHttpClient>? logger)
         {
             _httpClient = httpClient.CheckNotNull(nameof(httpClient));
             _logger = logger;

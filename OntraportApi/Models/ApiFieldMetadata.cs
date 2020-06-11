@@ -12,9 +12,9 @@ namespace HanumanInstitute.OntraportApi.Models
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class ApiFieldMetadata
     {
-        public string Alias { get; set; } = string.Empty;
+        public string? Alias { get; set; } = string.Empty;
 
-        public string Type { get; set; } = string.Empty;
+        public string? Type { get; set; } = string.Empty;
 
         [JsonConverter(typeof(JsonConverterIntBool))]
         public bool Required { get; set; }

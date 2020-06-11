@@ -21,6 +21,6 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString ProductNameField => _productNameField ??= new ApiPropertyString(this, ProductNameKey);
         private ApiPropertyString? _productNameField;
         public const string ProductNameKey = "product_name";
-        public string ProductName { get => ProductNameField.Value; set => ProductNameField.Value = value; }
+        public string? ProductName { get => ProductNameField.Value; set => ProductNameField.Value = value; }
     }
 }

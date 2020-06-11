@@ -28,7 +28,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the product's name.
         /// </summary>
-        public string Name { get => NameField.Value; set => NameField.Value = value; }
+        public string? Name { get => NameField.Value; set => NameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the product's price.
@@ -83,7 +83,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the product's description.
         /// </summary>
-        public string Description { get => DescriptionField.Value; set => DescriptionField.Value = value; }
+        public string? Description { get => DescriptionField.Value; set => DescriptionField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the product's ID in other integrations.
@@ -116,7 +116,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the product's code for integrations.
         /// </summary>
-        public string ExternalCode { get => ExternalCodeField.Value; set => ExternalCodeField.Value = value; }
+        public string? ExternalCode { get => ExternalCodeField.Value; set => ExternalCodeField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether or not the product can be included in tax calculations.

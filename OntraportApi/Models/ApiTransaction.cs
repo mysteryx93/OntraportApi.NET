@@ -50,7 +50,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the full name of the contact who made the transaction.
         /// </summary>
-        public string ContactName { get => ContactNameField.Value; set => ContactNameField.Value = value; }
+        public string? ContactName { get => ContactNameField.Value; set => ContactNameField.Value = value; }
 
         /// <summary>
         /// If the transaction resulted from a subscription purchase, returns a ApiProperty object to get or set the ID of the associated order.
@@ -215,7 +215,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the zip code for the shipping address.
         /// </summary>
-        public string Zip { get => ZipField.Value; set => ZipField.Value = value; }
+        public string? Zip { get => ZipField.Value; set => ZipField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the city for the shipping address.
@@ -226,7 +226,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the city for the shipping address.
         /// </summary>
-        public string City { get => CityField.Value; set => CityField.Value = value; }
+        public string? City { get => CityField.Value; set => CityField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the state for the shipping address.
@@ -237,7 +237,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the state for the shipping address.
         /// </summary>
-        public string State { get => StateField.Value; set => StateField.Value = value; }
+        public string? State { get => StateField.Value; set => StateField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the county for the shipping address.
@@ -248,7 +248,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the county for the shipping address.
         /// </summary>
-        public string Country { get => CountryField.Value; set => CountryField.Value = value; }
+        public string? Country { get => CountryField.Value; set => CountryField.Value = value; }
 
         /// <summary>
         /// If a sale comes from another system, returns a ApiProperty object to get or set the order ID sent from that system.
@@ -281,7 +281,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the JSON encoded offer data. The offer object contains all information about products, quantities, coupons, tax and shipping.
         /// </summary>
-        public string OfferData { get => OfferDataField.Value; set => OfferDataField.Value = value; }
+        public string? OfferData { get => OfferDataField.Value; set => OfferDataField.Value = value; }
 
         /// <summary>
         /// If the transaction has been recharged, returns a ApiProperty object to get or set the date and time of the last attempt.

@@ -12,7 +12,7 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString NameField => _nameField ??= new ApiPropertyString(this, NameKey);
         private ApiPropertyString? _nameField;
         public const string NameKey = "name";
-        public string Name { get => NameField.Value; set => NameField.Value = value; }
+        public string? Name { get => NameField.Value; set => NameField.Value = value; }
 
         public ApiPropertyDateTime DateCreatedField => _dateCreatedField ??= new ApiPropertyDateTime(this, DateCreatedKey);
         private ApiPropertyDateTime? _dateCreatedField;
@@ -22,17 +22,17 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString TableField => _tableField ??= new ApiPropertyString(this, TableKey);
         private ApiPropertyString? _tableField;
         public const string TableKey = "table";
-        public string Table { get => TableField.Value; set => TableField.Value = value; }
+        public string? Table { get => TableField.Value; set => TableField.Value = value; }
 
         public ApiPropertyString KeyField => _keyField ??= new ApiPropertyString(this, KeyKey);
         private ApiPropertyString? _keyField;
         public const string KeyKey = "key";
-        public string Key { get => KeyField.Value; set => KeyField.Value = value; }
+        public string? Key { get => KeyField.Value; set => KeyField.Value = value; }
 
         public ApiPropertyString ExternalKeyField => _externalKeyField ??= new ApiPropertyString(this, ExternalKeyKey);
         private ApiPropertyString? _externalKeyField;
         public const string ExternalKeyKey = "external_key";
-        public string ExternalKey { get => ExternalKeyField.Value; set => ExternalKeyField.Value = value; }
+        public string? ExternalKey { get => ExternalKeyField.Value; set => ExternalKeyField.Value = value; }
 
         public ApiPropertyIntBool PrimaryNavField => _primaryNavField ??= new ApiPropertyIntBool(this, PrimaryNavKey);
         private ApiPropertyIntBool? _primaryNavField;
@@ -42,32 +42,32 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString SingularField => _singularField ??= new ApiPropertyString(this, SingularKey);
         private ApiPropertyString? _singularField;
         public const string SingularKey = "singular";
-        public string Singular { get => SingularField.Value; set => SingularField.Value = value; }
+        public string? Singular { get => SingularField.Value; set => SingularField.Value = value; }
 
         public ApiPropertyString PluralField => _pluralField ??= new ApiPropertyString(this, PluralKey);
         private ApiPropertyString? _pluralField;
         public const string PluralKey = "plural";
-        public string Plural { get => PluralField.Value; set => PluralField.Value = value; }
+        public string? Plural { get => PluralField.Value; set => PluralField.Value = value; }
 
         public ApiPropertyString PossessiveField => _possessiveField ??= new ApiPropertyString(this, PossessiveKey);
         private ApiPropertyString? _possessiveField;
         public const string PossessiveKey = "possessive";
-        public string Possessive { get => PossessiveField.Value; set => PossessiveField.Value = value; }
+        public string? Possessive { get => PossessiveField.Value; set => PossessiveField.Value = value; }
 
         public ApiPropertyString PluralPossessiveField => _pluralPossessiveField ??= new ApiPropertyString(this, PluralPossessiveKey);
         private ApiPropertyString? _pluralPossessiveField;
         public const string PluralPossessiveKey = "plural_possessive";
-        public string PluralPossessive { get => PluralPossessiveField.Value; set => PluralPossessiveField.Value = value; }
+        public string? PluralPossessive { get => PluralPossessiveField.Value; set => PluralPossessiveField.Value = value; }
 
         public ApiPropertyString IconField => _iconField ??= new ApiPropertyString(this, IconKey);
         private ApiPropertyString? _iconField;
         public const string IconKey = "icon";
-        public string Icon { get => IconField.Value; set => IconField.Value = value; }
+        public string? Icon { get => IconField.Value; set => IconField.Value = value; }
 
         public ApiPropertyString ThemeField => _themeField ??= new ApiPropertyString(this, ThemeKey);
         private ApiPropertyString? _themeField;
         public const string ThemeKey = "theme";
-        public string Theme { get => ThemeField.Value; set => ThemeField.Value = value; }
+        public string? Theme { get => ThemeField.Value; set => ThemeField.Value = value; }
 
         public ApiPropertyIntBool DeletableField => _deletableField ??= new ApiPropertyIntBool(this, DeletableKey);
         private ApiPropertyIntBool? _deletableField;
@@ -77,7 +77,7 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString ObjectLabelField => _objectLabelField ??= new ApiPropertyString(this, ObjectLabelKey);
         private ApiPropertyString? _objectLabelField;
         public const string ObjectLabelKey = "object_label";
-        public string ObjectLabel { get => ObjectLabelField.Value; set => ObjectLabelField.Value = value; }
+        public string? ObjectLabel { get => ObjectLabelField.Value; set => ObjectLabelField.Value = value; }
 
     }
 }

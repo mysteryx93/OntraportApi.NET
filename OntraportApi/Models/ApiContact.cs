@@ -17,7 +17,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's first name.
         /// </summary>
-        public string FirstName { get => FirstNameField.Value; set => FirstNameField.Value = value; }
+        public string? FirstName { get => FirstNameField.Value; set => FirstNameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's last name.
@@ -28,7 +28,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's last name.
         /// </summary>
-        public string LastName { get => LastNameField.Value; set => LastNameField.Value = value; }
+        public string? LastName { get => LastNameField.Value; set => LastNameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's email address.
@@ -39,7 +39,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's email address.
         /// </summary>
-        public string Email { get => EmailField.Value; set => EmailField.Value = value; }
+        public string? Email { get => EmailField.Value; set => EmailField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the affiliate ID of the first affiliate to refer the contact.
@@ -72,7 +72,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's postal address.
         /// </summary>
-        public string Address { get => AddressField.Value; set => AddressField.Value = value; }
+        public string? Address { get => AddressField.Value; set => AddressField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set a second address field which is generally used for storing suite or unit numbers.
@@ -83,7 +83,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets a second address field which is generally used for storing suite or unit numbers.
         /// </summary>
-        public string Address2 { get => Address2Field.Value; set => Address2Field.Value = value; }
+        public string? Address2 { get => Address2Field.Value; set => Address2Field.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's city.
@@ -94,7 +94,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's city.
         /// </summary>
-        public string City { get => CityField.Value; set => CityField.Value = value; }
+        public string? City { get => CityField.Value; set => CityField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's state.
@@ -105,7 +105,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's state.
         /// </summary>
-        public string State { get => StateField.Value; set => StateField.Value = value; }
+        public string? State { get => StateField.Value; set => StateField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's postal code.
@@ -116,7 +116,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's postal code.
         /// </summary>
-        public string Zip { get => ZipField.Value; set => ZipField.Value = value; }
+        public string? Zip { get => ZipField.Value; set => ZipField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's country.
@@ -127,7 +127,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's country.
         /// </summary>
-        public string Country { get => CountryField.Value; set => CountryField.Value = value; }
+        public string? Country { get => CountryField.Value; set => CountryField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's birthday.
@@ -171,7 +171,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's home phone number.
         /// </summary>
-        public string HomePhone { get => HomePhoneField.Value; set => HomePhoneField.Value = value; }
+        public string? HomePhone { get => HomePhoneField.Value; set => HomePhoneField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the mobile number where the contact prefers receive text messages.
@@ -182,7 +182,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the mobile number where the contact prefers receive text messages.
         /// </summary>
-        public string SmsNumber { get => SmsNumberField.Value; set => SmsNumberField.Value = value; }
+        public string? SmsNumber { get => SmsNumberField.Value; set => SmsNumberField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's office phone number.
@@ -193,7 +193,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's office phone number.
         /// </summary>
-        public string OfficePhone { get => OfficePhoneField.Value; set => OfficePhoneField.Value = value; }
+        public string? OfficePhone { get => OfficePhoneField.Value; set => OfficePhoneField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's fax number.
@@ -204,7 +204,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's fax number.
         /// </summary>
-        public string Fax { get => FaxField.Value; set => FaxField.Value = value; }
+        public string? Fax { get => FaxField.Value; set => FaxField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the company the contact is affiliated with.
@@ -215,7 +215,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the company the contact is affiliated with.
         /// </summary>
-        public string Company { get => CompanyField.Value; set => CompanyField.Value = value; }
+        public string? Company { get => CompanyField.Value; set => CompanyField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's job title.
@@ -226,7 +226,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's job title.
         /// </summary>
-        public string Title { get => TitleField.Value; set => TitleField.Value = value; }
+        public string? Title { get => TitleField.Value; set => TitleField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's website.
@@ -237,7 +237,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's website.
         /// </summary>
-        public string Website { get => WebsiteField.Value; set => WebsiteField.Value = value; }
+        public string? Website { get => WebsiteField.Value; set => WebsiteField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the lead source ID for the tracking URL the contact arrived from.
@@ -402,7 +402,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the affiliate email address for Paypal payments.
         /// </summary>
-        public string AffiliatePayPal { get => AffiliatePayPalField.Value; set => AffiliatePayPalField.Value = value; }
+        public string? AffiliatePayPal { get => AffiliatePayPalField.Value; set => AffiliatePayPalField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's gender as listed on Facebook.
@@ -413,7 +413,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's gender as listed on Facebook.
         /// </summary>
-        public string FacebookGender { get => FacebookGenderField.Value; set => FacebookGenderField.Value = value; }
+        public string? FacebookGender { get => FacebookGenderField.Value; set => FacebookGenderField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the amount of the contact's most recent credit card charge.
@@ -512,7 +512,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the last 4 digits of the contact's credit card number.
         /// </summary>
-        public string CreditCardNumber { get => CreditCardNumberField.Value; set => CreditCardNumberField.Value = value; }
+        public string? CreditCardNumber { get => CreditCardNumberField.Value; set => CreditCardNumberField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the result of the contact's most recent credit card charge.
@@ -534,7 +534,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the last text message the contact received from you.
         /// </summary>
-        public string LastInboundSms { get => LastInboundSmsField.Value; set => LastInboundSmsField.Value = value; }
+        public string? LastInboundSms { get => LastInboundSmsField.Value; set => LastInboundSmsField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's timezone.
@@ -545,7 +545,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the contact's timezone.
         /// </summary>
-        public string Timezone { get => TimezoneField.Value; set => TimezoneField.Value = value; }
+        public string? Timezone { get => TimezoneField.Value; set => TimezoneField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the total amount the contact has spent with your company.

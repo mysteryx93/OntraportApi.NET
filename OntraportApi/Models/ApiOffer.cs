@@ -28,7 +28,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the offer's name.
         /// </summary>
-        public string Name { get => NameField.Value; set => NameField.Value = value; }
+        public string? Name { get => NameField.Value; set => NameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether the offer is accessible for processing manual transactions. 
@@ -50,7 +50,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets a json encoded string containing an offer's data.
         /// </summary>
-        public string Content { get => ContentField.Value; set => ContentField.Value = value; }
+        public string? Content { get => ContentField.Value; set => ContentField.Value = value; }
 
         public ApiProperty<int> ReferencedField => _referencedField ??= new ApiProperty<int>(this, ReferencedKey);
         private ApiProperty<int>? _referencedField;

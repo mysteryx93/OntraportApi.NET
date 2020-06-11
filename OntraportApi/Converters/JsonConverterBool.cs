@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace HanumanInstitute.OntraportApi.Converters
 {
@@ -9,5 +10,16 @@ namespace HanumanInstitute.OntraportApi.Converters
     {
         public override string Format(bool? value) => 
             value.HasValue ? (value == true ? "true" : "false") : "";
+
+        [return: MaybeNull]
+        public override bool? Parse(string? value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return null;
+            }
+            return (string.Compare(value, "true", StringComparison.InvariantCultureIgnoreCase) == 0 || 
+                string.Compare(value, "1", StringComparison.InvariantCultureIgnoreCase) == 0);
+        }
     }
 }

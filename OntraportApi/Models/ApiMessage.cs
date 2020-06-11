@@ -17,7 +17,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the message name.
         /// </summary>
-        public string Alias { get => AliasField.Value; set => AliasField.Value = value; }
+        public string? Alias { get => AliasField.Value; set => AliasField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the message type.
@@ -61,7 +61,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the content of the last autosave.
         /// </summary>
-        public string AutoSaveContent { get => AutoSaveContentField.Value; set => AutoSaveContentField.Value = value; }
+        public string? AutoSaveContent { get => AutoSaveContentField.Value; set => AutoSaveContentField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the date the message was created.
@@ -149,7 +149,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the email subject line.
         /// </summary>
-        public string Subject { get => SubjectField.Value; set => SubjectField.Value = value; }
+        public string? Subject { get => SubjectField.Value; set => SubjectField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the object type associated with the message. The default is 0 for contact objects. This field should only be changed if you are using custom objects.
@@ -193,7 +193,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the content of an ONTRAmail message.
         /// </summary>
-        public string Content { get => ContentField.Value; set => ContentField.Value = value; }
+        public string? Content { get => ContentField.Value; set => ContentField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user having ownership of the message.
@@ -215,7 +215,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets who the message will be sent from. Options are owner, custom, or the desired user ID.
         /// </summary>
-        public string From { get => FromField.Value; set => FromField.Value = value; }
+        public string? From { get => FromField.Value; set => FromField.Value = value; }
 
         /// <summary>
         /// For legacy emails only, returns a ApiProperty object to get or set the HTML content of the message.
@@ -226,7 +226,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// For legacy emails only, gets or sets the HTML content of the message.
         /// </summary>
-        public string MessageBody { get => MessageBodyField.Value; set => MessageBodyField.Value = value; }
+        public string? MessageBody { get => MessageBodyField.Value; set => MessageBodyField.Value = value; }
 
         /// <summary>
         /// If the from field is set to custom, returns a ApiProperty object to get or set the name the message should come from.
@@ -237,7 +237,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// If the from field is set to custom, gets or sets the name the message should come from.
         /// </summary>
-        public string FromName { get => FromNameField.Value; set => FromNameField.Value = value; }
+        public string? FromName { get => FromNameField.Value; set => FromNameField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the "reply to" email address.
@@ -248,7 +248,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the "reply to" email address.
         /// </summary>
-        public string ReplyToEmail { get => ReplyToEmailField.Value; set => ReplyToEmailField.Value = value; }
+        public string? ReplyToEmail { get => ReplyToEmailField.Value; set => ReplyToEmailField.Value = value; }
 
         /// <summary>
         /// For email messages, returns a ApiProperty object to get or set the plain text version of your email. For SMS messages, the content to be sent.
@@ -259,7 +259,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// For email messages, gets or sets the plain text version of your email. For SMS messages, the content to be sent.
         /// </summary>
-        public string PlainText { get => PlainTextField.Value; set => PlainTextField.Value = value; }
+        public string? PlainText { get => PlainTextField.Value; set => PlainTextField.Value = value; }
 
         /// <summary>
         /// Emails are automatically sent from your default email address. If you would like to send from another email address, this field can contain any validated email address.
@@ -270,7 +270,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Emails are automatically sent from your default email address. If you would like to send from another email address, this field can contain any validated email address.
         /// </summary>
-        public string FromEmail { get => FromEmailField.Value; set => FromEmailField.Value = value; }
+        public string? FromEmail { get => FromEmailField.Value; set => FromEmailField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the SendTo address.
@@ -284,7 +284,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// format {related_field}//{child_field}, where related_field is the parent field relating one object to another and child_field is 
         /// the actual email field in the related object you would like to send to. For SMS messages, this field defaults to sms_number.
         /// </summary>
-        public string SendTo { get => SendToField.Value; set => SendToField.Value = value; }
+        public string? SendTo { get => SendToField.Value; set => SendToField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set custom HTML email header data.
@@ -295,7 +295,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets custom HTML email header data.
         /// </summary>
-        public string EmailHeaderData { get => EmailHeaderDataField.Value; set => EmailHeaderDataField.Value = value; }
+        public string? EmailHeaderData { get => EmailHeaderDataField.Value; set => EmailHeaderDataField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or setes whether or not long lines are being wrapped.
@@ -316,7 +316,7 @@ namespace HanumanInstitute.OntraportApi.Models
         public ApiPropertyString ResourceField => _resourceField ??= new ApiPropertyString(this, ResourceKey);
         private ApiPropertyString? _resourceField;
         public const string ResourceKey = "resource";
-        public string Resource { get => ResourceField.Value; set => ResourceField.Value = value; }
+        public string? Resource { get => ResourceField.Value; set => ResourceField.Value = value; }
 
 
 
