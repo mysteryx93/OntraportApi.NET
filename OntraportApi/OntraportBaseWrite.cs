@@ -11,8 +11,22 @@ namespace HanumanInstitute.OntraportApi
     /// Provides common API endpoints for all objects with update methods.
     /// </summary>
     /// <typeparam name="T">The data object type deriving from ApiObject.</typeparam>
-    public abstract class OntraportBaseWrite<T> : OntraportBaseRead<T>, IOntraportBaseWrite<T> 
+    public abstract class OntraportBaseWrite<T> : OntraportBaseWrite<T, T>
         where T : ApiObject
+    {
+        public OntraportBaseWrite(OntraportHttpClient apiRequest, string endpointSingular, string endpointPlural, string? primarySearchKey) : 
+            base(apiRequest, endpointSingular, endpointPlural, primarySearchKey)
+        { }
+    }
+    /// <summary>
+    /// Provides common API endpoints for all objects with update methods.
+    /// TOverride can be used to configure Live and Sandbox accounts with a common interface and different Field IDs.
+    /// </summary>
+    /// <typeparam name="T">The data object type deriving from ApiObject.</typeparam>
+    /// <typeparam name="TOverride">A sub-type that overrides T members.</typeparam>
+    public abstract class OntraportBaseWrite<T, TOverride> : OntraportBaseRead<T>, IOntraportBaseWrite<T> 
+        where T : ApiObject
+        where TOverride : T
     {
         protected string? PrimarySearchKey { get; }
 

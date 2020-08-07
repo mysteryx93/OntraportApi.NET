@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -42,9 +43,10 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <typeparam name="T">The expected response data type. Set to JObject to parse manually. Set to Object to discard output.</typeparam>
         /// <param name="endpoint">The URL endpoint, excluding that goes after https://api.ontraport.com/1/ </param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <param name="values">Values set by the method type.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
-        public async Task<T> GetAsync<T>(string endpoint, IDictionary<string, object?>? values = null) where T : class =>
+        public async Task<T> GetAsync<T>(string endpoint, IDictionary<string, object?>? values = null, CancellationToken? cancellationToken = null) where T : class =>
             await RequestAsync<T>(endpoint, HttpMethod.Get, false, values).ConfigureAwait(false);
 
         /// <summary>
@@ -52,9 +54,10 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <typeparam name="T">The expected response data type. Set to JObject to parse manually. Set to Object to discard output.</typeparam>
         /// <param name="endpoint">The URL endpoint, excluding that goes after https://api.ontraport.com/1/ </param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <param name="values">Values set by the method type.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
-        public async Task<T> DeleteAsync<T>(string endpoint, IDictionary<string, object?>? values = null, bool encodeJson = true) where T : class =>
+        public async Task<T> DeleteAsync<T>(string endpoint, IDictionary<string, object?>? values = null, bool encodeJson = true, CancellationToken? cancellationToken = null) where T : class =>
             await RequestAsync<T>(endpoint, HttpMethod.Delete, encodeJson, values).ConfigureAwait(false);
 
         /// <summary>
@@ -62,9 +65,10 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <typeparam name="T">The expected response data type. Set to JObject to parse manually. Set to Object to discard output.</typeparam>
         /// <param name="endpoint">The URL endpoint, excluding that goes after https://api.ontraport.com/1/ </param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <param name="values">Values set by the method type.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
-        public async Task<T> PostAsync<T>(string endpoint, IDictionary<string, object?>? values = null) where T : class =>
+        public async Task<T> PostAsync<T>(string endpoint, IDictionary<string, object?>? values = null, CancellationToken? cancellationToken = null) where T : class =>
             await RequestAsync<T>(endpoint, HttpMethod.Post, true, values).ConfigureAwait(false);
 
         /// <summary>
@@ -72,9 +76,10 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <typeparam name="T">The expected response data type. Set to JObject to parse manually. Set to Object to discard output.</typeparam>
         /// <param name="endpoint">The URL endpoint, excluding that goes after https://api.ontraport.com/1/ </param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <param name="values">Values set by the method type.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
-        public async Task<T> PutAsync<T>(string endpoint, IDictionary<string, object?>? values = null) where T : class =>
+        public async Task<T> PutAsync<T>(string endpoint, IDictionary<string, object?>? values = null, CancellationToken? cancellationToken = null) where T : class =>
             await RequestAsync<T>(endpoint, HttpMethod.Put, true, values).ConfigureAwait(false);
 
         /// <summary>
@@ -84,10 +89,10 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="endpoint">The URL endpoint, excluding that goes after https://api.ontraport.com/1/ </param>
         /// <param name="method">The web request method.</param>
         /// <param name="encodeJson">True to encode the request as Json, false to encode as URL query.</param>
+        /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <param name="values">Values set by the method type.</param>
-        /// <param name="valuesOptional">Optional values set by the caller.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
-        protected async Task<T> RequestAsync<T>(string endpoint, HttpMethod method, bool encodeJson, IDictionary<string, object?>? values = null)
+        protected async Task<T> RequestAsync<T>(string endpoint, HttpMethod method, bool encodeJson, IDictionary<string, object?>? values = null, CancellationToken? cancellationToken = null)
             where T : class
         {
             values ??= new Dictionary<string, object?>();
