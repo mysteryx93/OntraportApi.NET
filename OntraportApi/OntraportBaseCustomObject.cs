@@ -11,8 +11,22 @@ namespace HanumanInstitute.OntraportApi
     /// <summary>
     /// Base class to provides Ontraport API support for custom objects.
     /// </summary>
-    public abstract class OntraportBaseCustomObject<T> : OntraportBaseDelete<T>, IOntraportBaseCustomObject<T>
+    public abstract class OntraportBaseCustomObject<T> : OntraportBaseCustomObject<T, T>
         where T : ApiCustomObjectBase
+    {
+        public OntraportBaseCustomObject(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects,
+            string endpointSingular, string endpointPlural,
+            int objectTypeId, string? primarySearchKey) :
+            base(apiRequest, ontraObjects, endpointSingular, endpointPlural, objectTypeId, primarySearchKey)
+        { }
+    }
+
+    /// <summary>
+    /// Base class to provides Ontraport API support for custom objects.
+    /// </summary>
+    public abstract class OntraportBaseCustomObject<T, TOverride> : OntraportBaseDelete<T>, IOntraportBaseCustomObject<T>
+        where T : ApiCustomObjectBase
+        where TOverride : T
     {
         private readonly IOntraportObjects _ontraObjects;
         private readonly int _objectTypeId;

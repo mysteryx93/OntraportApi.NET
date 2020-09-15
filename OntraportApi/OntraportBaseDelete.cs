@@ -9,8 +9,23 @@ namespace HanumanInstitute.OntraportApi
     /// Provides common API endpoints for all objects with delete methods.
     /// </summary>
     /// <typeparam name="T">The data object type deriving from ApiObject.</typeparam>
-    public abstract class OntraportBaseDelete<T> : OntraportBaseWrite<T>, IOntraportBaseDelete<T> 
+    public abstract class OntraportBaseDelete<T> : OntraportBaseDelete<T, T>, IOntraportBaseDelete<T> 
         where T : ApiObject
+    {
+        public OntraportBaseDelete(OntraportHttpClient apiRequest, string endpointSingular, string endpointPlural, string? primarySearchKey) :
+            base(apiRequest, endpointSingular, endpointPlural, primarySearchKey)
+        { }
+    }
+
+    /// <summary>
+    /// Provides common API endpoints for all objects with delete methods.
+    /// TOverride can be used to configure Live and Sandbox accounts with a common interface and different Field IDs.
+    /// </summary>
+    /// <typeparam name="T">The data object type deriving from ApiObject.</typeparam>
+    /// <typeparam name="TOverride">A sub-type that overrides T members.</typeparam>
+    public abstract class OntraportBaseDelete<T, TOverride> : OntraportBaseWrite<T>
+        where T : ApiObject
+        where TOverride : T
     {
         public OntraportBaseDelete(OntraportHttpClient apiRequest, string endpointSingular, string endpointPlural, string? primarySearchKey) :
             base(apiRequest, endpointSingular, endpointPlural, primarySearchKey)
