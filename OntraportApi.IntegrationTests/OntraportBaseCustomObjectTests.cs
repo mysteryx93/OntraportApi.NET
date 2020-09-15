@@ -6,9 +6,9 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
-    public abstract class OntraportBaseCustomObjectTests<T, U> : OntraportBaseDeleteTests<T, U>
-        where T : OntraportBaseCustomObject<U>
-        where U : ApiCustomObjectBase
+    public abstract class OntraportBaseCustomObjectTests<T, TU> : OntraportBaseDeleteTests<T, TU>
+        where T : OntraportBaseCustomObject<TU>
+        where TU : ApiCustomObjectBase
     {
         public OntraportBaseCustomObjectTests(ITestOutputHelper output, int validId, string validKeyValue) :
             base(output, validId, validKeyValue)

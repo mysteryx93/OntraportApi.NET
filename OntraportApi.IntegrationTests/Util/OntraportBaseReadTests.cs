@@ -10,12 +10,12 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
-    public abstract class OntraportBaseReadTests<T, U>
-        where T : OntraportBaseRead<U>
-        where U : ApiObject
+    public abstract class OntraportBaseReadTests<T, TU>
+        where T : OntraportBaseRead<TU>
+        where TU : ApiObject
     {
-        protected readonly ITestOutputHelper Output;
-        protected readonly int ValidId;
+        protected ITestOutputHelper Output { get; private set; }
+        protected int ValidId { get; private set; }
 
         public OntraportBaseReadTests(ITestOutputHelper output, int validId)
         {
@@ -25,21 +25,21 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
 
         protected T SetupApi()
         {
-            var httpClient = new ConfigHelper().GetHttpClient();
+            var httpClient = ConfigHelper.GetHttpClient();
             var ontraObjects = new OntraportObjects(httpClient);
             if (IsGenericTypeOf(typeof(OntraportBaseCustomObject<>), typeof(T)))
             {
-                return (T)Activator.CreateInstance(typeof(T), httpClient, ontraObjects);
+                return (T)Activator.CreateInstance(typeof(T), httpClient, ontraObjects)!;
             }
             else
             {
-                return (T)Activator.CreateInstance(typeof(T), httpClient);
+                return (T)Activator.CreateInstance(typeof(T), httpClient)!;
             }
         }
 
         protected OntraportObjects SetupObjectsApi()
         {
-            return new OntraportObjects(new ConfigHelper().GetHttpClient());
+            return new OntraportObjects(ConfigHelper.GetHttpClient());
         }
 
         [Fact]
@@ -105,16 +105,16 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
                 if (IsGenericTypeOf(typeof(ApiPropertyBase<,>), propInfo.PropertyType))
                 {
                     var prop = propInfo.GetValue(result);
-                    var hasKeyInfo = prop.GetType().GetProperty("HasKey");
+                    var hasKeyInfo = prop!.GetType().GetProperty("HasKey");
                     if (hasKeyInfo != null)
                     {
-                        var hasKey = (bool)hasKeyInfo.GetValue(prop);
+                        var hasKey = (bool)hasKeyInfo.GetValue(prop)!;
                         if (!hasKey)
                         {
                             hasError = true;
                             var keyInfo = prop.GetType().GetProperty("Key");
-                            var key = keyInfo.GetValue(prop);
-                            Output.WriteLine(key.ToString());
+                            var key = keyInfo?.GetValue(prop);
+                            Output.WriteLine(key?.ToString());
                         }
                     }
                 }
@@ -202,7 +202,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
             Assert.False(hasError, "Some dictionary keys don't have properties and have been listed in output.");
         }
 
-        private List<string> GetAllFieldProperties(U obj)
+        private List<string> GetAllFieldProperties(TU obj)
         {
             var result = new List<string>();
             foreach (var propInfo in obj.GetType().GetProperties())
@@ -210,11 +210,11 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
                 if (IsGenericTypeOf(typeof(ApiPropertyBase<,>), propInfo.PropertyType))
                 {
                     var prop = propInfo.GetValue(obj);
-                    var keyInfo = prop.GetType().GetProperty("Key");
+                    var keyInfo = prop!.GetType().GetProperty("Key");
                     if (keyInfo != null)
                     {
                         var key = keyInfo.GetValue(prop);
-                        result.Add(key.ToString());
+                        result.Add(key?.ToString() ?? string.Empty);
                     }
                 }
             }

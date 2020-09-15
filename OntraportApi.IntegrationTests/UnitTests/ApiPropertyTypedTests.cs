@@ -16,7 +16,7 @@ namespace HanumanInstitute.OntraportApi.UnitTests
     public class ApiPropertyIntEnumTests : ApiPropertyBaseTests<ApiPropertyIntEnum<BulkMailStatus>, BulkMailStatus, BulkMailStatus?>
     { }
 
-    public class ApiPropertyStringTests : ApiPropertyBaseTests<ApiPropertyString, string, string>
+    public class ApiPropertyStringTests : ApiPropertyBaseTests<ApiPropertyString, string, string?>
     {
     }
 

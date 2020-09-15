@@ -48,7 +48,7 @@ namespace HanumanInstitute.OntraportApi.UnitTests
         [MemberData(nameof(GetValues))]
 #pragma warning disable xUnit1026 // typeValue not used
 #pragma warning disable IDE0060   // typeValue not used
-        public void HasValue_Set_ReturnsTrue(string rawValue, string typedValue)
+        public void HasValue_Set_ReturnsTrue(string rawValue, string _)
         {
             var prop = SetupProperty();
             Set(rawValue);

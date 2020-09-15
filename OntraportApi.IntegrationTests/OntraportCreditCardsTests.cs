@@ -20,7 +20,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
 
             var result = await api.SetDefaultAsync(ValidId);
 
-            Assert.Equal(ValidId, result.Id.Value);
+            Assert.Equal(ValidId, result.Id!.Value);
         }
     }
 }

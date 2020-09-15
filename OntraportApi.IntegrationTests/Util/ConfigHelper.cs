@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using HanumanInstitute.OntraportApi.Models;
 using Microsoft.Extensions.Configuration;
@@ -7,15 +8,17 @@ using Moq;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
+    [SuppressMessage("Design", "CA1052:Static holder types should be Static or NotInheritable", Justification = "Reviewed: Can't call AddUserSecrets if class is static")]
+    [SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Reviewed: HttpClient needs to be disposed by OntraportPostForms or by the IOC container.")]
     public class ConfigHelper
     {
-        public OntraportHttpClient GetHttpClient()
+        public static OntraportHttpClient GetHttpClient()
         {
             // var factory = Mock.Of<IHttpClientFactory>(x => x.CreateClient(It.IsAny<string>()) == new HttpClient());
             return new OntraportHttpClient(new HttpClient(), GetConfig(), null);
         }
 
-        public IOptions<OntraportConfig> GetConfig()
+        public static IOptions<OntraportConfig> GetConfig()
         {
             var builder = new ConfigurationBuilder()
                 .AddUserSecrets<ConfigHelper>();

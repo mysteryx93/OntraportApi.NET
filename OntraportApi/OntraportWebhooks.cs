@@ -23,7 +23,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="eventName">The event to subscribe to.</param>
         /// <param name="data">Additional information about the format of the payload.</param>
         /// <returns>The created WebHook.</returns>
-        public async Task<ApiWebhook> SubscribeAsync(string url, string eventName, string data)
+        public async Task<ApiWebhook> SubscribeAsync(string url, string eventName, string? data)
         {
             var query = new Dictionary<string, object?>
             {

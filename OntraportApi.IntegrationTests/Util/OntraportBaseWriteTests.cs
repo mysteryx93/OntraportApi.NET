@@ -6,13 +6,13 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
-    public abstract class OntraportBaseWriteTests<T, U> : OntraportBaseReadTests<T, U>
-        where T : OntraportBaseWrite<U>
-        where U : ApiObject
+    public abstract class OntraportBaseWriteTests<T, TU> : OntraportBaseReadTests<T, TU>
+        where T : OntraportBaseWrite<TU>
+        where TU : ApiObject
     {
-        private readonly string _validKeyValue;
+        private readonly string? _validKeyValue;
 
-        public OntraportBaseWriteTests(ITestOutputHelper output, int validId, string validKeyValue) : 
+        public OntraportBaseWriteTests(ITestOutputHelper output, int validId, string? validKeyValue) : 
             base(output, validId)
         {
             _validKeyValue = validKeyValue;
@@ -58,7 +58,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
 
-            var result = await api.SelectAsync(_validKeyValue);
+            var result = await api.SelectAsync(_validKeyValue!);
 
             Assert.NotEmpty(result.Data);
         }

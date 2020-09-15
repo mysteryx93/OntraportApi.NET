@@ -81,7 +81,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
             };
             contact.StatusField.Value = newStatus;
 
-            var result = await api.CreateOrMergeAsync(contact.GetChanges());
+            await api.CreateOrMergeAsync(contact.GetChanges());
 
             var newContact = await api.SelectAsync("typed@test.com");
             Assert.Equal(newStatus, newContact.StatusField.Value);
@@ -100,7 +100,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
             contact.StatusField.Value = newStatus;
             contact.DateLastActivityField.Value = new DateTimeOffset(2019, 6, 1, 1, 1, 1, TimeSpan.Zero);
 
-            var result = await api.UpdateAsync(contact.Id.Value, contact.GetChanges());
+            await api.UpdateAsync(contact.Id!.Value, contact.GetChanges());
 
             var newContact = await api.SelectAsync("typed@test.com");
             Assert.Equal(newStatus, newContact.StatusField.Value);
@@ -120,7 +120,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
             await api.DeleteAsync(new ApiSearchOptions().AddCondition("email", "=", email));
 
             // Should throw Object Not Found.
-            await Assert.ThrowsAsync<HttpRequestException>(() => api.SelectAsync(obj.Id.Value));
+            await Assert.ThrowsAsync<HttpRequestException>(() => api.SelectAsync(obj.Id!.Value));
         }
     }
 }

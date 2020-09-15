@@ -22,7 +22,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
 
             var result = await api.UpdateAsync(ValidId, status: status);
 
-            var task = await api.SelectAsync(result.Id.Value);
+            var task = await api.SelectAsync(result.Id!.Value);
             Assert.Equal(status, task.StatusField.Value);
         }
 
@@ -30,15 +30,6 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         public async Task AssignAsync_SetNewId_NoException()
         {
             var api = SetupApi();
-            var message = new List<AssignTaskMessage>
-            {
-                new AssignTaskMessage()
-                {
-                    Id = 1,
-                    DueDate = DateTimeOffset.UtcNow,
-                    Type = ApiTask.TaskType.Fulfillment
-                }
-            };
 
             await api.AssignAsync(
                 (int)ApiObjectType.Contact, 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -15,9 +16,10 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         private readonly IOntraportTransactions _ontraTransactions;
         private readonly IOntraportPostForms _ontraPostForms;
 
+        [SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Reviewed: HttpClient needs to be disposed by OntraportPostForms or by the IOC container.")]
         public Samples()
         {
-            var httpClient = new ConfigHelper().GetHttpClient();
+            var httpClient = ConfigHelper.GetHttpClient();
             _ontraContacts = new OntraportContacts<ApiContact>(httpClient, new OntraportObjects(httpClient));
             _ontraProducts = new OntraportProducts(httpClient);
             _ontraTransactions = new OntraportTransactions(httpClient);
@@ -48,7 +50,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
             var tasks = contacts.Select(async x =>
             {
                 x.Company = newName;
-                return await _ontraContacts.UpdateAsync(x.Id.Value, x.GetChanges());
+                return await _ontraContacts.UpdateAsync(x.Id!.Value, x.GetChanges());
             });
             await Task.WhenAll(tasks);
         }
@@ -60,8 +62,8 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
                 Email = email
             }.GetChanges());
             var product = await _ontraProducts.SelectAsync(productName);
-            await _ontraTransactions.LogTransactionAsync(contact.Id.Value,
-                new ApiTransactionOffer().AddProduct(product.Id.Value, quantity, product.Price.Value));
+            await _ontraTransactions.LogTransactionAsync(contact.Id!.Value,
+                new ApiTransactionOffer().AddProduct(product.Id!.Value, quantity, product.Price!.Value));
         }
 
         public void PostForm(string email, string firstName)

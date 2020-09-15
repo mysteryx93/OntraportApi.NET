@@ -131,7 +131,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <param name="andCond">True to check that both this condition and the previous are true, false to check that either this condition
         /// or the previous is true. Ignored for the first added condition.</param>
         /// <returns>This object.</returns>
-        public ApiSearchOptions AddCondition(string field, string op, object value, bool andCond = true)
+        public ApiSearchOptions AddCondition(string field, string op, object? value, bool andCond = true)
         {
             // Add AND or OR if it's not the first condition.
             if (_content.Any())

@@ -8,9 +8,9 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
-    public abstract class OntraportBaseDeleteTests<T, U> : OntraportBaseWriteTests<T, U>
-        where T : OntraportBaseDelete<U>
-        where U : ApiObject
+    public abstract class OntraportBaseDeleteTests<T, TU> : OntraportBaseWriteTests<T, TU>
+        where T : OntraportBaseDelete<TU>
+        where TU : ApiObject
     {
         public OntraportBaseDeleteTests(ITestOutputHelper output, int validId, string validKeyValue) : 
             base(output, validId, validKeyValue)
@@ -23,7 +23,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
             var api = SetupApi();
             var obj = await api.CreateAsync();
 
-            await api.DeleteAsync(obj.Id.Value);
+            await api.DeleteAsync(obj.Id!.Value);
 
             // Should throw Object Not Found.
             await Assert.ThrowsAsync<HttpRequestException>(() => api.SelectAsync(obj.Id.Value));
@@ -35,7 +35,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
             var api = SetupApi();
             var obj = await api.CreateAsync();
 
-            await api.DeleteAsync(new ApiSearchOptions(obj.Id.Value));
+            await api.DeleteAsync(new ApiSearchOptions(obj.Id!.Value));
 
             // Should throw Object Not Found.
             await Assert.ThrowsAsync<HttpRequestException>(() => api.SelectAsync(obj.Id.Value));

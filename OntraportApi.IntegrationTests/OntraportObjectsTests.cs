@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -17,9 +18,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         private const int ValidTagId = 1;
         private const int ValidTagId2 = 3;
 
-        private OntraportObjects SetupApi()
+        private static OntraportObjects SetupApi()
         {
-            return new OntraportObjects(new ConfigHelper().GetHttpClient());
+            return new OntraportObjects(ConfigHelper.GetHttpClient());
         }
 
         [Fact]
@@ -135,12 +136,12 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
             var contact = await api.CreateOrMergeAsync(ApiObjectType.Contact, false, new { firstname = "aa", email = "a@test.com" });
-            var contactId = int.Parse(contact["id"]);
+            var contactId = int.Parse(contact["id"], CultureInfo.InvariantCulture);
 
             var result = await api.SelectAsync(ApiObjectType.Contact, contactId);
 
             Assert.NotEmpty(result);
-            Assert.Equal(contactId.ToString(), result["id"]);
+            Assert.Equal(contactId.ToString(CultureInfo.InvariantCulture), result["id"]);
         }
 
         [Fact]
@@ -360,7 +361,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
             var contact = await api.CreateAsync(ApiObjectType.Contact);
-            var contactId = int.Parse(contact["id"]);
+            var contactId = int.Parse(contact["id"], CultureInfo.InvariantCulture);
 
             await api.DeleteAsync(ApiObjectType.Contact, contactId);
 
@@ -373,7 +374,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         {
             var api = SetupApi();
             var contact = await api.CreateAsync(ApiObjectType.Contact);
-            var contactId = int.Parse(contact["id"]);
+            var contactId = int.Parse(contact["id"], CultureInfo.InvariantCulture);
 
             await api.DeleteMultipleAsync(ApiObjectType.Contact, new ApiSearchOptions(new[] { contactId }));
         }

@@ -23,7 +23,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
             var result = await api.SubscribeAsync(url, eventName, null);
 
             Assert.NotNull(result);
-            await api.UnsubscribeAsync(result.Id.Value);
+            await api.UnsubscribeAsync(result.Id!.Value);
         }
     }
 }
