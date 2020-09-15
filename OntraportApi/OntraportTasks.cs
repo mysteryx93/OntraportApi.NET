@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Converters;
 using HanumanInstitute.OntraportApi.Models;
@@ -25,7 +26,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="dateDue">The date and time the task should be due.</param>
         /// <param name="status">The task's status.</param>
         /// <returns>An object containing updated fields.</returns>
-        public async Task<ApiTask> UpdateAsync(int taskId, int? owner = null, DateTimeOffset? dateDue = null, ApiTask.TaskStatus? status = null)
+        public async Task<ApiTask> UpdateAsync(int taskId, int? owner = null, DateTimeOffset? dateDue = null, ApiTask.TaskStatus? status = null, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -36,7 +37,7 @@ namespace HanumanInstitute.OntraportApi
                 .AddIfHasValue("status", new JsonConverterStringEnum<ApiTask.TaskStatus>().Format(status));
 
             var json = await ApiRequest.PutAsync<JObject>(
-                "Tasks", query).ConfigureAwait(false);
+                "Tasks", query, cancellationToken).ConfigureAwait(false);
             return await CreateApiObjectAsync(JsonData(json)["attrs"]).ConfigureAwait(false);
         }
 
@@ -46,7 +47,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="searchOptions">The search options.</param>
         /// <param name="message">Data for the task message to assign to contacts.</param>
-        public async Task AssignAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, AssignTaskMessage? message = null)
+        public async Task AssignAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, AssignTaskMessage? message = null, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -56,7 +57,7 @@ namespace HanumanInstitute.OntraportApi
                 .AddIfHasValue("message", message);
 
             await ApiRequest.PostAsync<object>(
-                "task/assign", query).ConfigureAwait(false);
+                "task/assign", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="objectType">The object type.</param>
         /// <param name="searchOptions">The search options.</param>
-        public async Task CancelAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null)
+        public async Task CancelAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -73,7 +74,7 @@ namespace HanumanInstitute.OntraportApi
                 .AddSearchOptions(searchOptions, true);
 
             await ApiRequest.PostAsync<object>(
-                "task/cancel", query).ConfigureAwait(false);
+                "task/cancel", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="data">Additional data to set, see documentation.</param>
         /// <returns></returns>
-        public async Task CompleteAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, IDictionary<string, object?>? data = null)
+        public async Task CompleteAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, IDictionary<string, object?>? data = null, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -93,7 +94,7 @@ namespace HanumanInstitute.OntraportApi
                 .AddIfHasValue("data", data);
 
             await ApiRequest.PostAsync<object>(
-                "task/complete", query).ConfigureAwait(false);
+                "task/complete", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -102,7 +103,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="id">The task ID.</param>
         /// <param name="newTime">The date and time the task should be rescheduled for.</param>
         /// <returns></returns>
-        public async Task RescheduleAsync(int id, DateTimeOffset newTime)
+        public async Task RescheduleAsync(int id, DateTimeOffset newTime, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -111,7 +112,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             await ApiRequest.PostAsync<object>(
-                "task/reschedule", query).ConfigureAwait(false);
+                "task/reschedule", query, cancellationToken).ConfigureAwait(false);
         }
     }
 }

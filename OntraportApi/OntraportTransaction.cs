@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Converters;
 using HanumanInstitute.OntraportApi.Models;
@@ -21,7 +22,7 @@ namespace HanumanInstitute.OntraportApi
         /// Marks a transaction as in collections.
         /// </summary>
         /// <param name="transactionId">The transaction ID.</param>
-        public async Task MarkCollectionsAsync(int transactionId)
+        public async Task MarkCollectionsAsync(int transactionId, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -29,14 +30,14 @@ namespace HanumanInstitute.OntraportApi
             };
 
             await ApiRequest.PutAsync<object>(
-                "transaction/convertToCollections", query).ConfigureAwait(false);
+                "transaction/convertToCollections", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Marks a transaction as declined.
         /// </summary>
         /// <param name="transactionId">The transaction ID.</param>
-        public async Task MarkDeclinedAsync(int transactionId)
+        public async Task MarkDeclinedAsync(int transactionId, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -44,14 +45,14 @@ namespace HanumanInstitute.OntraportApi
             };
 
             await ApiRequest.PutAsync<object>(
-                "transaction/convertToDecline", query).ConfigureAwait(false);
+                "transaction/convertToDecline", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Marks a transaction as paid.
         /// </summary>
         /// <param name="transactionId">The transaction ID.</param>
-        public async Task MarkPaidAsync(int transactionId)
+        public async Task MarkPaidAsync(int transactionId, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -59,14 +60,14 @@ namespace HanumanInstitute.OntraportApi
             };
 
             await ApiRequest.PutAsync<object>(
-                "transaction/markPaid", query).ConfigureAwait(false);
+                "transaction/markPaid", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Updates an order to include new offer data. For example, to update the credit card tied to the recurring subscription.
         /// </summary>
         /// <param name="offer">The product and pricing offer for the transaction.</param>
-        public async Task UpdateOrderAsync(ApiOffer offer)
+        public async Task UpdateOrderAsync(ApiOffer offer, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -74,7 +75,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             await ApiRequest.PutAsync<object>(
-                "transaction/order", query).ConfigureAwait(false);
+                "transaction/order", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -92,7 +93,8 @@ namespace HanumanInstitute.OntraportApi
         /// <returns>The transaction result.</returns>
         public async Task<ApiTransactionResult> ProcessManualAsync(int contactId, int gatewayId,
             ApiTransactionOffer offer, ApiTransactionAddress? billingAddress = null, ApiTransactionPayer? payer = null,
-            int? creditCardId = null, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1)
+            int? creditCardId = null, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1,
+            CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -109,7 +111,7 @@ namespace HanumanInstitute.OntraportApi
                 .AddIfHasValue("cc_id", creditCardId);
 
             return await ApiRequest.PostAsync<ApiTransactionResult>(
-                "transaction/processManual", query).ConfigureAwait(false);
+                "transaction/processManual", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -123,7 +125,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="invoiceTemplate">The ID of the invoice template to use for this transaction. The default invoice ID is 1.</param>
         /// <returns>The invoice ID.</returns>
         public async Task<int> LogTransactionAsync(int contactId, ApiTransactionOffer offer,
-            string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1)
+            string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -136,7 +138,7 @@ namespace HanumanInstitute.OntraportApi
                 .AddIfHasValue("trans_date", new JsonConverterDateTime(true).Format(transactionDate));
 
             var json = await ApiRequest.PostAsync<JObject>(
-                "transaction/processManual", query).ConfigureAwait(false);
+                "transaction/processManual", query, cancellationToken).ConfigureAwait(false);
             return JsonData(json)["invoice_id"]?.Value<int>() ?? 0;
         }
 
@@ -144,78 +146,78 @@ namespace HanumanInstitute.OntraportApi
         /// Refunds a previously charged transaction.
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
-        public async Task RefundAsync(ApiSearchOptions searchOptions)
+        public async Task RefundAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);
 
             await ApiRequest.PutAsync<object>(
-                "transaction/refund", query).ConfigureAwait(false);
+                "transaction/refund", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Reruns a previously charged transaction.
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
-        public async Task RerunAsync(ApiSearchOptions searchOptions)
+        public async Task RerunAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);
 
             await ApiRequest.PostAsync<object>(
-                "transaction/rerun", query).ConfigureAwait(false);
+                "transaction/rerun", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Reruns partner commissions for a previously charged transaction.
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
-        public async Task RerunCommissionsAsync(ApiSearchOptions searchOptions)
+        public async Task RerunCommissionsAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);
 
             await ApiRequest.PutAsync<object>(
-                "transaction/rerunCommission", query).ConfigureAwait(false);
+                "transaction/rerunCommission", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Resends an invoice for a previously charged transaction.
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
-        public async Task ResendInvoiceAsync(ApiSearchOptions searchOptions)
+        public async Task ResendInvoiceAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);
 
             await ApiRequest.PostAsync<object>(
-                "transaction/resendInvoice", query).ConfigureAwait(false);
+                "transaction/resendInvoice", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Voids a previously charged transaction.
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
-        public async Task VoidAsync(ApiSearchOptions searchOptions)
+        public async Task VoidAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);
 
             await ApiRequest.PutAsync<object>(
-                "transaction/void", query).ConfigureAwait(false);
+                "transaction/void", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Writes off a previously charged transaction.
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
-        public async Task WriteOffAsync(ApiSearchOptions searchOptions)
+        public async Task WriteOffAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);
 
             await ApiRequest.PutAsync<object>(
-                "transaction/writeOff", query).ConfigureAwait(false);
+                "transaction/writeOff", query, cancellationToken).ConfigureAwait(false);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
 using Newtonsoft.Json.Linq;
@@ -12,7 +13,7 @@ namespace HanumanInstitute.OntraportApi
     /// </summary>
     public class OntraportCreditCards : OntraportBaseRead<ApiCreditCard>, IOntraportCreditCards
     {
-        public OntraportCreditCards(OntraportHttpClient apiRequest) : 
+        public OntraportCreditCards(OntraportHttpClient apiRequest) :
             base(apiRequest, "CreditCard", "CreditCards")
         { }
 
@@ -21,7 +22,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="creditCardId">The credit card ID.</param>
         /// <returns>An ApiCreditCard containing updated fields.</returns>
-        public async Task<ApiCreditCard> SetDefaultAsync(int creditCardId)
+        public async Task<ApiCreditCard> SetDefaultAsync(int creditCardId, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -29,7 +30,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             var json = await ApiRequest.PutAsync<JObject>(
-                $"{EndpointSingular}/default", query).ConfigureAwait(false);
+                $"{EndpointSingular}/default", query, cancellationToken).ConfigureAwait(false);
             return await CreateApiObjectAsync(json).ConfigureAwait(false);
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 
 namespace HanumanInstitute.OntraportApi
 {
@@ -29,13 +30,13 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="formId">The Ontraport UID of the form.</param>
         /// <param name="formParams">The list of form data to send.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2234:Pass system uri objects instead of strings", Justification = "Reviewed: can't pass null Uri or it can't recognize form string.")]
-        public async void ServerPost(string formId, IDictionary<string, object?> formParams)
+        public async void ServerPost(string formId, IDictionary<string, object?> formParams, CancellationToken cancellationToken = default)
         {
             formParams ??= new Dictionary<string, object?>();
             formParams.Add("uid", formId);
             var formString = formParams.Select(x => new KeyValuePair<string, string>(x.Key, x.Value?.ToStringInvariant() ?? string.Empty));
             using var content = new FormUrlEncodedContent(formString);
-            await _httpClient.PostAsync(string.Empty, content).ConfigureAwait(false);
+            await _httpClient.PostAsync(string.Empty, content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
 
@@ -15,6 +16,6 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="creditCardId">The credit card ID.</param>
         /// <returns>An ApiCreditCard containing updated fields.</returns>
-        Task<ApiCreditCard> SetDefaultAsync(int creditCardId);
+        Task<ApiCreditCard> SetDefaultAsync(int creditCardId, CancellationToken cancellationToken = default);
     }
 }

@@ -47,7 +47,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="id">The ID of the specific object.</param>
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>The selected object.</returns>
-        public async Task<T> SelectAsync(int id, CancellationToken? cancellationToken = null)
+        public async Task<T> SelectAsync(int id, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -77,13 +77,13 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>A list of objects matching the query.</returns>
         public async Task<IList<T>> SelectAsync(
-            ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null, IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, CancellationToken? cancellationToken = null)
+            ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null, IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions)
                 .AddSortOptions(sortOptions)
                 .AddIfHasValue("externs", externs)
-                .AddIfHasValue("listFields", externs);
+                .AddIfHasValue("listFields", listFields);
 
             var json = await ApiRequest.GetAsync<JObject>(
                 $"{EndpointPlural}", query, cancellationToken).ConfigureAwait(false);
@@ -104,7 +104,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>A ResponseMetaData object.</returns>
-        public async Task<ResponseMetadata> GetMetadataAsync(CancellationToken? cancellationToken = null)
+        public async Task<ResponseMetadata> GetMetadataAsync(CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -132,7 +132,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>A ResponseCollectionInfo object.</returns>
-        public async Task<ResponseCollectionInfo> GetCollectionInfoAsync(ApiSearchOptions? searchOptions = null, CancellationToken? cancellationToken = null)
+        public async Task<ResponseCollectionInfo> GetCollectionInfoAsync(ApiSearchOptions? searchOptions = null, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);

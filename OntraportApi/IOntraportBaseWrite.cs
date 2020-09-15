@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
 
 namespace HanumanInstitute.OntraportApi
@@ -15,14 +17,14 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="id">The ID of the specific object.</param>
         /// <returns>The selected object.</returns>
-        Task<T> SelectAsync(string keyValue);
+        Task<T> SelectAsync(string keyValue, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This endpoint will add a new object to your database. It can be used for any object type as long as the correct parameters are supplied. This endpoint allows duplication; if you want to avoid duplicates you should merge instead.
         /// </summary>
         /// <param name="values">Fields to set on the object.</param>
         /// <returns>The created object.</returns>
-        Task<T> CreateAsync(object? values = null);
+        Task<T> CreateAsync(object? values = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates an existing object with given data.
@@ -30,6 +32,6 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectId">The ID of the object to update.</param>
         /// <param name="values">Fields to set on the object.</param>
         /// <returns>An object containing updated fields.</returns>
-        Task<T> UpdateAsync(int objectId, object? values = null);
+        Task<T> UpdateAsync(int objectId, object? values = null, CancellationToken cancellationToken = default);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
 
@@ -35,7 +36,7 @@ namespace HanumanInstitute.OntraportApi
         /// Deletes an existing object.
         /// </summary>
         /// <param name="objectId">The ID of the specific object.</param>
-        public virtual async Task DeleteAsync(int objectId)
+        public virtual async Task DeleteAsync(int objectId, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -43,7 +44,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             await ApiRequest.DeleteAsync<object>(
-                EndpointSingular, query, encodeJson: false).ConfigureAwait(false);
+                EndpointSingular, query, false, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -51,13 +52,13 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
         /// <returns>A list of objects matching the query.</returns>
-        public virtual async Task DeleteAsync(ApiSearchOptions searchOptions)
+        public virtual async Task DeleteAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions, true);
 
             await ApiRequest.DeleteAsync<object>(
-                EndpointPlural, query).ConfigureAwait(false);
+                EndpointPlural, query, true, cancellationToken).ConfigureAwait(false);
         }
     }
 }

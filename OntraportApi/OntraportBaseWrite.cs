@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
 using Newtonsoft.Json.Linq;
@@ -41,11 +42,11 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="keyValue">The key value of the specific object, usually the name or email.</param>
         /// <returns>The selected object.</returns>
-        public async Task<T> SelectAsync(string keyValue)
+        public async Task<T> SelectAsync(string keyValue, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(PrimarySearchKey)) throw new InvalidOperationException(Properties.Resources.InvalidMethodForObjectType);
 
-            var result = await SelectAsync(new ApiSearchOptions().AddCondition(PrimarySearchKey, "=", keyValue)).ConfigureAwait(false);
+            var result = await SelectAsync(new ApiSearchOptions().AddCondition(PrimarySearchKey, "=", keyValue), cancellationToken: cancellationToken).ConfigureAwait(false);
             return result.FirstOrDefault();
         }
 
@@ -54,11 +55,11 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="values">Fields to set on the object.</param>
         /// <returns>The created object.</returns>
-        public async Task<T> CreateAsync(object? values = null)
+        public async Task<T> CreateAsync(object? values = null, CancellationToken cancellationToken = default)
         {
             var json = await ApiRequest.PostAsync<JObject>(
                 EndpointPlural,
-                new Dictionary<string, object?>().AddObject(values)).ConfigureAwait(false);
+                new Dictionary<string, object?>().AddObject(values), cancellationToken).ConfigureAwait(false);
             return await OnParseCreateAsync(json).ConfigureAwait(false);
         }
 
@@ -76,7 +77,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectId">The ID of the object to update.</param>
         /// <param name="values">Fields to set on the object.</param>
         /// <returns>A dictionary of updated fields.</returns>
-        public async Task<T> UpdateAsync(int objectId, object? values = null)
+        public async Task<T> UpdateAsync(int objectId, object? values = null, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -84,7 +85,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             var json = await ApiRequest.PutAsync<JObject>(
-                EndpointPlural, query.AddObject(values)).ConfigureAwait(false);
+                EndpointPlural, query.AddObject(values), cancellationToken).ConfigureAwait(false);
             return await OnParseUpdateAsync(json).ConfigureAwait(false);
         }
 

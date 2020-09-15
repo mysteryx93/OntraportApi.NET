@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
 using Newtonsoft.Json.Linq;
@@ -23,7 +24,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="formId">The ID of the form to retrieve HTML for.</param>
         /// <returns>The form HTML.</returns>
-        public async Task<string> SelectSmartFormHtmlAsync(int formId)
+        public async Task<string> SelectSmartFormHtmlAsync(int formId, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -31,7 +32,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             return await ApiRequest.GetAsync<string>(
-                "form", query).ConfigureAwait(false);
+                "form", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -39,13 +40,13 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="page">The zero-indexed page number. 50 entries are returned per page.</param>
         /// <returns>A dictionary of form blocks.</returns>
-        public async Task<IDictionary<string, string>> SelectAllFormBlocksAsync(int? page = null)
+        public async Task<IDictionary<string, string>> SelectAllFormBlocksAsync(int? page = null, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
                 .AddIfHasValue("page", page);
 
             return await ApiRequest.GetAsync<Dictionary<string, string>>(
-                "Form/getAllFormBlocks", query).ConfigureAwait(false);
+                "Form/getAllFormBlocks", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="formName">The name of the form.</param>
         /// <returns>The list of block IDs.</returns>
-        public async Task<IEnumerable<string>> SelectBlocksByFormNameAsync(string formName)
+        public async Task<IEnumerable<string>> SelectBlocksByFormNameAsync(string formName, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -61,7 +62,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             var json = await ApiRequest.GetAsync<JObject>(
-                "Form/getBlocksByFormName", query).ConfigureAwait(false);
+                "Form/getBlocksByFormName", query, cancellationToken).ConfigureAwait(false);
             return JsonData(json)["block_ids"]?.ToObject<IEnumerable<string>>() ?? Enumerable.Empty<string>();
         }
     }

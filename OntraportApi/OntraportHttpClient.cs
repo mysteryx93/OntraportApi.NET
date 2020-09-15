@@ -46,8 +46,8 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <param name="values">Values set by the method type.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
-        public async Task<T> GetAsync<T>(string endpoint, IDictionary<string, object?>? values = null, CancellationToken? cancellationToken = null) where T : class =>
-            await RequestAsync<T>(endpoint, HttpMethod.Get, false, values).ConfigureAwait(false);
+        public async Task<T> GetAsync<T>(string endpoint, IDictionary<string, object?>? values = null, CancellationToken cancellationToken = default) where T : class =>
+            await RequestAsync<T>(endpoint, HttpMethod.Get, false, values, cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Sends a DELETE API query to Ontraport.
@@ -57,8 +57,8 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <param name="values">Values set by the method type.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
-        public async Task<T> DeleteAsync<T>(string endpoint, IDictionary<string, object?>? values = null, bool encodeJson = true, CancellationToken? cancellationToken = null) where T : class =>
-            await RequestAsync<T>(endpoint, HttpMethod.Delete, encodeJson, values).ConfigureAwait(false);
+        public async Task<T> DeleteAsync<T>(string endpoint, IDictionary<string, object?>? values = null, bool encodeJson = true, CancellationToken cancellationToken = default) where T : class =>
+            await RequestAsync<T>(endpoint, HttpMethod.Delete, encodeJson, values, cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Sends a POST API query to Ontraport.
@@ -68,8 +68,8 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <param name="values">Values set by the method type.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
-        public async Task<T> PostAsync<T>(string endpoint, IDictionary<string, object?>? values = null, CancellationToken? cancellationToken = null) where T : class =>
-            await RequestAsync<T>(endpoint, HttpMethod.Post, true, values).ConfigureAwait(false);
+        public async Task<T> PostAsync<T>(string endpoint, IDictionary<string, object?>? values = null, CancellationToken cancellationToken = default) where T : class =>
+            await RequestAsync<T>(endpoint, HttpMethod.Post, true, values, cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Sends a PUT API query to Ontraport.
@@ -79,8 +79,8 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <param name="values">Values set by the method type.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
-        public async Task<T> PutAsync<T>(string endpoint, IDictionary<string, object?>? values = null, CancellationToken? cancellationToken = null) where T : class =>
-            await RequestAsync<T>(endpoint, HttpMethod.Put, true, values).ConfigureAwait(false);
+        public async Task<T> PutAsync<T>(string endpoint, IDictionary<string, object?>? values = null, CancellationToken cancellationToken = default) where T : class =>
+            await RequestAsync<T>(endpoint, HttpMethod.Put, true, values, cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Sends an API query to Ontraport.
@@ -92,7 +92,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <param name="values">Values set by the method type.</param>
         /// <returns>An ApiResponse of the expected type.</returns>
-        protected async Task<T> RequestAsync<T>(string endpoint, HttpMethod method, bool encodeJson, IDictionary<string, object?>? values = null, CancellationToken? cancellationToken = null)
+        protected async Task<T> RequestAsync<T>(string endpoint, HttpMethod method, bool encodeJson, IDictionary<string, object?>? values = null, CancellationToken cancellationToken = default)
             where T : class
         {
             values ??= new Dictionary<string, object?>();
@@ -116,7 +116,7 @@ namespace HanumanInstitute.OntraportApi
             {
                 Content = new StringContent(content, Encoding.UTF8, encodeJson ? ContentJson : ContentUrl)
             };
-            var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
+            var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
             var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

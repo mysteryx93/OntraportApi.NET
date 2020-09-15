@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
 using Newtonsoft.Json.Linq;
@@ -23,7 +24,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="eventName">The event to subscribe to.</param>
         /// <param name="data">Additional information about the format of the payload.</param>
         /// <returns>The created WebHook.</returns>
-        public async Task<ApiWebhook> SubscribeAsync(string url, string eventName, string? data)
+        public async Task<ApiWebhook> SubscribeAsync(string url, string eventName, string? data, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -33,7 +34,7 @@ namespace HanumanInstitute.OntraportApi
                 .AddIfHasValue("data", data);
 
             var json = await ApiRequest.PostAsync<JObject>(
-                "Webhook/subscribe", query).ConfigureAwait(false);
+                "Webhook/subscribe", query, cancellationToken).ConfigureAwait(false);
             return await CreateApiObjectAsync(json["data"]).ConfigureAwait(false);
         }
 
@@ -41,7 +42,7 @@ namespace HanumanInstitute.OntraportApi
         /// Unsubscribe from a specific webhook by its ID.
         /// </summary>
         /// <param name="webhookId">The ID of the webhook to unsubscribe from. Required.</param>
-        public async Task UnsubscribeAsync(int webhookId)
+        public async Task UnsubscribeAsync(int webhookId, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -49,7 +50,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             await ApiRequest.DeleteAsync<object>(
-                "Webhook/unsubscribe", query).ConfigureAwait(false);
+                "Webhook/unsubscribe", query, true, cancellationToken).ConfigureAwait(false);
         }
     }
 }

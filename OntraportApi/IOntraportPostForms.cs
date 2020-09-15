@@ -14,7 +14,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="formId">The Ontraport UID of the form.</param>
         /// <param name="formParams">The list of form data to send.</param>
-        void ServerPost(string formId, IDictionary<string, object?> formParams);
+        void ServerPost(string formId, IDictionary<string, object?> formParams, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Posts an Ontraport form with specified data from the client.

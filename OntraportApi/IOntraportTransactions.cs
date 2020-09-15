@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
 
@@ -10,7 +11,7 @@ namespace HanumanInstitute.OntraportApi
     /// </summary>
     public interface IOntraportTransactions : IOntraportBaseRead<ApiTransaction>
     {
-        Task MarkCollectionsAsync(int transactionId);
+        Task MarkCollectionsAsync(int transactionId, CancellationToken cancellationToken = default);
         /// <summary>
         /// Marks a transaction as in collections.
         /// </summary>
@@ -20,19 +21,19 @@ namespace HanumanInstitute.OntraportApi
         /// Marks a transaction as declined.
         /// </summary>
         /// <param name="transactionId">The transaction ID.</param>
-        Task MarkDeclinedAsync(int transactionId);
+        Task MarkDeclinedAsync(int transactionId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Marks a transaction as paid.
         /// </summary>
         /// <param name="transactionId">The transaction ID.</param>
-        Task MarkPaidAsync(int transactionId);
+        Task MarkPaidAsync(int transactionId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates an order to include new offer data. For example, to update the credit card tied to the recurring subscription.
         /// </summary>
         /// <param name="offer">The product and pricing offer for the transaction.</param>
-        Task UpdateOrderAsync(ApiOffer offer);
+        Task UpdateOrderAsync(ApiOffer offer, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Processes a transaction for a contact. Please note that this request requires valid parameters for all associated members of the transaction or the request will fail.
@@ -47,7 +48,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="transactionDate">The date and time of the transaction.</param>
         /// <param name="invoiceTemplate">The ID of the invoice template to use for this transaction. The default invoice ID is 1.</param>
         /// <returns>The transaction result.</returns>
-        Task<ApiTransactionResult> ProcessManualAsync(int contactId, int gatewayId, ApiTransactionOffer offer, ApiTransactionAddress? billingAddress = null, ApiTransactionPayer? payer = null, int? creditCardId = null, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1);
+        Task<ApiTransactionResult> ProcessManualAsync(int contactId, int gatewayId, ApiTransactionOffer offer, ApiTransactionAddress? billingAddress = null, ApiTransactionPayer? payer = null, int? creditCardId = null, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Far less data is needed to simply log a transaction than to manually process one. The gateway, payer, and billing details are unnecessary 
@@ -59,42 +60,42 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="transactionDate">The date and time of the transaction.</param>
         /// <param name="invoiceTemplate">The ID of the invoice template to use for this transaction. The default invoice ID is 1.</param>
         /// <returns>The invoice ID.</returns>
-        Task<int> LogTransactionAsync(int contactId, ApiTransactionOffer offer, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1);
+        Task<int> LogTransactionAsync(int contactId, ApiTransactionOffer offer, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Refunds a previously charged transaction.
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
-        Task RefundAsync(ApiSearchOptions searchOptions);
+        Task RefundAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Reruns a previously charged transaction.
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
-        Task RerunAsync(ApiSearchOptions searchOptions);
+        Task RerunAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Reruns partner commissions for a previously charged transaction.
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
-        Task RerunCommissionsAsync(ApiSearchOptions searchOptions);
+        Task RerunCommissionsAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Resends an invoice for a previously charged transaction.
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
-        Task ResendInvoiceAsync(ApiSearchOptions searchOptions);
+        Task ResendInvoiceAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Voids a previously charged transaction.
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
-        Task VoidAsync(ApiSearchOptions searchOptions);
+        Task VoidAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Writes off a previously charged transaction.
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
-        Task WriteOffAsync(ApiSearchOptions searchOptions);
+        Task WriteOffAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default);
     }
 }
