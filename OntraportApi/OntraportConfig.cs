@@ -10,10 +10,10 @@ namespace EmergenceGuardian.OntraportApi
         /// <summary>
         /// Gets or sets the Ontraport API Application Id, found in your account administration section.
         /// </summary>
-        public string AppId { get; set; }
+        public string AppId { get; set; } = string.Empty;
         /// <summary>
         /// Gets or sets the Ontraport API Key, found in your account administration section.
         /// </summary>
-        public string ApiKey { get; set; }
+        public string ApiKey { get; set; } = string.Empty;
     }
 }

@@ -275,7 +275,7 @@ namespace HanumanInstitute.OntraportApi
                 .AddSearchOptions(searchOptions);
 
             return await _apiRequest.GetAsync<ResponseCollectionInfo>(
-                "objects/getInfo", query, CancellationToken cancellationToken = default).ConfigureAwait(false);
+                "objects/getInfo", query, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>

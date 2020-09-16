@@ -8,7 +8,7 @@ namespace HanumanInstitute.OntraportApi.Converters
     /// </summary>
     public class JsonConverterDateTime : JsonConverterBase<DateTimeOffset?>
     {
-        public bool Milliseconds { get; private set; } = false;
+        public bool Milliseconds { get; private set; }
 
         public JsonConverterDateTime()
         { }

@@ -10,9 +10,9 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// Converts the property value into specified type.
         /// </summary>
         /// <param name="value">The value to convert.</param>
-        /// <typeparam name="P">The data type to convert the value to.</typeparam>
+        /// <typeparam name="T">The data type to convert the value to.</typeparam>
         /// <returns>The converted value.</returns>
-        public static P Convert<P>(this string value) => (P)TypeDescriptor.GetConverter(typeof(P)).ConvertFromString(null, CultureInfo.InvariantCulture, value);
+        public static T Convert<T>(this string value) => (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(null, CultureInfo.InvariantCulture, value);
 
         /// <summary>
         /// Converts the property value into specified type.
@@ -27,6 +27,6 @@ namespace EmergenceGuardian.OntraportApi.Models
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>A string value.</returns>
-        public static string ToStringInvariant(this object value) => System.Convert.ToString(value, CultureInfo.InvariantCulture);
+        public static string ToStringInvariant(this object value) => System.Convert.ToString(value, CultureInfo.InvariantCulture) ?? string.Empty;
     }
 }
