@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using HanumanInstitute.OntraportApi.Converters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace HanumanInstitute.OntraportApi.Models
 {
@@ -10,7 +9,6 @@ namespace HanumanInstitute.OntraportApi.Models
     /// An offer needs to be included with each manual transaction. This includes information on products, tax, and shipping.
     /// If invalid information is included in your offer, your request will fail.
     /// </summary>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy), ItemNullValueHandling = NullValueHandling.Ignore)]
     public class ApiTransactionOffer
     {
         /// <summary>
@@ -46,33 +44,29 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets whether or not there are applicable taxes for this offer.
         /// </summary>
-        [JsonConverter(typeof(JsonConverterBool))]
         public bool HasTaxes { get; set; }
 
         /// <summary>
         /// Gets or sets whether or not shipping should be applied to this offer.
         /// </summary>
-        [JsonConverter(typeof(JsonConverterBool))]
         public bool HasShipping { get; set; }
 
         /// <summary>
         /// Gets or sets whether or not shipping charges should be applied to recurring orders.
         /// </summary>
-        [JsonConverter(typeof(JsonConverterBool))]
-        [JsonProperty("shipping_charge_recurring_orders")]
+        [JsonPropertyName("shipping_charge_recurring_orders")]
         public bool RecurringShippingCharges { get; set; }
 
         /// <summary>
         /// For subscriptions, Gets or sets whether or not an invoice should be sent with every recurring order. This value defaults to false.
         /// </summary>
-        [JsonConverter(typeof(JsonConverterBool))]
-        [JsonProperty("send_recurring_invoice")]
+        [JsonPropertyName("send_recurring_invoice")]
         public bool SendRecurringInvoice { get; set; }
 
         /// <summary>
         /// Gets or sets the expiration date of the credit card on file.
         /// </summary>
-        [JsonProperty("ccExpirationDate")]
+        [JsonPropertyName("ccExpirationDate")]
         public string? CreditCardExpirationDate { get; set; } = string.Empty;
 
 

@@ -16,14 +16,14 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task Subscribe_ValidData_ReturnsIdAndUnsubscribe()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
             var url = "https://test98676342.32";
             var eventName = "object_create(0)";
 
-            var result = await api.SubscribeAsync(url, eventName, null);
+            var result = await c.Ontra.SubscribeAsync(url, eventName, null);
 
             Assert.NotNull(result);
-            await api.UnsubscribeAsync(result.Id!.Value);
+            await c.Ontra.UnsubscribeAsync(result.Id!.Value);
         }
     }
 }

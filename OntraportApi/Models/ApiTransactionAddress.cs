@@ -1,6 +1,4 @@
 ﻿using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace HanumanInstitute.OntraportApi.Models
 {
@@ -8,7 +6,6 @@ namespace HanumanInstitute.OntraportApi.Models
     /// If billing address information is not already on file for a contact, this information must be included with any manual transaction.
     /// Address information does not need to be included if it is already on file.
     /// </summary>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy), ItemNullValueHandling = NullValueHandling.Ignore)]
     public class ApiTransactionAddress
     {
         /// <summary>

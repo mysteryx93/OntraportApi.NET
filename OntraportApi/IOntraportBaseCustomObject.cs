@@ -16,7 +16,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="values">The field values to set.</param>
         /// <returns>The updated ApiObject.</returns>
-        Task<T> CreateOrMergeAsync(object? values = null, CancellationToken cancellationToken = default);
+        Task<T?> CreateOrMergeAsync(object? values = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves the custom fields data.

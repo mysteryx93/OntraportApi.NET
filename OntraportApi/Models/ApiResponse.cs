@@ -1,18 +1,17 @@
 ﻿using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Represents a response from an Ontraport API call.
     /// </summary>
-    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
     public class ApiResponse<T>
-        where T : class
+        where T : class?
     {
         public int Code { get; set; }
-        public T? Data { get; set; }
+        public T Data { get; set; } = default!;
+        [JsonPropertyName("account_id")]
         public int AccountId { get; set; }
     }
 }

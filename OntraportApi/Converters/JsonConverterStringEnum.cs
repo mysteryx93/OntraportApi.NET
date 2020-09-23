@@ -1,5 +1,6 @@
 ﻿using System;
-using Newtonsoft.Json.Serialization;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 
 namespace HanumanInstitute.OntraportApi.Converters
 {
@@ -10,24 +11,24 @@ namespace HanumanInstitute.OntraportApi.Converters
     public class JsonConverterStringEnum<T> : JsonConverterBase<T?>
         where T : struct
     {
-        private readonly NamingStrategy _namingStrategy;
+        private readonly JsonNamingPolicy _namingPolicy;
 
         public JsonConverterStringEnum() : this(null)
         { }
 
-        public JsonConverterStringEnum(NamingStrategy? namingStrategy)
+        public JsonConverterStringEnum(JsonNamingPolicy? namingStrategy)
         {
-            _namingStrategy = namingStrategy ?? new SnakeCaseNamingStrategy();
+            _namingPolicy = namingStrategy ?? new SnakeCaseNamingPolicy();
         }
 
         public override string? NullString => null;
 
-#pragma warning disable CA1307 // Replace overloads are not in .NET Standard 2.0
-        public override Nullable<T> Parse(string? value) =>
+
+        [SuppressMessage("Globalization", "CA1307:Specify StringComparison", Justification = "Reviewed: Replace overload with culture is not available in .NET Standard 2.0")]
+        public override T? Parse(string? value) =>
             !IsNullValue(value) ? value?.Replace("_", "")?.Convert<T?>() : (T?)null;
-#pragma warning restore CA1307
 
         public override string? Format(T? value) =>
-            value != null ? _namingStrategy.GetPropertyName(value.ToStringInvariant(), false) : null;
+            value != null ? _namingPolicy.ConvertName(value.ToStringInvariant()) : null;
     }
 }

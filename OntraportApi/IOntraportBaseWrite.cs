@@ -17,7 +17,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="id">The ID of the specific object.</param>
         /// <returns>The selected object.</returns>
-        Task<T> SelectAsync(string keyValue, CancellationToken cancellationToken = default);
+        Task<T?> SelectAsync(string keyValue, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This endpoint will add a new object to your database. It can be used for any object type as long as the correct parameters are supplied. This endpoint allows duplication; if you want to avoid duplicates you should merge instead.

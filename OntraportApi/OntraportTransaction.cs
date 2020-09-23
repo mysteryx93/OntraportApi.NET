@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Converters;
 using HanumanInstitute.OntraportApi.Models;
-using Newtonsoft.Json.Linq;
+using HanumanInstitute.Validators;
 
 namespace HanumanInstitute.OntraportApi
 {
@@ -69,6 +69,8 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="offer">The product and pricing offer for the transaction.</param>
         public async Task UpdateOrderAsync(ApiOffer offer, CancellationToken cancellationToken = default)
         {
+            offer.CheckNotNull(nameof(offer));
+
             var query = new Dictionary<string, object?>
             {
                 { "offer", offer}
@@ -96,6 +98,8 @@ namespace HanumanInstitute.OntraportApi
             int? creditCardId = null, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1,
             CancellationToken cancellationToken = default)
         {
+            offer.CheckNotNull(nameof(offer));
+
             var query = new Dictionary<string, object?>
             {
                 { "contact_id", contactId },
@@ -127,6 +131,8 @@ namespace HanumanInstitute.OntraportApi
         public async Task<int> LogTransactionAsync(int contactId, ApiTransactionOffer offer,
             string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1, CancellationToken cancellationToken = default)
         {
+            offer.CheckNotNull(nameof(offer));
+
             var query = new Dictionary<string, object?>
             {
                 { "contact_id", contactId },
@@ -137,9 +143,9 @@ namespace HanumanInstitute.OntraportApi
                 .AddIfHasValue("external_order_id", externalOrderId)
                 .AddIfHasValue("trans_date", new JsonConverterDateTime(true).Format(transactionDate));
 
-            var json = await ApiRequest.PostAsync<JObject>(
+            var json = await ApiRequest.PostJsonAsync(
                 "transaction/processManual", query, cancellationToken).ConfigureAwait(false);
-            return JsonData(json)["invoice_id"]?.Value<int>() ?? 0;
+            return await json.RunStructAndCatchAsync(x => json.JsonData().JsonChild("invoice_id").GetInt32()).ConfigureAwait(false);
         }
 
         /// <summary>

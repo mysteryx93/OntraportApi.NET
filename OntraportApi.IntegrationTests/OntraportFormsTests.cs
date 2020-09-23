@@ -16,9 +16,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectSmartFormHtmlAsync_ValidId_ReturnsString()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectSmartFormHtmlAsync(ValidId);
+            var result = await c.Ontra.SelectSmartFormHtmlAsync(ValidId);
 
             Assert.NotEmpty(result);
         }
@@ -29,9 +29,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [InlineData(1)]
         public async Task SelectAllFormBlocksAsync_ValidId_ReturnsString(int? page)
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAllFormBlocksAsync(page);
+            var result = await c.Ontra.SelectAllFormBlocksAsync(page);
 
             Assert.NotEmpty(result);
         }
@@ -39,9 +39,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectBlocksByFormNameAsync_ValidId_ReturnsString()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectBlocksByFormNameAsync("OntraForm1");
+            var result = await c.Ontra.SelectBlocksByFormNameAsync("OntraForm1");
 
             Assert.NotEmpty(result);
         }

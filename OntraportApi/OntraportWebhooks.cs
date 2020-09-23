@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
-using Newtonsoft.Json.Linq;
 
 namespace HanumanInstitute.OntraportApi
 {
@@ -33,9 +33,9 @@ namespace HanumanInstitute.OntraportApi
             }
                 .AddIfHasValue("data", data);
 
-            var json = await ApiRequest.PostAsync<JObject>(
+            var json = await ApiRequest.PostJsonAsync(
                 "Webhook/subscribe", query, cancellationToken).ConfigureAwait(false);
-            return await CreateApiObjectAsync(json["data"]).ConfigureAwait(false);
+            return await json.RunAndCatchAsync(x => CreateApiObject(json.JsonData())).ConfigureAwait(false);
         }
 
         /// <summary>

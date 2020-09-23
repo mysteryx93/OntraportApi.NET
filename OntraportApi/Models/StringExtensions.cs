@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Globalization;
 
-namespace EmergenceGuardian.OntraportApi.Models
+namespace HanumanInstitute.OntraportApi.Models
 {
-    public static class StringExtensions
+    internal static class StringExtensions
     {
         /// <summary>
         /// Converts the property value into specified type.

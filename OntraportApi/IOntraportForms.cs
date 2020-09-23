@@ -18,7 +18,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="formId">The ID of the form to retrieve HTML for.</param>
         /// <returns>The form HTML.</returns>
-        Task<string> SelectSmartFormHtmlAsync(int formId, CancellationToken cancellationToken = default);
+        Task<string?> SelectSmartFormHtmlAsync(int formId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves name and ID pairs for all existing form blocks.

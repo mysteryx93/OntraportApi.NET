@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
+using HanumanInstitute.OntraportApi.Converters;
 
 namespace HanumanInstitute.OntraportApi.Models
 {
@@ -38,6 +39,7 @@ namespace HanumanInstitute.OntraportApi.Models
         {
             if (options != null)
             {
+                // OntraportHttpClient.SerializerOptions.Converters.Add(new ApiSearchConditionConverter());
                 var condition = options.GetCondition();
                 list.AddIfHasValue("ids", options.Ids)
                     .AddIfHasValue("group_ids", options.GroupIds)

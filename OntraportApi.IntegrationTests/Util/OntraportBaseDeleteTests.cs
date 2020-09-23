@@ -20,25 +20,23 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task DeleteAsync_IdJustCreated_ThrowsNoException()
         {
-            var api = SetupApi();
-            var obj = await api.CreateAsync();
+            using var c = CreateContext();
+            var obj = await c.Ontra.CreateAsync();
 
-            await api.DeleteAsync(obj.Id!.Value);
+            await c.Ontra.DeleteAsync(obj.Id!.Value);
 
-            // Should throw Object Not Found.
-            await Assert.ThrowsAsync<HttpRequestException>(() => api.SelectAsync(obj.Id.Value));
+            Assert.Null(await c.Ontra.SelectAsync(obj.Id.Value));
         }
 
         [Fact]
         public async Task DeleteMultipleAsync_IdJustCreated_NoException()
         {
-            var api = SetupApi();
-            var obj = await api.CreateAsync();
+            using var c = CreateContext();
+            var obj = await c.Ontra.CreateAsync();
 
-            await api.DeleteAsync(new ApiSearchOptions(obj.Id!.Value));
+            await c.Ontra.DeleteAsync(new ApiSearchOptions(obj.Id!.Value));
 
-            // Should throw Object Not Found.
-            await Assert.ThrowsAsync<HttpRequestException>(() => api.SelectAsync(obj.Id.Value));
+            Assert.Null(await c.Ontra.SelectAsync(obj.Id.Value));
         }
     }
 }

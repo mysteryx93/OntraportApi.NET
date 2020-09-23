@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using HanumanInstitute.OntraportApi.Converters;
 
 namespace HanumanInstitute.OntraportApi.Models
 {
@@ -24,8 +25,6 @@ namespace HanumanInstitute.OntraportApi.Models
         {
             Ids.AddRange(ids);
         }
-
-        private readonly JArray _content = new JArray();
 
         /// <summary>
         /// Gets or sets a list of the IDs of the objects to retrieve.
@@ -57,6 +56,11 @@ namespace HanumanInstitute.OntraportApi.Models
         /// in addition to other object fields.
         /// </summary>
         public bool SearchNotes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the list of conditions to apply to the search. Can be set using AddCondition method.
+        /// </summary>
+        public List<ApiSearchConditionBase> Conditions { get; private set; } = new List<ApiSearchConditionBase>();
 
         /// <summary>
         /// Sets the Ids value.
@@ -133,35 +137,38 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <returns>This object.</returns>
         public ApiSearchOptions AddCondition(string field, string op, object? value, bool andCond = true)
         {
-            // Add AND or OR if it's not the first condition.
-            if (_content.Any())
-            {
-                _content.Add(andCond ? "AND" : "OR");
-            }
-
-            // Add field.
-            var cond = new JObject(new JProperty("field",
-                new JObject()
-                {
-                    { "field", field }
-                }
-            ))
-            {
-                { "op", value != null ? op : "IS" }
-            };
-
-            // Add value as null or single object.
-            if (value != null)
-            {
-                cond["value"] = new JObject(new JProperty("value", value));
-            }
-            else
-            {
-                cond["value"] = "NULL";
-            }
-
-            _content.Add(cond);
+            Conditions.Add(new ApiSearchCondition(field, op, value, andCond));
             return this;
+
+            //// Add AND or OR if it's not the first condition.
+            //if (_content.Any())
+            //{
+            //    _content.Add(andCond ? "AND" : "OR");
+            //}
+
+            //// Add field.
+            //var cond = new JsonElement(new JProperty("field",
+            //    new JsonElement()
+            //    {
+            //        { "field", field }
+            //    }
+            //))
+            //{
+            //    { "op", value != null ? op : "IS" }
+            //};
+
+            //// Add value as null or single object.
+            //if (value != null)
+            //{
+            //    cond["value"] = new JsonElement(new JProperty("value", value));
+            //}
+            //else
+            //{
+            //    cond["value"] = "NULL";
+            //}
+
+            //_content.Add(cond);
+            //return this;
         }
 
         /// <summary>
@@ -174,50 +181,52 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <returns>This object.</returns>
         public ApiSearchOptions AddConditionInList(string field, IEnumerable valueList, bool andCond = true)
         {
-            // Add AND or OR if it's not the first condition.
-            if (_content.Any())
-            {
-                _content.Add(andCond ? "AND" : "OR");
-            }
-
-            // Add field.
-            var cond = new JObject(new JProperty("field",
-                new JObject()
-                {
-                    { "field", field }
-                }
-            ))
-            {
-                { "op", valueList != null ? "IN" : "IS" }
-            };
-
-            // Add value as null or list.
-            var condValue = new JObject();
-            if (valueList != null)
-            {
-                var array = new JArray();
-                // Add as list.
-                foreach (var item in valueList)
-                {
-                    array.Add(new JObject(new JProperty("value", item)));
-                }
-                condValue["list"] = array;
-                cond["value"] = condValue;
-            }
-            else
-            {
-                // Add as null.
-                cond["value"] = "NULL";
-            }
-
-            _content.Add(cond);
+            Conditions.Add(new ApiSearchConditionInList(field, valueList, andCond));
             return this;
+
+            // Add AND or OR if it's not the first condition.
+            //if (_content.Any())
+            //{
+            //    _content.Add(andCond ? "AND" : "OR");
+            //}
+
+            //// Add field.
+            //var cond = new JsonElement(new JProperty("field",
+            //    new JsonElement()
+            //    {
+            //        { "field", field }
+            //    }
+            //))
+            //{
+            //    { "op", valueList != null ? "IN" : "IS" }
+            //};
+
+            //// Add value as null or list.
+            //var condValue = new JsonElement();
+            //if (valueList != null)
+            //{
+            //    var array = new JArray();
+            //    // Add as list.
+            //    foreach (var item in valueList)
+            //    {
+            //        array.Add(new JsonElement(new JProperty("value", item)));
+            //    }
+            //    condValue["list"] = array;
+            //    cond["value"] = condValue;
+            //}
+            //else
+            //{
+            //    // Add as null.
+            //    cond["value"] = "NULL";
+            //}
+
+            //_content.Add(cond);
+            //return this;
         }
 
         /// <summary>
         /// Returns the conditions as a JSON-encoded string.
         /// </summary>
-        /// <returns></returns>
-        public string? GetCondition() => _content.Any() ? JsonConvert.SerializeObject(_content, Formatting.None) : null;
+        public string? GetCondition() => Conditions.Any() ? JsonSerializer.Serialize(Conditions, OntraportSerializerOptions.Default) : null;
     }
 }

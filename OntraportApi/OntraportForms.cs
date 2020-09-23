@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
-using Newtonsoft.Json.Linq;
 
 namespace HanumanInstitute.OntraportApi
 {
@@ -24,7 +22,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="formId">The ID of the form to retrieve HTML for.</param>
         /// <returns>The form HTML.</returns>
-        public async Task<string> SelectSmartFormHtmlAsync(int formId, CancellationToken cancellationToken = default)
+        public async Task<string?> SelectSmartFormHtmlAsync(int formId, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -32,7 +30,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             return await ApiRequest.GetAsync<string>(
-                "form", query, cancellationToken).ConfigureAwait(false);
+                "form", query, true, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -45,8 +43,9 @@ namespace HanumanInstitute.OntraportApi
             var query = new Dictionary<string, object?>()
                 .AddIfHasValue("page", page);
 
-            return await ApiRequest.GetAsync<Dictionary<string, string>>(
-                "Form/getAllFormBlocks", query, cancellationToken).ConfigureAwait(false);
+            var result = await ApiRequest.GetAsync<Dictionary<string, string>>(
+                "Form/getAllFormBlocks", query, false, cancellationToken).ConfigureAwait(false);
+            return result!;
         }
 
         /// <summary>
@@ -61,9 +60,13 @@ namespace HanumanInstitute.OntraportApi
                 { "name", formName }
             };
 
-            var json = await ApiRequest.GetAsync<JObject>(
-                "Form/getBlocksByFormName", query, cancellationToken).ConfigureAwait(false);
-            return JsonData(json)["block_ids"]?.ToObject<IEnumerable<string>>() ?? Enumerable.Empty<string>();
+            var json = await ApiRequest.GetJsonAsync(
+                "Form/getBlocksByFormName", query, true, cancellationToken).ConfigureAwait(false);
+            return await json.RunAndCatchAsync(x =>
+                x.JsonData().JsonChild("block_ids")
+                .ToObject<IEnumerable<string>>()
+            ).ConfigureAwait(false) 
+                ?? Array.Empty<string>();
         }
     }
 }

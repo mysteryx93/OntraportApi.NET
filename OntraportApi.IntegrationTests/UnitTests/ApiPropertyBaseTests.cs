@@ -14,7 +14,7 @@ namespace HanumanInstitute.OntraportApi.UnitTests
 
         private TProp SetupProperty() => (TProp)Activator.CreateInstance(typeof(TProp), _host, _key)!;
 
-        private void Set(string? value) => _host.Data[_key] = value;
+        private void Set(string value) => _host.Data[_key] = value;
 
         [Fact]
         public void Value_NotSet_ReturnsNull()
@@ -53,7 +53,7 @@ namespace HanumanInstitute.OntraportApi.UnitTests
         {
             var prop = SetupProperty();
 
-            prop.Value = default(TNull)!;
+            prop.Value = default;
 
             Assert.Equal(prop.NullString, _host.Data[_key]);
         }

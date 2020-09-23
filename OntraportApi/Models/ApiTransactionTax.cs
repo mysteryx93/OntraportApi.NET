@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using HanumanInstitute.OntraportApi.Converters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Any array of price data should be included with products.
     /// </summary>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy), ItemNullValueHandling = NullValueHandling.Ignore)]
     public class ApiTransactionTax
     {
         /// <summary>
@@ -39,7 +37,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the ID of the related form, if any.
         /// </summary>
-        [JsonProperty("form_id")]
+        [JsonPropertyName("form_id")]
         public int? FormId { get; set; }
     }
 }

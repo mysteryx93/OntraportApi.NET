@@ -6,11 +6,11 @@
     
     <IsPackable>false</IsPackable>
 
-    <RootNamespace>EmergenceGuardian.OntraportApi.IntegrationTests</RootNamespace>
+    <RootNamespace>HanumanInstitute.OntraportApi.IntegrationTests</RootNamespace>
 
-    <AssemblyName>EmergenceGuardian.OntraportApi.IntegrationTests</AssemblyName>
+    <AssemblyName>OntraportApi.IntegrationTests</AssemblyName>
 
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,6 +33,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\HanumanInstitute.Validators\Validators\HanumanInstitute.Validators.csproj" />
+    <ProjectReference Include="..\OntraportApi.IdentityCore\OntraportApi.IdentityCore.csproj" />
     <ProjectReference Include="..\OntraportApi\OntraportApi.csproj" />
   </ItemGroup>
 

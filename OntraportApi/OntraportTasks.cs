@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Converters;
 using HanumanInstitute.OntraportApi.Models;
-using Newtonsoft.Json.Linq;
 
 namespace HanumanInstitute.OntraportApi
 {
@@ -36,9 +35,9 @@ namespace HanumanInstitute.OntraportApi
                 .AddIfHasValue("date_due", new JsonConverterDateTime().Format(dateDue))
                 .AddIfHasValue("status", new JsonConverterStringEnum<ApiTask.TaskStatus>().Format(status));
 
-            var json = await ApiRequest.PutAsync<JObject>(
+            var json = await ApiRequest.PutJsonAsync(
                 "Tasks", query, cancellationToken).ConfigureAwait(false);
-            return await CreateApiObjectAsync(JsonData(json)["attrs"]).ConfigureAwait(false);
+            return await json.RunAndCatchAsync(x => CreateApiObject(x.JsonData().JsonChild("attrs"))).ConfigureAwait(false);
         }
 
         /// <summary>

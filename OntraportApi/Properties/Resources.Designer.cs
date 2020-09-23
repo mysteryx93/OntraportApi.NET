@@ -61,15 +61,6 @@ namespace HanumanInstitute.OntraportApi.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} cannot be null or empty..
-        /// </summary>
-        internal static string ArgumentNullOrEmpty {
-            get {
-                return ResourceManager.GetString("ArgumentNullOrEmpty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to OntraportConfig.ApiKey is required..
         /// </summary>
         internal static string ConfigApiKeyRequired {
@@ -97,6 +88,15 @@ namespace HanumanInstitute.OntraportApi.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ontraport response data could not be parsed..
+        /// </summary>
+        internal static string InvalidResponseData {
+            get {
+                return ResourceManager.GetString("InvalidResponseData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to objectType must be Rule, Sequence or SequenceSubscriber..
         /// </summary>
         internal static string ObjectTypeMustBeSequence {
@@ -106,11 +106,11 @@ namespace HanumanInstitute.OntraportApi.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ontraport response data could not be parsed..
+        ///   Looks up a localized string similar to The remote server returned an error: ({0}).
         /// </summary>
-        internal static string ResponseDataNull {
+        internal static string ResponseErrorCode {
             get {
-                return ResourceManager.GetString("ResponseDataNull", resourceCulture);
+                return ResourceManager.GetString("ResponseErrorCode", resourceCulture);
             }
         }
     }

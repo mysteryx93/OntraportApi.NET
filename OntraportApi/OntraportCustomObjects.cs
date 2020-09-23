@@ -22,10 +22,10 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="pluralName">The plural name of the object.</param>
         /// <returns>The selected object.</returns>
-        public async Task<ApiCustomObject> SelectAsync(string pluralName)
+        public async Task<ApiCustomObject?> SelectAsync(string pluralName)
         {
             var result = await SelectAsync(new ApiSearchOptions().AddCondition("plural", "=", pluralName)).ConfigureAwait(false);
-            return result.FirstOrDefault();
+            return result?.FirstOrDefault();
         }
     }
 }

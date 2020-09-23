@@ -19,9 +19,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectAsync_EditString_GetChangesReturnsKey()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAsync(ValidId);
+            var result = await c.Ontra.SelectAsync(ValidId);
 
             result.AddressField.Value = "abc";
             var changes = result.GetChanges();
@@ -31,9 +31,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectAsync_EditDateTimeOffset_GetChangesReturnsKey()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAsync(ValidId);
+            var result = await c.Ontra.SelectAsync(ValidId);
 
             result.BirthdayField.Value = DateTimeOffset.Now;
             var changes = result.GetChanges();
@@ -43,9 +43,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectAsync_EditDouble_GetChangesReturnsKey()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAsync(ValidId);
+            var result = await c.Ontra.SelectAsync(ValidId);
 
             result.AffiliateAmountField.Value = 100;
             var changes = result.GetChanges();
@@ -55,10 +55,10 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task CreateOrMergeAsync_EmailFirstName_ReturnsSameFirstName()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
             var firstName = "cc2";
 
-            var result = await api.CreateOrMergeAsync(new
+            var result = await c.Ontra.CreateOrMergeAsync(new
             {
                 email = "a@test.com",
                 firstname = firstName
@@ -70,20 +70,21 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task CreateOrMergeContact_WithTypedObject_ObjectHasRightValues()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
+            var email = "createormerge@test.com";
             var newName = "Etienne";
-            var newStatus = SaleStatus.Committed;
+            var newStatus = SaleStatus.ClosedLost;
             var contact = new ApiContact()
             {
-                Email = "LogTest@test.com",
+                Email = email,
                 FirstName = newName,
-                LastName = "Charland"
+                LastName = "Charland",
+                Status = newStatus
             };
-            contact.StatusField.Value = newStatus;
 
-            await api.CreateOrMergeAsync(contact.GetChanges());
+            await c.Ontra.CreateOrMergeAsync(contact.GetChanges());
 
-            var newContact = await api.SelectAsync("typed@test.com");
+            var newContact = await c.Ontra.SelectAsync(email);
             Assert.Equal(newStatus, newContact.StatusField.Value);
             Assert.Equal(newName, newContact.FirstNameField.Value);
         }
@@ -91,36 +92,35 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task UpdateContact_WithTypedObject_ObjectHasRightValues()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
             var newName = "Etienne";
             var newStatus = SaleStatus.DemoScheduled;
-            var contact = await api.SelectAsync("typed@test.com");
+            var contact = await c.Ontra.SelectAsync("typed@test.com");
             contact.FirstName = newName;
             contact.LastNameField.Value = "Charlandd";
             contact.StatusField.Value = newStatus;
             contact.DateLastActivityField.Value = new DateTimeOffset(2019, 6, 1, 1, 1, 1, TimeSpan.Zero);
 
-            await api.UpdateAsync(contact.Id!.Value, contact.GetChanges());
+            await c.Ontra.UpdateAsync(contact.Id!.Value, contact.GetChanges());
 
-            var newContact = await api.SelectAsync("typed@test.com");
+            var newContact = await c.Ontra.SelectAsync("typed@test.com");
             Assert.Equal(newStatus, newContact.StatusField.Value);
             Assert.Equal(newName, newContact.FirstName);
         }
 
         [Fact]
-        public async Task DeleteAsync_ByEmail_ThrowsNoException()
+        public async Task DeleteAsync_ByEmail_SelectReturnsNull()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
             var email = "delete_by_emailtest@test.com";
-            var obj = await api.CreateAsync(new ApiContact()
+            var obj = await c.Ontra.CreateAsync(new ApiContact()
             {
                 Email = email
             }.GetChanges());
 
-            await api.DeleteAsync(new ApiSearchOptions().AddCondition("email", "=", email));
-
-            // Should throw Object Not Found.
-            await Assert.ThrowsAsync<HttpRequestException>(() => api.SelectAsync(obj.Id!.Value));
+            await c.Ontra.DeleteAsync(new ApiSearchOptions().AddCondition("email", "=", email));
+            
+            Assert.Null(await c.Ontra.SelectAsync(obj.Id!.Value));
         }
     }
 }

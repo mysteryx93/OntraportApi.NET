@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
+using HanumanInstitute.Validators;
 
 namespace HanumanInstitute.OntraportApi
 {
@@ -54,6 +55,8 @@ namespace HanumanInstitute.OntraportApi
         /// <returns>A list of objects matching the query.</returns>
         public virtual async Task DeleteAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
+            searchOptions.CheckNotNull(nameof(searchOptions));
+
             var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions, true);
 

@@ -19,7 +19,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="id">The ID of the specific object.</param>
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>The selected object.</returns>
-        Task<T> SelectAsync(int id, CancellationToken cancellationToken = default);
+        Task<T?> SelectAsync(int id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves a collection of objects based on a set of parameters.
@@ -45,6 +45,6 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>A ResponseCollectionInfo object.</returns>
-        Task<ResponseCollectionInfo> GetCollectionInfoAsync(ApiSearchOptions? searchOptions = null, CancellationToken cancellationToken = default);
+        Task<ResponseCollectionInfo?> GetCollectionInfoAsync(ApiSearchOptions? searchOptions = null, CancellationToken cancellationToken = default);
     }
 }

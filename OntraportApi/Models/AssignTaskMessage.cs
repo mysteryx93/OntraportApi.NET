@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json.Serialization;
 using HanumanInstitute.OntraportApi.Converters;
 
 namespace HanumanInstitute.OntraportApi.Models
@@ -11,7 +10,6 @@ namespace HanumanInstitute.OntraportApi.Models
     /// When assigning a task through the API, you can include an array of data pertaining to the task message. 
     /// You can specify which task message to use and the due date and assignee of the task.
     /// </summary>
-    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy), ItemNullValueHandling = NullValueHandling.Ignore)]
     public class AssignTaskMessage
     {
         /// <summary>
@@ -26,11 +24,13 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the date and time the task will be due.
         /// </summary>
+        [JsonPropertyName("due_date")]
         [JsonConverter(typeof(JsonConverterDateTime))]
         public DateTimeOffset? DueDate { get; set; }
         /// <summary>
         /// Gets or sets the ID of the user responsible for the task.
         /// </summary>
+        [JsonPropertyName("task_owner")]
         public int? TaskOwner { get; set; }
     }
 }

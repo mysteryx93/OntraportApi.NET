@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
-using Newtonsoft.Json.Linq;
 
 namespace HanumanInstitute.OntraportApi
 {
@@ -18,7 +18,7 @@ namespace HanumanInstitute.OntraportApi
         { }
 
         // It's normally under data/attrs.
-        protected override async Task<ApiMessage> OnParseUpdateAsync(JObject json) => 
-            await CreateApiObjectAsync(JsonData(json)).ConfigureAwait(false);
+        protected override ApiMessage OnParseUpdate(JsonElement json) => 
+            CreateApiObject(json.JsonData());
     }
 }

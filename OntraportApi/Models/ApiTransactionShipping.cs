@@ -1,14 +1,11 @@
 ﻿using System;
-using HanumanInstitute.OntraportApi.Converters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// An array of shipping data can be included with an offer where shipping is applicable.
     /// </summary>
-    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy), ItemNullValueHandling = NullValueHandling.Ignore)]
     public class ApiTransactionShipping
     {
         /// <summary>
@@ -29,6 +26,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the ID of the related form, if any.
         /// </summary>
+        [JsonPropertyName("form_id")]
         public int? FormId { get; set; }
     }
 }

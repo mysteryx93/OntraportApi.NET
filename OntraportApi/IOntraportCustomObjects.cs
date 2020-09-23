@@ -16,6 +16,6 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="pluralName">The plural name of the object.</param>
         /// <returns>The selected object.</returns>
-        Task<ApiCustomObject> SelectAsync(string pluralName);
+        Task<ApiCustomObject?> SelectAsync(string pluralName);
     }
 }

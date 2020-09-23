@@ -25,13 +25,17 @@ namespace HanumanInstitute.OntraportApi.UnitTests
             new object[] { "False", false },
             new object[] { "0", false },
             new object[] { "1", true },
-            new object[] { "", false}
+        };
+
+        public static IEnumerable<object[]> GetValuesNull() => new[] {
+            new object[] { "", null },
+            new object[] { null, null },
         };
 
         [Theory]
         [MemberData(nameof(GetValues))]
         [MemberData(nameof(GetValues2))]
-        public void Value_SetRawValue_ReturnsExpectedValue(string rawValue, bool typedValue)
+        public void Value_SetRawValue_ReturnsExpectedValue(string rawValue, bool? typedValue)
         {
             var prop = SetupProperty();
             Set(rawValue);
@@ -43,7 +47,7 @@ namespace HanumanInstitute.OntraportApi.UnitTests
 
         [Theory]
         [MemberData(nameof(GetValues))]
-        public void Value_SetValue_StoresExpectedRawValue(string rawValue, bool typedValue)
+        public void Value_SetValue_StoresExpectedRawValue(string rawValue, bool? typedValue)
         {
             var prop = SetupProperty();
 
@@ -57,7 +61,7 @@ namespace HanumanInstitute.OntraportApi.UnitTests
         [MemberData(nameof(GetValues2))]
 #pragma warning disable xUnit1026 // typeValue not used
 #pragma warning disable IDE0060   // typeValue not used
-        public void HasValue_Set_ReturnsTrue(string rawValue, bool _)
+        public void HasValue_Set_ReturnsTrue(string rawValue, bool? _)
         {
             var prop = SetupProperty();
             Set(rawValue);
@@ -65,6 +69,18 @@ namespace HanumanInstitute.OntraportApi.UnitTests
             var result = prop.HasValue;
 
             Assert.True(result);
+        }
+
+        [Theory]
+        [MemberData(nameof(GetValuesNull))]
+        public void Value_SetEmpty_ReturnsNull(string rawValue, bool? _)
+        {
+            var prop = SetupProperty();
+            Set(rawValue);
+
+            var result = prop.Value;
+
+            Assert.Null(result);
         }
     }
 }

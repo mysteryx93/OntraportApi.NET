@@ -44,7 +44,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="objectId">The ID of the specific object.</param>
         /// <returns>The selected object.</returns>
-        Task<Dictionary<string, string>> SelectAsync(ApiObjectType objectType, int objectId, CancellationToken cancellationToken = default);
+        Task<Dictionary<string, string>?> SelectAsync(ApiObjectType objectType, int objectId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves a collection of objects based on a set of parameters.
@@ -105,15 +105,15 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="objectType">The object type.</param>
         /// <param name="indexByName">True to index by name, false to index by id.</param>
-        /// <returns>A JObject providing raw access to the JSON data.</returns>
+        /// <returns>A JsonElement providing raw access to the JSON data.</returns>
         Task<Dictionary<int, ResponseMetadata>> GetAllMetadataAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves the field meta data for the specified object type.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        /// <returns>A JObject providing raw access to the JSON data.</returns>
-        Task<ResponseMetadata> GetMetadataAsync(ApiObjectType objectType, CancellationToken cancellationToken = default);
+        /// <returns>A JsonElement providing raw access to the JSON data.</returns>
+        Task<ResponseMetadata?> GetMetadataAsync(ApiObjectType objectType, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves information about a collection of objects, such as the number of objects that match the given criteria.
@@ -121,7 +121,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="searchOptions">The search options.</param>
         /// <returns>A ResponseCollectionInfo object.</returns>
-        Task<ResponseCollectionInfo> GetCollectionInfoAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, CancellationToken cancellationToken = default);
+        Task<ResponseCollectionInfo?> GetCollectionInfoAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve information about the fields an object has within a section.
@@ -129,7 +129,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="sectionName">The name of the section.</param>
         /// <returns>A list of fields in that section.</returns>
-        Task<ResponseSectionFields> SelectFieldsBySectionAsync(ApiObjectType objectType, string sectionName, CancellationToken cancellationToken = default);
+        Task<ResponseSectionFields?> SelectFieldsBySectionAsync(ApiObjectType objectType, string sectionName, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve information about all fields and sections an object has.
@@ -144,7 +144,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="fieldName">The name of the field.</param>
         /// <returns>A object containing the field information.</returns>
-        Task<ApiFieldInfo> SelectFieldByNameAsync(ApiObjectType objectType, string fieldName, CancellationToken cancellationToken = default);
+        Task<ApiFieldInfo?> SelectFieldByNameAsync(ApiObjectType objectType, string fieldName, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates an existing object with given data.

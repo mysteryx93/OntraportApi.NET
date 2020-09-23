@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
-using Newtonsoft.Json.Linq;
+using HanumanInstitute.Validators;
 
 namespace HanumanInstitute.OntraportApi
 {
@@ -54,10 +55,9 @@ namespace HanumanInstitute.OntraportApi
                 { "ignore_blanks", ignoreBlanks }
             };
 
-            var json = await _apiRequest.PostAsync<JObject>(
+            var json = await _apiRequest.PostJsonAsync(
                 "objects/saveorupdate", query.AddObject(values), cancellationToken).ConfigureAwait(false);
-            return JsonData(json)["attrs"]?.ToObject<Dictionary<string, string>>()
-                ?? throw new NullReferenceException(Properties.Resources.ResponseDataNull);
+            return await json.RunAndCatchAsync(x => x.JsonData().JsonChild("attrs").ToObject<Dictionary<string, string>>()).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -76,9 +76,9 @@ namespace HanumanInstitute.OntraportApi
                 { "fields", fields }
             };
 
-            var json = await _apiRequest.PostAsync<JObject>(
+            var json = await _apiRequest.PostJsonAsync(
                 "objects/fieldeditor", query, cancellationToken).ConfigureAwait(false);
-            return new ResponseSuccessList(json);
+            return await json.RunAndCatchAsync(x => new ResponseSuccessList(x)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="objectId">The ID of the specific object.</param>
         /// <returns>The selected object.</returns>
-        public async Task<Dictionary<string, string>> SelectAsync(ApiObjectType objectType, int objectId, CancellationToken cancellationToken = default)
+        public async Task<Dictionary<string, string>?> SelectAsync(ApiObjectType objectType, int objectId, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -96,7 +96,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             return await _apiRequest.GetAsync<Dictionary<string, string>>(
-                "object", query, cancellationToken).ConfigureAwait(false);
+                "object", query, true, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -122,7 +122,8 @@ namespace HanumanInstitute.OntraportApi
                 .AddIfHasValue("listFields", listFields);
 
             return await _apiRequest.GetAsync<List<Dictionary<string, string>>>(
-                "objects", query, cancellationToken).ConfigureAwait(false);
+                "objects", query, true, cancellationToken).ConfigureAwait(false)
+                ?? new List<Dictionary<string, string>>();
         }
 
         /// <summary>
@@ -141,8 +142,12 @@ namespace HanumanInstitute.OntraportApi
             ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null,
             IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, CancellationToken cancellationToken = default)
         {
-            var json = await SelectByTagAsync(objectType, tagId, tagName, searchOptions, sortOptions, externs, listFields, true, cancellationToken).ConfigureAwait(false);
-            return JsonData(json)["count"]?.Value<string>()?.Convert<int>() ?? 0;
+            var json = await SelectByTagAsync(
+                objectType, tagId, tagName, searchOptions, sortOptions, externs, listFields, true, cancellationToken).ConfigureAwait(false);
+            return await json.RunStructAndCatchAsync(x => {
+                var count = x.JsonData().JsonChild("count");
+                return count.GetString().Convert<int>();
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -161,11 +166,13 @@ namespace HanumanInstitute.OntraportApi
             ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null,
             IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, CancellationToken cancellationToken = default)
         {
-            var json = await SelectByTagAsync(objectType, tagId, tagName, searchOptions, sortOptions, externs, listFields, false, cancellationToken).ConfigureAwait(false);
-            return JsonData(json).ToObject<List<Dictionary<string, string>>>()!;
+            var json = await SelectByTagAsync(
+                objectType, tagId, tagName, searchOptions, sortOptions, externs, listFields, false, cancellationToken).ConfigureAwait(false);
+            return await json.RunAndCatchAsync(x => x.JsonData().ToObject<List<Dictionary<string, string>>>()).ConfigureAwait(false)
+                ?? new List<Dictionary<string, string>>();
         }
 
-        private async Task<JObject> SelectByTagAsync(ApiObjectType objectType,
+        private async Task<JsonElement?> SelectByTagAsync(ApiObjectType objectType,
             int? tagId = null, string? tagName = null,
             ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null,
             IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, bool count = false, CancellationToken cancellationToken = default)
@@ -181,8 +188,8 @@ namespace HanumanInstitute.OntraportApi
                 .AddIfHasValue("externs", externs)
                 .AddIfHasValue("listFields", listFields);
 
-            return await _apiRequest.GetAsync<JObject>(
-                "objects/tag", query, cancellationToken).ConfigureAwait(false);
+            return await _apiRequest.GetJsonAsync(
+                "objects/tag", query, true, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -193,9 +200,14 @@ namespace HanumanInstitute.OntraportApi
         /// <returns>The object ID.</returns>
         public async Task<int?> GetObjectIdByEmailAsync(ApiObjectType objectType, string email, CancellationToken cancellationToken = default)
         {
-            var json = await GetObjectIdByEmailAsync(objectType, email, false, cancellationToken).ConfigureAwait(false);
-            var result = JsonData(json)["id"]?.Value<string>();
-            return result != null ? result.Convert<int>() : (int?)null;
+            email.CheckNotNullOrEmpty(nameof(email));
+
+            var json = await GetObjectIdByEmailAsync(
+                objectType, email, false, cancellationToken).ConfigureAwait(false);
+            return await json.RunStructAndCatchAsync(x => {
+                var id = x.JsonData().JsonChild("id");
+                return id.GetString().Convert<int?>();
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -207,11 +219,15 @@ namespace HanumanInstitute.OntraportApi
         /// <returns>A list of object IDs.</returns>
         public async Task<IEnumerable<int>> GetObjectIdByEmailAllAsync(ApiObjectType objectType, string email, CancellationToken cancellationToken = default)
         {
-            var json = await GetObjectIdByEmailAsync(objectType, email, true, cancellationToken).ConfigureAwait(false);
-            return JsonData(json)["ids"]?.Values<int>() ?? Enumerable.Empty<int>();
+            email.CheckNotNull(nameof(email));
+
+            var json = await GetObjectIdByEmailAsync(
+                objectType, email, true, cancellationToken).ConfigureAwait(false);
+            return await json.RunAndCatchAsync(x => x.JsonData().JsonChild("ids").EnumerateArray().Select(x => x.GetString().Convert<int>())).ConfigureAwait(false)
+                ?? Enumerable.Empty<int>();
         }
 
-        private async Task<JObject> GetObjectIdByEmailAsync(ApiObjectType objectType, string email, bool all = false, CancellationToken cancellationToken = default)
+        private async Task<JsonElement?> GetObjectIdByEmailAsync(ApiObjectType objectType, string email, bool all = false, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -220,8 +236,8 @@ namespace HanumanInstitute.OntraportApi
                 { "all", all ? 1 : 0 }
             };
 
-            return await _apiRequest.GetAsync<JObject>(
-                "object/getByEmail", query, cancellationToken).ConfigureAwait(false);
+            return await _apiRequest.GetJsonAsync(
+                "object/getByEmail", query, true, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -229,7 +245,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="objectType">The object type.</param>
         /// <param name="indexByName">True to index by name, false to index by id.</param>
-        /// <returns>A JObject providing raw access to the JSON data.</returns>
+        /// <returns>A JsonElement providing raw access to the JSON data.</returns>
         public async Task<Dictionary<int, ResponseMetadata>> GetAllMetadataAsync(CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
@@ -237,16 +253,17 @@ namespace HanumanInstitute.OntraportApi
                 { "format", "byId" }
             };
 
-            return await _apiRequest.GetAsync<Dictionary<int, ResponseMetadata>>(
-                "objects/meta", query, cancellationToken).ConfigureAwait(false);
+            var result = await _apiRequest.GetAsync<Dictionary<int, ResponseMetadata>>(
+                "objects/meta", query, false, cancellationToken).ConfigureAwait(false);
+            return result!;
         }
 
         /// <summary>
         /// Retrieves the field meta data for the specified object type.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        /// <returns>A JObject providing raw access to the JSON data.</returns>
-        public async Task<ResponseMetadata> GetMetadataAsync(ApiObjectType objectType, CancellationToken cancellationToken = default)
+        /// <returns>A JsonElement providing raw access to the JSON data.</returns>
+        public async Task<ResponseMetadata?> GetMetadataAsync(ApiObjectType objectType, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -254,10 +271,9 @@ namespace HanumanInstitute.OntraportApi
                 { "format", "byId" }
             };
 
-            var json = await _apiRequest.GetAsync<JObject>(
-                "objects/meta", query, cancellationToken).ConfigureAwait(false);
-            return JsonData(json).First?.First?.ToObject<ResponseMetadata>()
-                ?? throw new NullReferenceException(Properties.Resources.ResponseDataNull);
+            var json = await _apiRequest.GetJsonAsync(
+                "objects/meta", query, true, cancellationToken).ConfigureAwait(false);
+            return await json.RunAndCatchAsync(x => x.JsonData().JsonFirst().ToObject<ResponseMetadata>()).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -266,7 +282,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="searchOptions">The search options.</param>
         /// <returns>A ResponseCollectionInfo object.</returns>
-        public async Task<ResponseCollectionInfo> GetCollectionInfoAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseCollectionInfo?> GetCollectionInfoAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
@@ -275,7 +291,7 @@ namespace HanumanInstitute.OntraportApi
                 .AddSearchOptions(searchOptions);
 
             return await _apiRequest.GetAsync<ResponseCollectionInfo>(
-                "objects/getInfo", query, cancellationToken).ConfigureAwait(false);
+                "objects/getInfo", query, true, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -284,7 +300,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="sectionName">The name of the section.</param>
         /// <returns>A list of fields in that section.</returns>
-        public async Task<ResponseSectionFields> SelectFieldsBySectionAsync(ApiObjectType objectType, string sectionName, CancellationToken cancellationToken = default)
+        public async Task<ResponseSectionFields?> SelectFieldsBySectionAsync(ApiObjectType objectType, string sectionName, CancellationToken cancellationToken = default)
         {
             sectionName.CheckNotNullOrEmpty(nameof(sectionName));
 
@@ -295,7 +311,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             return await _apiRequest.GetAsync<ResponseSectionFields>(
-                "objects/fieldeditor", query, cancellationToken).ConfigureAwait(false);
+                "objects/fieldeditor", query, true, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -310,8 +326,9 @@ namespace HanumanInstitute.OntraportApi
                 { "objectID", (int)objectType },
             };
 
-            return await _apiRequest.GetAsync<Dictionary<int, ResponseSectionFields>>(
-                "objects/fieldeditor", query, cancellationToken).ConfigureAwait(false);
+            var result = await _apiRequest.GetAsync<Dictionary<int, ResponseSectionFields>>(
+                "objects/fieldeditor", query, false, cancellationToken).ConfigureAwait(false);
+            return result!;
         }
 
         /// <summary>
@@ -320,7 +337,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="fieldName">The name of the field.</param>
         /// <returns>A object containing the field information.</returns>
-        public async Task<ApiFieldInfo> SelectFieldByNameAsync(ApiObjectType objectType, string fieldName, CancellationToken cancellationToken = default)
+        public async Task<ApiFieldInfo?> SelectFieldByNameAsync(ApiObjectType objectType, string fieldName, CancellationToken cancellationToken = default)
         {
             fieldName.CheckNotNullOrEmpty(nameof(fieldName));
 
@@ -331,7 +348,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             return await _apiRequest.GetAsync<ApiFieldInfo>(
-                "objects/fieldeditor", query, cancellationToken).ConfigureAwait(false);
+                "objects/fieldeditor", query, true, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -349,10 +366,9 @@ namespace HanumanInstitute.OntraportApi
                 { "id", objectId }
             };
 
-            var json = await _apiRequest.PutAsync<JObject>(
+            var json = await _apiRequest.PutJsonAsync(
                 "objects", query.AddObject(values), cancellationToken).ConfigureAwait(false);
-            return JsonData(json)["attrs"]?.ToObject<Dictionary<string, string>>()
-                ?? throw new NullReferenceException(Properties.Resources.ResponseDataNull);
+            return await json.RunAndCatchAsync(x => x.JsonData().JsonChild("attrs").ToObject<Dictionary<string, string>>()).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -374,9 +390,9 @@ namespace HanumanInstitute.OntraportApi
             }
                 .AddIfHasValue("description", sectionDescription);
 
-            var json = await _apiRequest.PutAsync<JObject>(
+            var json = await _apiRequest.PutJsonAsync(
                 "objects/fieldeditor", query, cancellationToken).ConfigureAwait(false);
-            return new ResponseSuccessList(json);
+            return await json.RunAndCatchAsync(x => new ResponseSuccessList(x)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -421,6 +437,8 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="sectionName">The name of the section.</param>
         public async Task DeleteSectionAsync(ApiObjectType objectType, string sectionName, CancellationToken cancellationToken = default)
         {
+            sectionName.CheckNotNullOrEmpty(nameof(sectionName));
+
             var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
@@ -438,6 +456,8 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="fieldName">The name of the field e.g f1234.</param>
         public async Task DeleteFieldAsync(ApiObjectType objectType, string fieldName, CancellationToken cancellationToken = default)
         {
+            fieldName.CheckNotNullOrEmpty(nameof(fieldName));
+
             var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
@@ -665,20 +685,6 @@ namespace HanumanInstitute.OntraportApi
 
             await _apiRequest.PostAsync<object>(
                 "objects/unpause", query, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Returns the content of JsonData(json) and throws exceptions if it's null.
-        /// </summary>
-        /// <param name="json">The Json to retrieve data for.</param>
-        /// <returns>The content of JsonData(json).</returns>
-        /// <exception cref="ArgumentNullException">json was null, or JsonData(json) was null.</exception>
-        protected static JToken JsonData(JObject? json)
-        {
-            json.CheckNotNull(nameof(json));
-            var data = json!["data"];
-            data.CheckNotNull("json[\"data\"]");
-            return data!;
         }
     }
 }

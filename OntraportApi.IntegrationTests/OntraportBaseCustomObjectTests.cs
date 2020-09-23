@@ -18,9 +18,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task CreateOrMergeAsync_ObjectWithEmail_ReturnsResultWithData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.CreateOrMergeAsync(new
+            var result = await c.Ontra.CreateOrMergeAsync(new
             {
                 email = "a@test.com",
                 firstname = "AAA"
@@ -32,9 +32,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectCustomFieldsAsync_NoArg_ReturnsData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.GetCustomFieldsAsync();
+            var result = await c.Ontra.GetCustomFieldsAsync();
 
             Assert.NotNull(result);
             foreach (var item in result.Fields)

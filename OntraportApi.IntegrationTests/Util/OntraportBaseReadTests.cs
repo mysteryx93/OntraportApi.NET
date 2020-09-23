@@ -23,41 +23,46 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
             ValidId = validId;
         }
 
-        protected T SetupApi()
-        {
-            var httpClient = ConfigHelper.GetHttpClient();
-            var ontraObjects = new OntraportObjects(httpClient);
-            if (IsGenericTypeOf(typeof(OntraportBaseCustomObject<>), typeof(T)))
-            {
-                return (T)Activator.CreateInstance(typeof(T), httpClient, ontraObjects)!;
-            }
-            else
-            {
-                return (T)Activator.CreateInstance(typeof(T), httpClient)!;
-            }
-        }
+        /// <summary>
+        /// Creates a context that initializes all classes required for Ontraport API tests
+        /// </summary>
+        protected OntraportContext<T> CreateContext() => new OntraportContext<T>(Output);
 
-        protected OntraportObjects SetupObjectsApi()
-        {
-            return new OntraportObjects(ConfigHelper.GetHttpClient());
-        }
+        //protected T SetupApi()
+        //{
+        //    var httpClient = ConfigHelper.GetHttpClient(Log);
+        //    var ontraObjects = new OntraportObjects(httpClient);
+        //    if (IsGenericTypeOf(typeof(OntraportBaseCustomObject<,>), typeof(T)))
+        //    {
+        //        return (T)Activator.CreateInstance(typeof(T), httpClient, ontraObjects)!;
+        //    }
+        //    else
+        //    {
+        //        return (T)Activator.CreateInstance(typeof(T), httpClient)!;
+        //    }
+        //}
+
+        //protected OntraportObjects SetupObjectsApi()
+        //{
+        //    return new OntraportObjects(ConfigHelper.GetHttpClient());
+        //}
 
         [Fact]
         public async Task SelectAsync_ValidId_ReturnsData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAsync(ValidId);
+            var result = await c.Ontra.SelectAsync(ValidId);
 
-            Assert.NotNull(result.Data);
+            Assert.NotEmpty(result?.Data);
         }
 
         [Fact]
         public async Task SelectMultipleAsync_ValidId_ReturnsData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAsync(new ApiSearchOptions(ValidId));
+            var result = await c.Ontra.SelectAsync(new ApiSearchOptions(ValidId));
 
             Assert.NotEmpty(result);
         }
@@ -65,9 +70,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectMultipleAsync_NoArgs_ReturnsAll()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAsync();
+            var result = await c.Ontra.SelectAsync();
 
             Assert.NotEmpty(result);
         }
@@ -75,9 +80,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectMetadataAsync_NoArg_ReturnsData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.GetMetadataAsync();
+            var result = await c.Ontra.GetMetadataAsync();
 
             Assert.NotEmpty(result.Fields);
         }
@@ -85,9 +90,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectCollectionInfoAsync_NoArg_ReturnsData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.GetCollectionInfoAsync();
+            var result = await c.Ontra.GetCollectionInfoAsync();
 
             Assert.NotEmpty(result.ListFields);
         }
@@ -95,10 +100,10 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectAsync_ValidId_AllPropertiesHaveKey()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
             var hasError = false;
 
-            var result = await api.SelectAsync(ValidId);
+            var result = await c.Ontra.SelectAsync(ValidId);
 
             foreach (var propInfo in result.GetType().GetProperties())
             {
@@ -119,16 +124,17 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
                     }
                 }
             }
+            Output.WriteLine(string.Empty);
             Assert.False(hasError, "Some keys are not present in the dictionary and have been listed in output.");
         }
 
         [Fact]
         public async Task SelectAsync_ValidId_AllApiPropertiesEndWithField()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
             var hasError = false;
 
-            var result = await api.SelectAsync(ValidId);
+            var result = await c.Ontra.SelectAsync(ValidId);
 
             foreach (var propInfo in result.GetType().GetProperties())
             {
@@ -141,16 +147,17 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
                     }
                 }
             }
+            Output.WriteLine(string.Empty);
             Assert.False(hasError, "Some ApiProperty members don't end with Field.");
         }
 
         [Fact]
         public async Task SelectAsync_ValidId_AllFieldPropertiesHaveMatchingValueProperty()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
             var hasError = false;
 
-            var result = await api.SelectAsync(ValidId);
+            var result = await c.Ontra.SelectAsync(ValidId);
 
             foreach (var propInfo in result.GetType().GetProperties())
             {
@@ -166,6 +173,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
                     }
                 }
             }
+            Output.WriteLine(string.Empty);
             Assert.False(hasError, "Some Field properties don't have a matching value property without 'Field'.");
         }
 
@@ -181,10 +189,10 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectAsync_ValidId_AllKeysHaveProperties()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
             var hasError = false;
 
-            var result = await api.SelectAsync(ValidId);
+            var result = await c.Ontra.SelectAsync(ValidId);
 
             var propList = GetAllFieldProperties(result);
             var customFieldRegex = new Regex("^f[0-9]{4}$");
@@ -199,6 +207,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
                     }
                 }
             }
+            Output.WriteLine(string.Empty);
             Assert.False(hasError, "Some dictionary keys don't have properties and have been listed in output.");
         }
 

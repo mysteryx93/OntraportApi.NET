@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ArgumentNullOrEmpty" xml:space="preserve">
-    <value>{0} cannot be null or empty.</value>
-  </data>
   <data name="ConfigApiKeyRequired" xml:space="preserve">
     <value>OntraportConfig.ApiKey is required.</value>
   </data>
@@ -129,10 +126,13 @@
   <data name="InvalidMethodForObjectType" xml:space="preserve">
     <value>This method is not available for this object type.</value>
   </data>
+  <data name="InvalidResponseData" xml:space="preserve">
+    <value>Ontraport response data could not be parsed.</value>
+  </data>
   <data name="ObjectTypeMustBeSequence" xml:space="preserve">
     <value>objectType must be Rule, Sequence or SequenceSubscriber.</value>
   </data>
-  <data name="ResponseDataNull" xml:space="preserve">
-    <value>Ontraport response data could not be parsed.</value>
+  <data name="ResponseErrorCode" xml:space="preserve">
+    <value>The remote server returned an error: ({0})</value>
   </data>
 </root>

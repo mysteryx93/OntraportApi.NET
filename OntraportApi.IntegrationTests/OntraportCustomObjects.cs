@@ -16,9 +16,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectAsync_ByName_ReturnsData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAsync("Recordings");
+            var result = await c.Ontra.SelectAsync("Recordings");
 
             Assert.NotEmpty(result.Data);
         }

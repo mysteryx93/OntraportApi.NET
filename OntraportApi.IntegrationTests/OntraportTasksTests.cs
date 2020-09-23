@@ -17,21 +17,21 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task UpdateAsync_SetStatus_ReturnsTask()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
             var status = ApiTask.TaskStatus.Pending;
 
-            var result = await api.UpdateAsync(ValidId, status: status);
+            var result = await c.Ontra.UpdateAsync(ValidId, status: status);
 
-            var task = await api.SelectAsync(result.Id!.Value);
+            var task = await c.Ontra.SelectAsync(result.Id!.Value);
             Assert.Equal(status, task.StatusField.Value);
         }
 
         [Fact]
         public async Task AssignAsync_SetNewId_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.AssignAsync(
+            await c.Ontra.AssignAsync(
                 (int)ApiObjectType.Contact, 
                 new ApiSearchOptions(2));
         }
@@ -39,9 +39,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task CancelAsync_TaskId_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.CancelAsync(
+            await c.Ontra.CancelAsync(
                 (int)ApiObjectType.Contact,
                 new ApiSearchOptions(2));
         }
@@ -49,9 +49,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task CompleteAsync_TaskId_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.CompleteAsync(
+            await c.Ontra.CompleteAsync(
                 ApiObjectType.Contact, 
                 new ApiSearchOptions().SetStart(0, 2).SetGroupId(16));
         }
@@ -59,9 +59,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task RescheduleAsync_TaskId_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.RescheduleAsync(5, new DateTimeOffset(2019, 09, 27, 12, 0, 0, TimeSpan.Zero));
+            await c.Ontra.RescheduleAsync(5, new DateTimeOffset(2019, 09, 27, 12, 0, 0, TimeSpan.Zero));
         }
     }
 }

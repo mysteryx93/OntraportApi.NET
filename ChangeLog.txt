@@ -2,6 +2,15 @@ OntraportApi.NET
 
 What's New
 
+v1.1
+- Added CancellationToken option to all requests
+- Added the ability to override custom ApiContact (and custom objects) field members to allow switching between live and development Ontraport accounts (where field IDs are different)
+- Added Nullables annotations
+- When queries find no result, it will now return null instead of throwing an exception
+- All API calls now return only 3 possible exceptions: HttpRequestException, InvalidOperationException or TaskCanceledException.
+- Replaced Newtonsoft.Json with System.Text.Json
+- Fixed bugs
+
 v1.0.2 (2020-02-11)
 - Fixed minor bugs
 - No longer set 'performAll' in query when search options aren't set

@@ -13,12 +13,12 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
     public class OntraportUserStore<TContact, TUser, TRole> : IUserStore<TUser>, IUserPasswordStore<TUser>, IUserEmailStore<TUser>, IUserRoleStore<TUser>
         where TContact : ApiContact, IIdentityContact, new()
         where TUser : OntraportIdentityUser, new()
-        where TRole : IdentityRole<string>
+        where TRole : IdentityRole<string>, new()
     {
         private readonly IOntraportContacts<TContact> _ontraportContacts;
-        private readonly IRoleStore<IdentityRole<string>> _roleStore;
+        private readonly IRoleStore<TRole> _roleStore;
 
-        public OntraportUserStore(IOntraportContacts<TContact> ontraportContacts, IRoleStore<IdentityRole<string>> roleStore)
+        public OntraportUserStore(IOntraportContacts<TContact> ontraportContacts, IRoleStore<TRole> roleStore)
         {
             _ontraportContacts = ontraportContacts;
             _roleStore = roleStore;
@@ -26,7 +26,7 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
 
         private static TUser? GetUserFromContact(TContact? contact)
         {
-            if (contact != null)
+            if (contact?.IdentityPasswordHash != null)
             {
                 var result = new TUser()
                 {

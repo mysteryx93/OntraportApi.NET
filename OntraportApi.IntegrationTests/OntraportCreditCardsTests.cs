@@ -16,9 +16,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SetDefaultAsync_ValidId_ReturnsObjectWithId()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SetDefaultAsync(ValidId);
+            var result = await c.Ontra.SetDefaultAsync(ValidId);
 
             Assert.Equal(ValidId, result.Id!.Value);
         }

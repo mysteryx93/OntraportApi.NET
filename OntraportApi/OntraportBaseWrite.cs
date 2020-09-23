@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
-using Newtonsoft.Json.Linq;
+using Res = HanumanInstitute.OntraportApi.Properties.Resources;
 
 namespace HanumanInstitute.OntraportApi
 {
@@ -15,7 +16,7 @@ namespace HanumanInstitute.OntraportApi
     public abstract class OntraportBaseWrite<T> : OntraportBaseWrite<T, T>
         where T : ApiObject
     {
-        public OntraportBaseWrite(OntraportHttpClient apiRequest, string endpointSingular, string endpointPlural, string? primarySearchKey) : 
+        public OntraportBaseWrite(OntraportHttpClient apiRequest, string endpointSingular, string endpointPlural, string? primarySearchKey) :
             base(apiRequest, endpointSingular, endpointPlural, primarySearchKey)
         { }
     }
@@ -25,7 +26,7 @@ namespace HanumanInstitute.OntraportApi
     /// </summary>
     /// <typeparam name="T">The data object type deriving from ApiObject.</typeparam>
     /// <typeparam name="TOverride">A sub-type that overrides T members.</typeparam>
-    public abstract class OntraportBaseWrite<T, TOverride> : OntraportBaseRead<T>, IOntraportBaseWrite<T> 
+    public abstract class OntraportBaseWrite<T, TOverride> : OntraportBaseRead<T>, IOntraportBaseWrite<T>
         where T : ApiObject
         where TOverride : T
     {
@@ -42,9 +43,9 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="keyValue">The key value of the specific object, usually the name or email.</param>
         /// <returns>The selected object.</returns>
-        public async Task<T> SelectAsync(string keyValue, CancellationToken cancellationToken = default)
+        public async Task<T?> SelectAsync(string keyValue, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrEmpty(PrimarySearchKey)) throw new InvalidOperationException(Properties.Resources.InvalidMethodForObjectType);
+            if (string.IsNullOrEmpty(PrimarySearchKey)) { throw new InvalidOperationException(Res.InvalidMethodForObjectType); }
 
             var result = await SelectAsync(new ApiSearchOptions().AddCondition(PrimarySearchKey, "=", keyValue), cancellationToken: cancellationToken).ConfigureAwait(false);
             return result.FirstOrDefault();
@@ -57,10 +58,10 @@ namespace HanumanInstitute.OntraportApi
         /// <returns>The created object.</returns>
         public async Task<T> CreateAsync(object? values = null, CancellationToken cancellationToken = default)
         {
-            var json = await ApiRequest.PostAsync<JObject>(
+            var json = await ApiRequest.PostJsonAsync(
                 EndpointPlural,
                 new Dictionary<string, object?>().AddObject(values), cancellationToken).ConfigureAwait(false);
-            return await OnParseCreateAsync(json).ConfigureAwait(false);
+            return await json.RunAndCatchAsync(x => OnParseCreate(x)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -68,8 +69,8 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="json">The JSON data to parse.</param>
         /// <returns>A T or object derived from it.</returns>
-        protected virtual async Task<T> OnParseCreateAsync(JObject json) => 
-            await CreateApiObjectAsync(JsonData(json)).ConfigureAwait(false);
+        protected virtual T OnParseCreate(JsonElement json) =>
+            CreateApiObject(json.JsonData());
 
         /// <summary>
         /// Updates an existing object with given data.
@@ -84,9 +85,9 @@ namespace HanumanInstitute.OntraportApi
                 { "id", objectId }
             };
 
-            var json = await ApiRequest.PutAsync<JObject>(
+            var json = await ApiRequest.PutJsonAsync(
                 EndpointPlural, query.AddObject(values), cancellationToken).ConfigureAwait(false);
-            return await OnParseUpdateAsync(json).ConfigureAwait(false);
+            return await json.RunAndCatchAsync(x => OnParseUpdate(x)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -94,7 +95,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="json">The JSON data to parse.</param>
         /// <returns>A T or object derived from it.</returns>
-        protected virtual async Task<T> OnParseUpdateAsync(JObject json) =>
-            await CreateApiObjectAsync(JsonData(json)["attrs"]).ConfigureAwait(false);
+        protected virtual T OnParseUpdate(JsonElement json) =>
+            CreateApiObject(json.JsonData().JsonChild("attrs"));
     }
 }

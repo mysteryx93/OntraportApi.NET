@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace HanumanInstitute.OntraportApi.Converters
 {
@@ -11,16 +12,26 @@ namespace HanumanInstitute.OntraportApi.Converters
     /// <typeparam name="TNull">The .NET nullable type to parse the data into.</typeparam>
     public class JsonConverterBase<TNull> : JsonConverter<TNull>
     {
-#pragma warning disable CS8764 // Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
-#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
-        [return: MaybeNull]
-        public override TNull ReadJson(JsonReader reader, Type objectType, TNull existingValue, bool hasExistingValue, JsonSerializer serializer) =>
-            Parse(reader?.Value?.ToStringInvariant());
+        public override TNull Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            //return Parse(JsonSerializer.Deserialize<TNull>(ref reader, options)?.ToStringInvariant())!;
+            var value = reader.GetValue<TNull>()?.ToStringInvariant();
+            return Parse(value)!;
+        }
 
-        public override void WriteJson(JsonWriter writer, TNull value, JsonSerializer serializer) =>
-            writer?.WriteValue(Format(value));
-#pragma warning restore CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
-#pragma warning restore CS8764 // Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
+        public override void Write(Utf8JsonWriter writer, TNull value, JsonSerializerOptions options) =>
+            writer?.WriteStringValue(Format(value));
+
+        //#pragma warning disable CS8764 // Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
+        //#pragma warning disable CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
+        //        [return: MaybeNull]
+        //        public override TNull Read(Utf8JsonReader reader, Type objectType, TNull existingValue, bool hasExistingValue, JsonSerializer serializer) =>
+        //            Parse(reader?.Value?.ToStringInvariant());
+
+        //        public override void Write(Utf8JsonWriter writer, TNull value, JsonSerializer serializer) =>
+        //            writer?.WriteValue(Format(value));
+        //#pragma warning restore CS8765 // Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
+        //#pragma warning restore CS8764 // Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
 
         /// <summary>
         /// Return whether specific value is to be considered null.

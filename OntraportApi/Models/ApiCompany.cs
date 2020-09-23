@@ -137,16 +137,16 @@ namespace HanumanInstitute.OntraportApi.Models
         /// </summary>
         public string? Zip { get => ZipField.Value; set => ZipField.Value = value; }
 
-        /// <summary>
-        /// Returns a ApiProperty object to get or set the company's country.
-        /// </summary>
-        public ApiPropertyString CountryField => _countryField ??= new ApiPropertyString(this, CountryKey);
-        private ApiPropertyString? _countryField;
-        public const string CountryKey = "country";
-        /// <summary>
-        /// Gets or sets the company's country.
-        /// </summary>
-        public string? Country { get => CountryField.Value; set => CountryField.Value = value; }
+        ///// <summary>
+        ///// Returns a ApiProperty object to get or set the company's country.
+        ///// </summary>
+        //public ApiPropertyString CountryField => _countryField ??= new ApiPropertyString(this, CountryKey);
+        //private ApiPropertyString? _countryField;
+        //public const string CountryKey = "country";
+        ///// <summary>
+        ///// Gets or sets the company's country.
+        ///// </summary>
+        //public string? Country { get => CountryField.Value; set => CountryField.Value = value; }
 
     }
 }

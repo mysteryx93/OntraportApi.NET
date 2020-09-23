@@ -6,11 +6,19 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
     public class OntraportObjectsTests
     {
+        private readonly ITestOutputHelper _output;
+
+        public OntraportObjectsTests(ITestOutputHelper output)
+        {
+            _output = output;
+        }
+
         private const string SectionContact = "Contact Information";
         private const string SectionTest = "Test Section";
         private const int ValidContactId = 19;
@@ -18,17 +26,14 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         private const int ValidTagId = 1;
         private const int ValidTagId2 = 3;
 
-        private static OntraportObjects SetupApi()
-        {
-            return new OntraportObjects(ConfigHelper.GetHttpClient());
-        }
+        protected OntraportContext<OntraportObjects> CreateContext() => new OntraportContext<OntraportObjects>(_output);
 
         [Fact]
         public async Task CreateAsync_Contact_ReturnsResultWithData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.CreateAsync(ApiObjectType.Contact);
+            var result = await c.Ontra.CreateAsync(ApiObjectType.Contact);
 
             Assert.NotEmpty(result);
         }
@@ -37,9 +42,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [InlineData("Name1", "a@test.com")]
         public async Task CreateAsync_ContactWithNameEmail_ReturnsSameNameEmail(string firstname, string email)
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.CreateAsync(ApiObjectType.Contact, new
+            var result = await c.Ontra.CreateAsync(ApiObjectType.Contact, new
             {
                 firstname,
                 email
@@ -52,9 +57,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task CreateOrMergeAsync_ContactWithEmail_ReturnsResultWithData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.CreateOrMergeAsync(ApiObjectType.Contact, false, new
+            var result = await c.Ontra.CreateOrMergeAsync(ApiObjectType.Contact, false, new
             {
                 email = "a@test.com"
             });
@@ -66,14 +71,14 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [InlineData("Name1", "a@test.com")]
         public async Task CreateOrMergeAsync_ContactWithNameEmailSetNameBlank_ReturnsNameBlank(string firstname, string email)
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.CreateOrMergeAsync(ApiObjectType.Contact, false, new
+            await c.Ontra.CreateOrMergeAsync(ApiObjectType.Contact, false, new
             {
                 firstname,
                 email
             });
-            var result2 = await api.CreateOrMergeAsync(ApiObjectType.Contact, false, new
+            var result2 = await c.Ontra.CreateOrMergeAsync(ApiObjectType.Contact, false, new
             {
                 firstname = "",
                 email
@@ -86,14 +91,14 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [InlineData("Name1", "a@test.com")]
         public async Task CreateOrMergeAsync_ContactWithNameEmailSetBlankIgnore_NotReturnName(string firstname, string email)
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.CreateOrMergeAsync(ApiObjectType.Contact, false, new
+            await c.Ontra.CreateOrMergeAsync(ApiObjectType.Contact, false, new
             {
                 firstname,
                 email
             });
-            var result2 = await api.CreateOrMergeAsync(ApiObjectType.Contact, true, new
+            var result2 = await c.Ontra.CreateOrMergeAsync(ApiObjectType.Contact, true, new
             {
                 firstname = "",
                 email
@@ -105,7 +110,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task CreateFieldsAsync_FieldsList_ReturnsSuccessObject()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
             var fields = new List<List<ApiFieldEditor>>
             {
                 new List<ApiFieldEditor>() {
@@ -125,20 +130,20 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
                 }
             };
 
-            var result = await api.CreateFieldsAsync(ApiObjectType.Contact, SectionTest, fields);
+            var result = await c.Ontra.CreateFieldsAsync(ApiObjectType.Contact, SectionTest, fields);
 
             Assert.Equal(2, result.Success.Count);
-            await Task.WhenAll(result.Success.Keys.Select(x => api.DeleteFieldAsync(ApiObjectType.Contact, x)));
+            await Task.WhenAll(result.Success.Keys.Select(x => c.Ontra.DeleteFieldAsync(ApiObjectType.Contact, x)));
         }
 
         [Fact]
         public async Task SelectAsync_Contact_ReturnsResultWithData()
         {
-            var api = SetupApi();
-            var contact = await api.CreateOrMergeAsync(ApiObjectType.Contact, false, new { firstname = "aa", email = "a@test.com" });
+            using var c = CreateContext();
+            var contact = await c.Ontra.CreateOrMergeAsync(ApiObjectType.Contact, false, new { firstname = "aa", email = "a@test.com" });
             var contactId = int.Parse(contact["id"], CultureInfo.InvariantCulture);
 
-            var result = await api.SelectAsync(ApiObjectType.Contact, contactId);
+            var result = await c.Ontra.SelectAsync(ApiObjectType.Contact, contactId);
 
             Assert.NotEmpty(result);
             Assert.Equal(contactId.ToString(CultureInfo.InvariantCulture), result["id"]);
@@ -147,9 +152,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectMultipleAsync_NoParam_SelectAllContacts()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAsync(ApiObjectType.Contact);
+            var result = await c.Ontra.SelectAsync(ApiObjectType.Contact);
 
             Assert.NotEmpty(result);
         }
@@ -157,9 +162,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectMultipleAsync_ById_SelectThoseContacts()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAsync(ApiObjectType.Contact, new ApiSearchOptions(new[] { 19, 20 }));
+            var result = await c.Ontra.SelectAsync(ApiObjectType.Contact, new ApiSearchOptions(new[] { 19, 20 }));
 
             Assert.Equal(2, result.Count);
         }
@@ -167,9 +172,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectMultipleAsync_ByCondition_SelectMatchingContacts()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAsync(ApiObjectType.Contact, searchOptions:
+            var result = await c.Ontra.SelectAsync(ApiObjectType.Contact, searchOptions:
                 new ApiSearchOptions()
                     .AddCondition("email", "=", "a@test.com")
                     .AddCondition("firstname", "=", "a", false)
@@ -181,9 +186,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectMultipleAsync_ByConditionNull_SelectMatchingContacts()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAsync(ApiObjectType.Contact, searchOptions:
+            var result = await c.Ontra.SelectAsync(ApiObjectType.Contact, searchOptions:
                 new ApiSearchOptions()
                     .AddCondition("lastname", "=", null)
             );
@@ -194,9 +199,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectMultipleAsync_ByConditionList_SelectMatchingContacts()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAsync(ApiObjectType.Contact, searchOptions:
+            var result = await c.Ontra.SelectAsync(ApiObjectType.Contact, searchOptions:
                 new ApiSearchOptions()
                     .AddConditionInList("id", new[] { 20, 21 })
             );
@@ -207,9 +212,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectByTagAsync_TagId_ReturnsList()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectByTagAsync(ApiObjectType.Contact, tagId: 1);
+            var result = await c.Ontra.SelectByTagAsync(ApiObjectType.Contact, tagId: 1);
 
             Assert.NotNull(result);
         }
@@ -217,9 +222,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectByTagAsync_TagName_ReturnsList()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectByTagAsync(ApiObjectType.Contact, tagName: "tag1");
+            var result = await c.Ontra.SelectByTagAsync(ApiObjectType.Contact, tagName: "tag1");
 
             Assert.NotNull(result);
         }
@@ -227,9 +232,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task GetCountByTagAsync_Count_ReturnsCount()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.GetCountByTagAsync(ApiObjectType.Contact, tagId: 1);
+            var result = await c.Ontra.GetCountByTagAsync(ApiObjectType.Contact, tagId: 1);
 
             Assert.True(result > 0);
         }
@@ -237,9 +242,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task GetObjectIdByEmailAsync_ValidEmail_ReturnsId()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.GetObjectIdByEmailAsync(ApiObjectType.Contact, "a@test.com");
+            var result = await c.Ontra.GetObjectIdByEmailAsync(ApiObjectType.Contact, "a@test.com");
 
             Assert.NotNull(result);
         }
@@ -247,9 +252,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task GetObjectIdByEmailAllAsync_ValidEmail_ReturnsList()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.GetObjectIdByEmailAllAsync(ApiObjectType.Contact, "a@test.com");
+            var result = await c.Ontra.GetObjectIdByEmailAllAsync(ApiObjectType.Contact, "a@test.com");
 
             Assert.NotEmpty(result);
         }
@@ -257,9 +262,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task GetAllMetadataAsync_NoParam_ReturnsData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.GetAllMetadataAsync();
+            var result = await c.Ontra.GetAllMetadataAsync();
 
             Assert.NotEmpty(result);
         }
@@ -267,9 +272,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task GetMetadataAsync_ByName_ReturnsData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.GetMetadataAsync(ApiObjectType.Message);
+            var result = await c.Ontra.GetMetadataAsync(ApiObjectType.Message);
 
             Assert.NotEmpty(result.Fields);
         }
@@ -277,9 +282,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task GetCollectionInfoAsync_Contacts_ReturnsData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.GetCollectionInfoAsync(ApiObjectType.Product);
+            var result = await c.Ontra.GetCollectionInfoAsync(ApiObjectType.Product);
 
             Assert.NotEmpty(result.ListFields);
         }
@@ -287,9 +292,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectAllFieldsAsync_All_ReturnsData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectAllFieldsAsync(ApiObjectType.Contact);
+            var result = await c.Ontra.SelectAllFieldsAsync(ApiObjectType.Contact);
 
             Assert.NotEmpty(result);
         }
@@ -297,9 +302,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectFieldByNameAsync_WithFieldName_ReturnsData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectFieldByNameAsync(ApiObjectType.Contact, "firstname");
+            var result = await c.Ontra.SelectFieldByNameAsync(ApiObjectType.Contact, "firstname");
 
             Assert.NotNull(result);
         }
@@ -307,9 +312,9 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task SelectFieldsBySectionAsync_WithSectionName_ReturnsData()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            var result = await api.SelectFieldsBySectionAsync(ApiObjectType.Contact, SectionContact);
+            var result = await c.Ontra.SelectFieldsBySectionAsync(ApiObjectType.Contact, SectionContact);
 
             Assert.NotEmpty(result.Fields);
         }
@@ -317,10 +322,10 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task UpdateAsync_SetName_ReturnsSameName()
         {
-            var api = SetupApi();
-            var name = "NewName3";
+            using var c = CreateContext();
+            var name = "NewName4";
 
-            var result = await api.UpdateAsync(ApiObjectType.Contact, 19, new { firstname = name });
+            var result = await c.Ontra.UpdateAsync(ApiObjectType.Contact, 19, new { firstname = name });
 
             Assert.Equal(name, result["firstname"]);
         }
@@ -328,7 +333,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task UpdateFieldsAsync_NewFieldData_ResponseSuccess()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
             var fields = new List<List<ApiFieldEditor>>
             {
                 new List<ApiFieldEditor>() {
@@ -350,137 +355,137 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
                 }
             };
 
-            var result = await api.UpdateFieldsAsync(ApiObjectType.Contact, SectionTest, fields);
+            var result = await c.Ontra.UpdateFieldsAsync(ApiObjectType.Contact, SectionTest, fields);
 
             // Server returns error!
             Assert.NotEmpty(result.Success);
         }
 
         [Fact]
-        public async Task DeleteAsync_IdJustCreated_ThrowsNoException()
+        public async Task DeleteAsync_IdJustCreated_SelectReturnsNull()
         {
-            var api = SetupApi();
-            var contact = await api.CreateAsync(ApiObjectType.Contact);
+            using var c = CreateContext();
+            var contact = await c.Ontra.CreateAsync(ApiObjectType.Contact);
             var contactId = int.Parse(contact["id"], CultureInfo.InvariantCulture);
 
-            await api.DeleteAsync(ApiObjectType.Contact, contactId);
+            await c.Ontra.DeleteAsync(ApiObjectType.Contact, contactId);
 
             // Should throw Object Not Found.
-            await Assert.ThrowsAsync<HttpRequestException>(() => api.SelectAsync(ApiObjectType.Contact, contactId));
+            Assert.Null(await c.Ontra.SelectAsync(ApiObjectType.Contact, contactId));
         }
 
         [Fact]
         public async Task DeleteMultipleAsync_IdJustCreated_NoException()
         {
-            var api = SetupApi();
-            var contact = await api.CreateAsync(ApiObjectType.Contact);
+            using var c = CreateContext();
+            var contact = await c.Ontra.CreateAsync(ApiObjectType.Contact);
             var contactId = int.Parse(contact["id"], CultureInfo.InvariantCulture);
 
-            await api.DeleteMultipleAsync(ApiObjectType.Contact, new ApiSearchOptions(new[] { contactId }));
+            await c.Ontra.DeleteMultipleAsync(ApiObjectType.Contact, new ApiSearchOptions(new[] { contactId }));
         }
 
         [Fact]
         public async Task DeleteSectionAsync_NotEmpty_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
             var section = "test1";
-            await api.CreateFieldsAsync(ApiObjectType.Contact, section, null);
+            await c.Ontra.CreateFieldsAsync(ApiObjectType.Contact, section, null);
 
-            await api.DeleteSectionAsync(ApiObjectType.Contact, section);
+            await c.Ontra.DeleteSectionAsync(ApiObjectType.Contact, section);
         }
 
         [Fact]
         public async Task DeleteFieldAsync_NotEmpty_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
             var fields = new List<List<ApiFieldEditor>>()
             {
                 new List<ApiFieldEditor>()
                 {
                     new ApiFieldEditor()
                     {
-                        Alias = "testfield",
+                        Alias = "testfield2",
                         Type = ApiFieldType.text
                     }
                 }
             };
-            var result = await api.CreateFieldsAsync(ApiObjectType.Contact, SectionTest, fields);
+            var result = await c.Ontra.CreateFieldsAsync(ApiObjectType.Contact, SectionTest, fields);
             var fieldName = result.Success.Keys.First();
 
-            await api.DeleteFieldAsync(ApiObjectType.Contact, fieldName);
+            await c.Ontra.DeleteFieldAsync(ApiObjectType.Contact, fieldName);
         }
 
         [Fact]
         public async Task AddToSequenceAsync_ValidIds_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.AddToSequenceAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidSequenceId });
+            await c.Ontra.AddToSequenceAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidSequenceId });
         }
 
         [Fact]
         public async Task AddTagAsync_ValidIds_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.AddTagAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidTagId, ValidTagId2 });
+            await c.Ontra.AddTagAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidTagId, ValidTagId2 });
         }
 
         [Fact]
         public async Task AddTagNamesAsync_ValidNames_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.AddTagNamesAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { "tag10", "tag11" });
+            await c.Ontra.AddTagNamesAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { "tag10", "tag11" });
         }
 
         [Fact]
         public async Task AddToCampaignAsync_ValidIds_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.AddToCampaignAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidSequenceId });
+            await c.Ontra.AddToCampaignAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidSequenceId });
         }
 
 
         [Fact]
         public async Task RemoveFromSequenceAsync_ValidIds_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.RemoveFromSequenceAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidSequenceId });
+            await c.Ontra.RemoveFromSequenceAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidSequenceId });
         }
 
         [Fact]
         public async Task RemoveTagAsync_ValidIds_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.RemoveTagAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidTagId, ValidTagId2 });
+            await c.Ontra.RemoveTagAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidTagId, ValidTagId2 });
         }
 
         [Fact]
         public async Task RemoveTagNamesAsync_ValidNames_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.RemoveTagNamesAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { "tag10", "tag11" });
+            await c.Ontra.RemoveTagNamesAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { "tag10", "tag11" });
         }
 
         [Fact]
         public async Task PauseRuleOrSequenceAsync_ValidIds_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.PauseRuleOrSequenceAsync(ApiObjectType.Sequence, new ApiSearchOptions(ValidContactId));
+            await c.Ontra.PauseRuleOrSequenceAsync(ApiObjectType.Sequence, new ApiSearchOptions(ValidContactId));
         }
 
         [Fact]
         public async Task UnpauseRuleOrSequenceAsync_ValidIds_NoException()
         {
-            var api = SetupApi();
+            using var c = CreateContext();
 
-            await api.UnpauseRuleOrSequenceAsync(ApiObjectType.Sequence, new ApiSearchOptions(ValidContactId));
+            await c.Ontra.UnpauseRuleOrSequenceAsync(ApiObjectType.Sequence, new ApiSearchOptions(ValidContactId));
         }
     }
 }

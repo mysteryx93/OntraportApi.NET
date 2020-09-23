@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using HanumanInstitute.OntraportApi.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 
@@ -12,10 +13,10 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
     [SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Reviewed: HttpClient needs to be disposed by OntraportPostForms or by the IOC container.")]
     public class ConfigHelper
     {
-        public static OntraportHttpClient GetHttpClient()
+        public static OntraportHttpClient GetHttpClient(ILogger<OntraportHttpClient> logger = null)
         {
             // var factory = Mock.Of<IHttpClientFactory>(x => x.CreateClient(It.IsAny<string>()) == new HttpClient());
-            return new OntraportHttpClient(new HttpClient(), GetConfig(), null);
+            return new OntraportHttpClient(new HttpClient(), GetConfig(), logger);
         }
 
         public static IOptions<OntraportConfig> GetConfig()

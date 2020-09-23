@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using HanumanInstitute.OntraportApi.Models;
+using HanumanInstitute.Validators;
+using Res = HanumanInstitute.OntraportApi.Properties.Resources;
 
 namespace HanumanInstitute.OntraportApi
 {
@@ -15,7 +17,7 @@ namespace HanumanInstitute.OntraportApi
     public abstract class OntraportBaseRead<T> : OntraportBaseRead<T, T>
         where T : ApiObject
     {
-        public OntraportBaseRead(OntraportHttpClient apiRequest, string endpointSingular, string endpointPlural) : 
+        public OntraportBaseRead(OntraportHttpClient apiRequest, string endpointSingular, string endpointPlural) :
             base(apiRequest, endpointSingular, endpointPlural)
         { }
     }
@@ -47,16 +49,16 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="id">The ID of the specific object.</param>
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>The selected object.</returns>
-        public async Task<T> SelectAsync(int id, CancellationToken cancellationToken = default)
+        public async Task<T?> SelectAsync(int id, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
                 { "id", id }
             };
 
-            var json = await ApiRequest.GetAsync<JObject>(
-                EndpointSingular, query, cancellationToken).ConfigureAwait(false);
-            return await OnParseSelectAsync(json).ConfigureAwait(false);
+            var json = await ApiRequest.GetJsonAsync(
+                EndpointSingular, query, true, cancellationToken).ConfigureAwait(false);
+            return await json.RunAndCatchAsync(x => OnParseSelect(x)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -64,8 +66,8 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="json">The JSON data to parse.</param>
         /// <returns>A T or object derived from it.</returns>
-        protected virtual async Task<T> OnParseSelectAsync(JObject json) =>
-            await CreateApiObjectAsync(JsonData(json)).ConfigureAwait(false);
+        protected virtual T OnParseSelect(JsonElement json) =>
+            CreateApiObject(json.JsonData());
 
         /// <summary>
         /// Retrieves a collection of objects based on a set of parameters.
@@ -85,9 +87,10 @@ namespace HanumanInstitute.OntraportApi
                 .AddIfHasValue("externs", externs)
                 .AddIfHasValue("listFields", listFields);
 
-            var json = await ApiRequest.GetAsync<JObject>(
-                $"{EndpointPlural}", query, cancellationToken).ConfigureAwait(false);
-            return await OnParseSelectMultipleAsync(json).ConfigureAwait(false);
+            var json = await ApiRequest.GetJsonAsync(
+                $"{EndpointPlural}", query, false, cancellationToken).ConfigureAwait(false);
+            var result = await json.RunAndCatchAsync(x => OnParseSelectMultipleAsync(x)).ConfigureAwait(false);
+            return result!;
         }
 
         /// <summary>
@@ -95,9 +98,11 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="json">The JSON data to parse.</param>
         /// <returns>A List<T> or object derived from it.</returns>
-        protected virtual async Task<IList<T>> OnParseSelectMultipleAsync(JObject json) =>
-            await Task.WhenAll(
-                JsonData(json).Children().Select(x => CreateApiObjectAsync(x))).ConfigureAwait(false);
+        protected virtual async Task<IList<T>> OnParseSelectMultipleAsync(JsonElement json)
+        {
+            var list = json.JsonData().EnumerateArray().ToList();
+            return await list.ForEachOrderedAsync(x => Task.Run<T>(() => CreateApiObject(x))).ConfigureAwait(false);
+        }
 
         /// <summary>
         /// Retrieves the field meta data for the specified object type.
@@ -111,9 +116,10 @@ namespace HanumanInstitute.OntraportApi
                 { "format", "byId" }
             };
 
-            var json = await ApiRequest.GetAsync<JObject>(
-                $"{EndpointPlural}/meta", query, cancellationToken).ConfigureAwait(false);
-            return await OnParseGetMetadataAsync(json).ConfigureAwait(false);
+            var json = await ApiRequest.GetJsonAsync(
+                $"{EndpointPlural}/meta", query, false, cancellationToken).ConfigureAwait(false);
+            var result = await json.RunAndCatchAsync(x => OnParseGetMetadata(x)).ConfigureAwait(false);
+            return result!;
         }
 
         /// <summary>
@@ -122,9 +128,11 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="json">The JSON data to parse.</param>
         /// <returns>A ResponseMetadata or object derived from it.</returns>
         /// <exception cref="NullReferenceException">Response data could not be parsed.</exception>
-        protected virtual async Task<ResponseMetadata> OnParseGetMetadataAsync(JObject json) =>
-            await Task.Run(() => JsonData(json).First?.First?.ToObject<ResponseMetadata>()).ConfigureAwait(false)
-                ?? throw new NullReferenceException(Properties.Resources.ResponseDataNull);
+        protected virtual ResponseMetadata OnParseGetMetadata(JsonElement json)
+        {
+            var first = json.JsonData().JsonFirst();
+            return first.ToObject<ResponseMetadata>();
+        }
 
         /// <summary>
         /// Retrieves information about a collection of objects, such as the number of objects that match the given criteria.
@@ -132,14 +140,14 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>A ResponseCollectionInfo object.</returns>
-        public async Task<ResponseCollectionInfo> GetCollectionInfoAsync(ApiSearchOptions? searchOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseCollectionInfo?> GetCollectionInfoAsync(ApiSearchOptions? searchOptions = null, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
                 .AddSearchOptions(searchOptions);
 
-            var json = await ApiRequest.GetAsync<JObject>(
-                $"{EndpointPlural}/getInfo", query, cancellationToken).ConfigureAwait(false);
-            return OnParseGetCollectionInfo(json);
+            var json = await ApiRequest.GetJsonAsync(
+                $"{EndpointPlural}/getInfo", query, true, cancellationToken).ConfigureAwait(false);
+            return await json.RunAndCatchAsync(x => OnParseGetCollectionInfo(x)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -148,8 +156,8 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="json">The JSON data to parse.</param>
         /// <returns>A ResponseCollectionInfo or object derived from it.</returns>
         /// <exception cref="NullReferenceException">Response data could not be parsed.</exception>
-        protected virtual ResponseCollectionInfo OnParseGetCollectionInfo(JObject json) =>
-            JsonData(json).ToObject<ResponseCollectionInfo>()!;
+        protected virtual ResponseCollectionInfo OnParseGetCollectionInfo(JsonElement json) =>
+            json.JsonData().ToObject<ResponseCollectionInfo>();
 
         /// <summary>
         /// Creates an instance of the ApiObject of type T and parses data into it.
@@ -157,33 +165,18 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="json">The JSON data to feed into the object..</param>
         /// <returns>A new ApiObject of type T.</returns>
         /// <exception cref="NullReferenceException">Response data could not be parsed.</exception>
-        protected virtual async Task<T> CreateApiObjectAsync(JToken? json)
+        protected virtual T CreateApiObject(JsonElement json)
         {
-            if (json != null)
+            var result = (T)Activator.CreateInstance(typeof(TOverride), null)!;
+            try
             {
-                var result = (T)Activator.CreateInstance(typeof(TOverride), null)!;
-                await Task.Run(() =>
-                {
-                    result.Data = json.ToObject<IDictionary<string, string?>>() ??
-                        throw new NullReferenceException(Properties.Resources.ResponseDataNull);
-                }).ConfigureAwait(false);
-                return result;
+                result.Data = json.ToObject<IDictionary<string, string?>>();
             }
-            return default!;
-        }
-
-        /// <summary>
-        /// Returns the content of json["data"] and throws exceptions if it's null.
-        /// </summary>
-        /// <param name="json">The Json to retrieve data for.</param>
-        /// <returns>The content of json["data"].</returns>
-        /// <exception cref="ArgumentNullException">json was null, or json["data"] was null.</exception>
-        protected static JToken JsonData(JObject? json)
-        {
-            json.CheckNotNull(nameof(json));
-            var data = json!["data"];
-            data.CheckNotNull("json[\"data\"]");
-            return data!;
+            catch (JsonException ex)
+            {
+                throw new InvalidOperationException(Res.InvalidResponseData, ex);
+            }
+            return result;
         }
     }
 }

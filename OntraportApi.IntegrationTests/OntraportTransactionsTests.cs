@@ -17,13 +17,12 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         [Fact]
         public async Task LogTransaction_Order_LoggedProperly()
         {
-            var api = SetupApi();
-            var apiObj = SetupObjectsApi();
-            var contactId = await apiObj.GetObjectIdByEmailAsync(ApiObjectType.Contact, "a@test.com");
+            using var c = CreateContext();
+            var contactId = await c.OntraObjects.GetObjectIdByEmailAsync(ApiObjectType.Contact, "a@test.com");
             var offer = new ApiTransactionOffer()
                 .AddProduct(1, 2, 100);
 
-            var result = await api.LogTransactionAsync(contactId.Value, offer);
+            var result = await c.Ontra.LogTransactionAsync(contactId.Value, offer);
 
             Assert.NotEqual(0, result);
         }

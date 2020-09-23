@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using HanumanInstitute.OntraportApi.Converters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace HanumanInstitute.OntraportApi.Models
 {
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
     public class ResponseCollectionInfo
     {
-        public List<string>? ListFields { get; private set; } = new List<string>();
-        [JsonConverter(typeof(JsonEmptyArrayToObjectConverter))]
-        public Dictionary<string, string> ListFieldSettings { get; private set; } = new Dictionary<string, string>();
-        [JsonConverter(typeof(JsonEmptyArrayToObjectConverter))]
+        public ICollection<string> ListFields { get; set; } = new List<string>();
+        [JsonConverter(typeof(JsonEmptyArrayConverter<Dictionary<string, string>>))]
+        public Dictionary<string, string> ListFieldSettings { get; set; } = new Dictionary<string, string>();
+        [JsonConverter(typeof(JsonEmptyArrayConverter<ResponseCardViewSettings?>))]
         public ResponseCardViewSettings? CardViewSettings { get; set; }
-        [JsonConverter(typeof(JsonEmptyArrayToObjectConverter))]
+        [JsonConverter(typeof(JsonEmptyArrayConverter<int>))]
         public int ViewMode { get; set; }
         public int Count { get; set; }
     }

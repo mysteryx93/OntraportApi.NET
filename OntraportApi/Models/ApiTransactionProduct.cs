@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using HanumanInstitute.OntraportApi.Converters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// An array of products is included with every offer. If valid, existing products are not included, a transaction can't be processed.
     /// </summary>
-    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy), ItemNullValueHandling = NullValueHandling.Ignore)]
     public class ApiTransactionProduct
     {
         public ApiTransactionProduct() { }
@@ -21,7 +19,7 @@ namespace HanumanInstitute.OntraportApi.Models
             AddPrice(price);
         }
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int ProductId { get; set; }
 
         /// <summary>
@@ -37,13 +35,11 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets whether or not there is a cost to ship this product.
         /// </summary>
-        [JsonConverter(typeof(JsonConverterBool))]
         public bool Shipping { get; set; }
 
         /// <summary>
         /// Gets or sets whether or not this product should be taxed.
         /// </summary>
-        [JsonConverter(typeof(JsonConverterBool))]
         public bool Taxable { get; set; }
 
         /// <summary>
@@ -75,32 +71,38 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets whether or not this product is offered to affiliates.
         /// </summary>
+        [JsonPropertyName("offer_to_affiliates")]
         public bool? OfferToAffiliates { get; set; }
 
         /// <summary>
         /// If there is a trial period for the product, gets or sets the units of length of the trial period. 
         /// </summary>
+        [JsonPropertyName("trial_period_unit")]
         [JsonConverter(typeof(JsonConverterStringEnum<TransactionPeriodUnit>))]
         public TransactionPeriodUnit? TrialPeriodUnit { get; set; }
 
         /// <summary>
         /// Gets or sets the length of the trial period. Must be used in conjunction with trial_period_unit.
         /// </summary>
+        [JsonPropertyName("trial_period_count")]
         public int? TrialPeriodCount { get; set; }
 
         /// <summary>
         /// Gets or sets the price of the product during the trial period.
         /// </summary>
+        [JsonPropertyName("trial_price")]
         public decimal? TrialPrice { get; set; }
 
         /// <summary>
         /// Gets or sets the cost of of any one-time set-up fee, if applicable.
         /// </summary>
+        [JsonPropertyName("setup_fee")]
         public decimal? SetupFee { get; set; }
 
         /// <summary>
         /// Gets or sets when the setup fee should be applied.
         /// </summary>
+        [JsonPropertyName("setup_fee_when")]
         [JsonConverter(typeof(JsonConverterStringEnum<ProductSetupFeeWhen>))]
         public ProductSetupFeeWhen? SetupFeeWhen { get; set; }
 

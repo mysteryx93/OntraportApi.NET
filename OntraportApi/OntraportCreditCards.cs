@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
-using Newtonsoft.Json.Linq;
 
 namespace HanumanInstitute.OntraportApi
 {
@@ -22,17 +21,16 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="creditCardId">The credit card ID.</param>
         /// <returns>An ApiCreditCard containing updated fields.</returns>
-        public async Task<ApiCreditCard> SetDefaultAsync(int creditCardId, CancellationToken cancellationToken = default)
+        public async Task<ApiCreditCard?> SetDefaultAsync(int creditCardId, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
                 { "id", creditCardId }
             };
 
-            var json = await ApiRequest.PutAsync<JObject>(
+            var json = await ApiRequest.PutJsonAsync(
                 $"{EndpointSingular}/default", query, cancellationToken).ConfigureAwait(false);
-            return await CreateApiObjectAsync(json).ConfigureAwait(false);
+            return await json.RunAndCatchAsync(x => CreateApiObject(x)).ConfigureAwait(false);
         }
-
     }
 }

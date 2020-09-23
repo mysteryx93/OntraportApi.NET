@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using HanumanInstitute.OntraportApi.Converters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Any array of price data should be included with products.
     /// </summary>
-    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy), ItemNullValueHandling = NullValueHandling.Ignore)]
     public class ApiTransactionPrice
     {
         /// <summary>
@@ -24,11 +22,13 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// If a payment plan item, gets or sets the number of payments to be made.
         /// </summary>
+        [JsonPropertyName("payment_count")]
         public int? PaymentCount { get; set; }
 
         /// <summary>
         /// Gets or sets the units of time of payments.
         /// </summary>
+        [JsonPropertyName("transaction_period_unit")]
         [JsonConverter(typeof(JsonConverterStringEnum<TransactionPeriodUnit>))]
         public TransactionPeriodUnit? Unit { get; set; }
     }

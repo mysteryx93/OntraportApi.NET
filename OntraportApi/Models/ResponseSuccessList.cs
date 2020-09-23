@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using HanumanInstitute.OntraportApi.Converters;
+using HanumanInstitute.Validators;
 
 namespace HanumanInstitute.OntraportApi.Models
 {
@@ -15,21 +17,19 @@ namespace HanumanInstitute.OntraportApi.Models
         /// Initializes a new instance of ResponseSuccessList and parses the data from a JSON parser.
         /// </summary>
         /// <param name="json"></param>
-        public ResponseSuccessList(JObject json)
+        public ResponseSuccessList(JsonElement json)
         {
             json.CheckNotNull(nameof(json));
-            var data = json["data"];
-            if (data != null)
+            if (json.TryGetProperty("data", out var jsonData))
             {
-                var jsonSuccess = data["success"];
-                var jsonError = data["error"];
-                if (jsonSuccess?.Any() == true)
+                // Discard [], see JsonEmptyArrayConverter
+                if (jsonData.TryGetProperty("success", out var jsonSuccess) && jsonSuccess.ValueKind != JsonValueKind.Array)
                 {
-                    Success = jsonSuccess.ToObject<IDictionary<string, string>>()!;
+                    Success = jsonSuccess.ToObject<Dictionary<string, string>>();
                 }
-                if (jsonError?.Any() == true)
+                if (jsonData.TryGetProperty("error", out var jsonError) && jsonError.ValueKind != JsonValueKind.Array)
                 {
-                    Error = jsonError.ToObject<IDictionary<string, string>>()!;
+                    Error = jsonError.ToObject<Dictionary<string, string>>();
                 }
             }
         }
