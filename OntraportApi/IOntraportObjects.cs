@@ -106,7 +106,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="indexByName">True to index by name, false to index by id.</param>
         /// <returns>A JsonElement providing raw access to the JSON data.</returns>
-        Task<Dictionary<int, ResponseMetadata>> GetAllMetadataAsync(CancellationToken cancellationToken = default);
+        Task<Dictionary<string, ResponseMetadata>> GetAllMetadataAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves the field meta data for the specified object type.
@@ -136,7 +136,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="objectType">The object type.</param>
         /// <returns>A dictionary of sections each containing their fields.</returns>
-        Task<Dictionary<int, ResponseSectionFields>> SelectAllFieldsAsync(ApiObjectType objectType, CancellationToken cancellationToken = default);
+        Task<Dictionary<string, ResponseSectionFields>> SelectAllFieldsAsync(ApiObjectType objectType, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve information about a field an object has.

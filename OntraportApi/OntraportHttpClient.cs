@@ -245,10 +245,6 @@ namespace HanumanInstitute.OntraportApi
                 {
                     throw new InvalidOperationException(Res.InvalidResponseData, ex);
                 }
-                catch (NotSupportedException ex)
-                {
-                    throw new InvalidOperationException(Res.InvalidResponseData, ex);
-                }
             }
         }
 

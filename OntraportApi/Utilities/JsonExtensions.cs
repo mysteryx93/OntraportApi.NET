@@ -173,10 +173,6 @@ namespace HanumanInstitute.OntraportApi
             {
                 throw new InvalidOperationException(Res.InvalidResponseData, ex);
             }
-            catch (NotSupportedException ex)
-            {
-                throw new InvalidOperationException(Res.InvalidResponseData, ex);
-            }
         }
 
         /// <summary>
@@ -218,10 +214,6 @@ namespace HanumanInstitute.OntraportApi
                 return await task(json.Value).ConfigureAwait(false);
             }
             catch (JsonException ex)
-            {
-                throw new InvalidOperationException(Res.InvalidResponseData, ex);
-            }
-            catch (NotSupportedException ex)
             {
                 throw new InvalidOperationException(Res.InvalidResponseData, ex);
             }

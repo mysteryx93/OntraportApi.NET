@@ -246,14 +246,14 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="indexByName">True to index by name, false to index by id.</param>
         /// <returns>A JsonElement providing raw access to the JSON data.</returns>
-        public async Task<Dictionary<int, ResponseMetadata>> GetAllMetadataAsync(CancellationToken cancellationToken = default)
+        public async Task<Dictionary<string, ResponseMetadata>> GetAllMetadataAsync(CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
                 { "format", "byId" }
             };
 
-            var result = await _apiRequest.GetAsync<Dictionary<int, ResponseMetadata>>(
+            var result = await _apiRequest.GetAsync<Dictionary<string, ResponseMetadata>>(
                 "objects/meta", query, false, cancellationToken).ConfigureAwait(false);
             return result!;
         }
@@ -319,14 +319,14 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="objectType">The object type.</param>
         /// <returns>A dictionary of sections each containing their fields.</returns>
-        public async Task<Dictionary<int, ResponseSectionFields>> SelectAllFieldsAsync(ApiObjectType objectType, CancellationToken cancellationToken = default)
+        public async Task<Dictionary<string, ResponseSectionFields>> SelectAllFieldsAsync(ApiObjectType objectType, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType },
             };
 
-            var result = await _apiRequest.GetAsync<Dictionary<int, ResponseSectionFields>>(
+            var result = await _apiRequest.GetAsync<Dictionary<string, ResponseSectionFields>>(
                 "objects/fieldeditor", query, false, cancellationToken).ConfigureAwait(false);
             return result!;
         }
