@@ -14,8 +14,8 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
                                     IUserStore<TUser>,
                                     IUserRoleStore<TUser>,
                                     IUserPasswordStore<TUser>,
-                                    IUserEmailStore<TUser>
-                                    //IUserLockoutStore<TUser>
+                                    IUserEmailStore<TUser>,
+                                    IUserLockoutStore<TUser>
         where TContact : ApiContact, IIdentityContact, new()
         where TUser : OntraportIdentityUser, new()
         where TRole : IdentityRole<string>, new()
