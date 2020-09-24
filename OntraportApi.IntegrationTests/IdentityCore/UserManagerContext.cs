@@ -11,6 +11,7 @@ using HanumanInstitute.Validators;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Moq;
+using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
 {
@@ -19,7 +20,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
     /// </summary>
     public class UserManagerContext : UserManagerContext<IdentityContact, OntraportIdentityUser, IdentityRole<string>>
     {
-        public UserManagerContext(IList<string> validRoles = null)
+        public UserManagerContext(IList<string> validRoles = null, ITestOutputHelper output = null) : base(output)
         {
             if (validRoles != null)
             {
@@ -36,6 +37,17 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         where TUser : OntraportIdentityUser, new()
         where TRole : IdentityRole<string>, new()
     {
+        private readonly ITestOutputHelper _output;
+
+        public UserManagerContext(ITestOutputHelper output = null)
+        {
+            if (output != null)
+            {
+                _output = output;
+                AppDomain.CurrentDomain.UnhandledException += (s, e) => Dispose(true);
+            }
+        }
+
         public IOptions<OntraportIdentityConfig> Config => _config ??= Options.Create(new OntraportIdentityConfig());
         private IOptions<OntraportIdentityConfig> _config;
 
@@ -69,8 +81,11 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         public IOntraportObjects OntraportObjects => _ontraportObjects ??= new OntraportObjects(HttpClient);
         private IOntraportObjects _ontraportObjects;
 
-        public OntraportHttpClient HttpClient => _httpClient ??= ConfigHelper.GetHttpClient();
+        public OntraportHttpClient HttpClient => _httpClient ??= ConfigHelper.GetHttpClient(Log);
         private OntraportHttpClient _httpClient;
+
+        public ILogger<OntraportHttpClient> Log => _log ??= new MockLogger<OntraportHttpClient>() { RecordResponses = false };
+        private ILogger<OntraportHttpClient> _log;
 
         public async Task<TUser> FindOrCreateUserAsync(string email, string password)
         {
@@ -96,6 +111,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
             {
                 if (disposing)
                 {
+                    _output?.WriteLine(Log.ToString());
                     _userStore?.Dispose();
                     _roleStore?.Dispose();
                     _userManager?.Dispose();

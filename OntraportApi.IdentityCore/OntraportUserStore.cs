@@ -73,7 +73,7 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
             // Add password hash.
             contact = new TContact()
             {
-                Email = user.NormalizedUserName,
+                Email = user.NormalizedUserName.ToLowerInvariant(), // store email as lowercase
                 IdentityPasswordHash = user.PasswordHash
                 // UserRole = user.UserRole
             };
@@ -279,7 +279,7 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
         {
             normalizedEmail.CheckNotNullOrEmpty(nameof(normalizedEmail));
 
-            var contact = await _ontraportContacts.SelectAsync(normalizedEmail, cancellationToken).ConfigureAwait(false);
+            var contact = await _ontraportContacts.SelectAsync(normalizedEmail.ToLowerInvariant(), cancellationToken).ConfigureAwait(false);
             return GetUserFromContact(contact)!;
         }
 
@@ -366,39 +366,49 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
 
         // *** IUserLockoutStore ***
 
-        public Task<DateTimeOffset?> GetLockoutEndDateAsync(TUser user, CancellationToken cancellationToken)
+        public Task<DateTimeOffset?> GetLockoutEndDateAsync(TUser user, CancellationToken _)
         {
-            throw new NotImplementedException();
+            user.CheckNotNull(nameof(user));
+            return Task.FromResult(user.LockoutEnd);
         }
 
-        public Task SetLockoutEndDateAsync(TUser user, DateTimeOffset? lockoutEnd, CancellationToken cancellationToken)
+        public Task SetLockoutEndDateAsync(TUser user, DateTimeOffset? lockoutEnd, CancellationToken _)
         {
-            throw new NotImplementedException();
+            user.CheckNotNull(nameof(user));
+            user.LockoutEnd = lockoutEnd;
+            return Task.CompletedTask;
         }
 
-        public Task<int> IncrementAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+        public Task<int> IncrementAccessFailedCountAsync(TUser user, CancellationToken _)
         {
-            throw new NotImplementedException();
+            user.CheckNotNull(nameof(user));
+            return Task.FromResult(user.AccessFailedCount++);
         }
 
-        public Task ResetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+        public Task ResetAccessFailedCountAsync(TUser user, CancellationToken _)
         {
-            throw new NotImplementedException();
+            user.CheckNotNull(nameof(user));
+            user.AccessFailedCount = 0;
+            return Task.CompletedTask;
         }
 
-        public Task<int> GetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+        public Task<int> GetAccessFailedCountAsync(TUser user, CancellationToken _)
         {
-            throw new NotImplementedException();
+            user.CheckNotNull(nameof(user));
+            return Task.FromResult(user.AccessFailedCount);
         }
 
-        public Task<bool> GetLockoutEnabledAsync(TUser user, CancellationToken cancellationToken)
+        public Task<bool> GetLockoutEnabledAsync(TUser user, CancellationToken _)
         {
-            throw new NotImplementedException();
+            user.CheckNotNull(nameof(user));
+            return Task.FromResult(user.LockoutEnabled);
         }
 
-        public Task SetLockoutEnabledAsync(TUser user, bool enabled, CancellationToken cancellationToken)
+        public Task SetLockoutEnabledAsync(TUser user, bool enabled, CancellationToken _)
         {
-            throw new NotImplementedException();
+            user.CheckNotNull(nameof(user));
+            user.LockoutEnabled = enabled;
+            return Task.CompletedTask;
         }
 
 

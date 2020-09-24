@@ -7,11 +7,19 @@ using HanumanInstitute.Validators;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using System.Net.Http;
+using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
 {
     public class UserManagerTests
     {
+        private readonly ITestOutputHelper _output;
+
+        public UserManagerTests(ITestOutputHelper output = null)
+        {
+            _output = output;
+        }
+
         private readonly string[] _roles = new[] { "Admin", "Manager" };
         //private readonly string[] _roleAdmin = new[] { "Admin" };
 
@@ -31,7 +39,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         [InlineData("0.5")]
         public async Task FindByIdAsync_InvalidInt_ThrowsException(string contactId)
         {
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
 
             Task<OntraportIdentityUser> Act() => c.UserManager.FindByIdAsync(contactId.ToStringInvariant());
 
@@ -43,7 +51,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         [InlineData(ContactIdInvalid)]
         public async Task FindByIdAsync_NoPassword_ReturnsNull(int contactId)
         {
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
 
             var result = await c.UserManager.FindByIdAsync(contactId.ToStringInvariant()).ConfigureAwait(false);
 
@@ -54,7 +62,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         [InlineData(ContactIdWithPassword)]
         public async Task FindByIdAsync_WithPassword_ReturnsIdentity(int contactId)
         {
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
 
             var result = await c.UserManager.FindByIdAsync(contactId.ToStringInvariant()).ConfigureAwait(false);
 
@@ -66,7 +74,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         [InlineData(ContactEmailInvalid)]
         public async Task FindByNameAsync_EmailNoPassword_ReturnsNull(string email)
         {
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
 
             var result = await c.UserManager.FindByNameAsync(email).ConfigureAwait(false);
 
@@ -77,7 +85,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         [InlineData(ContactEmailWithPassword)]
         public async Task FindByNameAsync_EmailWithPassword_ReturnsIdentity(string email)
         {
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
 
             var result = await c.UserManager.FindByNameAsync(email).ConfigureAwait(false);
 
@@ -88,7 +96,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         [InlineData(ContactEmailWithPassword)]
         public async Task FindByNameAsync_UpperCaseEmailWithPassword_ReturnsIdentity(string email)
         {
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
 
             var result = await c.UserManager.FindByNameAsync(email.ToUpperInvariant()).ConfigureAwait(false);
 
@@ -100,7 +108,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         [InlineData(ContactEmailInvalid)]
         public async Task FindByEmailAsync_EmailNoPassword_ReturnsNull(string email)
         {
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
 
             var result = await c.UserManager.FindByEmailAsync(email).ConfigureAwait(false);
 
@@ -111,7 +119,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         [InlineData(ContactEmailWithPassword)]
         public async Task FindByEmailAsync_EmailWithPassword_ReturnsIdentity(string email)
         {
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
 
             var result = await c.UserManager.FindByEmailAsync(email).ConfigureAwait(false);
 
@@ -122,7 +130,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         [InlineData(ContactEmailWithPassword)]
         public async Task FindByEmailAsync_UpperCaseEmailWithPassword_ReturnsIdentity(string email)
         {
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
 
             var result = await c.UserManager.FindByEmailAsync(email.ToUpperInvariant()).ConfigureAwait(false);
 
@@ -133,7 +141,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         public async Task CreateAsync_NewEmail_IdReturned()
         {
             const string NewEmail = "CreateAsyncTest@test.com";
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
             var exist = await c.UserManager.FindByNameAsync(NewEmail);
             if (exist != null)
             {
@@ -155,7 +163,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         public async Task CreateAsync_ExistingEmail_ReturnsFailure()
         {
             const string NewEmail = "CreateAsyncDuplicate@test.com";
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
 
             var user = new OntraportIdentityUser()
             {
@@ -171,7 +179,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         public async Task DeleteAsync_ValidId_LeaveContactAndRemovePassword()
         {
             const string NewEmail = "DeleteAsync@test.com";
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
             var user = await c.FindOrCreateUserAsync(NewEmail, Password);
 
             var result = await c.UserManager.DeleteAsync(user);
@@ -186,7 +194,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         public async Task DeleteAsync_InvalidId_ThrowsException()
         {
             const string NewEmail = "DeleteInvalid@test.com";
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
             var user = new OntraportIdentityUser()
             {
                 Id = int.MaxValue,
@@ -203,8 +211,8 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         public async Task UpdateAsync_ExistingEmail_ReturnsFailure()
         {
             const string NewEmail = "UpdateAsync@test.com";
-            using var c = new UserManagerContext(_roles);
-            var user = await c.UserManager.FindByEmailAsync(NewEmail);
+            using var c = new UserManagerContext(_roles, _output);
+            var user = await c.FindOrCreateUserAsync(NewEmail, Password);
 
             await c.UserManager.ChangePasswordAsync(user, Password, Password);
             var result = await c.UserManager.UpdateAsync(user);
@@ -218,7 +226,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         public async Task AddToRoleAsync_Valid_IsInRole(string role)
         {
             const string NewEmail = "AddToRoleAsync@test.com";
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
             var user = await c.FindOrCreateUserAsync(NewEmail, Password);
 
             var result = await c.UserManager.AddToRoleAsync(user, role);
@@ -233,7 +241,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         public async Task AddToRoleAsync_Invalid_IsInRole(string role)
         {
             const string NewEmail = "AddToRoleAsync@test.com";
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
             var user = await c.FindOrCreateUserAsync(NewEmail, Password);
 
             Task Act() => c.UserManager.AddToRoleAsync(user, role);
@@ -247,7 +255,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         public async Task RemoveFromRoleAsync_Valid_IsInRole(string role)
         {
             const string NewEmail = "AddToRoleAsync@test.com";
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
             var user = await c.FindOrCreateUserAsync(NewEmail, Password);
             await c.UserManager.AddToRoleAsync(user, role);
 
@@ -262,7 +270,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         public async Task GetRolesAsync_TwoRoles_ReturnsBoth()
         {
             const string NewEmail = "AddToRoleAsync@test.com";
-            using var c = new UserManagerContext(_roles);
+            using var c = new UserManagerContext(_roles, _output);
             var user = await c.FindOrCreateUserAsync(NewEmail, Password);
             await c.UserManager.AddToRoleAsync(user, _roles[0]);
             await c.UserManager.AddToRoleAsync(user, _roles[1]);

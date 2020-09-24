@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using HanumanInstitute.OntraportApi.Converters;
 using HanumanInstitute.OntraportApi.IdentityCore;
 using HanumanInstitute.OntraportApi.Models;
@@ -15,11 +14,33 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         /// </summary>
         public ApiPropertyString IdentityPasswordHashField => _identityPasswordHashField ??= new ApiPropertyString(this, IdentityPasswordHashKey);
         private ApiPropertyString _identityPasswordHashField;
-        public const string IdentityPasswordHashKey = "f1824";
+        public virtual string IdentityPasswordHashKey => "f1824";
         /// <summary>
         /// Gets or sets the login password hash.
         /// </summary>
         public string IdentityPasswordHash { get => IdentityPasswordHashField.Value; set => IdentityPasswordHashField.Value = value; }
+
+        /// <summary>
+        /// Returns a ApiProperty object to get or set the date and time, in UTC, when any user lockout ends.
+        /// </summary>
+        public ApiPropertyDateTime IdentityLockoutEndField => _identityLockoutEndField ??= new ApiPropertyDateTime(this, IdentityLockoutEndKey);
+        private ApiPropertyDateTime _identityLockoutEndField;
+        public virtual string IdentityLockoutEndKey => "f1834";
+        /// <summary>
+        /// Gets or sets the date and time, in UTC, when any user lockout ends.
+        /// </summary>
+        public DateTimeOffset? IdentityLockoutEnd { get => IdentityLockoutEndField.Value; set => IdentityLockoutEndField.Value = value; }
+
+        /// <summary>
+        /// Returns a ApiProperty object to get or set the number of failed login attempts for the current user.
+        /// </summary>
+        public ApiProperty<int> IdentityAccessFailedCountField => _identityAccessFailedCountField ??= new ApiProperty<int>(this, IdentityAccessFailedCountKey);
+        private ApiProperty<int> _identityAccessFailedCountField;
+        public virtual string IdentityAccessFailedCountKey => "f1835";
+        /// <summary>
+        /// Gets or sets the number of failed login attempts for the current user.
+        /// </summary>
+        public int? IdentityAccessFailedCount { get => IdentityAccessFailedCountField.Value; set => IdentityAccessFailedCountField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set whether the user is an admin.
@@ -39,7 +60,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         private ApiPropertyBool _isManagerField;
         public const string IsManagerKey = "f1826";
         public bool? IsManager { get => IsManagerField.Value; set => IsManagerField.Value = value; }
-
+        int IIdentityContact.IdentityAccessFailedCount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public bool GetRole(string roleName)
         {
@@ -82,6 +103,14 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
             {
                 IsManager = value;
             }
+        }
+
+        /// <summary>
+        /// Gets or sets a flag indicating if the user could be locked out. Users can be locked out unless they are admins.
+        /// </summary>
+        public bool IdentityLockoutEnabled {
+            get => IsAdmin == false;
+            set { } 
         }
     }
 }

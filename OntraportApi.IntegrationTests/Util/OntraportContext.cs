@@ -16,7 +16,11 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
 
         public OntraportContext(ITestOutputHelper output = null)
         {
-            _output = output;
+            if (output != null)
+            {
+                _output = output;
+                AppDomain.CurrentDomain.UnhandledException += (s, e) => Dispose(true);
+            }
         }
 
         public ILogger<OntraportHttpClient> Log => _log ??= new MockLogger<OntraportHttpClient>();
@@ -33,11 +37,6 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
 
         private T SetupOntra()
         {
-            if (_output != null)
-            {
-                AppDomain.CurrentDomain.UnhandledException += (s, e) => Dispose(true);
-            }
-
             if (typeof(T).IsAssignableFromGeneric(typeof(OntraportBaseCustomObject<,>)))
             {
                 return (T)Activator.CreateInstance(typeof(T), HttpClient, OntraObjects)!;
