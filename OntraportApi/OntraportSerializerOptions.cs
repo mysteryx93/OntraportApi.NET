@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using HanumanInstitute.OntraportApi.Converters;
 
@@ -16,6 +15,7 @@ namespace HanumanInstitute.OntraportApi
         {
             var result = new JsonSerializerOptions()
             {
+                PropertyNameCaseInsensitive = false,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 IgnoreNullValues = true
             };

@@ -230,10 +230,6 @@ namespace HanumanInstitute.OntraportApi
                 // Parse response.
                 try
                 {
-                    var options = new JsonSerializerOptions()
-                    {
-                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                    };
                     var result = await JsonSerializer.DeserializeAsync<ApiResponse<T>>(responseStream, OntraportSerializerOptions.Default, CancellationToken.None).ConfigureAwait(false);
                     if (result.Code != 0)
                     {

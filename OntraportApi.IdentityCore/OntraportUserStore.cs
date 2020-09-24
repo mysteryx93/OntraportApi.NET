@@ -10,7 +10,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace HanumanInstitute.OntraportApi.IdentityCore
 {
-    public class OntraportUserStore<TContact, TUser, TRole> : IUserStore<TUser>, IUserPasswordStore<TUser>, IUserEmailStore<TUser>, IUserRoleStore<TUser>
+    public class OntraportUserStore<TContact, TUser, TRole> :
+                                    IUserStore<TUser>,
+                                    IUserRoleStore<TUser>,
+                                    IUserPasswordStore<TUser>,
+                                    IUserEmailStore<TUser>
+                                    //IUserLockoutStore<TUser>
         where TContact : ApiContact, IIdentityContact, new()
         where TUser : OntraportIdentityUser, new()
         where TRole : IdentityRole<string>, new()
@@ -26,7 +31,7 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
 
         private static TUser? GetUserFromContact(TContact? contact)
         {
-            if (contact?.IdentityPasswordHash != null)
+            if (!string.IsNullOrEmpty(contact?.IdentityPasswordHash))
             {
                 var result = new TUser()
                 {
@@ -60,7 +65,7 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
 
             // Check if user account already exists.
             var contact = await _ontraportContacts.SelectAsync(user.NormalizedUserName, cancellationToken).ConfigureAwait(false);
-            if (string.IsNullOrEmpty(contact?.IdentityPasswordHash))
+            if (!string.IsNullOrEmpty(contact?.IdentityPasswordHash))
             {
                 return IdentityResult.Failed(new IdentityError() { Description = "There is already an account with that email address." });
             }
@@ -74,7 +79,7 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
             };
 
             var newContact = await _ontraportContacts.CreateOrMergeAsync(contact.GetChanges(), cancellationToken).ConfigureAwait(false);
-            if (newContact.Id.HasValue)
+            if (newContact?.Id != null)
             {
                 // Get the ID of the updated contact.
                 user.Id = newContact.Id.Value;
@@ -100,6 +105,15 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
             {
                 IdentityPasswordHash = string.Empty
             };
+
+            // Remove roles.
+            var roles = await GetRolesAsync(user, cancellationToken).ConfigureAwait(false);
+            foreach (var item in roles.ToList())
+            {
+                await RemoveFromRoleAsync(user, item, cancellationToken).ConfigureAwait(false);
+            }
+
+            // Update contact.
             var newContact = await _ontraportContacts.UpdateAsync(user.Id, contact.GetChanges(), cancellationToken).ConfigureAwait(false);
             if (newContact == null)
             {
@@ -179,27 +193,12 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
         {
             user.CheckNotNull(nameof(user));
             return Task.FromResult(user.Id.ToStringInvariant());
-            //if (user.Id <= 0)
-            //{
-            //    // Fetch ID from database.
-            //    user.NormalizedUserName.CheckNotNull(nameof(user.NormalizedUserName));
-            //    var contact = await _ontraportContacts.SelectAsync(user.NormalizedUserName, cancellationToken).ConfigureAwait(false);
-            //    if (contact?.Id != null)
-            //    {
-            //        user.Id = contact.Id.Value;
-            //    }
-            //    else
-            //    {
-            //        throw new InvalidOperationException("Could not find contact with email '{0}'.");
-            //    }
-            //}
-            //return user.Id.ToStringInvariant();
         }
 
         public Task<string> GetUserNameAsync(TUser user, CancellationToken cancellationToken)
         {
             user.CheckNotNull(nameof(user));
-            return Task.FromResult(user.NormalizedUserName);
+            return Task.FromResult(user.UserName);
         }
 
         public Task SetNormalizedUserNameAsync(TUser user, string normalizedName, CancellationToken cancellationToken)
@@ -294,6 +293,7 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
         {
             user.CheckNotNull(nameof(user));
             normalizedEmail.CheckNotNullOrEmpty(nameof(normalizedEmail));
+
             user.NormalizedEmail = normalizedEmail;
             return Task.CompletedTask;
         }
@@ -360,6 +360,44 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
         public virtual Task<IList<TUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
         {
             // It can't be done here. If you want the list, you must query the database manually.
+            throw new NotImplementedException();
+        }
+
+
+        // *** IUserLockoutStore ***
+
+        public Task<DateTimeOffset?> GetLockoutEndDateAsync(TUser user, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetLockoutEndDateAsync(TUser user, DateTimeOffset? lockoutEnd, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> IncrementAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task ResetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> GetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> GetLockoutEnabledAsync(TUser user, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetLockoutEnabledAsync(TUser user, bool enabled, CancellationToken cancellationToken)
+        {
             throw new NotImplementedException();
         }
 
