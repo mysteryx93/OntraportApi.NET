@@ -47,7 +47,7 @@ namespace HanumanInstitute.OntraportApi
         {
             if (string.IsNullOrEmpty(PrimarySearchKey)) { throw new InvalidOperationException(Res.InvalidMethodForObjectType); }
 
-            var result = await SelectAsync(new ApiSearchOptions().AddCondition(PrimarySearchKey, "=", keyValue), cancellationToken: cancellationToken).ConfigureAwait(false);
+            var result = await SelectAsync(new ApiSearchOptions().AddCondition(PrimarySearchKey!, "=", keyValue), cancellationToken: cancellationToken).ConfigureAwait(false);
             return result.FirstOrDefault();
         }
 

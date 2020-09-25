@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using HanumanInstitute.Validators;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace HanumanInstitute.OntraportApi.IdentityCore
 {
@@ -32,8 +31,6 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
         {
             Roles.AddRange(roles);
             return this;
-            IServiceCollection services;
-            services.AddOptions<OntraportIdentityConfig>().Configure(x => x.AddRole("Admin"));
         }
     }
 }

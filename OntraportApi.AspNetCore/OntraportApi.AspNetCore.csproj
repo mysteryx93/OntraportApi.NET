@@ -3,18 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Etienne Charland</Authors>
-    <Company>Spiritual Self Transformation</Company>
-    <Description>Registers OntraportApi.NET in an ASP.NET Core Web project to add API-managed marketing automation</Description>
+    <Company>Hanuman Institute</Company>
+    <Description>Registers OntraportApi in an ASP.NET Core Web project to add API-managed marketing automation</Description>
     <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
-    <Copyright>Etienne Charland, 2019</Copyright>
-    <PackageProjectUrl>https://github.com/mysteryx93/EmergenceGuardian.OntraportApi</PackageProjectUrl>
-    <PackageTags>Ontraport API marketing automation email sender smtp</PackageTags>
+    <Copyright>Copyright © 2019-2020 Etienne Charland</Copyright>
+    <PackageProjectUrl>https://github.com/mysteryx93/OntraportApi.NET/</PackageProjectUrl>
+    <PackageTags>Ontraport API marketing automation email sender smtp .net</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.2</Version>
+    <Version>1.2</Version>
     <PackageReleaseNotes>https://github.com/mysteryx93/OntraportApi.NET/releases</PackageReleaseNotes>
     <RootNamespace>HanumanInstitute.OntraportApi.AspNetCore</RootNamespace>
     <NeutralLanguage>en</NeutralLanguage>
     <Nullable>enable</Nullable>
+    <Product>OntraportApi</Product>
   </PropertyGroup>
 
   <ItemGroup>

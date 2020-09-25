@@ -33,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\HanumanInstitute.Validators\Validators\HanumanInstitute.Validators.csproj" />
     <ProjectReference Include="..\OntraportApi.IdentityCore\OntraportApi.IdentityCore.csproj" />
     <ProjectReference Include="..\OntraportApi\OntraportApi.csproj" />
   </ItemGroup>

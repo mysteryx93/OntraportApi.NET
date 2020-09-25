@@ -4,6 +4,18 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>HanumanInstitute.OntraportApi.IdentityCore</RootNamespace>
     <Nullable>enable</Nullable>
+    <PackageId>OntraportApi.IdentityCore</PackageId>
+    <Version>1.2</Version>
+    <Authors>Etienne Charland</Authors>
+    <Company>Hanuman Institute</Company>
+    <Product>OntraportApi</Product>
+    <Description>An Ontraport Membership Manager for Identity Framework Core</Description>
+    <Copyright>Copyright © 2019-2020 Etienne Charland</Copyright>
+    <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/mysteryx93/OntraportApi.NET/</PackageProjectUrl>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageTags>Ontraport API marketing automation email sender smtp .net</PackageTags>
+    <PackageReleaseNotes>https://github.com/mysteryx93/OntraportApi.NET/releases</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,7 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\HanumanInstitute.Validators\Validators\HanumanInstitute.Validators.csproj" />
     <ProjectReference Include="..\OntraportApi\OntraportApi.csproj" />
   </ItemGroup>
 
