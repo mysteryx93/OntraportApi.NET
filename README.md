@@ -3,7 +3,7 @@ Strongly-Typed .NET API for Ontraport (Marketing Automation System)
 
 Fully supports .NET Core and Dependency Injection.
 
-I've spent a lot of time to develop this professional-grade framework and am making it available for free. However, **[please subscribe to Ontraport via my affiliate link to support this project!](https://ontraport.com/?orid=480125&utm_source=referral&utm_medium=inapp&utm_campaign=refer&utm_term=ShareTheLove&utm_content=ontraport)**
+I've spent a lot of time to develop this enterprise-grade framework and am making it available for free. However, **[please subscribe to Ontraport via my affiliate link to support this project!](https://ontraport.com/?orid=480125&utm_source=referral&utm_medium=inapp&utm_campaign=refer&utm_term=ShareTheLove&utm_content=ontraport)**
 
 [What is Ontraport?](#what-is-ontraport)  
 [Sample Code](#sample-code)  
