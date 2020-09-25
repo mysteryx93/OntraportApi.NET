@@ -152,6 +152,8 @@ Add this to appsettings.json
 }
 ```
 
+Or even beter, use Secret Manager to store sensitive configuration keys!
+
 #### Adding Polly
 
 For better reliability of communication,  you can use [Polly](http://www.thepollyproject.org/) to automatically retry API requests on timeout or failure.
@@ -309,7 +311,7 @@ You will probably want to use a sandbox Ontraport account for development. One p
 
 To solve the problem, as of v1.2, you can now create a class deriving from your custom ApiContact class that overrides the field IDs.
 
-In previous versions, you would write custom fields using this
+In previous versions, you would write custom fields like this
 
 ```c#
 public const string Custom1Key = "f1234";
@@ -349,6 +351,8 @@ Now, when registering services in Startup.cs, you can switch between these two r
 services.AddTransient<IOntraportContacts, OntraportContacts<IdentityContact>>();
 services.AddTransient<IOntraportContacts, OntraportContacts<IdentityContactDev>>();
 ```
+
+Of course, also make sure to switch AppId and ApiKey configuration accordingly.
 
 
 ## <a name="ontraport-membership-provider"/>Ontraport Membership Provider for Identity Framework Core
