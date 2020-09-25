@@ -5,6 +5,19 @@ Fully supports .NET Core and Dependency Injection.
 
 If you want to support this project, [subscribe to Ontraport via my affiliate link.](https://ontraport.com/?orid=480125&utm_source=referral&utm_medium=inapp&utm_campaign=refer&utm_term=ShareTheLove&utm_content=ontraport)
 
+[What is Ontraport?](#what-is-ontraport)
+[Sample Code](#sample-code)
+[Supported Classes](#supported-classes)
+[How to Configure in ASP.NET Core](#how-to-configure)
+[Posting SmartForms](#posting-smartforms)
+[Adding Custom Fields](#adding-custom-fields)
+[Adding Strongly-Typed Support for Custom Objects](#custom-objects)
+[Switching Between Live and Dev Ontraport Accounts](#switching-accounts)
+[Unit Testing the Source Code](#unit-testing)
+[About The Author](#about)
+
+
+<a name="what-is-ontraport"/>
 ## What is Ontraport?
 
 Ontraport is essentially the engine that powers all the interactions between you and your customers online — in ways that wouldn’t be possible manually.
@@ -13,6 +26,7 @@ It does everything related to email marketing and automation for your business, 
 
 Their [API documentation is available here](https://api.ontraport.com/doc/), but it is very complex and difficult to use manually. This library makes it very simple, allowing you to focus on your .NET web application while letting Ontraport manage the business-side of it and all email communications campaigns.
 
+<a name="sample-code"/>
 ## Sample Code
 
 Return the name and birthday of a contact by email.
@@ -71,6 +85,7 @@ public async Task LogTransaction(string email, string productName, int quantity)
 }
 ```    
 
+<a name="supported-classes"/>
 ## Supported Classes
 
 Fully-typed API and classes for all main documented classes (and a few more), with very good documentation for Intellisense.
@@ -100,7 +115,7 @@ All data formatting and parsing, such as Unix Epoch date time format to DateTime
 
 [Ontraport supports many other (undocumented) objects](https://api.ontraport.com/doc/#accessible-objects) which can be used via IOntraportObjects.
 
-
+<a name="how-to-configure"/>
 ## How to Configure in ASP.NET Core
 
 Add *OntraportApi* and *OntraportApi.AspNetCore* to your project via NuGet.
@@ -140,6 +155,7 @@ services.AddHttpClient<OntraportHttpClient>()
 No problem, [this is the only class](https://github.com/mysteryx93/OntraportApi.NET/blob/master/OntraportApi.AspNetCore/OntraportApiServiceCollectionExtensions.cs) that depends on .NET Core so you can easily rewrite it for whatever technology you use.
 
 
+<a name="posting-smartforms"/>
 ## Posting SmartForms
 
 In many cases, a simpler way to send data to Ontraport is to simply submit a SmartForm. Then, you can perform additional actions in your form via Ontraport. You can obtain the form id and custom field names (that look like f0000) by clicking Publish and looking at the HTML view.
@@ -163,7 +179,7 @@ _ontraPostForms.ServerPost("my-form-id", new ApiContact()
 }.GetChanges());
 ```
 
-
+<a name="adding-custom-fields"/>
 ## Adding Custom Fields
 
 Simple way: you can access all custom properties using the Data property of the object returned by the API. It exposes all raw data returned from Ontraport.
@@ -177,17 +193,17 @@ public class ApiCustomContact : ApiContact
 {
     public ApiPropertyString Custom1Field => _custom1Field ?? (_custom1Field = new ApiPropertyString(this, Custom1Key));
     private ApiPropertyString _custom1Field;
-    public const string Custom1Key = "f1234";
+    public virtual string Custom1Key => "f1234";
     public string Custom1 { get => Custom1Field.Value; set => Custom1Field.Value = value; }
 
     public ApiPropertyDateTime Custom2Field => _custom2Field ?? (_custom2Field = new ApiPropertyDateTime(this, Custom2Key));
     private ApiPropertyDateTime _custom2Field;
-    public const string Custom2Key = "f2222";
+    public virtual string Custom2Key => "f2222";
     public DateTimeOffset? Custom2 { get => Custom2Field.Value; set => Custom2Field.Value = value; }
 }
 ```
 
-Then, use *OntraportContacts\<ApiCustomContact\>* instead of *OntraportContacts<ApiContact>*. You may want to create this class for convenience.
+Then, use *OntraportContacts\<ApiCustomContact\>* instead of *OntraportContacts<ApiContact>*.
 
 ```c#
 public class OntraportContacts : OntraportContacts<ApiCustomContact>, IOntraportContacts
@@ -196,7 +212,11 @@ public class OntraportContacts : OntraportContacts<ApiCustomContact>, IOntraport
         base(apiRequest, ontraObjects)
     { }
 }
+```
 
+You may want to declare the IOntraportContacts interface for convenience.
+
+```c#
 public interface IOntraportContacts : IOntraportContacts<ApiCustomContact>
 { }
 ```
@@ -206,7 +226,7 @@ Don't forget to register your new class in Startup.cs
 services.AddTransient<IOntraportContacts, OntraportContacts>();
 ```
     
-Supprted ApiProperty types (and you can easily implement your own parser):
+Supprted ApiProperty types (and you can easily implement your own parsers):
 - ApiProperty\<int\>
 - ApiProperty\<decimal\>
 - ApiProperty\<float\>
@@ -217,6 +237,7 @@ Supprted ApiProperty types (and you can easily implement your own parser):
 - ApiPropertyIntEnum\<T\> (Numeric field parsed as enumeration of type T)
 - ApiPropertyStringEnum\<T\> (string parsed as enumeration of type T)
 
+<a name="custom-objects"/>
 ## Adding Strongly-Typed Support for Custom Objects
 
 Simple way: use OntraportObject with the ObjectTypeId of your custom object. It takes an ObjectType parameter of type ApiCustomObject but you can pass any integer like this: (ApiObjectType)10000. Custom Objects have an ObjectTypeId above 10000.
@@ -261,14 +282,60 @@ public class ApiRecording : ApiCustomObjectBase
 {
     public ApiProperty<int> Custom1Field => _custom1Field ?? (_custom1Field = new ApiProperty<int>(this, Custom1Key));
     private ApiProperty<int> _custom1Field;
-    public const string Custom1Key = "f3333";
+    public virtual string Custom1Key => "f3333";
     public int? Custom1 { get => Custom1Field.Value; set => Custom1Field.Value = value; }
 }
 ```
 
-That's it.
+<a name="switching-accounts"/>
+## Switching Between Live and Dev Ontraport Accounts
 
+You will probably want to use a sandbox Ontraport account for development. One problem is that all custom fields will have a different ID on your live and development servers!
 
+To solve the problem, you can now create a class deriving from your custom ApiContact class that overrides the field IDs.
+
+In previous versions, you would write custom fields using this
+
+```c#
+public const string Custom1Key = "f1234";
+```
+
+Replace those lines with
+
+```c#
+public virtual string Custom1Key => "f1234";
+```
+
+Create your classes like this
+
+```c#
+public class IdentityContactDev : IdentityContact
+{
+    public override string IdentityAccessFailedCountKey => "f0000";
+    public override string IdentityLockoutEndKey => "f1111";
+    public override string IdentityPasswordHashKey => "f2222";
+}
+
+public interface IOntraportContacts : IOntraportContacts<IdentityContact>
+{ }
+
+public class OntraportContacts<TOverride> : OntraportContacts<IdentityContact, TOverride>, IOntraportContacts
+    where TOverride : IdentityContact
+{
+    public OntraportContacts(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) :
+        base(apiRequest, ontraObjects)
+    { }
+}
+```
+
+Now, when registering services in Startup.cs, you can switch between these two registrations depending on whether you want to run on the live or development server!
+
+```c#
+services.AddTransient<IOntraportContacts, OntraportContacts<IdentityContact>>();
+services.AddTransient<IOntraportContacts, OntraportContacts<IdentityContactDev>>();
+```
+
+<a name="unit-testing"/>
 ## Unit Testing the Source Code
 
 DO NOT RUN TESTS ON YOUR LIVE ONTRAPORT ACCOUNT
@@ -285,6 +352,7 @@ dotnet user-secrets set OntraportAppId ""your-app-id-here""
 dotnet user-secrets set OntraportApiKey ""your-api-key-here""");
 ```
  
+<a name="about"/>
 ## About The Author
 
 [Etienne Charland](https://www.spiritualselftransformation.com), known as the Emergence Guardian, helps starseeds reconnect with their soul power to accomplish the purpose 
