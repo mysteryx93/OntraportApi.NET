@@ -3,7 +3,7 @@ Strongly-Typed .NET API for Ontraport (Marketing Automation System)
 
 Fully supports .NET Core and Dependency Injection.
 
-If you want to support this project, [subscribe to Ontraport via my affiliate link.](https://ontraport.com/?orid=480125&utm_source=referral&utm_medium=inapp&utm_campaign=refer&utm_term=ShareTheLove&utm_content=ontraport)
+I've spent a lot of time to develop this professional-grade framework and am making it available for free. However, [please subscribe to Ontraport via my affiliate link to support this project!](https://ontraport.com/?orid=480125&utm_source=referral&utm_medium=inapp&utm_campaign=refer&utm_term=ShareTheLove&utm_content=ontraport)
 
 [What is Ontraport?](#what-is-ontraport)  
 [Sample Code](#sample-code)  
@@ -13,6 +13,7 @@ If you want to support this project, [subscribe to Ontraport via my affiliate li
 [Adding Custom Fields](#adding-custom-fields)  
 [Adding Strongly-Typed Support for Custom Objects](#custom-objects)  
 [Switching Between Live and Dev Ontraport Accounts](#switching-accounts)  
+[Ontraport Membership Provider for Identity Framework Core](#ontraport-membership-provider)  
 [Unit Testing the Source Code](#unit-testing)  
 [About The Author](#about)  
 
@@ -24,6 +25,12 @@ Ontraport is essentially the engine that powers all the interactions between you
 It does everything related to email marketing and automation for your business, just like InfusionSoft/Keap, but it's cheaper and more user-friendly.
 
 Their [API documentation is available here](https://api.ontraport.com/doc/), but it is very complex and difficult to use manually. This library makes it very simple, allowing you to focus on your .NET web application while letting Ontraport manage the business-side of it and all email communications campaigns.
+
+Your .NET application can combine a private database with Ontraport. In this case, you end up with two databases, and you have to be careful to keep both databases in sync, especially if users change their email addresses in Ontraport or you merge two duplicate records of a same user.
+
+Another option is to store all your data in Ontraport, if your data structures are simple enough and if you don't mind the performance cost of fetching all the data via API requests. For a shopping-cart type of application, where most of the data is stored in Ontraport anyway, this is the best option and you don't need a local database.
+
+If you do not use a local database, I've created a custom Identity Framework Membership Provider for Ontraport.
 
 
 ## <a name="sample-code"/>Sample Code
@@ -334,6 +341,9 @@ services.AddTransient<IOntraportContacts, OntraportContacts<IdentityContactDev>>
 ```
 
 
+## <a name="ontraport-membership-provider"/>Ontraport Membership Provider for Identity Framework Core
+
+
 ## <a name="unit-testing"/>Unit Testing the Source Code
 
 DO NOT RUN TESTS ON YOUR LIVE ONTRAPORT ACCOUNT
@@ -357,3 +367,5 @@ dotnet user-secrets set OntraportApiKey ""your-api-key-here""");
 they came here to do. [You can read his book at Satrimono Publishing.](https://satrimono.com/) Warning: non-geek zone.
 
 You may also be interested in the [Natural Grounding Player, Yin Media Encoder, 432hz Player, Powerliminals Player, and Audio Video Muxer.](https://github.com/mysteryx93/NaturalGroundingPlayer)
+
+I've spent a lot of time to develop this professional-grade framework and am making it available for free. However, [please subscribe to Ontraport via my affiliate link to support this project!](https://ontraport.com/?orid=480125&utm_source=referral&utm_medium=inapp&utm_campaign=refer&utm_term=ShareTheLove&utm_content=ontraport)
