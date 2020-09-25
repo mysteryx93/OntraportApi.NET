@@ -2,7 +2,7 @@ OntraportApi.NET
 
 What's New
 
-v1.1
+v1.2
 - Added CancellationToken option to all requests
 - Added the ability to override custom ApiContact (and custom objects) field members to allow switching between live and development Ontraport accounts (where field IDs are different)
 - Added Nullables annotations
