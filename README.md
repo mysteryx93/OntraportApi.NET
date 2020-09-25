@@ -364,7 +364,7 @@ If you are using Ontraport as your main database engine, you can use .NET Identi
 **Step 2:** Create a custom Contact class that derives from ApiContact and implements IIdentityContact. [Sample.](https://github.com/mysteryx93/OntraportApi.NET/blob/master/OntraportApi.IntegrationTests/IdentityCore/IdentityContact.cs)  
 Create matching custom fields in your Ontraport account.
 
-**Step 3 (optional):** Create your own ApplicationIdentityUser and/or ApplicationIdentityRole that derive from OntraportIdentityUser and IdentityRole<string>.
+**Step 3 (optional):** Create your own ApplicationIdentityUser and/or ApplicationIdentityRole that derive from OntraportIdentityUser and IdentityRole&lt;string>.
 
 **Step 4:** Register services in Startup.cs
 
