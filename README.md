@@ -5,20 +5,19 @@ Fully supports .NET Core and Dependency Injection.
 
 If you want to support this project, [subscribe to Ontraport via my affiliate link.](https://ontraport.com/?orid=480125&utm_source=referral&utm_medium=inapp&utm_campaign=refer&utm_term=ShareTheLove&utm_content=ontraport)
 
-[What is Ontraport?](#what-is-ontraport)
-[Sample Code](#sample-code)
-[Supported Classes](#supported-classes)
-[How to Configure in ASP.NET Core](#how-to-configure)
-[Posting SmartForms](#posting-smartforms)
-[Adding Custom Fields](#adding-custom-fields)
-[Adding Strongly-Typed Support for Custom Objects](#custom-objects)
-[Switching Between Live and Dev Ontraport Accounts](#switching-accounts)
-[Unit Testing the Source Code](#unit-testing)
-[About The Author](#about)
+[What is Ontraport?](#what-is-ontraport)  
+[Sample Code](#sample-code)  
+[Supported Classes](#supported-classes)  
+[How to Configure in ASP.NET Core](#how-to-configure)  
+[Posting SmartForms](#posting-smartforms)  
+[Adding Custom Fields](#adding-custom-fields)  
+[Adding Strongly-Typed Support for Custom Objects](#custom-objects)  
+[Switching Between Live and Dev Ontraport Accounts](#switching-accounts)  
+[Unit Testing the Source Code](#unit-testing)  
+[About The Author](#about)  
 
 
-<a name="what-is-ontraport"/>
-## What is Ontraport?
+## <a name="what-is-ontraport"/>What is Ontraport?
 
 Ontraport is essentially the engine that powers all the interactions between you and your customers online — in ways that wouldn’t be possible manually.
 
@@ -26,8 +25,8 @@ It does everything related to email marketing and automation for your business, 
 
 Their [API documentation is available here](https://api.ontraport.com/doc/), but it is very complex and difficult to use manually. This library makes it very simple, allowing you to focus on your .NET web application while letting Ontraport manage the business-side of it and all email communications campaigns.
 
-<a name="sample-code"/>
-## Sample Code
+
+## <a name="sample-code"/>Sample Code
 
 Return the name and birthday of a contact by email.
 
@@ -85,8 +84,8 @@ public async Task LogTransaction(string email, string productName, int quantity)
 }
 ```    
 
-<a name="supported-classes"/>
-## Supported Classes
+
+## <a name="supported-classes"/>Supported Classes
 
 Fully-typed API and classes for all main documented classes (and a few more), with very good documentation for Intellisense.
 - CampaignBuilderItems
@@ -115,8 +114,8 @@ All data formatting and parsing, such as Unix Epoch date time format to DateTime
 
 [Ontraport supports many other (undocumented) objects](https://api.ontraport.com/doc/#accessible-objects) which can be used via IOntraportObjects.
 
-<a name="how-to-configure"/>
-## How to Configure in ASP.NET Core
+
+## <a name="how-to-configure"/>How to Configure in ASP.NET Core
 
 Add *OntraportApi* and *OntraportApi.AspNetCore* to your project via NuGet.
 
@@ -155,8 +154,7 @@ services.AddHttpClient<OntraportHttpClient>()
 No problem, [this is the only class](https://github.com/mysteryx93/OntraportApi.NET/blob/master/OntraportApi.AspNetCore/OntraportApiServiceCollectionExtensions.cs) that depends on .NET Core so you can easily rewrite it for whatever technology you use.
 
 
-<a name="posting-smartforms"/>
-## Posting SmartForms
+## <a name="posting-smartforms"/>Posting SmartForms
 
 In many cases, a simpler way to send data to Ontraport is to simply submit a SmartForm. Then, you can perform additional actions in your form via Ontraport. You can obtain the form id and custom field names (that look like f0000) by clicking Publish and looking at the HTML view.
 
@@ -179,8 +177,8 @@ _ontraPostForms.ServerPost("my-form-id", new ApiContact()
 }.GetChanges());
 ```
 
-<a name="adding-custom-fields"/>
-## Adding Custom Fields
+
+## <a name="adding-custom-fields"/>Adding Custom Fields
 
 Simple way: you can access all custom properties using the Data property of the object returned by the API. It exposes all raw data returned from Ontraport.
 
@@ -237,8 +235,8 @@ Supprted ApiProperty types (and you can easily implement your own parsers):
 - ApiPropertyIntEnum\<T\> (Numeric field parsed as enumeration of type T)
 - ApiPropertyStringEnum\<T\> (string parsed as enumeration of type T)
 
-<a name="custom-objects"/>
-## Adding Strongly-Typed Support for Custom Objects
+
+## <a name="custom-objects"/>Adding Strongly-Typed Support for Custom Objects
 
 Simple way: use OntraportObject with the ObjectTypeId of your custom object. It takes an ObjectType parameter of type ApiCustomObject but you can pass any integer like this: (ApiObjectType)10000. Custom Objects have an ObjectTypeId above 10000.
 
@@ -287,8 +285,8 @@ public class ApiRecording : ApiCustomObjectBase
 }
 ```
 
-<a name="switching-accounts"/>
-## Switching Between Live and Dev Ontraport Accounts
+
+## <a name="switching-accounts"/>Switching Between Live and Dev Ontraport Accounts
 
 You will probably want to use a sandbox Ontraport account for development. One problem is that all custom fields will have a different ID on your live and development servers!
 
@@ -335,8 +333,8 @@ services.AddTransient<IOntraportContacts, OntraportContacts<IdentityContact>>();
 services.AddTransient<IOntraportContacts, OntraportContacts<IdentityContactDev>>();
 ```
 
-<a name="unit-testing"/>
-## Unit Testing the Source Code
+
+## <a name="unit-testing"/>Unit Testing the Source Code
 
 DO NOT RUN TESTS ON YOUR LIVE ONTRAPORT ACCOUNT
 
