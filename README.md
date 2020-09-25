@@ -357,7 +357,9 @@ If you are using Ontraport as your main database engine, you can use .NET Identi
 
 **Step 1:** Install OntraportApi.IdentityCore from NuGet. If you use another version of .NET, download the source code and add it to your project to customize it. .NET Framework and .NET Core use different versions of Identity Framework.
 
-**Step 2:** Create a custom Contact class that derives from ApiContact and implements IIdentityContact. [Sample.](https://github.com/mysteryx93/OntraportApi.NET/blob/master/OntraportApi.IntegrationTests/IdentityCore/IdentityContact.cs) Create matching custom fields in your Ontraport account.
+**Step 2:** Create a custom Contact class that derives from ApiContact and implements IIdentityContact. [Sample.](https://github.com/mysteryx93/OntraportApi.NET/blob/master/OntraportApi.IntegrationTests/IdentityCore/IdentityContact.cs)
+
+Create matching custom fields in your Ontraport account.
 
 **Step 3 (optional):** Create your own ApplicationIdentityUser and/or ApplicationIdentityRole that derive from OntraportIdentityUser and IdentityRole<string>.
 
