@@ -10,6 +10,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace HanumanInstitute.OntraportApi.IdentityCore
 {
+    /// <summary>
+    /// User store for Ontraport-based authentication. Data is mapped to your Ontraport account using the IIdentityContact interface.
+    /// </summary>
+    /// <typeparam name="TContact">The type of ApiContact implementing IIdentityContact.</typeparam>
+    /// <typeparam name="TUser">The type of OntraportIdentityUser.</typeparam>
+    /// <typeparam name="TRole">The type of IdentityRole&lt;string>.</typeparam>
     public class OntraportUserStore<TContact, TUser, TRole> :
                                     IUserStore<TUser>,
                                     IUserRoleStore<TUser>,

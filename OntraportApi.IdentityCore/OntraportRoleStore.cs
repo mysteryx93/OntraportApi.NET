@@ -1,18 +1,18 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using HanumanInstitute.Validators;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using HanumanInstitute.Validators;
-using System.Linq;
-using System.Diagnostics.CodeAnalysis;
 
 namespace HanumanInstitute.OntraportApi.IdentityCore
 {
     /// <summary>
     /// Role store for Ontraport-based authentication. Roles collection is read-only and must be defined using IOptions&lt;OntraportIdentityConfig>
     /// </summary>
-    /// <typeparam name="TRole">The type of IdenityRole&lt;string>.</typeparam>
+    /// <typeparam name="TRole">The type of IdentityRole&lt;string>.</typeparam>
     public class OntraportRoleStore<TRole> : IRoleStore<TRole>
         where TRole : IdentityRole<string>, new()
     {
@@ -25,7 +25,7 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
 
         private TRole? FindRole(string roleId)
         {
-            var roleName = _config.Value.ValidRoles.FirstOrDefault(x => x.EqualsInvariant(roleId));
+            var roleName = _config.Value.Roles.FirstOrDefault(x => x.EqualsInvariant(roleId));
             if (roleName != null)
             {
                 return new TRole()

@@ -353,6 +353,29 @@ services.AddTransient<IOntraportContacts, OntraportContacts<IdentityContactDev>>
 
 ## <a name="ontraport-membership-provider"/>Ontraport Membership Provider for Identity Framework Core
 
+If you are using Ontraport as your main database engine, you can use .NET Identity Framework directly with Ontraport.
+
+Step 1: Install OntraportApi.IdentityCore from NuGet. If you use another version of .NET, download the source and add it to your project to customize it. .NET Framework and .NET Core use a different version of Identity Framework.
+
+Step 2: Create a custom Contact class that derives from ApiContact and implements IIdentityContact. [It will look like this.](https://github.com/mysteryx93/OntraportApi.NET/blob/master/OntraportApi.IntegrationTests/IdentityCore/IdentityContact.cs)
+
+Step 3 (optional): Create your own ApplicationIdentityUser and/or ApplicationIdentityRole that derive from OntraportIdentityUser and IdentityRole<string>.
+
+Step 4: Register services in Startup.cs
+
+```c#
+services.AddIdentityCore<TUser>()
+    .AddUserStore<OntraportUserStore<TContact, TUser, TRole>>()
+    .AddRoleStore<OntraportRoleStore<TRole>>();
+```
+
+Step 5: Configure roles
+
+```c#
+services.AddOptions<OntraportIdentityConfig>()
+    .Configure(x => x.AddRole("Admin"));
+```
+
 
 ## <a name="unit-testing"/>Unit Testing the Source Code
 

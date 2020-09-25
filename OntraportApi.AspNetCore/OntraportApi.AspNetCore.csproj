@@ -14,6 +14,7 @@
     <PackageReleaseNotes>https://github.com/mysteryx93/OntraportApi.NET/releases</PackageReleaseNotes>
     <RootNamespace>HanumanInstitute.OntraportApi.AspNetCore</RootNamespace>
     <NeutralLanguage>en</NeutralLanguage>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

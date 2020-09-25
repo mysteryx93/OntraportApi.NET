@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using HanumanInstitute.OntraportApi;
 using HanumanInstitute.OntraportApi.Models;
-using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace - MS guidelines say put DI registration in this NS
 namespace Microsoft.Extensions.DependencyInjection
@@ -21,7 +20,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services">The IoC services container.</param>
         /// <param name="additionalHttpConfig">Additional configuration to be applied to HttpClient connections.</param>
-        public static IServiceCollection AddOntraportApi(this IServiceCollection services, Action<IHttpClientBuilder> additionalHttpConfig)
+        public static IServiceCollection AddOntraportApi(this IServiceCollection services, Action<IHttpClientBuilder>? additionalHttpConfig)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
@@ -68,7 +67,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services">The IoC services container.</param>
         /// <param name="additionalHttpConfig">Additional configuration to be applied to HttpClient connections.</param>
-        public static IServiceCollection AddOntraportPostForms(this IServiceCollection services, Action<IHttpClientBuilder> additionalHttpConfig)
+        public static IServiceCollection AddOntraportPostForms(this IServiceCollection services, Action<IHttpClientBuilder>? additionalHttpConfig)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 

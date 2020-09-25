@@ -24,7 +24,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         {
             if (validRoles != null)
             {
-                Config.Value.ValidRoles.AddRange(validRoles);
+                Config.Value.Roles.AddRange(validRoles);
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using HanumanInstitute.Validators;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HanumanInstitute.OntraportApi.IdentityCore
 {
@@ -8,14 +9,31 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
     {
         public OntraportIdentityConfig() { }
 
-        public OntraportIdentityConfig(IList<string> validRoles)
-        {
-            ValidRoles.AddRange(validRoles);
-        }
-
         /// <summary>
         /// Gets or sets the roles that are valid for this application.
         /// </summary>
-        public IList<string> ValidRoles { get; } = new List<string>();
+        public ICollection<string> Roles { get; } = new List<string>();
+
+        /// <summary>
+        /// Adds specified role to the application.
+        /// </summary>
+        /// <param name="role">The role to add.</param>
+        public OntraportIdentityConfig AddRole(string role)
+        {
+            Roles.Add(role);
+            return this;
+        }
+
+        /// <summary>
+        /// Adds specified roles to the application.
+        /// </summary>
+        /// <param name="roles">The roles to add.</param>
+        public OntraportIdentityConfig AddRoles(IList<string> roles)
+        {
+            Roles.AddRange(roles);
+            return this;
+            IServiceCollection services;
+            services.AddOptions<OntraportIdentityConfig>().Configure(x => x.AddRole("Admin"));
+        }
     }
 }
