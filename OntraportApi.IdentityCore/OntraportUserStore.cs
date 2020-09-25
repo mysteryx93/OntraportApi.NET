@@ -74,8 +74,10 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
             contact = new TContact()
             {
                 Email = user.NormalizedUserName.ToLowerInvariant(), // store email as lowercase
-                IdentityPasswordHash = user.PasswordHash
-                // UserRole = user.UserRole
+                IdentityPasswordHash = user.PasswordHash,
+                IdentityLockoutEnd = user.LockoutEnd,
+                IdentityAccessFailedCount = user.AccessFailedCount,
+                IdentityLockoutEnabled = user.LockoutEnabled
             };
 
             var newContact = await _ontraportContacts.CreateOrMergeAsync(contact.GetChanges(), cancellationToken).ConfigureAwait(false);
@@ -103,7 +105,10 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
             // Remove password hash.
             var contact = new TContact()
             {
-                IdentityPasswordHash = string.Empty
+                IdentityPasswordHash = string.Empty,
+                IdentityLockoutEnd = null,
+                IdentityAccessFailedCount = 0,
+                IdentityLockoutEnabled = false
             };
 
             // Remove roles.
@@ -139,7 +144,10 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
             // Update password hash.
             var contact = new TContact()
             {
-                IdentityPasswordHash = user.PasswordHash
+                IdentityPasswordHash = user.PasswordHash,
+                IdentityLockoutEnd = user.LockoutEnd,
+                IdentityAccessFailedCount = user.AccessFailedCount,
+                IdentityLockoutEnabled = user.LockoutEnabled
             };
             var newContact = await _ontraportContacts.UpdateAsync(user.Id, contact.GetChanges(), cancellationToken).ConfigureAwait(false);
             if (newContact == null)
