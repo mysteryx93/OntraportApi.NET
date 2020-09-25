@@ -3,7 +3,7 @@ Strongly-Typed .NET API for Ontraport (Marketing Automation System)
 
 Fully supports .NET Core and Dependency Injection.
 
-I've spent a lot of time to develop this professional-grade framework and am making it available for free. However, [please subscribe to Ontraport via my affiliate link to support this project!](https://ontraport.com/?orid=480125&utm_source=referral&utm_medium=inapp&utm_campaign=refer&utm_term=ShareTheLove&utm_content=ontraport)
+I've spent a lot of time to develop this professional-grade framework and am making it available for free. However, **[please subscribe to Ontraport via my affiliate link to support this project!](https://ontraport.com/?orid=480125&utm_source=referral&utm_medium=inapp&utm_campaign=refer&utm_term=ShareTheLove&utm_content=ontraport)**
 
 [What is Ontraport?](#what-is-ontraport)  
 [Sample Code](#sample-code)  
@@ -89,7 +89,17 @@ public async Task LogTransaction(string email, string productName, int quantity)
     await _ontraTransactions.LogTransactionAsync(contact.Id.Value,
         new ApiTransactionOffer().AddProduct(product.Id.Value, quantity, product.Price.Value));
 }
-```    
+```
+
+#### Exceptions
+
+All API calls can throw either of these 3 exceptions. (as of v1.2)
+
+**InvalidOperationException:** There was an error while sending or parsing the request.  
+**HttpRequestException:** There was an HTTP communication error or Ontraport returned an error.  
+**TaskCanceledException:** The request timed-out or the user canceled the request's Task.  
+
+Before v1.2, Select requests would throw HttpRequestException when the record is not found. As of v1.2, it instead returns null.
 
 
 ## <a name="supported-classes"/>Supported Classes
@@ -297,7 +307,7 @@ public class ApiRecording : ApiCustomObjectBase
 
 You will probably want to use a sandbox Ontraport account for development. One problem is that all custom fields will have a different ID on your live and development servers!
 
-To solve the problem, you can now create a class deriving from your custom ApiContact class that overrides the field IDs.
+To solve the problem, as of v1.2, you can now create a class deriving from your custom ApiContact class that overrides the field IDs.
 
 In previous versions, you would write custom fields using this
 
