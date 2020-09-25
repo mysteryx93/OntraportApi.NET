@@ -350,8 +350,8 @@ dotnet user-secrets set OntraportAppId ""your-app-id-here""
 dotnet user-secrets set OntraportApiKey ""your-api-key-here""");
 ```
  
-<a name="about"/>
-## About The Author
+
+## <a name="about"/>About The Author
 
 [Etienne Charland](https://www.spiritualselftransformation.com), known as the Emergence Guardian, helps starseeds reconnect with their soul power to accomplish the purpose 
 they came here to do. [You can read his book at Satrimono Publishing.](https://satrimono.com/) Warning: non-geek zone.
