@@ -47,7 +47,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         /// </summary>
         public ApiPropertyBool IsAdminField => _isAdminField ??= new ApiPropertyBool(this, IsAdminKey);
         private ApiPropertyBool _isAdminField;
-        public const string IsAdminKey = "f1825";
+        public virtual string IsAdminKey => "f1825";
         /// <summary>
         /// Gets or sets whether the user is an admin.
         /// </summary>
@@ -58,7 +58,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         /// </summary>
         public ApiPropertyBool IsManagerField => _isManagerField ??= new ApiPropertyBool(this, IsManagerKey);
         private ApiPropertyBool _isManagerField;
-        public const string IsManagerKey = "f1826";
+        public virtual string IsManagerKey => "f1826";
         public bool? IsManager { get => IsManagerField.Value; set => IsManagerField.Value = value; }
         int IIdentityContact.IdentityAccessFailedCount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
