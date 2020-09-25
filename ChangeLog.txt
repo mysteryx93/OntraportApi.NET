@@ -3,6 +3,7 @@ OntraportApi.NET
 What's New
 
 v1.2
+- Added an Ontraport Membership Manager for Identity Framework Core
 - Added CancellationToken option to all requests
 - Added the ability to override custom ApiContact (and custom objects) field members to allow switching between live and development Ontraport accounts (where field IDs are different)
 - Added Nullables annotations
