@@ -15,11 +15,19 @@
     <PackageTags>Ontraport API marketing automation email sender smtp .net</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>OntraportApi</PackageId>
-    <Version>1.2.1</Version>
+    <Version>1.2.2</Version>
     <PackageReleaseNotes>https://github.com/mysteryx93/OntraportApi.NET/releases</PackageReleaseNotes>
     <Product>OntraportApi</Product>
     <NeutralLanguage>en</NeutralLanguage>
     <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DocumentationFile>bin\Release\OntraportApi.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HanumanInstitute.Validators" Version="1.0.0" />
+    <PackageReference Include="HanumanInstitute.Validators" Version="1.0.4" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

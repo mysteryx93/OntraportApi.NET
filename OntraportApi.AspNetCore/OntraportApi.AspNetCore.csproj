@@ -10,12 +10,16 @@
     <PackageProjectUrl>https://github.com/mysteryx93/OntraportApi.NET/</PackageProjectUrl>
     <PackageTags>Ontraport API marketing automation email sender smtp .net</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2</Version>
+    <Version>1.2.2</Version>
     <PackageReleaseNotes>https://github.com/mysteryx93/OntraportApi.NET/releases</PackageReleaseNotes>
     <RootNamespace>HanumanInstitute.OntraportApi.AspNetCore</RootNamespace>
     <NeutralLanguage>en</NeutralLanguage>
     <Nullable>enable</Nullable>
     <Product>OntraportApi</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\OntraportApi.AspNetCore.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,6 +31,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="OntraportApi" Version="1.2.0" />
+    <PackageReference Include="OntraportApi" Version="1.2.1" />
   </ItemGroup>
 </Project>

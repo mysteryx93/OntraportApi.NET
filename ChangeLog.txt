@@ -2,6 +2,10 @@ OntraportApi.NET
 
 What's New
 
+v1.2.2
+- Changed IIdentityContact to have nullable types
+- XML code documentation was missing! Fixed
+
 v1.2.1 (2020-09-25)
 - Removed duplicate OntraportConfig class
 

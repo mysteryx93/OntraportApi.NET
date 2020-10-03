@@ -19,11 +19,11 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
         /// <summary>
         /// Gets or sets the number of failed login attempts for the current user.
         /// </summary>
-        public int IdentityAccessFailedCount { get; set; }
+        public int? IdentityAccessFailedCount { get; set; }
         /// <summary>
         /// Gets or sets a flag indicating if the user could be locked out.
         /// </summary>
-        public bool IdentityLockoutEnabled { get; set; }
+        public bool? IdentityLockoutEnabled { get; set; }
 
         /// <summary>
         /// Returns whether the user is part of specified role.

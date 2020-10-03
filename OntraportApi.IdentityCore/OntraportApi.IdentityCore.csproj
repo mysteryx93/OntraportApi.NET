@@ -5,7 +5,7 @@
     <RootNamespace>HanumanInstitute.OntraportApi.IdentityCore</RootNamespace>
     <Nullable>enable</Nullable>
     <PackageId>OntraportApi.IdentityCore</PackageId>
-    <Version>1.2</Version>
+    <Version>1.2.2</Version>
     <Authors>Etienne Charland</Authors>
     <Company>Hanuman Institute</Company>
     <Product>OntraportApi</Product>
@@ -17,6 +17,10 @@
     <PackageTags>Ontraport API marketing automation email sender smtp .net</PackageTags>
     <PackageReleaseNotes>https://github.com/mysteryx93/OntraportApi.NET/releases</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\OntraportApi.IdentityCore.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,7 +39,7 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.8" />
-    <PackageReference Include="OntraportApi" Version="1.2.0" />
+    <PackageReference Include="OntraportApi" Version="1.2.1" />
   </ItemGroup>
 
 </Project>

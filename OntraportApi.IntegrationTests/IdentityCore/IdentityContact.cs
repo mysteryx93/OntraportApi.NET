@@ -60,7 +60,6 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         private ApiPropertyBool _isManagerField;
         public virtual string IsManagerKey => "f1826";
         public bool? IsManager { get => IsManagerField.Value; set => IsManagerField.Value = value; }
-        int IIdentityContact.IdentityAccessFailedCount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public bool GetRole(string roleName)
         {
@@ -108,7 +107,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         /// <summary>
         /// Gets or sets a flag indicating if the user could be locked out. Users can be locked out unless they are admins.
         /// </summary>
-        public bool IdentityLockoutEnabled {
+        public bool? IdentityLockoutEnabled {
             get => IsAdmin == false;
             set { } 
         }
