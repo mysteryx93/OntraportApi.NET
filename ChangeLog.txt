@@ -2,6 +2,18 @@ OntraportApi.NET
 
 What's New
 
+v1.2.3
+- Added ApiTransaction.Offer to parse OfferData
+- Updated to reflect recent API changes
+- Added unique_id field
+- Added SelectByUniqueId
+- ApiContact removed NumPurchased
+- ApiContact added FacebookLink, TwitterLink, InstagramLink, LinkedInLink, ProfileImage, UnpaidInvoices, HasMembership, EmailHash
+- ApiForm removed SkipBackgroundAutomation, RuleHash
+- ApiForm added UniqueConvert
+- ApiMessage added SiteId
+- ApiSearchOptions.GroupIds replaced with GroupId
+
 v1.2.2
 - Changed IIdentityContact to have nullable types
 - XML code documentation was missing! Fixed

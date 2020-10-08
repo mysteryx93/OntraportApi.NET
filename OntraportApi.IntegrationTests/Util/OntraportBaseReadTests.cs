@@ -28,25 +28,6 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         /// </summary>
         protected OntraportContext<T> CreateContext() => new OntraportContext<T>(Output);
 
-        //protected T SetupApi()
-        //{
-        //    var httpClient = ConfigHelper.GetHttpClient(Log);
-        //    var ontraObjects = new OntraportObjects(httpClient);
-        //    if (IsGenericTypeOf(typeof(OntraportBaseCustomObject<,>), typeof(T)))
-        //    {
-        //        return (T)Activator.CreateInstance(typeof(T), httpClient, ontraObjects)!;
-        //    }
-        //    else
-        //    {
-        //        return (T)Activator.CreateInstance(typeof(T), httpClient)!;
-        //    }
-        //}
-
-        //protected OntraportObjects SetupObjectsApi()
-        //{
-        //    return new OntraportObjects(ConfigHelper.GetHttpClient());
-        //}
-
         [Fact]
         public async Task SelectAsync_ValidId_ReturnsData()
         {

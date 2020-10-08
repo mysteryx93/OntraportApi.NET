@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
 using Xunit;
@@ -33,8 +34,8 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         {
             using var c = CreateContext();
 
-            var result = await c.Ontra.UpdateAsync(ValidId, new {
-                email = "c@test.com"
+            var result = await c.Ontra.UpdateAsync(ValidId, new Dictionary<string, object>() {
+                { c.Ontra.PrimarySearchKey, _validKeyValue }
             });
 
             Assert.NotEmpty(result.Data);
@@ -45,9 +46,8 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         {
             using var c = CreateContext();
 
-            var result = await c.Ontra.UpdateAsync(ValidId, new
-            {
-                email = "c@test.com"
+            var result = await c.Ontra.UpdateAsync(ValidId, new Dictionary<string, object>() {
+                { c.Ontra.PrimarySearchKey, _validKeyValue }
             });
 
             Assert.NotEmpty(result.Data);

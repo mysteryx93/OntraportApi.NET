@@ -559,17 +559,6 @@ namespace HanumanInstitute.OntraportApi.Models
         public decimal? Spent { get => SpentField.Value; set => SpentField.Value = value; }
 
         /// <summary>
-        /// Returns a ApiProperty object to get or set the contact's total orders.
-        /// </summary>
-        public ApiProperty<int> NumPurchasedField => _numPurchasedField ??= new ApiProperty<int>(this, NumPurchasedKey);
-        private ApiProperty<int>? _numPurchasedField;
-        public const string NumPurchasedKey = "num_purchased";
-        /// <summary>
-        /// Gets or sets the contact's total orders.
-        /// </summary>
-        public int? NumPurchased { get => NumPurchasedField.Value; set => NumPurchasedField.Value = value; }
-
-        /// <summary>
         /// Returns a ApiProperty object to get or set the contact's score based upon lead scoring rules.
         /// </summary>
         public ApiProperty<int> GradeField => _gradeField ??= new ApiProperty<int>(this, GradeKey);
@@ -585,12 +574,101 @@ namespace HanumanInstitute.OntraportApi.Models
         public const string NMediaKey = "n_media";
         public int? NMedia { get => NMediaField.Value; set => NMediaField.Value = value; }
 
-        // This is a configurable enum.
+        /// <summary>
+        /// The time since the contact's last activity. Only accounts after 2018 will have this field. This is a configurable enum.
+        /// </summary>
         public ApiProperty<int> TimeSinceLastActivityField => _timeSinceLastActivityField ??= new ApiProperty<int>(this, TimeSinceLastActivityKey);
         private ApiProperty<int>? _timeSinceLastActivityField;
         public const string TimeSinceLastActivityKey = "time_since_dla";
         public int? TimeSinceLastActivity { get => TimeSinceLastActivityField.Value; set => TimeSinceLastActivityField.Value = value; }
 
+        /// <summary>
+        /// Returns a ApiProperty object to get or set the contact's Facebook profile link.
+        /// </summary>
+        public ApiPropertyString FacebookLinkField => _facebookLinkField ??= new ApiPropertyString(this, FacebookLinkKey);
+        private ApiPropertyString? _facebookLinkField;
+        public const string FacebookLinkKey = "facebook_link";
+        /// <summary>
+        /// Gets or sets the contact's Facebook profile link.
+        /// </summary>
+        public string? FacebookLink { get => FacebookLinkField.Value; set => FacebookLinkField.Value = value; }
+
+        /// <summary>
+        /// Returns a ApiProperty object to get or set the contact's Twitter profile link.
+        /// </summary>
+        public ApiPropertyString TwitterLinkField => _twitterLinkField ??= new ApiPropertyString(this, TwitterLinkKey);
+        private ApiPropertyString? _twitterLinkField;
+        public const string TwitterLinkKey = "twitter_link";
+        /// <summary>
+        /// Gets or sets the contact's Twitter profile link.
+        /// </summary>
+        public string? TwitterLink { get => TwitterLinkField.Value; set => TwitterLinkField.Value = value; }
+
+        /// <summary>
+        /// Returns a ApiProperty object to get or set the contact's Instagram profile link.
+        /// </summary>
+        public ApiPropertyString InstagramLinkField => _InstagramLinkField ??= new ApiPropertyString(this, InstagramLinkKey);
+        private ApiPropertyString? _InstagramLinkField;
+        public const string InstagramLinkKey = "instagram_link";
+        /// <summary>
+        /// Gets or sets the contact's Instagram profile link.
+        /// </summary>
+        public string? InstagramLink { get => InstagramLinkField.Value; set => InstagramLinkField.Value = value; }
+
+        /// <summary>
+        /// Returns a ApiProperty object to get or set the contact's LinkedIn profile link.
+        /// </summary>
+        public ApiPropertyString LinkedInLinkField => _linkedInLinkField ??= new ApiPropertyString(this, LinkedInLinkKey);
+        private ApiPropertyString? _linkedInLinkField;
+        public const string LinkedInLinkKey = "linkedin_link";
+        /// <summary>
+        /// Gets or sets the contact's LinkedIn profile link.
+        /// </summary>
+        public string? LinkedInLink { get => LinkedInLinkField.Value; set => LinkedInLinkField.Value = value; }
+
+        /// <summary>
+        /// Returns a ApiProperty object to get or set the contact's profile image link.
+        /// </summary>
+        public ApiPropertyString ProfileImageField => _ProfileImageField ??= new ApiPropertyString(this, ProfileImageKey);
+        private ApiPropertyString? _ProfileImageField;
+        public const string ProfileImageKey = "profile_image";
+        /// <summary>
+        /// Gets or sets the contact's profile image link.
+        /// </summary>
+        public string? ProfileImage { get => ProfileImageField.Value; set => ProfileImageField.Value = value; }
+
+        /// <summary>
+        /// Returns a ApiProperty object to get or set the contact has unpaid invoices.
+        /// </summary>
+        public ApiPropertyBool UnpaidInvoicesField => _UnpaidInvoicesField ??= new ApiPropertyBool(this, UnpaidInvoicesKey);
+        private ApiPropertyBool? _UnpaidInvoicesField;
+        public const string UnpaidInvoicesKey = "unpaid_invoices";
+        /// <summary>
+        /// Gets or sets whether the contact has unpaid invoices.
+        /// </summary>
+        public bool? UnpaidInvoices { get => UnpaidInvoicesField.Value; set => UnpaidInvoicesField.Value = value; }
+
+        /// <summary>
+        /// Returns a ApiProperty object to get or set the contact has unpaid invoices.
+        /// </summary>
+        public ApiPropertyBool HasMembershipField => _hasMembershipField ??= new ApiPropertyBool(this, HasMembershipKey);
+        private ApiPropertyBool? _hasMembershipField;
+        public const string HasMembershipKey = "has_membership";
+        /// <summary>
+        /// Gets or sets whether the contact has unpaid invoices.
+        /// </summary>
+        public bool? HasMembership { get => HasMembershipField.Value; set => HasMembershipField.Value = value; }
+
+        /// <summary>
+        /// Returns a ApiProperty object to get or set the contact's email hash.
+        /// </summary>
+        public ApiPropertyString EmailHashField => _emailHashField ??= new ApiPropertyString(this, EmailHashKey);
+        private ApiPropertyString? _emailHashField;
+        public const string EmailHashKey = "emailHash";
+        /// <summary>
+        /// Gets or sets the contact's email hash.
+        /// </summary>
+        public string? EmailHash { get => EmailHashField.Value; set => EmailHashField.Value = value; }
 
 
 

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Text.Json;
 using HanumanInstitute.OntraportApi.Converters;
+using HanumanInstitute.Validators;
 
 namespace HanumanInstitute.OntraportApi.Models
 {
@@ -316,7 +318,16 @@ namespace HanumanInstitute.OntraportApi.Models
         /// </summary>
         public bool? Recharge { get => RechargeField.Value; set => RechargeField.Value = value; }
 
-
+        /// <summary>
+        /// Parses and returns the offer data associated with this transaction.
+        /// </summary>
+        public ApiTransactionOffer? Offer => _offer ??= ParseOfferData();
+        private ApiTransactionOffer? _offer;
+        private ApiTransactionOffer? ParseOfferData()
+        {
+            if (string.IsNullOrEmpty(OfferData)) { return null; }
+            return JsonSerializer.Deserialize<ApiTransactionOffer>(OfferData, OntraportSerializerOptions.Default);
+        }
 
 
 

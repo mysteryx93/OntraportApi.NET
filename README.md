@@ -397,7 +397,13 @@ Use the following commands to set your keys to your sandbox account
 dotnet user-secrets set OntraportAppId ""your-app-id-here""
 dotnet user-secrets set OntraportApiKey ""your-api-key-here""");
 ```
- 
+
+## <a name="todo"/>TODO
+
+- Add unique_id option to create and update methods
+- Add API support for groups
+- OntraportUserStore: implement IUserTwoFactorStore, IUserPhoneNumberStore, IUserSecurityStampStore and IQueryableUserStore
+
 
 ## <a name="about"/>About The Author
 

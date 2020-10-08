@@ -14,17 +14,17 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets a list of products to include in your offer.
         /// </summary>
-        public IList<ApiTransactionProduct> Products { get; private set; } = new List<ApiTransactionProduct>();
+        public IList<ApiTransactionProduct> Products { get; set; } = new List<ApiTransactionProduct>();
 
         /// <summary>
         /// Gets or sets a list of taxes to be applied to your offer.
         /// </summary>
-        public IList<ApiTransactionTax> Taxes { get; private set; } = new List<ApiTransactionTax>();
+        public IList<ApiTransactionTax> Taxes { get; set; } = new List<ApiTransactionTax>();
 
         /// <summary>
         /// Gets or sets a list of shipping detail to be applied to your offer. 
         /// </summary>
-        public IList<ApiTransactionShipping> Shipping { get; private set; } = new List<ApiTransactionShipping>();
+        public IList<ApiTransactionShipping> Shipping { get; set; } = new List<ApiTransactionShipping>();
 
         /// <summary>
         /// Gets or sets the number of days to delay the start of the offer.

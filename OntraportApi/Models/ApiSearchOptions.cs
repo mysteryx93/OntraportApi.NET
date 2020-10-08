@@ -34,7 +34,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Gets or sets the list of the group ids of objects to retrieve.
         /// </summary>
-        public List<int> GroupIds { get; private set; } = new List<int>();
+        public int? GroupId { get; set; }
 
         /// <summary>
         /// Gets or sets the offset to start your search from.
@@ -88,17 +88,7 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <param name="groupIds">List of the group ids of objects to retrieve.</param>
         public ApiSearchOptions SetGroupId(int groupId)
         {
-            GroupIds.Add(groupId);
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the GroupIds value.
-        /// </summary>
-        /// <param name="groupIds">List of the group ids of objects to retrieve.</param>
-        public ApiSearchOptions SetGroupIds(IList<int> groupIds)
-        {
-            GroupIds.AddRange(groupIds);
+            GroupId = groupId;
             return this;
         }
 
@@ -139,36 +129,6 @@ namespace HanumanInstitute.OntraportApi.Models
         {
             Conditions.Add(new ApiSearchCondition(field, op, value, andCond));
             return this;
-
-            //// Add AND or OR if it's not the first condition.
-            //if (_content.Any())
-            //{
-            //    _content.Add(andCond ? "AND" : "OR");
-            //}
-
-            //// Add field.
-            //var cond = new JsonElement(new JProperty("field",
-            //    new JsonElement()
-            //    {
-            //        { "field", field }
-            //    }
-            //))
-            //{
-            //    { "op", value != null ? op : "IS" }
-            //};
-
-            //// Add value as null or single object.
-            //if (value != null)
-            //{
-            //    cond["value"] = new JsonElement(new JProperty("value", value));
-            //}
-            //else
-            //{
-            //    cond["value"] = "NULL";
-            //}
-
-            //_content.Add(cond);
-            //return this;
         }
 
         /// <summary>
@@ -183,45 +143,6 @@ namespace HanumanInstitute.OntraportApi.Models
         {
             Conditions.Add(new ApiSearchConditionInList(field, valueList, andCond));
             return this;
-
-            // Add AND or OR if it's not the first condition.
-            //if (_content.Any())
-            //{
-            //    _content.Add(andCond ? "AND" : "OR");
-            //}
-
-            //// Add field.
-            //var cond = new JsonElement(new JProperty("field",
-            //    new JsonElement()
-            //    {
-            //        { "field", field }
-            //    }
-            //))
-            //{
-            //    { "op", valueList != null ? "IN" : "IS" }
-            //};
-
-            //// Add value as null or list.
-            //var condValue = new JsonElement();
-            //if (valueList != null)
-            //{
-            //    var array = new JArray();
-            //    // Add as list.
-            //    foreach (var item in valueList)
-            //    {
-            //        array.Add(new JsonElement(new JProperty("value", item)));
-            //    }
-            //    condValue["list"] = array;
-            //    cond["value"] = condValue;
-            //}
-            //else
-            //{
-            //    // Add as null.
-            //    cond["value"] = "NULL";
-            //}
-
-            //_content.Add(cond);
-            //return this;
         }
 
         /// <summary>

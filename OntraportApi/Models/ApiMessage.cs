@@ -318,6 +318,10 @@ namespace HanumanInstitute.OntraportApi.Models
         public const string ResourceKey = "resource";
         public string? Resource { get => ResourceField.Value; set => ResourceField.Value = value; }
 
+        public ApiProperty<int> SiteIdField => _SiteIdField ??= new ApiProperty<int>(this, SiteIdKey);
+        private ApiProperty<int>? _SiteIdField;
+        public const string SiteIdKey = "site_id";
+        public int? SiteId { get => SiteIdField.Value; set => SiteIdField.Value = value; }
 
 
 

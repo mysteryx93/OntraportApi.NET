@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
 using Xunit;
@@ -14,6 +11,16 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         public OntraportContactsTests(ITestOutputHelper output) :
             base(output, 19, "a@test.com")
         {
+        }
+
+        [Fact]
+        public async Task SelectAsync_GroupId_ReturnsData()
+        {
+            using var c = CreateContext();
+
+            var result = await c.Ontra.SelectAsync(new ApiSearchOptions() { GroupId = 1 });
+
+            Assert.NotEmpty(result);
         }
 
         [Fact]

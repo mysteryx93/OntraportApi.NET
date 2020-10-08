@@ -311,7 +311,7 @@ namespace HanumanInstitute.OntraportApi
             // Log request.
             if (_logger?.IsEnabled(LogLevel.Information) == true)
             {
-                _logger?.LogInformation($"Request {endpoint} {method} {content}");
+                _logger?.LogInformation($"{method} {_httpClient.BaseAddress}{endpoint}?{content}");
             }
 
             var requestUrl = endpoint;

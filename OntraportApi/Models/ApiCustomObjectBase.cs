@@ -11,6 +11,17 @@ namespace HanumanInstitute.OntraportApi.Models
     public class ApiCustomObjectBase : ApiObject
     {
         /// <summary>
+        /// Returns a ApiProperty object to get or set the object's UniqueId.
+        /// </summary>
+        public ApiPropertyString UniqueIdField => _uniqueIdField ??= new ApiPropertyString(this, UniqueIdKey);
+        private ApiPropertyString? _uniqueIdField;
+        public const string UniqueIdKey = "unique_id";
+        /// <summary>
+        /// Gets or sets the object's UniqueId.
+        /// </summary>
+        public string? UniqueId { get => UniqueIdField.Value; set => UniqueIdField.Value = value; }
+
+        /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the user who controls the custom object. This field must contain a value for a custom object to be saved properly.
         /// </summary>
         public ApiProperty<int> OwnerField => _ownerField ??= new ApiProperty<int>(this, OwnerKey);

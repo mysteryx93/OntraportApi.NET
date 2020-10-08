@@ -127,6 +127,24 @@ namespace HanumanInstitute.OntraportApi
         }
 
         /// <summary>
+        /// Retrieves all the information for an existing object of the specified object type.
+        /// </summary>
+        /// <param name="objectType">The object type.</param>
+        /// <param name="uniqueId">The unique ID of the specific object.</param>
+        /// <returns>The selected object.</returns>
+        public async Task<Dictionary<string, string>?> SelectByUniqueIdAsync(ApiObjectType objectType, int uniqueId, CancellationToken cancellationToken = default)
+        {
+            var query = new Dictionary<string, object?>
+            {
+                { "objectID", (int)objectType },
+                { "unique_id", uniqueId }
+            };
+
+            return await _apiRequest.GetAsync<Dictionary<string, string>>(
+                "object", query, true, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Retrieves the number of objects having a specified tag.
         /// </summary>
         /// <param name="objectType">The object type.</param>

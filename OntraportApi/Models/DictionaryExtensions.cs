@@ -41,8 +41,11 @@ namespace HanumanInstitute.OntraportApi.Models
             {
                 // OntraportHttpClient.SerializerOptions.Converters.Add(new ApiSearchConditionConverter());
                 var condition = options.GetCondition();
-                list.AddIfHasValue("ids", options.Ids)
-                    .AddIfHasValue("group_ids", options.GroupIds)
+                if (options.Ids.Any())
+                {
+                    list.Add("ids", string.Join(",", options.Ids));
+                }
+                list.AddIfHasValue("group_id", options.GroupId)
                     .AddIfHasValue("start", options.Start)
                     .AddIfHasValue("range", options.Range)
                     .AddIfHasValue("condition", condition)
@@ -81,87 +84,25 @@ namespace HanumanInstitute.OntraportApi.Models
             return list;
         }
 
-        /// <summary>
-        /// Adds Start and Range query parameters.
-        /// </summary>
-        /// <param name="list">The dictionary of query parameters.</param>
-        /// <param name="start">The offset to start your search from.</param>
-        /// <param name="range">The number of objects you want to retrieve. The maximum and default range is 50.</param>
-        /// <returns>The query dictionary.</returns>
-        internal static Dictionary<string, object?> AddStartRange(this Dictionary<string, object?> list, int? start = null, int? range = null)
-        {
-            if (start.HasValue)
-            {
-                list.Add("start", start);
-            }
-            if (range.HasValue)
-            {
-                list.Add("range", range);
-            }
-            return list;
-        }
-
-        /// <summary>
-        /// Adds Sort and SortDir query parameters.
-        /// </summary>
-        /// <param name="list">The dictionary of query parameters.</param>
-        /// <param name="sort">The field results should be sorted on.</param>
-        /// <param name="sortDirection">The direction your results should be sorted.</param>
-        /// <returns>The query dictionary.</returns>
-        internal static Dictionary<string, object?> AddSort(this Dictionary<string, object?> list, string? sort = null, ListSortDirection sortDirection = ListSortDirection.Ascending)
-        {
-            if (!string.IsNullOrEmpty(sort))
-            {
-                list.Add("sort", sort!);
-                list.Add("sortDir", sortDirection == ListSortDirection.Ascending ? "asc" : "desc");
-            }
-            return list;
-        }
-
-        /// <summary>
-        /// Adds Conditions, Search and SearchNotes query parameters.
-        /// </summary>
-        /// <param name="list">The dictionary of query parameters.</param>
-        /// <param name="condition">Sets more specific criterias for which objects to bring back.</param>
-        /// <param name="search">A string to search your objects for.</param>
-        /// <param name="searchNotes">Used in conjunction with the search parameter to indicate whether or not object notes should be searched for the specified string in addition to other object fields.</param>
-        /// <returns>The query dictionary.</returns>
-        internal static Dictionary<string, object?> AddConditions(this Dictionary<string, object?> list, ApiSearchOptions? condition = null, string? search = null, bool searchNotes = false)
-        {
-            if (condition != null)
-            {
-                list.Add("condition", condition.ToString());
-            }
-            if (!string.IsNullOrEmpty(search))
-            {
-                list.Add("search", search!);
-                if (searchNotes)
-                {
-                    list.Add("searchNotes", searchNotes);
-                }
-            }
-            return list;
-        }
-
-        /// <summary>
-        /// Adds GroupIds and PerformAll query parameters.
-        /// </summary>
-        /// <param name="list">The dictionary of query parameters.</param>
-        /// <param name="groupIds">List of the group ids of objects to retrieve</param>
-        /// <param name="performAll">Used in conjunction with group_ids to indicates wether specified action should be performed on all members of a group.</param>
-        /// <returns>The query dictionnary.</returns>
-        internal static Dictionary<string, object?> AddGroupIds(this Dictionary<string, object?> list, IEnumerable<int>? groupIds = null, bool? performAll = null)
-        {
-            if (groupIds != null)
-            {
-                list.Add("group_ids", string.Join(",", groupIds));
-                if (performAll.HasValue)
-                {
-                    list.Add("performAll", performAll.Value ? 1 : 0);
-                }
-            }
-            return list;
-        }
+        ///// <summary>
+        ///// Adds GroupIds and PerformAll query parameters.
+        ///// </summary>
+        ///// <param name="list">The dictionary of query parameters.</param>
+        ///// <param name="groupId">The group id of objects to retrieve</param>
+        ///// <param name="performAll">Used in conjunction with group_id to indicates wether specified action should be performed on all members of a group.</param>
+        ///// <returns>The query dictionnary.</returns>
+        //internal static Dictionary<string, object?> AddGroupId(this Dictionary<string, object?> list, int? groupId = null, bool? performAll = null)
+        //{
+        //    if (groupIds != null)
+        //    {
+        //        list.Add("group_ids", string.Join(",", groupIds));
+        //        if (performAll.HasValue)
+        //        {
+        //            list.Add("performAll", performAll.Value ? 1 : 0);
+        //        }
+        //    }
+        //    return list;
+        //}
 
         /// <summary>
         /// Adds Externs and ListFields query parameters.

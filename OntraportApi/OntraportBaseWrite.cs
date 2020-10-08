@@ -30,7 +30,7 @@ namespace HanumanInstitute.OntraportApi
         where T : ApiObject
         where TOverride : T
     {
-        protected string? PrimarySearchKey { get; }
+        public string? PrimarySearchKey { get; }
 
         public OntraportBaseWrite(OntraportHttpClient apiRequest, string endpointSingular, string endpointPlural, string? primarySearchKey) :
             base(apiRequest, endpointSingular, endpointPlural)

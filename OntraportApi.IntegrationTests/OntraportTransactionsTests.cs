@@ -27,5 +27,15 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
             Assert.NotEqual(0, result);
         }
 
+        [Fact]
+        public async Task SelectAsync_ValidId_ParsesOffer()
+        {
+            using var c = CreateContext();
+
+            var result = await c.Ontra.SelectAsync(ValidId);
+
+            Assert.NotNull(result.Offer);
+            Assert.NotEmpty(result.Offer.Products);
+        }
     }
 }

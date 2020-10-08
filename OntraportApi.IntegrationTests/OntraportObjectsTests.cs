@@ -150,6 +150,19 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests
         }
 
         [Fact]
+        public async Task SelectByUniqueIdAsync_Contact_ReturnsResultWithData()
+        {
+            using var c = CreateContext();
+            var contact = await c.Ontra.CreateOrMergeAsync(ApiObjectType.Contact, false, new { firstname = "aa", email = "a@test.com" });
+            var contactUniqueId = int.Parse(contact["unique_id"], CultureInfo.InvariantCulture);
+
+            var result = await c.Ontra.SelectByUniqueIdAsync(ApiObjectType.Contact, contactUniqueId);
+
+            Assert.NotEmpty(result);
+            Assert.Equal(contactUniqueId.ToString(CultureInfo.InvariantCulture), result["id"]);
+        }
+
+        [Fact]
         public async Task SelectMultipleAsync_NoParam_SelectAllContacts()
         {
             using var c = CreateContext();

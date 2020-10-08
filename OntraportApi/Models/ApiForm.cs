@@ -214,17 +214,10 @@ namespace HanumanInstitute.OntraportApi.Models
         public const string RevenueKey = "revenue";
         public decimal? Revenue { get => RevenueField.Value; set => RevenueField.Value = value; }
 
-        public ApiPropertyBool SkipBackgroundAutomationField => _skipBackgroundAutomationField ??= new ApiPropertyBool(this, SkipBackgroundAutomationKey);
-        private ApiPropertyBool? _skipBackgroundAutomationField;
-        public const string SkipBackgroundAutomationKey = "skip_bg_automation";
-        public bool? SkipBackgroundAutomation { get => SkipBackgroundAutomationField.Value; set => SkipBackgroundAutomationField.Value = value; }
-
-        public ApiProperty<int> RuleHashField => _ruleHashField ??= new ApiProperty<int>(this, RuleHashKey);
-        private ApiProperty<int>? _ruleHashField;
-        public const string RuleHashKey = "rule_hash";
-        public int? RuleHash { get => RuleHashField.Value; set => RuleHashField.Value = value; }
-
-
+        public ApiProperty<int> UniqueConvertField => _uniqueConvertField ??= new ApiProperty<int>(this, UniqueConvertKey);
+        private ApiProperty<int>? _uniqueConvertField;
+        public const string UniqueConvertKey = "unique_convert";
+        public int? UniqueConvert { get => UniqueConvertField.Value; set => UniqueConvertField.Value = value; }
 
 
         /// <summary>
