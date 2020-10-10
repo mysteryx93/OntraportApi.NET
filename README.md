@@ -15,7 +15,7 @@ I've spent a lot of time to develop this enterprise-grade framework and am makin
 [Switching Between Live and Dev Ontraport Accounts](#switching-accounts)  
 [Ontraport Membership Provider for Identity Framework Core](#ontraport-membership-provider)  
 [Unit Testing the Source Code](#unit-testing)  
-[Custom Ontraport Shopping Cart](#shoppingcart)
+[Custom Blazor Shopping Cart](#shoppingcart)  
 [TODO](#todo)  
 [About The Author](#about)  
 
