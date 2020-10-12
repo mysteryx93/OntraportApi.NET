@@ -321,7 +321,11 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Parses and returns the offer data associated with this transaction.
         /// </summary>
-        public ApiTransactionOffer? Offer => _offer ??= ParseOfferData();
+        public ApiTransactionOffer? Offer
+        {
+            get => _offer ??= ParseOfferData();
+            set => _offer = value;
+        }
         private ApiTransactionOffer? _offer;
         private ApiTransactionOffer? ParseOfferData()
         {

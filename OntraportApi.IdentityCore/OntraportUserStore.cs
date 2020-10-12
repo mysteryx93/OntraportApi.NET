@@ -21,7 +21,10 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
                                     IUserRoleStore<TUser>,
                                     IUserPasswordStore<TUser>,
                                     IUserEmailStore<TUser>,
-                                    IUserLockoutStore<TUser>
+                                    IUserLockoutStore<TUser>,
+                                    IUserTwoFactorStore<TUser>,
+                                    IUserPhoneNumberStore<TUser>,
+                                    IUserSecurityStampStore<TUser>
         where TContact : ApiContact, IIdentityContact, new()
         where TUser : OntraportIdentityUser, new()
         where TRole : IdentityRole<string>, new()
@@ -44,7 +47,14 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
                     Id = contact.Id!.Value,
                     UserName = contact.Email,
                     Email = contact.Email,
-                    PasswordHash = contact.IdentityPasswordHash
+                    PasswordHash = contact.IdentityPasswordHash,
+                    AccessFailedCount = contact.IdentityAccessFailedCount ?? 0,
+                    LockoutEnd = contact.IdentityLockoutEnd,
+                    LockoutEnabled = contact.IdentityLockoutEnabled ?? false,
+                    TwoFactorEnabled = contact.IdentityTwoFactorEnabled ?? false,
+                    PhoneNumber = contact.IdentityPhoneNumber,
+                    PhoneNumberConfirmed = contact.IdentityPhoneNumberConfirmed ?? false,
+                    SecurityStamp = contact.IdentitySecurityStamp
                 };
                 result.Roles.AddRange(contact.Roles());
                 return result;
@@ -81,10 +91,29 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
             {
                 Email = user.NormalizedUserName.ToLowerInvariant(), // store email as lowercase
                 IdentityPasswordHash = user.PasswordHash,
-                IdentityLockoutEnd = user.LockoutEnd,
                 IdentityAccessFailedCount = user.AccessFailedCount,
-                IdentityLockoutEnabled = user.LockoutEnabled
+                IdentityLockoutEnd = user.LockoutEnd,
+                IdentityLockoutEnabled = user.LockoutEnabled,
+                IdentityTwoFactorEnabled = user.TwoFactorEnabled
             };
+            if (user.PhoneNumber.HasValue())
+            {
+                contact.IdentityPhoneNumber = user.PhoneNumber;
+            }
+            contact.IdentityPhoneNumberConfirmed = user.PhoneNumberConfirmed;
+            contact.IdentitySecurityStamp = user.SecurityStamp;
+            // contact = new TContact();
+            //{
+            //    Email = user.NormalizedUserName.ToLowerInvariant(), // store email as lowercase
+            //    IdentityPasswordHash = user.PasswordHash,
+            //    IdentityAccessFailedCount = user.AccessFailedCount,
+            //    IdentityLockoutEnd = user.LockoutEnd,
+            //    IdentityLockoutEnabled = user.LockoutEnabled,
+            //    IdentityTwoFactorEnabled = user.TwoFactorEnabled,
+            //    IdentityPhoneNumber = user.PhoneNumber,
+            //    IdentityPhoneNumberConfirmed = user.PhoneNumberConfirmed,
+            //    IdentitySecurityStamp = user.SecurityStamp
+            //};
 
             var newContact = await _ontraportContacts.CreateOrMergeAsync(contact.GetChanges(), cancellationToken).ConfigureAwait(false);
             if (newContact?.Id != null)
@@ -112,9 +141,13 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
             var contact = new TContact()
             {
                 IdentityPasswordHash = string.Empty,
-                IdentityLockoutEnd = null,
                 IdentityAccessFailedCount = 0,
-                IdentityLockoutEnabled = false
+                IdentityLockoutEnd = null,
+                IdentityLockoutEnabled = false,
+                IdentityTwoFactorEnabled = false,
+                IdentityPhoneNumberConfirmed = false,
+                IdentitySecurityStamp = string.Empty
+                // keep phone number
             };
 
             // Remove roles.
@@ -151,10 +184,15 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
             var contact = new TContact()
             {
                 IdentityPasswordHash = user.PasswordHash,
-                IdentityLockoutEnd = user.LockoutEnd,
                 IdentityAccessFailedCount = user.AccessFailedCount,
-                IdentityLockoutEnabled = user.LockoutEnabled
+                IdentityLockoutEnd = user.LockoutEnd,
+                IdentityLockoutEnabled = user.LockoutEnabled,
+                IdentityTwoFactorEnabled = user.TwoFactorEnabled,
+                IdentityPhoneNumber = user.PhoneNumber,
+                IdentityPhoneNumberConfirmed = user.PhoneNumberConfirmed,
+                IdentitySecurityStamp = user.SecurityStamp
             };
+
             var newContact = await _ontraportContacts.UpdateAsync(user.Id, contact.GetChanges(), cancellationToken).ConfigureAwait(false);
             if (newContact == null)
             {
@@ -426,8 +464,70 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
         }
 
 
+        // *** IUserTwoFactorStore ***
+
+        public Task SetTwoFactorEnabledAsync(TUser user, bool enabled, CancellationToken _)
+        {
+            user.CheckNotNull(nameof(user));
+            user.TwoFactorEnabled = enabled;
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> GetTwoFactorEnabledAsync(TUser user, CancellationToken _)
+        {
+            user.CheckNotNull(nameof(user));
+            return Task.FromResult(user.TwoFactorEnabled);
+        }
+
+
+        // *** IUserPhoneNumberStore ***
+
+        public Task<string> GetPhoneNumberAsync(TUser user, CancellationToken cancellationToken)
+        {
+            user.CheckNotNull(nameof(user));
+            return Task.FromResult(user.PhoneNumber);
+        }
+
+        public Task SetPhoneNumberAsync(TUser user, string phoneNumber, CancellationToken cancellationToken)
+        {
+            user.CheckNotNull(nameof(user));
+            user.PhoneNumber = phoneNumber;
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> GetPhoneNumberConfirmedAsync(TUser user, CancellationToken cancellationToken)
+        {
+            user.CheckNotNull(nameof(user));
+            return Task.FromResult(user.PhoneNumberConfirmed);
+        }
+
+        public Task SetPhoneNumberConfirmedAsync(TUser user, bool confirmed, CancellationToken cancellationToken)
+        {
+            user.CheckNotNull(nameof(user));
+            user.PhoneNumberConfirmed = confirmed;
+            return Task.CompletedTask;
+        }
+
+
+        // *** IUserSecurityStampStore  ***
+
+        public Task<string> GetSecurityStampAsync(TUser user, CancellationToken cancellationToken)
+        {
+            user.CheckNotNull(nameof(user));
+            return Task.FromResult(user.SecurityStamp);
+        }
+
+        public Task SetSecurityStampAsync(TUser user, string stamp, CancellationToken cancellationToken)
+        {
+            user.CheckNotNull(nameof(user));
+            user.SecurityStamp = stamp;
+            return Task.CompletedTask;
+        }
+
+
 
         private bool _disposedValue;
+
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposedValue)

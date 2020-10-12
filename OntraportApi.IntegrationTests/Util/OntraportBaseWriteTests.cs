@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
     public abstract class OntraportBaseWriteTests<T, TU> : OntraportBaseReadTests<T, TU>
-        where T : OntraportBaseWrite<TU>
+        where T : OntraportBaseWrite<TU, TU>
         where TU : ApiObject
     {
         private readonly string _validKeyValue;

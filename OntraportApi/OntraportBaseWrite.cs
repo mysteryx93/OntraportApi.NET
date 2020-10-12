@@ -26,7 +26,7 @@ namespace HanumanInstitute.OntraportApi
     /// </summary>
     /// <typeparam name="T">The data object type deriving from ApiObject.</typeparam>
     /// <typeparam name="TOverride">A sub-type that overrides T members.</typeparam>
-    public abstract class OntraportBaseWrite<T, TOverride> : OntraportBaseRead<T>, IOntraportBaseWrite<T>
+    public abstract class OntraportBaseWrite<T, TOverride> : OntraportBaseRead<T, TOverride>, IOntraportBaseWrite<T>
         where T : ApiObject
         where TOverride : T
     {
@@ -58,9 +58,10 @@ namespace HanumanInstitute.OntraportApi
         /// <returns>The created object.</returns>
         public async Task<T> CreateAsync(object? values = null, CancellationToken cancellationToken = default)
         {
+            var query = new Dictionary<string, object?>().AddObject(values).WriteOverrideFields<T, TOverride>();
             var json = await ApiRequest.PostJsonAsync(
                 EndpointPlural,
-                new Dictionary<string, object?>().AddObject(values), cancellationToken).ConfigureAwait(false);
+                query, cancellationToken).ConfigureAwait(false);
             return await json.RunAndCatchAsync(x => OnParseCreate(x)).ConfigureAwait(false);
         }
 
@@ -83,10 +84,10 @@ namespace HanumanInstitute.OntraportApi
             var query = new Dictionary<string, object?>
             {
                 { "id", objectId }
-            };
+            }.AddObject(values).WriteOverrideFields<T, TOverride>();
 
             var json = await ApiRequest.PutJsonAsync(
-                EndpointPlural, query.AddObject(values), cancellationToken).ConfigureAwait(false);
+                EndpointPlural, query, cancellationToken).ConfigureAwait(false);
             return await json.RunAndCatchAsync(x => OnParseUpdate(x)).ConfigureAwait(false);
         }
 

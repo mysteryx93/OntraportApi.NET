@@ -25,7 +25,7 @@ namespace HanumanInstitute.OntraportApi
     /// </summary>
     /// <typeparam name="T">The data object type deriving from ApiObject.</typeparam>
     /// <typeparam name="TOverride">A sub-type that overrides T members.</typeparam>
-    public abstract class OntraportBaseDelete<T, TOverride> : OntraportBaseWrite<T>
+    public abstract class OntraportBaseDelete<T, TOverride> : OntraportBaseWrite<T, TOverride>
         where T : ApiObject
         where TOverride : T
     {

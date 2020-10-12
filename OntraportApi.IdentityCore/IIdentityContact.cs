@@ -13,17 +13,33 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
         /// </summary>
         public string? IdentityPasswordHash { get; set; }
         /// <summary>
-        /// Gets or sets the date and time, in UTC, when any user lockout ends.
-        /// </summary>
-        public DateTimeOffset? IdentityLockoutEnd { get; set; }
-        /// <summary>
         /// Gets or sets the number of failed login attempts for the current user.
         /// </summary>
         public int? IdentityAccessFailedCount { get; set; }
         /// <summary>
+        /// Gets or sets the date and time, in UTC, when any user lockout ends.
+        /// </summary>
+        public DateTimeOffset? IdentityLockoutEnd { get; set; }
+        /// <summary>
         /// Gets or sets a flag indicating if the user could be locked out.
         /// </summary>
         public bool? IdentityLockoutEnabled { get; set; }
+        /// <summary>
+        /// Gets or sets whether Two Factor Authentication is enabled.
+        /// </summary>
+        public bool? IdentityTwoFactorEnabled { get; set; }
+        /// <summary>
+        /// Gets or sets the phone number.
+        /// </summary>
+        public string? IdentityPhoneNumber { get; set; }
+        /// <summary>
+        /// Gets or sets whether the phone number is confirmed.
+        /// </summary>
+        public bool? IdentityPhoneNumberConfirmed { get; set; }
+        /// <summary>
+        /// Gets or sets the security stamp.
+        /// </summary>
+        public string? IdentitySecurityStamp { get; set; }
 
         /// <summary>
         /// Returns whether the user is part of specified role.

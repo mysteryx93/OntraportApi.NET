@@ -26,7 +26,7 @@ namespace HanumanInstitute.OntraportApi
     /// <summary>
     /// Base class to provides Ontraport API support for custom objects.
     /// </summary>
-    public abstract class OntraportBaseCustomObject<T, TOverride> : OntraportBaseDelete<T>, IOntraportBaseCustomObject<T>
+    public abstract class OntraportBaseCustomObject<T, TOverride> : OntraportBaseDelete<T, TOverride>, IOntraportBaseCustomObject<T>
         where T : ApiCustomObjectBase
         where TOverride : T
     {
@@ -49,10 +49,10 @@ namespace HanumanInstitute.OntraportApi
         /// <returns>The updated ApiObject.</returns>
         public async Task<T?> CreateOrMergeAsync(object? values = null, CancellationToken cancellationToken = default)
         {
-            var query = new Dictionary<string, object?>();
+            var query = new Dictionary<string, object?>().AddObject(values).WriteOverrideFields<T, TOverride>();
 
             var json = await ApiRequest.PostJsonAsync(
-                $"{EndpointPlural}/saveorupdate", query.AddObject(values), cancellationToken).ConfigureAwait(false);
+                $"{EndpointPlural}/saveorupdate", query, cancellationToken).ConfigureAwait(false);
             return await json.RunAndCatchAsync(x =>
             {
                 var data = json.JsonData();

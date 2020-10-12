@@ -2,7 +2,18 @@ OntraportApi.NET
 
 What's New
 
-v1.2.3
+v1.2.4
+- ApiTransaction.Offer property is now writeable, useful for unit testing
+- TOverride wasn't being passed correctly to base classes
+
+TOverride allows switching between Live and Dev Ontraport accounts where field keys are different. TOverride was difficult to use due to always requiring creating model classes of derived types. One option was to add a CreateModel on the base class and make the model constructors internal, but this made it harder to use the classes.
+
+I've changed the approach with TOverride to always use the T model classes and automatically replace field names between T and TOverride when reading and writing data. The mapping is done via reflection. It has a performance cost, but reflection is only done on the first call and the override map is then cached for each class type. Furthermore, TOverride is only used for development and this code is skipped in production.
+
+The usage is transparent to the user, but the field override definition is different. Model keys are now defined as "public const string" on class T and "public new const string" on TOverride. This avoids polluting the model quick view with extra properties, and the "new" ensures the constant names match in both classes.
+
+
+v1.2.3 (2020-10-08)
 - Added ApiTransaction.Offer to parse OfferData
 - Updated to reflect recent API changes
 - Added unique_id field
@@ -13,7 +24,7 @@ v1.2.3
 - ApiMessage added SiteId
 - ApiSearchOptions.GroupIds replaced with GroupId
 
-v1.2.2
+v1.2.2 (2020-10-02)
 - Changed IIdentityContact to have nullable types
 - XML code documentation was missing! Fixed
 

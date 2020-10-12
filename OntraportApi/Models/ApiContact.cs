@@ -607,8 +607,8 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's Instagram profile link.
         /// </summary>
-        public ApiPropertyString InstagramLinkField => _InstagramLinkField ??= new ApiPropertyString(this, InstagramLinkKey);
-        private ApiPropertyString? _InstagramLinkField;
+        public ApiPropertyString InstagramLinkField => _instagramLinkField ??= new ApiPropertyString(this, InstagramLinkKey);
+        private ApiPropertyString? _instagramLinkField;
         public const string InstagramLinkKey = "instagram_link";
         /// <summary>
         /// Gets or sets the contact's Instagram profile link.
@@ -629,8 +629,8 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact's profile image link.
         /// </summary>
-        public ApiPropertyString ProfileImageField => _ProfileImageField ??= new ApiPropertyString(this, ProfileImageKey);
-        private ApiPropertyString? _ProfileImageField;
+        public ApiPropertyString ProfileImageField => _profileImageField ??= new ApiPropertyString(this, ProfileImageKey);
+        private ApiPropertyString? _profileImageField;
         public const string ProfileImageKey = "profile_image";
         /// <summary>
         /// Gets or sets the contact's profile image link.
@@ -640,8 +640,8 @@ namespace HanumanInstitute.OntraportApi.Models
         /// <summary>
         /// Returns a ApiProperty object to get or set the contact has unpaid invoices.
         /// </summary>
-        public ApiPropertyBool UnpaidInvoicesField => _UnpaidInvoicesField ??= new ApiPropertyBool(this, UnpaidInvoicesKey);
-        private ApiPropertyBool? _UnpaidInvoicesField;
+        public ApiPropertyBool UnpaidInvoicesField => _unpaidInvoicesField ??= new ApiPropertyBool(this, UnpaidInvoicesKey);
+        private ApiPropertyBool? _unpaidInvoicesField;
         public const string UnpaidInvoicesKey = "unpaid_invoices";
         /// <summary>
         /// Gets or sets whether the contact has unpaid invoices.

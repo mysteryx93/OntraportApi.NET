@@ -43,6 +43,32 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         public int? IdentityAccessFailedCount { get => IdentityAccessFailedCountField.Value; set => IdentityAccessFailedCountField.Value = value; }
 
         /// <summary>
+        /// Gets or sets whether two-factor authentication is enabled.
+        /// </summary>
+        public bool? IdentityTwoFactorEnabled { get => false; set => throw new NotSupportedException("Two factor authentication is not implemented."); }
+
+        /// <summary>
+        /// Gets or sets the user's phone number.
+        /// </summary>
+        public string IdentityPhoneNumber { get => HomePhone; set => HomePhone = value; }
+
+        /// <summary>
+        /// Gets or sets whether the phone number is confirmed.
+        /// </summary>
+        public bool? IdentityPhoneNumberConfirmed { get => false; set => throw new NotSupportedException("Phone number confirmation is not implemented."); }
+
+        /// <summary>
+        /// Returns a ApiProperty object to get or set the identity framework security stamp.
+        /// </summary>
+        public ApiPropertyString IdentitySecurityStampField => _identitySecurityStampField ??= new ApiPropertyString(this, IdentitySecurityStampKey);
+        private ApiPropertyString _identitySecurityStampField;
+        public virtual string IdentitySecurityStampKey => "f1948";
+        /// <summary>
+        /// Gets or sets the identity framework security stamp.
+        /// </summary>
+        public string IdentitySecurityStamp { get => IdentitySecurityStampField.Value; set => IdentitySecurityStampField.Value = value; }
+
+        /// <summary>
         /// Returns a ApiProperty object to get or set whether the user is an admin.
         /// </summary>
         public ApiPropertyBool IsAdminField => _isAdminField ??= new ApiPropertyBool(this, IsAdminKey);

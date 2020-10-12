@@ -9,7 +9,7 @@ using Xunit.Abstractions;
 namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
     public abstract class OntraportBaseDeleteTests<T, TU> : OntraportBaseWriteTests<T, TU>
-        where T : OntraportBaseDelete<TU>
+        where T : OntraportBaseDelete<TU, TU>
         where TU : ApiObject
     {
         public OntraportBaseDeleteTests(ITestOutputHelper output, int validId, string validKeyValue) : 

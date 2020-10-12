@@ -170,7 +170,7 @@ namespace HanumanInstitute.OntraportApi
             var result = (T)Activator.CreateInstance(typeof(TOverride), null)!;
             try
             {
-                result.Data = json.ToObject<IDictionary<string, string?>>();
+                result.Data = json.ToObject<IDictionary<string, string?>>().ReadOverrideFields<T, TOverride>();
             }
             catch (JsonException ex)
             {

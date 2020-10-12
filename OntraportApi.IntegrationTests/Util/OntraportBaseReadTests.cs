@@ -11,7 +11,7 @@ using Xunit.Abstractions;
 namespace HanumanInstitute.OntraportApi.IntegrationTests
 {
     public abstract class OntraportBaseReadTests<T, TU>
-        where T : OntraportBaseRead<TU>
+        where T : OntraportBaseRead<TU, TU>
         where TU : ApiObject
     {
         protected ITestOutputHelper Output { get; private set; }
