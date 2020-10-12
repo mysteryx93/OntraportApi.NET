@@ -15,6 +15,8 @@ I've spent a lot of time to develop this enterprise-grade framework and am makin
 [Switching Between Live and Dev Ontraport Accounts](#switching-accounts)  
 [Ontraport Membership Provider for Identity Framework Core](#ontraport-membership-provider)  
 [Unit Testing the Source Code](#unit-testing)  
+[Custom Blazor Shopping Cart](#shoppingcart)  
+[TODO](#todo)  
 [About The Author](#about)  
 
 
@@ -397,6 +399,34 @@ Use the following commands to set your keys to your sandbox account
 dotnet user-secrets set OntraportAppId ""your-app-id-here""
 dotnet user-secrets set OntraportApiKey ""your-api-key-here""");
 ```
+
+## <a name="shoppingcart"/>Custom Ontraport Shopping Cart
+
+I'm currently working on a custom Shopping Cart based on ASP.Net Blazor technology that integrates with Ontraport.
+
+The goal is to have a straightforward check-out experience without browsing to fill a cart. Let's say you're selling a digital product, they click Buy Now which goes into a page to checkout for that specific product.
+
+Problems with Ontraport's default shopping cart:
+- Very little support for payment gateways outside the US!!
+- Impossible to bill USD and convert/process in your local currency.
+- Little flexibility to adjust prices at runtime because the prices are hard-coded on the forms.
+
+Features of Blazor shopping cart:
+
+- Configurable products, allowing to add several products to a page, and optionally allowing the user to edit quantity and/or remove products.
+- Supports coupon codes per products to apply discounts. Note that Ontraport doesn't allow logging coupon codes via API.
+- Step-by-step wizard to go from Summary, Address, Payment, allowing for backwards navigation.
+- Blazor allows for a rich client-side experience without the need for JavaScript.
+- Supported payment method: Credit card USD, credit card with automatic currency conversion, PayPal USD, PayPal with automatic currency conversion, TransferWise, Crypto. Adding your own payment gateway or other payment methods is easy.
+- Local database to track open orders. Completed orders are stored in Ontraport.
+- Open orders generate a unique URL. The user can get notifications to complete his order.
+- Support recurring payments.
+- Support monthly postpaid invoicing, where they get invoiced at the end of each month based on their usage (such as partial-month usage)
+- Does not support taxes and shipping calculations.
+
+I can share this code for $1000. Requires .NET Core hosting. I'm also available to hire for custom needs.
+
+The Ontrapport Blazor shopping cart is still under development. You can [contact Etienne here](https://www.spiritualselftransformation.com/contact-us) to show your interest and be notified when it's ready.
 
 ## <a name="todo"/>TODO
 
