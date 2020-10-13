@@ -167,7 +167,7 @@ namespace HanumanInstitute.OntraportApi
         /// <exception cref="NullReferenceException">Response data could not be parsed.</exception>
         protected virtual T CreateApiObject(JsonElement json)
         {
-            var result = (T)Activator.CreateInstance(typeof(TOverride), null)!;
+            var result = (T)Activator.CreateInstance(typeof(T), null)!;
             try
             {
                 result.Data = json.ToObject<IDictionary<string, string?>>().ReadOverrideFields<T, TOverride>();

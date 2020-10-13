@@ -29,6 +29,10 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
         /// </summary>
         public bool? IdentityTwoFactorEnabled { get; set; }
         /// <summary>
+        /// Gets or sets whether the email is confirmed.
+        /// </summary>
+        public bool? IdentityEmailConfirmed { get; set; }
+        /// <summary>
         /// Gets or sets the phone number.
         /// </summary>
         public string? IdentityPhoneNumber { get; set; }

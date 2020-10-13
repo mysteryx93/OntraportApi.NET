@@ -47,6 +47,7 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
                     Id = contact.Id!.Value,
                     UserName = contact.Email,
                     Email = contact.Email,
+                    EmailConfirmed = contact.IdentityEmailConfirmed ?? false,
                     PasswordHash = contact.IdentityPasswordHash,
                     AccessFailedCount = contact.IdentityAccessFailedCount ?? 0,
                     LockoutEnd = contact.IdentityLockoutEnd,
@@ -94,26 +95,15 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
                 IdentityAccessFailedCount = user.AccessFailedCount,
                 IdentityLockoutEnd = user.LockoutEnd,
                 IdentityLockoutEnabled = user.LockoutEnabled,
-                IdentityTwoFactorEnabled = user.TwoFactorEnabled
+                IdentityTwoFactorEnabled = user.TwoFactorEnabled,
+                IdentityEmailConfirmed = user.EmailConfirmed,
+                IdentityPhoneNumberConfirmed = user.PhoneNumberConfirmed,
+                IdentitySecurityStamp = user.SecurityStamp
             };
             if (user.PhoneNumber.HasValue())
             {
                 contact.IdentityPhoneNumber = user.PhoneNumber;
             }
-            contact.IdentityPhoneNumberConfirmed = user.PhoneNumberConfirmed;
-            contact.IdentitySecurityStamp = user.SecurityStamp;
-            // contact = new TContact();
-            //{
-            //    Email = user.NormalizedUserName.ToLowerInvariant(), // store email as lowercase
-            //    IdentityPasswordHash = user.PasswordHash,
-            //    IdentityAccessFailedCount = user.AccessFailedCount,
-            //    IdentityLockoutEnd = user.LockoutEnd,
-            //    IdentityLockoutEnabled = user.LockoutEnabled,
-            //    IdentityTwoFactorEnabled = user.TwoFactorEnabled,
-            //    IdentityPhoneNumber = user.PhoneNumber,
-            //    IdentityPhoneNumberConfirmed = user.PhoneNumberConfirmed,
-            //    IdentitySecurityStamp = user.SecurityStamp
-            //};
 
             var newContact = await _ontraportContacts.CreateOrMergeAsync(contact.GetChanges(), cancellationToken).ConfigureAwait(false);
             if (newContact?.Id != null)
@@ -145,6 +135,7 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
                 IdentityLockoutEnd = null,
                 IdentityLockoutEnabled = false,
                 IdentityTwoFactorEnabled = false,
+                IdentityEmailConfirmed = false,
                 IdentityPhoneNumberConfirmed = false,
                 IdentitySecurityStamp = string.Empty
                 // keep phone number
@@ -183,11 +174,13 @@ namespace HanumanInstitute.OntraportApi.IdentityCore
             // Update password hash.
             var contact = new TContact()
             {
+                Email = user.Email,
                 IdentityPasswordHash = user.PasswordHash,
                 IdentityAccessFailedCount = user.AccessFailedCount,
                 IdentityLockoutEnd = user.LockoutEnd,
                 IdentityLockoutEnabled = user.LockoutEnabled,
                 IdentityTwoFactorEnabled = user.TwoFactorEnabled,
+                IdentityEmailConfirmed = user.EmailConfirmed,
                 IdentityPhoneNumber = user.PhoneNumber,
                 IdentityPhoneNumberConfirmed = user.PhoneNumberConfirmed,
                 IdentitySecurityStamp = user.SecurityStamp

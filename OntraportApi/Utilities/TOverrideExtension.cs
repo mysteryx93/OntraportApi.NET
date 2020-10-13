@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using HanumanInstitute.OntraportApi.Models;
+using HanumanInstitute.Validators;
 
 namespace HanumanInstitute.OntraportApi
 {
@@ -109,6 +110,7 @@ namespace HanumanInstitute.OntraportApi
             // Get all constants.
             var fieldsSource = t.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
             var fieldsOverride = tOverride.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
+            var duplicate = string.Empty;
             foreach (var item in fieldsOverride)
             {
                 if (item.FieldType == typeof(string) && item.Name.EndsWith("Key", StringComparison.Ordinal))
@@ -117,17 +119,30 @@ namespace HanumanInstitute.OntraportApi
                     {
                         if (itemMatch.Name == item.Name)
                         {
+                            var tValue = (string)itemMatch.GetValue(null);
+                            var tOverrideValue = (string)item.GetValue(null);
+                            duplicate = string.Empty;
                             try
                             {
-                                var tValue = (string)itemMatch.GetValue(null);
-                                var tOverrideValue = (string)item.GetValue(null);
                                 writeKeysOverride.Add(tValue, tOverrideValue);
-                                readKeysOverride.Add(tOverrideValue, tValue);                                
                             }
                             catch (ArgumentException)
                             {
-                                throw new InvalidOperationException("To use TOverride, all keys on T and TOverride must be set to unique values.");
+                                duplicate += $" Field {tValue} on T is duplicate.";
                             }
+                            try
+                            {
+                                readKeysOverride.Add(tOverrideValue, tValue);
+                            }
+                            catch (ArgumentException)
+                            {
+                                duplicate += $" Field {tOverrideValue} on TOverride is duplicate.";
+                            }
+                            if (duplicate.HasValue())
+                            {
+                                throw new InvalidOperationException("To use TOverride, all keys on T and TOverride must be set to unique values." + duplicate);
+                            }
+
                             break;
                         }
                     }

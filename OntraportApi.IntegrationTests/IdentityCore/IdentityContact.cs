@@ -45,7 +45,12 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         /// <summary>
         /// Gets or sets whether two-factor authentication is enabled.
         /// </summary>
-        public bool? IdentityTwoFactorEnabled { get => false; set => throw new NotSupportedException("Two factor authentication is not implemented."); }
+        public bool? IdentityTwoFactorEnabled { get => false; set { } }
+
+        /// <summary>
+        /// Gets or sets whether the phone number is confirmed.
+        /// </summary>
+        public bool? IdentityEmailConfirmed { get => false; set { } }
 
         /// <summary>
         /// Gets or sets the user's phone number.
@@ -55,7 +60,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         /// <summary>
         /// Gets or sets whether the phone number is confirmed.
         /// </summary>
-        public bool? IdentityPhoneNumberConfirmed { get => false; set => throw new NotSupportedException("Phone number confirmation is not implemented."); }
+        public bool? IdentityPhoneNumberConfirmed { get => false; set { } }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set the identity framework security stamp.
@@ -134,7 +139,7 @@ namespace HanumanInstitute.OntraportApi.IntegrationTests.IdentityCore
         /// Gets or sets a flag indicating if the user could be locked out. Users can be locked out unless they are admins.
         /// </summary>
         public bool? IdentityLockoutEnabled {
-            get => IsAdmin == false;
+            get => true;
             set { } 
         }
     }
