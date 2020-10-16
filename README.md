@@ -336,10 +336,10 @@ Even if you're only working on the development server, it's important that all k
 Define this new class to use TOverride
 
 ```
-public class OntraportContacts<TOverride> : OntraportContacts<ApiCustomContact, TOverride>, IOntraportContacts
+public class OntraportCustomContacts<TOverride> : OntraportContacts<ApiCustomContact, TOverride>, IOntraportContacts
     where TOverride : ApiCustomContact
 {
-    public OntraportContacts(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) :
+    public OntraportCustomContacts(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) :
         base(apiRequest, ontraObjects)
     { }
 }
