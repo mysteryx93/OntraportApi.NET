@@ -323,7 +323,7 @@ public const string Custom1Key = "f1234";
 Create a new derived class like this
 
 ```c#
-public class IdentityContactDev : IdentityContact
+public class ApiCustomContactDev : ApiCustomContact
 {
     public new const string Custom1Key = "f5555";
 }
@@ -336,8 +336,8 @@ Even if you're only working on the development server, it's important that all k
 Define this new class to use TOverride
 
 ```
-public class OntraportContacts<TOverride> : OntraportContacts<IdentityContact, TOverride>, IOntraportContacts
-    where TOverride : IdentityContact
+public class OntraportContacts<TOverride> : OntraportContacts<ApiCustomContact, TOverride>, IOntraportContacts
+    where TOverride : ApiCustomContact
 {
     public OntraportContacts(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) :
         base(apiRequest, ontraObjects)
