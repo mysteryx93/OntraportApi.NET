@@ -362,7 +362,7 @@ else
 
 Of course, also make sure to switch AppId and ApiKey configuration accordingly.
 
-Ontraport dropdown fields generate associated Integer values, which you typically create an Enum for. You won't be able to easily switch such values between servers, so the best way is to ensure both servers have the same Integer values for each element! If needed, delete the field and recreate it to have values like "1, 2, 3, 4".
+**Note: Ontraport dropdown fields** generate associated Integer values, which you typically create an Enum for. You won't be able to easily switch such values between servers, so the best way is to ensure both servers have the same Integer values for each element! If needed, delete the field and recreate it to have values like "1, 2, 3, 4".
 
 
 ## <a name="ontraport-membership-provider"/>Ontraport Membership Provider for Identity Framework Core
