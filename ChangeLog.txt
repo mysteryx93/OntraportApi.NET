@@ -2,9 +2,9 @@ OntraportApi.NET
 
 What's New
 
-v1.2.4 (2020-10-12)
+v1.2.4 (2020-10-15)
 - ApiTransaction.Offer property is now writeable, useful for unit testing
-- Added IIdentityContact.EmailConfirmed to allow storing that field in Ontraport
+- OntraportUserStore now implements IUserTwoFactorStore, IUserPhoneNumberStore and IUserSecurityStampStore
 - TOverride is now passed correctly to base classes
 
 TOverride allows switching between Live and Dev Ontraport accounts where field keys are different. TOverride was difficult to use due to always requiring creating model classes of derived types. One option was to add a CreateModel on the base class and make the model constructors internal, but this made it harder to use the classes.

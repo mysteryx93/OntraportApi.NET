@@ -212,12 +212,12 @@ public class ApiCustomContact : ApiContact
 {
     public ApiPropertyString Custom1Field => _custom1Field ?? (_custom1Field = new ApiPropertyString(this, Custom1Key));
     private ApiPropertyString _custom1Field;
-    public virtual string Custom1Key => "f1234";
+    public const string Custom1Key = "f1234";
     public string Custom1 { get => Custom1Field.Value; set => Custom1Field.Value = value; }
 
     public ApiPropertyDateTime Custom2Field => _custom2Field ?? (_custom2Field = new ApiPropertyDateTime(this, Custom2Key));
     private ApiPropertyDateTime _custom2Field;
-    public virtual string Custom2Key => "f2222";
+    public const string Custom2Key = "f2222";
     public DateTimeOffset? Custom2 { get => Custom2Field.Value; set => Custom2Field.Value = value; }
 }
 ```
@@ -225,9 +225,9 @@ public class ApiCustomContact : ApiContact
 Then, use *OntraportContacts\<ApiCustomContact\>* instead of *OntraportContacts<ApiContact>*.
 
 ```c#
-public class OntraportContacts : OntraportContacts<ApiCustomContact>, IOntraportContacts
+public class OntraportCustomContacts : OntraportContacts<ApiCustomContact>, IOntraportContacts
 {
-    public OntraportContacts(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) :
+    public OntraportCustomContacts(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) :
         base(apiRequest, ontraObjects)
     { }
 }
@@ -242,7 +242,8 @@ public interface IOntraportContacts : IOntraportContacts<ApiCustomContact>
 
 Don't forget to register your new class in Startup.cs
 ```c#
-services.AddTransient<IOntraportContacts, OntraportContacts>();
+services.AddTransient<IOntraportContacts, OntraportCustomContacts>();
+services.AddTransient<IOntraportContacts<ApiCustomContact>, OntraportCustomContacts>();
 ```
     
 Supprted ApiProperty types (and you can easily implement your own parsers):
@@ -301,7 +302,7 @@ public class ApiRecording : ApiCustomObjectBase
 {
     public ApiProperty<int> Custom1Field => _custom1Field ?? (_custom1Field = new ApiProperty<int>(this, Custom1Key));
     private ApiProperty<int> _custom1Field;
-    public virtual string Custom1Key => "f3333";
+    public const string Custom1Key = "f3333";
     public int? Custom1 { get => Custom1Field.Value; set => Custom1Field.Value = value; }
 }
 ```
@@ -313,31 +314,28 @@ You will probably want to use a sandbox Ontraport account for development. One p
 
 To solve the problem, as of v1.2, you can now create a class deriving from your custom ApiContact class that overrides the field IDs.
 
-In previous versions, you would write custom fields like this
+In your ApiCustomContact class, you write custom fields like this
 
 ```c#
 public const string Custom1Key = "f1234";
 ```
 
-Replace those lines with
-
-```c#
-public virtual string Custom1Key => "f1234";
-```
-
-Create your classes like this
+Create a new derived class like this
 
 ```c#
 public class IdentityContactDev : IdentityContact
 {
-    public override string IdentityAccessFailedCountKey => "f0000";
-    public override string IdentityLockoutEndKey => "f1111";
-    public override string IdentityPasswordHashKey => "f2222";
+    public new const string Custom1Key = "f5555";
 }
+```
 
-public interface IOntraportContacts : IOntraportContacts<IdentityContact>
-{ }
+A field replacement map will be created via reflection and be applied when reading or writing data. In this case, as you edit the data, it will use "f1234" field, but when you call UpdateAsync, it will replace "f1234" with "f5555".
 
+Even if you're only working on the development server, it's important that all keys on the main class are defined and set to unique values. All key properties must also end with "Key". The "new" keyword will allow you to ensure keys are properly defined and overriding each other.
+
+Define this new class to use TOverride
+
+```
 public class OntraportContacts<TOverride> : OntraportContacts<IdentityContact, TOverride>, IOntraportContacts
     where TOverride : IdentityContact
 {
@@ -347,14 +345,24 @@ public class OntraportContacts<TOverride> : OntraportContacts<IdentityContact, T
 }
 ```
 
-Now, when registering services in Startup.cs, you can switch between these two registrations depending on whether you want to run on the live or development server!
+When registering services in Startup.cs, you can switch between these two registrations depending on whether you want to run on the live or development server!
 
 ```c#
-services.AddTransient<IOntraportContacts, OntraportContacts<IdentityContact>>();
-services.AddTransient<IOntraportContacts, OntraportContacts<IdentityContactDev>>();
+if (env.IsDevelopment())
+{
+    services.AddTransient<IOntraportContacts, OntraportCustomContacts<ApiCustomContactDev>>();
+    services.AddTransient<IOntraportContacts<ApiCustomContact>, OntraportCustomContacts<ApiCustomContactDev>>();
+}
+else
+{
+    services.AddTransient<IOntraportContacts, OntraportCustomContacts<ApiCustomContact>>();
+    services.AddTransient<IOntraportContacts<ApiCustomContact>, OntraportCustomContacts<ApiCustomContact>>();
+}
 ```
 
 Of course, also make sure to switch AppId and ApiKey configuration accordingly.
+
+Ontraport dropdown fields generate associated Integer values, which you typically create an Enum for. You won't be able to easily switch such values between servers, so the best way is to ensure both servers have the same Integer values for each element! If needed, delete the field and recreate it to have values like "1, 2, 3, 4".
 
 
 ## <a name="ontraport-membership-provider"/>Ontraport Membership Provider for Identity Framework Core
@@ -371,7 +379,7 @@ Create matching custom fields in your Ontraport account.
 **Step 4:** Register services in Startup.cs
 
 ```c#
-services.AddIdentityCore<TUser>()
+services.AddIdentity<TUser, TRole>()
     .AddUserStore<OntraportUserStore<TContact, TUser, TRole>>()
     .AddRoleStore<OntraportRoleStore<TRole>>();
 ```
@@ -432,7 +440,6 @@ The Ontrapport Blazor shopping cart is still under development. You can [contact
 
 - Add unique_id option to create and update methods
 - Add API support for groups
-- OntraportUserStore: implement IUserTwoFactorStore, IUserPhoneNumberStore, IUserSecurityStampStore and IQueryableUserStore
 
 
 ## <a name="about"/>About The Author
