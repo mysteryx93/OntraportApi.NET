@@ -7,7 +7,7 @@
     <AssemblyName>OntraportApi</AssemblyName>
     <Authors>Etienne Charland</Authors>
     <Company>Hanuman Institute</Company>
-    <Copyright>Copyright © 2019-2020 Etienne Charland</Copyright>
+    <Copyright>Copyright © 2019-2021 Etienne Charland</Copyright>
     <Description>Strongly-Typed .NET API for Ontraport (Marketing Automation System)</Description>
     <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/mysteryx93/OntraportApi.NET</PackageProjectUrl>
@@ -15,7 +15,7 @@
     <PackageTags>Ontraport API marketing automation email sender smtp .net</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>OntraportApi</PackageId>
-    <Version>1.2.4</Version>
+    <Version>1.2.5</Version>
     <PackageReleaseNotes>https://github.com/mysteryx93/OntraportApi.NET/releases</PackageReleaseNotes>
     <Product>OntraportApi</Product>
     <NeutralLanguage>en</NeutralLanguage>

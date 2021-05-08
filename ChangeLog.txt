@@ -2,6 +2,9 @@ OntraportApi.NET
 
 What's New
 
+v1.2.5 (2021-05-08)
+- Fixed a data parsing bug
+
 v1.2.4 (2020-10-15)
 - ApiTransaction.Offer property is now writeable, useful for unit testing
 - OntraportUserStore now implements IUserTwoFactorStore, IUserPhoneNumberStore and IUserSecurityStampStore
