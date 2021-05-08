@@ -103,6 +103,11 @@ namespace HanumanInstitute.OntraportApi
                 JsonTokenType.Number => ReadNumber<T>(ref reader),
                 _ => throw new JsonException()
             };
+            if (typeof(T) == typeof(string) && value?.GetType() != typeof(string))
+            {
+                // False cannot be converted to String without this.
+                return (T)(object)value?.ToStringInvariant()!;
+            }
             return (T)value!;
         }
 
