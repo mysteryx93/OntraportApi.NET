@@ -1,18 +1,14 @@
-﻿using System;
-using System.Threading.Tasks;
-using HanumanInstitute.OntraportApi.Models;
-using Xunit;
+﻿using HanumanInstitute.OntraportApi.Models;
 using Xunit.Abstractions;
 
-namespace HanumanInstitute.OntraportApi.IntegrationTests
+namespace HanumanInstitute.OntraportApi.IntegrationTests;
+
+public class OntraportProductsTests : OntraportBaseDeleteTests<OntraportProducts, ApiProduct>
 {
-    public class OntraportProductsTests : OntraportBaseDeleteTests<OntraportProducts, ApiProduct>
+    public OntraportProductsTests(ITestOutputHelper output) :
+        base(output, 1, "product1")
     {
-        public OntraportProductsTests(ITestOutputHelper output) :
-            base(output, 1, "product1")
-        {
-        }
-
-
     }
+
+
 }

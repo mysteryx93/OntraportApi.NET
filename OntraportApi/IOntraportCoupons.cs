@@ -1,12 +1,8 @@
-﻿using System;
-using HanumanInstitute.OntraportApi.Models;
+﻿namespace HanumanInstitute.OntraportApi;
 
-namespace HanumanInstitute.OntraportApi
+/// <summary>
+/// Provides Ontraport API support for CouponCode objects.
+/// </summary>
+public interface IOntraportCoupons : IOntraportBaseDelete<ApiCoupon>
 {
-    /// <summary>
-    /// Provides Ontraport API support for CouponCode objects.
-    /// </summary>
-    public interface IOntraportCoupons : IOntraportBaseDelete<ApiCoupon>
-    {
-    }
 }

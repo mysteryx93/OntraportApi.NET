@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using HanumanInstitute.OntraportApi.Converters;
+﻿namespace HanumanInstitute.OntraportApi.Models;
 
-namespace HanumanInstitute.OntraportApi.Models
+public class ResponseCollectionInfo
 {
-    public class ResponseCollectionInfo
-    {
-        public ICollection<string> ListFields { get; set; } = new List<string>();
-        [JsonConverter(typeof(JsonEmptyArrayConverter<Dictionary<string, string>>))]
-        public Dictionary<string, string> ListFieldSettings { get; set; } = new Dictionary<string, string>();
-        [JsonConverter(typeof(JsonEmptyArrayConverter<ResponseCardViewSettings?>))]
-        public ResponseCardViewSettings? CardViewSettings { get; set; }
-        [JsonConverter(typeof(JsonEmptyArrayConverter<int>))]
-        public int ViewMode { get; set; }
-        public int Count { get; set; }
-    }
+    public ICollection<string> ListFields { get; set; } = new List<string>();
+    [JsonConverter(typeof(JsonEmptyArrayConverter<Dictionary<string, string>>))]
+    public Dictionary<string, string> ListFieldSettings { get; set; } = new Dictionary<string, string>();
+    [JsonConverter(typeof(JsonEmptyArrayConverter<ResponseCardViewSettings?>))]
+    public ResponseCardViewSettings? CardViewSettings { get; set; }
+    [JsonConverter(typeof(JsonEmptyArrayConverter<int>))]
+    public int ViewMode { get; set; }
+    public int Count { get; set; }
 }

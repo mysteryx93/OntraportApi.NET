@@ -1,18 +1,14 @@
-﻿using System;
-using HanumanInstitute.OntraportApi.Models;
+﻿namespace HanumanInstitute.OntraportApi;
 
-namespace HanumanInstitute.OntraportApi
+/// <summary>
+/// Provides Ontraport API support for Companies objects.
+/// </summary>
+/// <typeparam name="T">A type deriving from ApiCompany exposing additional custom fields.</typeparam>
+public class OntraportCompanies<T> : OntraportBaseCustomObject<T>, IOntraportCompanies<T>
+    where T : ApiCompany
 {
-    /// <summary>
-    /// Provides Ontraport API support for Companies objects.
-    /// </summary>
-    /// <typeparam name="T">A type deriving from ApiCompany exposing additional custom fields.</typeparam>
-    public class OntraportCompanies<T> : OntraportBaseCustomObject<T>, IOntraportCompanies<T>
-        where T : ApiCompany
-    {
-        public OntraportCompanies(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) : 
-            base(apiRequest, ontraObjects, "Company", "Companies", (int)ApiObjectType.Company, ApiCompany.NameKey)
-        { }
+    public OntraportCompanies(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects) : 
+        base(apiRequest, ontraObjects, "Company", "Companies", (int)ApiObjectType.Company, ApiCompany.NameKey)
+    { }
 
-    }
 }

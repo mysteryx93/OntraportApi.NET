@@ -1,16 +1,13 @@
-﻿using System;
+﻿namespace HanumanInstitute.OntraportApi.Models;
 
-namespace HanumanInstitute.OntraportApi.Models
+/// <summary>
+/// Indicates the units of length of the trial period.
+/// </summary>
+public enum TransactionPeriodUnit
 {
-    /// <summary>
-    /// Indicates the units of length of the trial period.
-    /// </summary>
-    public enum TransactionPeriodUnit
-    {
-        Day,
-        Week,
-        Month,
-        Quarter,
-        Year
-    }
+    Day,
+    Week,
+    Month,
+    Quarter,
+    Year
 }

@@ -1,53 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using HanumanInstitute.OntraportApi.Converters;
+﻿namespace HanumanInstitute.OntraportApi.Models;
 
-namespace HanumanInstitute.OntraportApi.Models
+/// <summary>
+/// An Ontraport field for editing queries.
+/// </summary>
+public class ApiFieldEditor
 {
-    /// <summary>
-    /// An Ontraport field for editing queries.
-    /// </summary>
-    public class ApiFieldEditor
+    public string? Field { get; set; } = string.Empty;
+
+    public string? Alias { get; set; } = string.Empty;
+
+    [JsonConverter(typeof(JsonConverterStringEnum<ApiFieldType>))]
+    public ApiFieldType? Type { get; set; }
+
+    public bool? Required { get; set; }
+
+    public bool? Unique { get; set; }
+
+    public ApiFieldOptions? Options { get; set; }
+
+    public ApiFieldEditor ListAdd(IEnumerable<string> listValues)
     {
-        public string? Field { get; set; } = string.Empty;
-
-        public string? Alias { get; set; } = string.Empty;
-
-        [JsonConverter(typeof(JsonConverterStringEnum<ApiFieldType>))]
-        public ApiFieldType? Type { get; set; }
-
-        public bool? Required { get; set; }
-
-        public bool? Unique { get; set; }
-
-        public ApiFieldOptions? Options { get; set; }
-
-        public ApiFieldEditor ListAdd(IEnumerable<string> listValues)
+        Options = new ApiFieldOptions()
         {
-            Options = new ApiFieldOptions()
-            {
-                Add = listValues
-            };
-            return this;
-        }
+            Add = listValues
+        };
+        return this;
+    }
 
-        public ApiFieldEditor ListRemove(IEnumerable<string> listValues)
+    public ApiFieldEditor ListRemove(IEnumerable<string> listValues)
+    {
+        Options = new ApiFieldOptions()
         {
-            Options = new ApiFieldOptions()
-            {
-                Remove = listValues
-            };
-            return this;
-        }
+            Remove = listValues
+        };
+        return this;
+    }
 
-        public ApiFieldEditor ListReplace(IEnumerable<string> listValues)
+    public ApiFieldEditor ListReplace(IEnumerable<string> listValues)
+    {
+        Options = new ApiFieldOptions()
         {
-            Options = new ApiFieldOptions()
-            {
-                Replace = listValues
-            };
-            return this;
-        }
+            Replace = listValues
+        };
+        return this;
     }
 }

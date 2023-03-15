@@ -1,114 +1,112 @@
 ﻿using System;
-using System.Collections.Generic;
 using HanumanInstitute.OntraportApi.Converters;
 using HanumanInstitute.OntraportApi.Models;
 using Xunit;
 
-namespace HanumanInstitute.OntraportApi.UnitTests
+namespace HanumanInstitute.OntraportApi.UnitTests;
+
+public abstract class ApiPropertyBaseTests<TProp, T, TNull>
+    where TProp : ApiPropertyBase<T, TNull>
 {
-    public abstract class ApiPropertyBaseTests<TProp, T, TNull>
-        where TProp : ApiPropertyBase<T, TNull>
+    private readonly string _key = "key1";
+    private readonly ApiObject _host = new ApiObject();
+
+    private TProp SetupProperty() => (TProp)Activator.CreateInstance(typeof(TProp), _host, _key)!;
+
+    private void Set(string value) => _host.Data[_key] = value;
+
+    [Fact]
+    public void Value_NotSet_ReturnsNull()
     {
-        private readonly string _key = "key1";
-        private readonly ApiObject _host = new ApiObject();
+        var prop = SetupProperty();
 
-        private TProp SetupProperty() => (TProp)Activator.CreateInstance(typeof(TProp), _host, _key)!;
+        var result = prop.Value;
 
-        private void Set(string value) => _host.Data[_key] = value;
+        Assert.Null(result);
+    }
 
-        [Fact]
-        public void Value_NotSet_ReturnsNull()
-        {
-            var prop = SetupProperty();
+    [Fact]
+    public void Value_SetRawNull_ReturnsNull()
+    {
+        var prop = SetupProperty();
+        Set(null);
 
-            var result = prop.Value;
+        var result = prop.Value;
 
-            Assert.Null(result);
-        }
+        Assert.Null(result);
+    }
 
-        [Fact]
-        public void Value_SetRawNull_ReturnsNull()
-        {
-            var prop = SetupProperty();
-            Set(null);
+    [Fact]
+    public void Value_SetRawEmpty_ReturnsNull()
+    {
+        var prop = SetupProperty();
+        Set(prop.NullString);
 
-            var result = prop.Value;
+        var result = prop.Value;
 
-            Assert.Null(result);
-        }
+        Assert.Null(result);
+    }
 
-        [Fact]
-        public void Value_SetRawEmpty_ReturnsNull()
-        {
-            var prop = SetupProperty();
-            Set(prop.NullString);
+    [Fact]
+    public void Value_SetNull_ReturnsRawEmpty()
+    {
+        var prop = SetupProperty();
 
-            var result = prop.Value;
+        prop.Value = default;
 
-            Assert.Null(result);
-        }
+        Assert.Equal(prop.NullString, _host.Data[_key]);
+    }
 
-        [Fact]
-        public void Value_SetNull_ReturnsRawEmpty()
-        {
-            var prop = SetupProperty();
+    [Fact]
+    public void HasKey_NotSet_ReturnsFalse()
+    {
+        var prop = SetupProperty();
 
-            prop.Value = default;
+        var result = prop.HasKey;
 
-            Assert.Equal(prop.NullString, _host.Data[_key]);
-        }
+        Assert.False(result);
+    }
 
-        [Fact]
-        public void HasKey_NotSet_ReturnsFalse()
-        {
-            var prop = SetupProperty();
+    [Fact]
+    public void HasKey_SetNull_ReturnsTrue()
+    {
+        var prop = SetupProperty();
+        Set(null);
 
-            var result = prop.HasKey;
+        var result = prop.HasKey;
 
-            Assert.False(result);
-        }
+        Assert.True(result);
+    }
 
-        [Fact]
-        public void HasKey_SetNull_ReturnsTrue()
-        {
-            var prop = SetupProperty();
-            Set(null);
+    [Fact]
+    public void HasValue_NotSet_ReturnsFalse()
+    {
+        var prop = SetupProperty();
 
-            var result = prop.HasKey;
+        var result = prop.HasValue;
 
-            Assert.True(result);
-        }
+        Assert.False(result);
+    }
 
-        [Fact]
-        public void HasValue_NotSet_ReturnsFalse()
-        {
-            var prop = SetupProperty();
+    [Fact]
+    public void HasValue_SetNull_ReturnsFalse()
+    {
+        var prop = SetupProperty();
+        Set(null);
 
-            var result = prop.HasValue;
+        var result = prop.HasValue;
 
-            Assert.False(result);
-        }
+        Assert.False(result);
+    }
 
-        [Fact]
-        public void HasValue_SetNull_ReturnsFalse()
-        {
-            var prop = SetupProperty();
-            Set(null);
+    [Fact]
+    public void HasValue_SetEmpty_ReturnsFalse()
+    {
+        var prop = SetupProperty();
+        Set(prop.NullString);
 
-            var result = prop.HasValue;
+        var result = prop.HasValue;
 
-            Assert.False(result);
-        }
-
-        [Fact]
-        public void HasValue_SetEmpty_ReturnsFalse()
-        {
-            var prop = SetupProperty();
-            Set(prop.NullString);
-
-            var result = prop.HasValue;
-
-            Assert.False(result);
-        }
+        Assert.False(result);
     }
 }

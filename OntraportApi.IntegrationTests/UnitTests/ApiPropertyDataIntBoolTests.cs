@@ -1,70 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using HanumanInstitute.OntraportApi.Converters;
 using HanumanInstitute.OntraportApi.Models;
 using Xunit;
 
-namespace HanumanInstitute.OntraportApi.UnitTests
+namespace HanumanInstitute.OntraportApi.UnitTests;
+
+public class ApiPropertyDataIntBoolTests
 {
-    public class ApiPropertyDataIntBoolTests
+    private readonly string _key = "key1";
+    private readonly ApiObject _host = new ApiObject();
+
+    private ApiPropertyIntBool SetupProperty() => new ApiPropertyIntBool(_host, _key);
+
+    private void Set(string value) => _host.Data[_key] = value;
+
+    public static IEnumerable<object[]> GetValues() => new[] {
+        new object[] { "1", true },
+        new object[] { "0", false },
+    };
+
+    public static IEnumerable<object[]> GetValues2() => new[] {
+        new object[] { "-1", false },
+        new object[] { "true", true },
+        new object[] { "false", false },
+        new object[] { "True", true },
+        new object[] { "False", false }
+    };
+
+    [Theory]
+    [MemberData(nameof(GetValues))]
+    [MemberData(nameof(GetValues2))]
+    public void Value_SetRawValue_ReturnsExpectedValue(string rawValue, bool typedValue)
     {
-        private readonly string _key = "key1";
-        private readonly ApiObject _host = new ApiObject();
+        var prop = SetupProperty();
+        Set(rawValue);
 
-        private ApiPropertyIntBool SetupProperty() => new ApiPropertyIntBool(_host, _key);
+        var result = prop.Value;
 
-        private void Set(string value) => _host.Data[_key] = value;
+        Assert.Equal(typedValue, result);
+    }
 
-        public static IEnumerable<object[]> GetValues() => new[] {
-            new object[] { "1", true },
-            new object[] { "0", false },
-        };
+    [Theory]
+    [MemberData(nameof(GetValues))]
+    public void Value_SetValue_StoresExpectedRawValue(string rawValue, bool typedValue)
+    {
+        var prop = SetupProperty();
 
-        public static IEnumerable<object[]> GetValues2() => new[] {
-            new object[] { "-1", false },
-            new object[] { "true", true },
-            new object[] { "false", false },
-            new object[] { "True", true },
-            new object[] { "False", false }
-        };
+        prop.Value = typedValue;
 
-        [Theory]
-        [MemberData(nameof(GetValues))]
-        [MemberData(nameof(GetValues2))]
-        public void Value_SetRawValue_ReturnsExpectedValue(string rawValue, bool typedValue)
-        {
-            var prop = SetupProperty();
-            Set(rawValue);
+        Assert.Equal(rawValue, prop.RawValue);
+    }
 
-            var result = prop.Value;
-
-            Assert.Equal(typedValue, result);
-        }
-
-        [Theory]
-        [MemberData(nameof(GetValues))]
-        public void Value_SetValue_StoresExpectedRawValue(string rawValue, bool typedValue)
-        {
-            var prop = SetupProperty();
-
-            prop.Value = typedValue;
-
-            Assert.Equal(rawValue, prop.RawValue);
-        }
-
-        [Theory]
-        [MemberData(nameof(GetValues))]
-        [MemberData(nameof(GetValues2))]
+    [Theory]
+    [MemberData(nameof(GetValues))]
+    [MemberData(nameof(GetValues2))]
 #pragma warning disable xUnit1026 // typeValue not used
 #pragma warning disable IDE0060   // typeValue not used
-        public void HasValue_Set_ReturnsTrue(string rawValue, bool _)
-        {
-            var prop = SetupProperty();
-            Set(rawValue);
+    public void HasValue_Set_ReturnsTrue(string rawValue, bool _)
+    {
+        var prop = SetupProperty();
+        Set(rawValue);
 
-            var result = prop.HasValue;
+        var result = prop.HasValue;
 
-            Assert.True(result);
-        }
+        Assert.True(result);
     }
 }

@@ -1,31 +1,27 @@
-using System;
-using System.Collections.Generic;
+namespace HanumanInstitute.OntraportApi;
 
-namespace HanumanInstitute.OntraportApi
+internal class OverrideCacheKey
 {
-    internal class OverrideCacheKey
+    public Type T { get; set; }
+    public Type TOverride { get; set; }
+    public IDictionary<string, string> WriteKeysOverride { get; }
+    public IDictionary<string, string> ReadKeysOverride { get; }
+
+    public OverrideCacheKey(Type t, Type tOverride, IDictionary<string, string> writeKeysOverride,
+        IDictionary<string, string> readKeysOverride)
     {
-        public Type T { get; set; }
-        public Type TOverride { get; set; }
-        public IDictionary<string, string> WriteKeysOverride { get; }
-        public IDictionary<string, string> ReadKeysOverride { get; }
+        T = t;
+        TOverride = tOverride;
+        WriteKeysOverride = writeKeysOverride;
+        ReadKeysOverride = readKeysOverride;
+    }
 
-        public OverrideCacheKey(Type t, Type tOverride, IDictionary<string, string> writeKeysOverride,
-            IDictionary<string, string> readKeysOverride)
+    public string ApplyOn(string key)
+    {
+        if (WriteKeysOverride.TryGetValue(key, out var match))
         {
-            T = t;
-            TOverride = tOverride;
-            WriteKeysOverride = writeKeysOverride;
-            ReadKeysOverride = readKeysOverride;
+            return match;
         }
-
-        public string ApplyOn(string key)
-        {
-            if (WriteKeysOverride.TryGetValue(key, out var match))
-            {
-                return match;
-            }
-            return key;
-        }
+        return key;
     }
 }

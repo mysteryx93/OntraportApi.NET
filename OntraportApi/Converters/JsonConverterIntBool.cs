@@ -1,32 +1,29 @@
-﻿using System;
+﻿namespace HanumanInstitute.OntraportApi.Converters;
 
-namespace HanumanInstitute.OntraportApi.Converters
+/// <summary>
+/// Converts a "0" or "1" field into a boolean property.
+/// </summary>
+public class JsonConverterIntBool : JsonConverterBase<bool?>
 {
-    /// <summary>
-    /// Converts a "0" or "1" field into a boolean property.
-    /// </summary>
-    public class JsonConverterIntBool : JsonConverterBase<bool?>
+    public override bool? Parse(string? value)
     {
-        public override bool? Parse(string? value)
+        // Different forms may use either a binary integer or boolean value for deleted field.
+        int? valueInt = null;
+        if (value == "true" || value == "True")
         {
-            // Different forms may use either a binary integer or boolean value for deleted field.
-            int? valueInt = null;
-            if (value == "true" || value == "True")
-            {
-                valueInt = 1;
-            }
-            else if (value == "false" || value == "False")
-            {
-                valueInt = 0;
-            }
-            else if (!IsNullValue(value))
-            {
-                valueInt = value?.Convert<int?>();
-            }
-            return valueInt.HasValue ? valueInt == 1 : (bool?)null;
+            valueInt = 1;
         }
-
-        public override string Format(bool? value) =>
-            value.HasValue ? (value == true ? "1" : "0") : "";
+        else if (value == "false" || value == "False")
+        {
+            valueInt = 0;
+        }
+        else if (!IsNullValue(value))
+        {
+            valueInt = value?.Convert<int?>();
+        }
+        return valueInt.HasValue ? valueInt == 1 : (bool?)null;
     }
+
+    public override string Format(bool? value) =>
+        value.HasValue ? (value == true ? "1" : "0") : "";
 }

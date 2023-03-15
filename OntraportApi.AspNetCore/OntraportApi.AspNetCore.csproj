@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>default</LangVersion>
     <Authors>Etienne Charland</Authors>
     <Company>Hanuman Institute</Company>
     <Description>Registers OntraportApi in an ASP.NET Core Web project to add API-managed marketing automation</Description>
     <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
-    <Copyright>Copyright © 2019-2021 Etienne Charland</Copyright>
+    <Copyright>Copyright © 2019-2023 Etienne Charland</Copyright>
     <PackageProjectUrl>https://github.com/mysteryx93/OntraportApi.NET/</PackageProjectUrl>
     <PackageTags>Ontraport API marketing automation email sender smtp .net</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

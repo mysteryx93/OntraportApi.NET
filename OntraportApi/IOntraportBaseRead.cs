@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using HanumanInstitute.OntraportApi.Models;
-
-namespace HanumanInstitute.OntraportApi
+﻿namespace HanumanInstitute.OntraportApi
 {
     /// <summary>
     /// Provides common API endpoints for all objects with read methods.

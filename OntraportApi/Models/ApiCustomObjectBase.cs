@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using HanumanInstitute.OntraportApi.Converters;
-
-namespace HanumanInstitute.OntraportApi.Models
+﻿namespace HanumanInstitute.OntraportApi.Models
 {
     /// <summary>
     /// Custom objects behave like contacts and have their own properties, forms, campaigns and emails.

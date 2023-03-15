@@ -1,15 +1,12 @@
-﻿using System;
+﻿namespace HanumanInstitute.OntraportApi.Models;
 
-namespace HanumanInstitute.OntraportApi.Models
+/// <summary>
+/// A flag that indicates whether or not a contact is opted in to receive bulk texts.
+/// </summary>
+public enum BulkSmsStatus
 {
-    /// <summary>
-    /// A flag that indicates whether or not a contact is opted in to receive bulk texts.
-    /// </summary>
-    public enum BulkSmsStatus
-    {
-        OptedOut = 0,
-        OptedIn = 1,
-        DoubleOptIn = 2,
-        HardBounce = -2
-    }
+    OptedOut = 0,
+    OptedIn = 1,
+    DoubleOptIn = 2,
+    HardBounce = -2
 }
