@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <UserSecretsId>fc6858ea-c7c5-4060-9abc-855ad2843eab</UserSecretsId>
     
     <IsPackable>false</IsPackable>

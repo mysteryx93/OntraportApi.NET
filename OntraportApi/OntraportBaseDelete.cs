@@ -57,8 +57,9 @@ namespace HanumanInstitute.OntraportApi
         {
             searchOptions.CheckNotNull(nameof(searchOptions));
 
+            var keysOverride = this.GetKeysOverride();
             var query = new Dictionary<string, object?>()
-                .AddSearchOptions(searchOptions, true);
+                .AddSearchOptions(searchOptions, keysOverride, true);
 
             await ApiRequest.DeleteAsync<object>(
                 EndpointPlural, query, true, cancellationToken).ConfigureAwait(false);

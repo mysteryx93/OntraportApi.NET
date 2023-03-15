@@ -155,7 +155,7 @@ namespace HanumanInstitute.OntraportApi
         public async Task RefundAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, this.GetKeysOverride());
 
             await ApiRequest.PutAsync<object>(
                 "transaction/refund", query, cancellationToken).ConfigureAwait(false);
@@ -168,7 +168,7 @@ namespace HanumanInstitute.OntraportApi
         public async Task RerunAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, this.GetKeysOverride());
 
             await ApiRequest.PostAsync<object>(
                 "transaction/rerun", query, cancellationToken).ConfigureAwait(false);
@@ -181,7 +181,7 @@ namespace HanumanInstitute.OntraportApi
         public async Task RerunCommissionsAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, this.GetKeysOverride());
 
             await ApiRequest.PutAsync<object>(
                 "transaction/rerunCommission", query, cancellationToken).ConfigureAwait(false);
@@ -194,7 +194,7 @@ namespace HanumanInstitute.OntraportApi
         public async Task ResendInvoiceAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, this.GetKeysOverride());
 
             await ApiRequest.PostAsync<object>(
                 "transaction/resendInvoice", query, cancellationToken).ConfigureAwait(false);
@@ -207,7 +207,7 @@ namespace HanumanInstitute.OntraportApi
         public async Task VoidAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, this.GetKeysOverride());
 
             await ApiRequest.PutAsync<object>(
                 "transaction/void", query, cancellationToken).ConfigureAwait(false);
@@ -220,7 +220,7 @@ namespace HanumanInstitute.OntraportApi
         public async Task WriteOffAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>()
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, this.GetKeysOverride());
 
             await ApiRequest.PutAsync<object>(
                 "transaction/writeOff", query, cancellationToken).ConfigureAwait(false);

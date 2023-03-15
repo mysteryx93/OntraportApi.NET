@@ -80,6 +80,54 @@ namespace HanumanInstitute.OntraportApi
             }
             return list;
         }
+        
+        internal static void WriteOverrideFields<T, TOverride>(this IList<ApiSearchConditionBase> list)
+            where T : ApiObject
+            where TOverride : T
+        {
+            if (typeof(T) == typeof(TOverride)) { return; }
+
+            var keysOverride = GetKeysOverride(typeof(T), typeof(TOverride)).WriteKeysOverride;
+
+            // Replace key names.
+            if (keysOverride.Any())
+            {
+                foreach (var item in list)
+                {
+                    if (keysOverride.TryGetValue(item.Field, out var match))
+                    {
+                        item.Field = match;
+                    }
+                }
+            }
+        }
+
+        // /// <summary>
+        // /// Returns the field key overriden for testing via reflection, when using TOverride.
+        // /// </summary>
+        // /// <param name="ontra">The Ontraport object.</param>
+        // /// <param name="fieldKey">The field key to evaluate.</param>
+        // /// <typeparam name="T">The normal object type.</typeparam>
+        // /// <typeparam name="TOverride">The override type containing new key values for testing.</typeparam>
+        // /// <returns>A new key from TOverride if any, or fieldKey.</returns>
+        // private static string GetFieldKeyWithOverride<T, TOverride>(this OntraportBaseCustomObject<T, TOverride> ontra, string fieldKey)
+        //     where T : ApiCustomObjectBase
+        //     where TOverride : T
+        // {
+        //     if (typeof(T) == typeof(TOverride)) { return fieldKey; }
+        //
+        //     var keysOverride = GetKeysOverride(typeof(T), typeof(TOverride)).ReadKeysOverride;
+        //     if (keysOverride.TryGetValue(fieldKey, out var match))
+        //     {
+        //         return match;
+        //     }
+        //     return fieldKey;
+        // }
+
+        internal static OverrideCacheKey GetKeysOverride<T, TOverride>(this OntraportBaseRead<T, TOverride> ontra)
+            where T : ApiObject
+            where TOverride : T =>
+            GetKeysOverride(typeof(T), typeof(TOverride));
 
         private static OverrideCacheKey GetKeysOverride(Type t, Type tOverride)
         {
@@ -151,23 +199,7 @@ namespace HanumanInstitute.OntraportApi
             return new OverrideCacheKey(t, tOverride, writeKeysOverride, readKeysOverride);
         }
 
-        // Static cache is enough considering this will be skipped in production. It serves only for developpement.
+        // Static cache is enough considering this will be skipped in production. It serves only for development.
         private static readonly List<OverrideCacheKey> s_overrideFieldsCache = new List<OverrideCacheKey>();
-
-        private class OverrideCacheKey
-        {
-            public Type T { get; set; }
-            public Type TOverride { get; set; }
-            public IDictionary<string, string> WriteKeysOverride { get; }
-            public IDictionary<string, string> ReadKeysOverride { get; }
-
-            public OverrideCacheKey(Type t, Type tOverride, IDictionary<string, string> writeKeysOverride, IDictionary<string, string> readKeysOverride)
-            {
-                T = t;
-                TOverride = tOverride;
-                WriteKeysOverride = writeKeysOverride;
-                ReadKeysOverride = readKeysOverride;
-            }
-        }
     }
 }

@@ -116,10 +116,9 @@ namespace HanumanInstitute.OntraportApi
             {
                 { "objectID", (int)objectType }
             }
-                .AddSearchOptions(searchOptions)
-                .AddSortOptions(sortOptions)
-                .AddIfHasValue("externs", externs)
-                .AddIfHasValue("listFields", listFields);
+                .AddSearchOptions(searchOptions, null)
+                .AddSortOptions(sortOptions, null)
+                .AddFields(externs, listFields, null);
 
             return await _apiRequest.GetAsync<List<Dictionary<string, string>>>(
                 "objects", query, true, cancellationToken).ConfigureAwait(false)
@@ -201,10 +200,9 @@ namespace HanumanInstitute.OntraportApi
                 { tagId.HasValue ? "tag_id" : "tag_name", (object?)tagId ?? tagName },
                 { "count", count ? "true" : "false" },
             }
-                .AddSearchOptions(searchOptions)
-                .AddSortOptions(sortOptions)
-                .AddIfHasValue("externs", externs)
-                .AddIfHasValue("listFields", listFields);
+                .AddSearchOptions(searchOptions, null)
+                .AddSortOptions(sortOptions, null)
+                .AddFields(externs, listFields, null);
 
             return await _apiRequest.GetJsonAsync(
                 "objects/tag", query, true, cancellationToken).ConfigureAwait(false);
@@ -306,7 +304,7 @@ namespace HanumanInstitute.OntraportApi
             {
                 { "objectID", (int)objectType },
             }
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, null);
 
             return await _apiRequest.GetAsync<ResponseCollectionInfo>(
                 "objects/getInfo", query, true, cancellationToken).ConfigureAwait(false);
@@ -442,7 +440,7 @@ namespace HanumanInstitute.OntraportApi
             {
                 { "objectID", (int)objectType },
             }
-                .AddSearchOptions(searchOptions, true);
+                .AddSearchOptions(searchOptions, null, true);
 
             await _apiRequest.DeleteAsync<object>(
                 "objects", query, true, cancellationToken).ConfigureAwait(false);
@@ -501,7 +499,7 @@ namespace HanumanInstitute.OntraportApi
                 { "objectID", (int)objectType },
                 { "add_list", sequenceIds },
             }
-                .AddSearchOptions(searchOptions, true);
+                .AddSearchOptions(searchOptions, null, true);
 
             await _apiRequest.PutAsync<object>(
                 "objects/sequence", query, cancellationToken).ConfigureAwait(false);
@@ -523,7 +521,7 @@ namespace HanumanInstitute.OntraportApi
                 { "objectID", (int)objectType },
                 { "add_list", tagIds },
             }
-                .AddSearchOptions(searchOptions, true);
+                .AddSearchOptions(searchOptions, null, true);
 
             await _apiRequest.PutAsync<object>(
                 "objects/tag", query, cancellationToken).ConfigureAwait(false);
@@ -545,7 +543,7 @@ namespace HanumanInstitute.OntraportApi
                 { "objectID", (int)objectType },
                 { "add_names", tagNames },
             }
-                .AddSearchOptions(searchOptions, true);
+                .AddSearchOptions(searchOptions, null, true);
 
             await _apiRequest.PutAsync<object>(
                 "objects/tagByName", query, cancellationToken).ConfigureAwait(false);
@@ -567,7 +565,7 @@ namespace HanumanInstitute.OntraportApi
                 { "objectID", (int)objectType },
                 { "add_list", campaignIds },
             }
-                .AddSearchOptions(searchOptions, true);
+                .AddSearchOptions(searchOptions, null, true);
 
             await _apiRequest.PutAsync<object>(
                 "objects/subscribe", query, cancellationToken).ConfigureAwait(false);
@@ -589,7 +587,7 @@ namespace HanumanInstitute.OntraportApi
                 { "objectID", (int)objectType },
                 { "remove_list", sequenceIds }
             }
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, null);
 
             await _apiRequest.DeleteAsync<object>(
                 "objects/sequence", query, true, cancellationToken).ConfigureAwait(false);
@@ -611,7 +609,7 @@ namespace HanumanInstitute.OntraportApi
                 { "objectID", (int)objectType },
                 { "remove_list", tagIds },
             }
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, null);
 
             await _apiRequest.DeleteAsync<object>(
                 "objects/tag", query, true, cancellationToken).ConfigureAwait(false);
@@ -633,7 +631,7 @@ namespace HanumanInstitute.OntraportApi
                 { "objectID", (int)objectType },
                 { "remove_names", tagNames },
             }
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, null);
 
             await _apiRequest.DeleteAsync<object>(
                 "objects/tagByName", query, true, cancellationToken).ConfigureAwait(false);
@@ -655,7 +653,7 @@ namespace HanumanInstitute.OntraportApi
                 { "objectID", (int)objectType },
                 { "remove_list", campaignIds }
             }
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, null);
 
             await _apiRequest.DeleteAsync<object>(
                 "objects/subscribe", query, true, cancellationToken).ConfigureAwait(false);
@@ -677,7 +675,7 @@ namespace HanumanInstitute.OntraportApi
             {
                 { "objectID", (int)objectType },
             }
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, null);
 
             await _apiRequest.PostAsync<object>(
                 "objects/pause", query, cancellationToken).ConfigureAwait(false);
@@ -699,7 +697,7 @@ namespace HanumanInstitute.OntraportApi
             {
                 { "objectID", (int)objectType },
             }
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, null);
 
             await _apiRequest.PostAsync<object>(
                 "objects/unpause", query, cancellationToken).ConfigureAwait(false);

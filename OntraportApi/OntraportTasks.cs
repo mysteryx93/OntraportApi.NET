@@ -48,11 +48,12 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="message">Data for the task message to assign to contacts.</param>
         public async Task AssignAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, AssignTaskMessage? message = null, CancellationToken cancellationToken = default)
         {
+            var keysOverride = this.GetKeysOverride();
             var query = new Dictionary<string, object?>
             {
                 { "object_type_id", (int)objectType },
             }
-                .AddSearchOptions(searchOptions, true)
+                .AddSearchOptions(searchOptions, keysOverride, true)
                 .AddIfHasValue("message", message);
 
             await ApiRequest.PostAsync<object>(
@@ -66,11 +67,12 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         public async Task CancelAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, CancellationToken cancellationToken = default)
         {
+            var keysOverride = this.GetKeysOverride();
             var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType }
             }
-                .AddSearchOptions(searchOptions, true);
+                .AddSearchOptions(searchOptions, keysOverride, true);
 
             await ApiRequest.PostAsync<object>(
                 "task/cancel", query, cancellationToken).ConfigureAwait(false);
@@ -85,11 +87,12 @@ namespace HanumanInstitute.OntraportApi
         /// <returns></returns>
         public async Task CompleteAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions = null, IDictionary<string, object?>? data = null, CancellationToken cancellationToken = default)
         {
+            var keysOverride = this.GetKeysOverride();
             var query = new Dictionary<string, object?>
             {
                 { "objectID", (int)objectType }
             }
-                .AddSearchOptions(searchOptions, true)
+                .AddSearchOptions(searchOptions, keysOverride, true)
                 .AddIfHasValue("data", data);
 
             await ApiRequest.PostAsync<object>(

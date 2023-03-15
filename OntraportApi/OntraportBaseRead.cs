@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -81,11 +82,11 @@ namespace HanumanInstitute.OntraportApi
         public async Task<IList<T>> SelectAsync(
             ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null, IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, CancellationToken cancellationToken = default)
         {
+            var keysOverride = this.GetKeysOverride();
             var query = new Dictionary<string, object?>()
-                .AddSearchOptions(searchOptions)
-                .AddSortOptions(sortOptions)
-                .AddIfHasValue("externs", externs)
-                .AddIfHasValue("listFields", listFields);
+                .AddSearchOptions(searchOptions, keysOverride)
+                .AddSortOptions(sortOptions, keysOverride)
+                .AddFields(externs, listFields, keysOverride);
 
             var json = await ApiRequest.GetJsonAsync(
                 $"{EndpointPlural}", query, false, cancellationToken).ConfigureAwait(false);
@@ -142,8 +143,9 @@ namespace HanumanInstitute.OntraportApi
         /// <returns>A ResponseCollectionInfo object.</returns>
         public async Task<ResponseCollectionInfo?> GetCollectionInfoAsync(ApiSearchOptions? searchOptions = null, CancellationToken cancellationToken = default)
         {
+            var keysOverride = this.GetKeysOverride();
             var query = new Dictionary<string, object?>()
-                .AddSearchOptions(searchOptions);
+                .AddSearchOptions(searchOptions, keysOverride);
 
             var json = await ApiRequest.GetJsonAsync(
                 $"{EndpointPlural}/getInfo", query, true, cancellationToken).ConfigureAwait(false);

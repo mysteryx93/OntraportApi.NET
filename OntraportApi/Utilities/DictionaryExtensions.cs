@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -34,13 +33,19 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="list">The dictionary of query parameters.</param>
         /// <param name="options">An ApiSearchOptions object containing search options.</param>
+        /// <param name="keysOverride">A list of key overrides returned by GetKeysOverride, for unit testing.</param>
         /// <param name="performsAction">Whether the query performs an action other than selecting data.</param>
         /// <returns></returns>
-        internal static Dictionary<string, object?> AddSearchOptions(this Dictionary<string, object?> list, ApiSearchOptions? options, bool performsAction = false)
+        internal static Dictionary<string, object?> AddSearchOptions(this Dictionary<string, object?> list, ApiSearchOptions? options, OverrideCacheKey keysOverride, bool performsAction = false)
         {
             if (options != null)
             {
                 // OntraportHttpClient.SerializerOptions.Converters.Add(new ApiSearchConditionConverter());
+
+                foreach (var item in options.Conditions)
+                {
+                    item.Field = keysOverride.ApplyOn(item.Field);
+                }
                 var condition = options.GetCondition();
                 if (options.Ids.Any())
                 {
@@ -72,13 +77,14 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="list">The dictionary of query parameters.</param>
         /// <param name="options">An ApiSortOptions object containing sort options.</param>
-        internal static Dictionary<string, object?> AddSortOptions(this Dictionary<string, object?> list, ApiSortOptions? options)
+        /// <param name="keysOverride">A list of key overrides returned by GetKeysOverride, for unit testing.</param>
+        internal static Dictionary<string, object?> AddSortOptions(this Dictionary<string, object?> list, ApiSortOptions? options, OverrideCacheKey keysOverride)
         {
             if (options != null)
             {
                 if (!string.IsNullOrEmpty(options.Sort))
                 {
-                    list.Add("sort", options.Sort);
+                    list.Add("sort", keysOverride.ApplyOn(options.Sort!));
                     list.Add("sortDir", options.Direction == ListSortDirection.Ascending ? "asc" : "desc");
                 }
             }
@@ -90,8 +96,8 @@ namespace HanumanInstitute.OntraportApi
         ///// </summary>
         ///// <param name="list">The dictionary of query parameters.</param>
         ///// <param name="groupId">The group id of objects to retrieve</param>
-        ///// <param name="performAll">Used in conjunction with group_id to indicates wether specified action should be performed on all members of a group.</param>
-        ///// <returns>The query dictionnary.</returns>
+        ///// <param name="performAll">Used in conjunction with group_id to indicates whether specified action should be performed on all members of a group.</param>
+        ///// <returns>The query dictionary.</returns>
         //internal static Dictionary<string, object?> AddGroupId(this Dictionary<string, object?> list, int? groupId = null, bool? performAll = null)
         //{
         //    if (groupIds != null)
@@ -111,8 +117,9 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="list">The dictionary of query parameters.</param>
         /// <param name="externs">If you have a relationship between your object and another object, you may want to include the data from a related field in your results. Each external field is listed in the format {object}//{field}.</param>
         /// <param name="listFields">A string array of the fields which should be returned in your results.</param>
+        /// <param name="keysOverride">A list of key overrides returned by GetKeysOverride, for unit testing.</param>
         /// <returns>The query dictionary.</returns>
-        internal static Dictionary<string, object?> AddFields(this Dictionary<string, object?> list, IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null)
+        internal static Dictionary<string, object?> AddFields(this Dictionary<string, object?> list, IEnumerable<string>? externs, IEnumerable<string>? listFields, OverrideCacheKey keysOverride)
         {
             if (externs != null)
             {
@@ -120,7 +127,7 @@ namespace HanumanInstitute.OntraportApi
             }
             if (listFields != null)
             {
-                list.Add("listFields", string.Join(",", listFields));
+                list.Add("listFields", string.Join(",", listFields.Select(keysOverride.ApplyOn)));
             }
             return list;
         }
