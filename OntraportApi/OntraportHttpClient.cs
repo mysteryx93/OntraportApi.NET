@@ -312,12 +312,12 @@ public class OntraportHttpClient
         if (!encodeJson && !string.IsNullOrEmpty(content))
         {
             requestUrl += "?" + content;
-            content = "";
+            content = null;
         }
 
         using var request = new HttpRequestMessage(method, requestUrl)
         {
-            Content = new StringContent(content, Encoding.UTF8, encodeJson ? ContentJson : ContentUrl)
+            Content = content != null ? new StringContent(content, Encoding.UTF8, encodeJson ? ContentJson : ContentUrl) : null
         };
         var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
