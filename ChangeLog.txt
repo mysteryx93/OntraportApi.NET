@@ -2,6 +2,11 @@ OntraportApi.NET
 
 What's New
 
+v1.2.6 (2023-03-15)
+- TOverride now applies to select conditions, sort and listFields (but not externs)
+- Fix a crash with .NET 4.8 with GET requests
+- Raised framework dependency to .NET 5.0 for AspNetCore and IdentityCore
+
 v1.2.5 (2021-05-08)
 - Fixed a data parsing bug
 
