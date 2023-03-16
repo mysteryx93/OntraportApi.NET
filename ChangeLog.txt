@@ -2,6 +2,9 @@ OntraportApi.NET
 
 What's New
 
+v1.2.8
+- Fix RequestUrl not showing fully in log (regression in v1.2.7)
+
 v1.2.7 (2023-03-16)
 - Fix some parsing problems reading transaction offers
 - Bool fields can now read either string or int

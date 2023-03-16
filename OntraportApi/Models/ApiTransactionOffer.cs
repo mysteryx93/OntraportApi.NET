@@ -57,7 +57,7 @@ public class ApiTransactionOffer
     /// </summary>
     [JsonPropertyName("send_recurring_invoice")]
     // [JsonConverter(typeof(JsonConverterIntBool))]
-    public bool? SendRecurringInvoice { get; set; }
+    public bool SendRecurringInvoice { get; set; }
 
     /// <summary>
     /// Gets or sets the expiration date of the credit card on file.
