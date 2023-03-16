@@ -9,6 +9,11 @@ v1.2.7 (2023-03-16)
 - Enable parsing of non-nullable DateTimeOffset fields
 - Enable parsing of Decimal fields
 - Added product type "single" (any difference with "onetime"?)
+- Fix problem with OntraportObjects due to recent TOverride changes
+- Fix problem with AddTagNamesAsync, pass "ids" as array instead of comma-delimited
+- Removed OntraportObjects.SelectByUniqueId
+- Removed WebHook.Owner property
+- Tried to fix WebHook.Subscribe method but failed. There are a few minor APIs that are broken.
 
 v1.2.6 (2023-03-15)
 - TOverride now applies to select conditions, sort and listFields (but not externs)

@@ -117,16 +117,17 @@ public class OntraportHttpClient
     /// </summary>
     /// <typeparam name="T">The expected response data type. Set to JsonElement to parse manually. Set to Object to discard output.</typeparam>
     /// <param name="endpoint">The URL endpoint, excluding that goes after https://api.ontraport.com/1/ </param>
-    /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
     /// <param name="values">Values set by the method type.</param>
+    /// <param name="encodeJson">True to encode the request as Json, false to encode as query data.</param>
+    /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
     /// <returns>An ApiResponse of the expected type.</returns>
     /// <exception cref="InvalidOperationException">There was an error while sending or parsing the request.</exception>
     /// <exception cref="HttpRequestException">There was an HTTP communication error or Ontraport returned an error.</exception>
     /// <exception cref="TaskCanceledException">The request timed-out or the user canceled the request's Task.</exception>
-    public async Task<T> PostAsync<T>(string endpoint, IDictionary<string, object?>? values = null, CancellationToken cancellationToken = default)
+    public async Task<T> PostAsync<T>(string endpoint, IDictionary<string, object?>? values = null, bool encodeJson = true, CancellationToken cancellationToken = default)
         where T : class
     {
-        var result = await RequestAsync<T>(endpoint, HttpMethod.Post, true, values, false, cancellationToken).ConfigureAwait(false);
+        var result = await RequestAsync<T>(endpoint, HttpMethod.Post, encodeJson, values, false, cancellationToken).ConfigureAwait(false);
         return result!;
     }
 
@@ -135,15 +136,16 @@ public class OntraportHttpClient
     /// </summary>
     /// <typeparam name="T">The expected response data type. Set to JsonElement to parse manually. Set to Object to discard output.</typeparam>
     /// <param name="endpoint">The URL endpoint, excluding that goes after https://api.ontraport.com/1/ </param>
-    /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
     /// <param name="values">Values set by the method type.</param>
+    /// <param name="encodeJson">True to encode the request as Json, false to encode as query data.</param>
+    /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
     /// <returns>An ApiResponse of the expected type.</returns>
     /// <exception cref="InvalidOperationException">There was an error while sending or parsing the request.</exception>
     /// <exception cref="HttpRequestException">There was an HTTP communication error or Ontraport returned an error.</exception>
     /// <exception cref="TaskCanceledException">The request timed-out or the user canceled the request's Task.</exception>
-    public async Task<JsonElement> PostJsonAsync(string endpoint, IDictionary<string, object?>? values = null, CancellationToken cancellationToken = default)
+    public async Task<JsonElement> PostJsonAsync(string endpoint, IDictionary<string, object?>? values = null, bool encodeJson = true, CancellationToken cancellationToken = default)
     {
-        var result = await RequestJsonAsync(endpoint, HttpMethod.Post, true, values, false, cancellationToken).ConfigureAwait(false);
+        var result = await RequestJsonAsync(endpoint, HttpMethod.Post, encodeJson, values, false, cancellationToken).ConfigureAwait(false);
         return result.Value;
     }
 
@@ -302,19 +304,19 @@ public class OntraportHttpClient
             JsonSerializer.Serialize(values, OntraportSerializerOptions.Default) :
             values!.ToQueryString();
 
-        // Log request.
-        if (_logger?.IsEnabled(LogLevel.Information) == true)
-        {
-            _logger?.LogInformation($"{method} {_httpClient.BaseAddress}{endpoint}?{content}");
-        }
-
         var requestUrl = endpoint;
-        if (!encodeJson && !string.IsNullOrEmpty(content))
+        if ((method == HttpMethod.Get || method == HttpMethod.Delete) && !encodeJson && !string.IsNullOrEmpty(content))
         {
             requestUrl += "?" + content;
             content = null;
         }
 
+        // Log request.
+        if (_logger?.IsEnabled(LogLevel.Information) == true)
+        {
+            _logger?.LogInformation("{Method} {BaseAddress}{Endpoint}    {Content}", method, _httpClient.BaseAddress, endpoint, content ?? string.Empty);
+        }
+        
         using var request = new HttpRequestMessage(method, requestUrl)
         {
             Content = content != null ? new StringContent(content, Encoding.UTF8, encodeJson ? ContentJson : ContentUrl) : null

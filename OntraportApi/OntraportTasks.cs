@@ -50,7 +50,7 @@ public class OntraportTasks : OntraportBaseRead<ApiTask>, IOntraportTasks
             .AddIfHasValue("message", message);
 
         await ApiRequest.PostAsync<object>(
-            "task/assign", query, cancellationToken).ConfigureAwait(false);
+            "task/assign", query, true, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -68,7 +68,7 @@ public class OntraportTasks : OntraportBaseRead<ApiTask>, IOntraportTasks
             .AddSearchOptions(searchOptions, keysOverride, true);
 
         await ApiRequest.PostAsync<object>(
-            "task/cancel", query, cancellationToken).ConfigureAwait(false);
+            "task/cancel", query, true, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -89,7 +89,7 @@ public class OntraportTasks : OntraportBaseRead<ApiTask>, IOntraportTasks
             .AddIfHasValue("data", data);
 
         await ApiRequest.PostAsync<object>(
-            "task/complete", query, cancellationToken).ConfigureAwait(false);
+            "task/complete", query, true, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -107,6 +107,6 @@ public class OntraportTasks : OntraportBaseRead<ApiTask>, IOntraportTasks
         };
 
         await ApiRequest.PostAsync<object>(
-            "task/reschedule", query, cancellationToken).ConfigureAwait(false);
+            "task/reschedule", query, true, cancellationToken).ConfigureAwait(false);
     }
 }

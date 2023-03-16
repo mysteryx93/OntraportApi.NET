@@ -107,7 +107,7 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
             .AddIfHasValue("cc_id", creditCardId);
 
         return await ApiRequest.PostAsync<ApiTransactionResult>(
-            "transaction/processManual", query, cancellationToken).ConfigureAwait(false);
+            "transaction/processManual", query, true, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -136,7 +136,7 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
             .AddIfHasValue("trans_date", new JsonConverterDateTimeNullable(true).Format(transactionDate));
 
         var json = await ApiRequest.PostJsonAsync(
-            "transaction/processManual", query, cancellationToken).ConfigureAwait(false);
+            "transaction/processManual", query, true, cancellationToken).ConfigureAwait(false);
         return await json.RunStructAndCatchAsync(x => json.JsonData().JsonChild("invoice_id").GetInt32()).ConfigureAwait(false);
     }
 
@@ -163,7 +163,7 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
             .AddSearchOptions(searchOptions, this.GetKeysOverride());
 
         await ApiRequest.PostAsync<object>(
-            "transaction/rerun", query, cancellationToken).ConfigureAwait(false);
+            "transaction/rerun", query, true, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -189,7 +189,7 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
             .AddSearchOptions(searchOptions, this.GetKeysOverride());
 
         await ApiRequest.PostAsync<object>(
-            "transaction/resendInvoice", query, cancellationToken).ConfigureAwait(false);
+            "transaction/resendInvoice", query, true, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>

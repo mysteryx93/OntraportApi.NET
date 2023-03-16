@@ -45,7 +45,7 @@ namespace HanumanInstitute.OntraportApi
             var query = new Dictionary<string, object?>().AddObject(values).WriteOverrideFields<T, TOverride>();
 
             var json = await ApiRequest.PostJsonAsync(
-                $"{EndpointPlural}/saveorupdate", query, cancellationToken).ConfigureAwait(false);
+                $"{EndpointPlural}/saveorupdate", query, true, cancellationToken).ConfigureAwait(false);
             return await json.RunAndCatchAsync(x =>
             {
                 var data = json.JsonData();

@@ -55,7 +55,7 @@ public abstract class OntraportBaseWrite<T, TOverride> : OntraportBaseRead<T, TO
         var query = new Dictionary<string, object?>().AddObject(values).WriteOverrideFields<T, TOverride>();
         var json = await ApiRequest.PostJsonAsync(
             EndpointPlural,
-            query, cancellationToken).ConfigureAwait(false);
+            query, true, cancellationToken).ConfigureAwait(false);
         return await json.RunAndCatchAsync(x => OnParseCreate(x)).ConfigureAwait(false);
     }
 

@@ -50,7 +50,8 @@ namespace HanumanInstitute.OntraportApi
                 var condition = options.GetCondition();
                 if (options.Ids.Any())
                 {
-                    list.Add("ids", string.Join(",", options.Ids));
+                    // list.Add("ids", string.Join(",", options.Ids));
+                    list.Add("ids", options.Ids);
                 }
                 list.AddIfHasValue("group_id", options.GroupId)
                     .AddIfHasValue("start", options.Start)
@@ -180,9 +181,9 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="parameters">The parameters to encode.</param>
         /// <returns>A URI-encoded string.</returns>
-        internal static string ToQueryString(this IDictionary<string, object> parameters) =>
-            string.Join("&",
-                parameters.Select(kvp => $"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(ValueToQueryString(kvp.Value))}"));
+        internal static string? ToQueryString(this IDictionary<string, object> parameters) =>
+            parameters.Any() ? string.Join("&",
+                parameters.Select(kvp => $"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(ValueToQueryString(kvp.Value))}")) : null;
 
         /// <summary>
         /// Converts an object into its string representation. Lists will be returned as comma-delimited strings.

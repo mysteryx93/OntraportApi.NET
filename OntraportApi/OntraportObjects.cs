@@ -30,7 +30,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             return await _apiRequest.PostAsync<Dictionary<string, string>>(
-                "objects", query.AddObject(values), cancellationToken).ConfigureAwait(false);
+                "objects", query.AddObject(values), true, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             var json = await _apiRequest.PostJsonAsync(
-                "objects/saveorupdate", query.AddObject(values), cancellationToken).ConfigureAwait(false);
+                "objects/saveorupdate", query.AddObject(values), true, cancellationToken).ConfigureAwait(false);
             return await json.RunAndCatchAsync(x => x.JsonData().JsonChild("attrs").ToObject<Dictionary<string, string>>()).ConfigureAwait(false);
         }
 
@@ -70,7 +70,7 @@ namespace HanumanInstitute.OntraportApi
             };
 
             var json = await _apiRequest.PostJsonAsync(
-                "objects/fieldeditor", query, cancellationToken).ConfigureAwait(false);
+                "objects/fieldeditor", query, true, cancellationToken).ConfigureAwait(false);
             return await json.RunAndCatchAsync(x => new ResponseSuccessList(x)).ConfigureAwait(false);
         }
 
@@ -116,24 +116,6 @@ namespace HanumanInstitute.OntraportApi
             return await _apiRequest.GetAsync<List<Dictionary<string, string>>>(
                 "objects", query, true, cancellationToken).ConfigureAwait(false)
                 ?? new List<Dictionary<string, string>>();
-        }
-
-        /// <summary>
-        /// Retrieves all the information for an existing object of the specified object type.
-        /// </summary>
-        /// <param name="objectType">The object type.</param>
-        /// <param name="uniqueId">The unique ID of the specific object.</param>
-        /// <returns>The selected object.</returns>
-        public async Task<Dictionary<string, string>?> SelectByUniqueIdAsync(ApiObjectType objectType, int uniqueId, CancellationToken cancellationToken = default)
-        {
-            var query = new Dictionary<string, object?>
-            {
-                { "objectID", (int)objectType },
-                { "unique_id", uniqueId }
-            };
-
-            return await _apiRequest.GetAsync<Dictionary<string, string>>(
-                "object", query, true, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -671,7 +653,7 @@ namespace HanumanInstitute.OntraportApi
                 .AddSearchOptions(searchOptions, null);
 
             await _apiRequest.PostAsync<object>(
-                "objects/pause", query, cancellationToken).ConfigureAwait(false);
+                "objects/pause", query, true, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -693,7 +675,7 @@ namespace HanumanInstitute.OntraportApi
                 .AddSearchOptions(searchOptions, null);
 
             await _apiRequest.PostAsync<object>(
-                "objects/unpause", query, cancellationToken).ConfigureAwait(false);
+                "objects/unpause", query, true, cancellationToken).ConfigureAwait(false);
         }
     }
 }

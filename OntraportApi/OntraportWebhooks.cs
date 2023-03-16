@@ -27,7 +27,7 @@ public class OntraportWebhooks : OntraportBaseRead<ApiWebhook>, IOntraportWebhoo
             .AddIfHasValue("data", data);
 
         var json = await ApiRequest.PostJsonAsync(
-            "Webhook/subscribe", query, cancellationToken).ConfigureAwait(false);
+            "Webhook/subscribe", query, false, cancellationToken).ConfigureAwait(false);
         return await json.RunAndCatchAsync(x => CreateApiObject(json.JsonData())).ConfigureAwait(false);
     }
 

@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using HanumanInstitute.OntraportApi.Models;
+using HanumanInstitute.Validators;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -114,7 +115,7 @@ public class OntraportObjectsTests
             new List<ApiFieldEditor>() {
                 new ApiFieldEditor()
                 {
-                    Alias = "FieldAdd5",
+                    Alias = "FieldAdd7",
                     Type = ApiFieldType.drop
                 }
             },
@@ -122,7 +123,7 @@ public class OntraportObjectsTests
             new List<ApiFieldEditor>() {
                 new ApiFieldEditor()
                 {
-                    Alias = "FieldAdd6",
+                    Alias = "FieldAdd8",
                     Type = ApiFieldType.check
                 }
             }
@@ -145,19 +146,6 @@ public class OntraportObjectsTests
 
         Assert.NotEmpty(result);
         Assert.Equal(contactId.ToString(CultureInfo.InvariantCulture), result["id"]);
-    }
-
-    [Fact]
-    public async Task SelectByUniqueIdAsync_Contact_ReturnsResultWithData()
-    {
-        using var c = CreateContext();
-        var contact = await c.Ontra.CreateOrMergeAsync(ApiObjectType.Contact, false, new { firstname = "aa", email = "a@test.com" });
-        var contactUniqueId = int.Parse(contact["unique_id"], CultureInfo.InvariantCulture);
-
-        var result = await c.Ontra.SelectByUniqueIdAsync(ApiObjectType.Contact, contactUniqueId);
-
-        Assert.NotEmpty(result);
-        Assert.Equal(contactUniqueId.ToString(CultureInfo.InvariantCulture), result["id"]);
     }
 
     [Fact]
@@ -334,7 +322,7 @@ public class OntraportObjectsTests
     public async Task UpdateAsync_SetName_ReturnsSameName()
     {
         using var c = CreateContext();
-        var name = "NewName4";
+        var name = "NewName1";
 
         var result = await c.Ontra.UpdateAsync(ApiObjectType.Contact, 19, new { firstname = name });
 

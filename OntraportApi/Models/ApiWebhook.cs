@@ -6,17 +6,6 @@
 public class ApiWebhook : ApiObject
 {
     /// <summary>
-    /// Returns a ApiProperty object to get or set the ID of the user who controls the webhook object. This field must contain a value for a webhook object to be saved properly.
-    /// </summary>
-    public ApiProperty<int> OwnerField => _ownerField ??= new ApiProperty<int>(this, OwnerKey);
-    private ApiProperty<int>? _ownerField;
-    public const string OwnerKey = "owner";
-    /// <summary>
-    /// Gets or sets the ID of the user who controls the webhook object. This field must contain a value for a webhook object to be saved properly.
-    /// </summary>
-    public int? OwnerValue { get => OwnerField.Value; set => OwnerField.Value = value; }
-
-    /// <summary>
     /// Returns a ApiProperty object to get or set the event triggering the webhook.
     /// </summary>
     public ApiPropertyString EventField => _eventField ??= new ApiPropertyString(this, EventKey);
