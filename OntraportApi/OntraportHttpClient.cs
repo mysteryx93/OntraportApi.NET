@@ -314,7 +314,7 @@ public class OntraportHttpClient
         // Log request.
         if (_logger?.IsEnabled(LogLevel.Information) == true)
         {
-            _logger?.LogInformation("{Method} {BaseAddress}{Endpoint}    {Content}", method, _httpClient.BaseAddress, endpoint, content ?? string.Empty);
+            _logger?.LogInformation("{Method} {BaseAddress}{RequestUrl}    {Content}", method, _httpClient.BaseAddress, requestUrl, content ?? string.Empty);
         }
         
         using var request = new HttpRequestMessage(method, requestUrl)
