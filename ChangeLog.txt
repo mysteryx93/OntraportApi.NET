@@ -2,6 +2,14 @@ OntraportApi.NET
 
 What's New
 
+v1.2.7 (2023-03-16)
+- Fix some parsing problems reading transaction offers
+- Bool fields can now read either string or int
+- Enable parsing of non-nullable Bool fields
+- Enable parsing of non-nullable DateTimeOffset fields
+- Enable parsing of Decimal fields
+- Added product type "single" (any difference with "onetime"?)
+
 v1.2.6 (2023-03-15)
 - TOverride now applies to select conditions, sort and listFields (but not externs)
 - Fix a crash with .NET 4.8 with GET requests
