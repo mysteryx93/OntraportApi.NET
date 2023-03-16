@@ -33,15 +33,19 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="keysOverride">A list of key overrides returned by GetKeysOverride, for unit testing.</param>
         /// <param name="performsAction">Whether the query performs an action other than selecting data.</param>
         /// <returns></returns>
-        internal static Dictionary<string, object?> AddSearchOptions(this Dictionary<string, object?> list, ApiSearchOptions? options, OverrideCacheKey keysOverride, bool performsAction = false)
+        internal static Dictionary<string, object?> AddSearchOptions(this Dictionary<string, object?> list, ApiSearchOptions? options,
+            OverrideCacheKey? keysOverride, bool performsAction = false)
         {
             if (options != null)
             {
                 // OntraportHttpClient.SerializerOptions.Converters.Add(new ApiSearchConditionConverter());
 
-                foreach (var item in options.Conditions)
+                if (keysOverride != null)
                 {
-                    item.Field = keysOverride.ApplyOn(item.Field);
+                    foreach (var item in options.Conditions)
+                    {
+                        item.Field = keysOverride.ApplyOn(item.Field);
+                    }
                 }
                 var condition = options.GetCondition();
                 if (options.Ids.Any())
@@ -75,13 +79,14 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="list">The dictionary of query parameters.</param>
         /// <param name="options">An ApiSortOptions object containing sort options.</param>
         /// <param name="keysOverride">A list of key overrides returned by GetKeysOverride, for unit testing.</param>
-        internal static Dictionary<string, object?> AddSortOptions(this Dictionary<string, object?> list, ApiSortOptions? options, OverrideCacheKey keysOverride)
+        internal static Dictionary<string, object?> AddSortOptions(this Dictionary<string, object?> list, ApiSortOptions? options,
+            OverrideCacheKey? keysOverride)
         {
             if (options != null)
             {
                 if (!string.IsNullOrEmpty(options.Sort))
                 {
-                    list.Add("sort", keysOverride.ApplyOn(options.Sort!));
+                    list.Add("sort", keysOverride?.ApplyOn(options.Sort!) ?? options.Sort);
                     list.Add("sortDir", options.Direction == ListSortDirection.Ascending ? "asc" : "desc");
                 }
             }
@@ -116,7 +121,8 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="listFields">A string array of the fields which should be returned in your results.</param>
         /// <param name="keysOverride">A list of key overrides returned by GetKeysOverride, for unit testing.</param>
         /// <returns>The query dictionary.</returns>
-        internal static Dictionary<string, object?> AddFields(this Dictionary<string, object?> list, IEnumerable<string>? externs, IEnumerable<string>? listFields, OverrideCacheKey keysOverride)
+        internal static Dictionary<string, object?> AddFields(this Dictionary<string, object?> list, IEnumerable<string>? externs,
+            IEnumerable<string>? listFields, OverrideCacheKey? keysOverride)
         {
             if (externs != null)
             {
@@ -124,7 +130,7 @@ namespace HanumanInstitute.OntraportApi
             }
             if (listFields != null)
             {
-                list.Add("listFields", string.Join(",", listFields.Select(keysOverride.ApplyOn)));
+                list.Add("listFields", string.Join(",", keysOverride != null ? listFields.Select(keysOverride.ApplyOn) : listFields));
             }
             return list;
         }
@@ -166,10 +172,7 @@ namespace HanumanInstitute.OntraportApi
         /// <returns>A new list.</returns>
         internal static List<Dictionary<string, string>> WrapInList(this Dictionary<string, string> dictionary)
         {
-            return new List<Dictionary<string, string>>
-            {
-                dictionary
-            };
+            return new List<Dictionary<string, string>> { dictionary };
         }
 
         /// <summary>
@@ -178,7 +181,8 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="parameters">The parameters to encode.</param>
         /// <returns>A URI-encoded string.</returns>
         internal static string ToQueryString(this IDictionary<string, object> parameters) =>
-            string.Join("&", parameters.Select(kvp => $"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(ValueToQueryString(kvp.Value))}"));
+            string.Join("&",
+                parameters.Select(kvp => $"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(ValueToQueryString(kvp.Value))}"));
 
         /// <summary>
         /// Converts an object into its string representation. Lists will be returned as comma-delimited strings.
