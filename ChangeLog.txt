@@ -13,7 +13,7 @@ v1.2.7 (2023-03-16)
 - Fix problem with AddTagNamesAsync, pass "ids" as array instead of comma-delimited
 - Removed OntraportObjects.SelectByUniqueId
 - Removed WebHook.Owner property
-- Tried to fix WebHook.Subscribe method but failed. There are a few minor APIs that are broken.
+- Tried to fix WebHook.Subscribe method but failed. There are a few minor APIs that are broken. There are also some fields that have been added or removed over time. If you need those new fields, code contributions are welcomed.
 
 v1.2.6 (2023-03-15)
 - TOverride now applies to select conditions, sort and listFields (but not externs)
