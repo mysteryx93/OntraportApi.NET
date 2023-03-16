@@ -11,6 +11,6 @@ public class ApiPropertyDateTime : ApiProperty<DateTimeOffset>
     /// <param name="host">The ApiObject containing the data.</param>
     /// <param name="key">The field key represented by this property.</param>
     public ApiPropertyDateTime(ApiObject host, string key) : 
-        base(host, key, new JsonConverterDateTime())
+        base(host, key, new JsonConverterDateTimeNullable())
     { }
 }

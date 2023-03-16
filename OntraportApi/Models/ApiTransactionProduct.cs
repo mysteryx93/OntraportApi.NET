@@ -155,9 +155,13 @@ public class ApiTransactionProduct
         /// </summary>
         OneTime,
         /// <summary>
+        /// A single purchase item.
+        /// </summary>
+        Single,
+        /// <summary>
         /// A product paid for on installment.
         /// </summary>
-        PaymentPlan
+        PaymentPlan,
     }
 
     /// <summary>

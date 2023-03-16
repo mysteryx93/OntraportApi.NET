@@ -18,8 +18,10 @@ public static class OntraportSerializerOptions
             IgnoreNullValues = true
         };
         result.Converters.Add(new ApiSearchConditionListConverter());
-        result.Converters.Add(new JsonConverterIntBool());
+        // result.Converters.Add(new JsonConverterIntBool());
+        result.Converters.Add(new JsonConverterIntBoolNullable());
         result.Converters.Add(new JsonConverterDateTime());
+        result.Converters.Add(new JsonConverterDateTimeNullable());
         result.Converters.Add(new JsonConverterBase<string>());
         result.Converters.Add(new JsonConverterBase<int>());
         result.Converters.Add(new JsonConverterBase<int?>());
@@ -31,6 +33,8 @@ public static class OntraportSerializerOptions
         result.Converters.Add(new JsonConverterBase<float?>());
         result.Converters.Add(new JsonConverterBase<double>());
         result.Converters.Add(new JsonConverterBase<double?>());
+        result.Converters.Add(new JsonConverterBase<decimal>());
+        result.Converters.Add(new JsonConverterBase<decimal?>());
         return result;
     }
 }

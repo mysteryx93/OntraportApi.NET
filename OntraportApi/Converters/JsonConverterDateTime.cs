@@ -3,7 +3,7 @@
 /// <summary>
 /// Converts a Unix Epoch seconds field into a DateTimeOffset property.
 /// </summary>
-public class JsonConverterDateTime : JsonConverterBase<DateTimeOffset?>
+public class JsonConverterDateTime : JsonConverterBase<DateTimeOffset>
 {
     public bool Milliseconds { get; private set; }
 
@@ -17,7 +17,7 @@ public class JsonConverterDateTime : JsonConverterBase<DateTimeOffset?>
 
     public override string NullString => "0";
 
-    public override DateTimeOffset? Parse(string? value)
+    public override DateTimeOffset Parse(string? value)
     {
         if (!IsNullValue(value))
         {
@@ -26,11 +26,11 @@ public class JsonConverterDateTime : JsonConverterBase<DateTimeOffset?>
                 DateTimeOffset.FromUnixTimeMilliseconds(valueLong) :
                 DateTimeOffset.FromUnixTimeSeconds(valueLong);
         }
-        return null;
+        return DateTimeOffset.MinValue;
     }
 
-    public override string Format(DateTimeOffset? value) => 
-        value != null ? Milliseconds ?
-            ((DateTimeOffset)value).ToUnixTimeMilliseconds().ToStringInvariant() :
-            ((DateTimeOffset)value).ToUnixTimeSeconds().ToStringInvariant() : "0";
+    public override string Format(DateTimeOffset value) => 
+        Milliseconds ?
+            value.ToUnixTimeMilliseconds().ToStringInvariant() :
+            value.ToUnixTimeSeconds().ToStringInvariant();
 }

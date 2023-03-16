@@ -134,6 +134,10 @@ internal static partial class JsonExtensions
         {
             return reader.GetDouble();
         }
+        else if (t == typeof(decimal) || t == typeof(decimal?))
+        {
+            return reader.GetDecimal();
+        }
         else if (t == typeof(string))
         {
             return reader.GetDecimal().ToStringInvariant();
@@ -151,10 +155,12 @@ internal static partial class JsonExtensions
         {
             return reader.GetString();
         }
-        else
+        if (t == typeof(bool) || t == typeof(bool?))
         {
-            return reader.GetString().Convert(t);
+            var val = reader.GetString();
+            return val == "1" || val == "true" || val == "True";
         }
+        return reader.GetString().Convert(t);
     }
 
     /// <summary>

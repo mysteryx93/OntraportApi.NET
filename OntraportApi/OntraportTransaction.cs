@@ -101,7 +101,7 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
                 { "offer", offer }
             }
             .AddIfHasValue("external_order_id", externalOrderId)
-            .AddIfHasValue("trans_date", new JsonConverterDateTime(true).Format(transactionDate))
+            .AddIfHasValue("trans_date", new JsonConverterDateTimeNullable(true).Format(transactionDate))
             .AddIfHasValue("billing_address", billingAddress)
             .AddIfHasValue("payer", payer)
             .AddIfHasValue("cc_id", creditCardId);
@@ -133,7 +133,7 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
                 { "offer", offer }
             }
             .AddIfHasValue("external_order_id", externalOrderId)
-            .AddIfHasValue("trans_date", new JsonConverterDateTime(true).Format(transactionDate));
+            .AddIfHasValue("trans_date", new JsonConverterDateTimeNullable(true).Format(transactionDate));
 
         var json = await ApiRequest.PostJsonAsync(
             "transaction/processManual", query, cancellationToken).ConfigureAwait(false);

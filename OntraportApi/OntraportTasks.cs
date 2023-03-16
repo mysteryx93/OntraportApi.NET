@@ -25,7 +25,7 @@ public class OntraportTasks : OntraportBaseRead<ApiTask>, IOntraportTasks
                 { "id", taskId },
             }
             .AddIfHasValue("owner", owner)
-            .AddIfHasValue("date_due", new JsonConverterDateTime().Format(dateDue))
+            .AddIfHasValue("date_due", new JsonConverterDateTimeNullable().Format(dateDue))
             .AddIfHasValue("status", new JsonConverterStringEnum<ApiTask.TaskStatus>().Format(status));
 
         var json = await ApiRequest.PutJsonAsync(
@@ -103,7 +103,7 @@ public class OntraportTasks : OntraportBaseRead<ApiTask>, IOntraportTasks
         var query = new Dictionary<string, object?>
         {
             { "id", id },
-            { "newtime", new JsonConverterDateTime().Format(newTime) }
+            { "newtime", new JsonConverterDateTimeNullable().Format(newTime) }
         };
 
         await ApiRequest.PostAsync<object>(

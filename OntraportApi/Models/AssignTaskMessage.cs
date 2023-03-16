@@ -19,7 +19,7 @@ public class AssignTaskMessage
     /// Gets or sets the date and time the task will be due.
     /// </summary>
     [JsonPropertyName("due_date")]
-    [JsonConverter(typeof(JsonConverterDateTime))]
+    [JsonConverter(typeof(JsonConverterDateTimeNullable))]
     public DateTimeOffset? DueDate { get; set; }
     /// <summary>
     /// Gets or sets the ID of the user responsible for the task.

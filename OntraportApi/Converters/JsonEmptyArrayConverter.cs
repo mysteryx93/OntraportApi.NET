@@ -3,7 +3,7 @@
 namespace HanumanInstitute.OntraportApi.Converters;
 
 /// <summary>
-/// Discards [] values. Ontraport API returns [] instead of {} for empty dictinoaries.
+/// Discards [] values. Ontraport API returns [] instead of {} for empty dictionaries.
 /// </summary>
 public class JsonEmptyArrayConverter<T> : JsonConverter<T>
 {

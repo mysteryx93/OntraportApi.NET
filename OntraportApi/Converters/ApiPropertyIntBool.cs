@@ -11,5 +11,5 @@ public class ApiPropertyIntBool : ApiProperty<bool>
     /// <param name="host">The ApiObject containing the data.</param>
     /// <param name="key">The field key represented by this property.</param>
     public ApiPropertyIntBool(ApiObject host, string key) : 
-        base(host, key, new JsonConverterIntBool()) { }
+        base(host, key, new JsonConverterIntBoolNullable()) { }
 }

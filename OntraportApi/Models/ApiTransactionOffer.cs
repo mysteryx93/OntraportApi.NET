@@ -56,7 +56,8 @@ public class ApiTransactionOffer
     /// For subscriptions, Gets or sets whether or not an invoice should be sent with every recurring order. This value defaults to false.
     /// </summary>
     [JsonPropertyName("send_recurring_invoice")]
-    public bool SendRecurringInvoice { get; set; }
+    // [JsonConverter(typeof(JsonConverterIntBool))]
+    public bool? SendRecurringInvoice { get; set; }
 
     /// <summary>
     /// Gets or sets the expiration date of the credit card on file.
