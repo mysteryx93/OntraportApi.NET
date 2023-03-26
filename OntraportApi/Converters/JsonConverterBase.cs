@@ -13,7 +13,7 @@ public class JsonConverterBase<TNull> : JsonConverter<TNull>
     public override TNull Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         //return Parse(JsonSerializer.Deserialize<TNull>(ref reader, options)?.ToStringInvariant())!;
-        var value = reader.GetValue<TNull>()?.ToStringInvariant();
+        var value = reader.GetValue<string>()?.ToStringInvariant();
         return Parse(value)!;
     }
 

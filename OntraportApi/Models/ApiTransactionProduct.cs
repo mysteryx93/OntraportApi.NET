@@ -155,6 +155,10 @@ public class ApiTransactionProduct
         /// </summary>
         OneTime,
         /// <summary>
+        /// A digital product.
+        /// </summary>
+        Digital,
+        /// <summary>
         /// A single purchase item.
         /// </summary>
         Single,

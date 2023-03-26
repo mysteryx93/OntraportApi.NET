@@ -22,6 +22,11 @@ public class JsonConverterStringEnum<T> : JsonConverterBase<T?>
 
     public override string? NullString => null;
 
+    public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        var value = reader.GetValue<string>();
+        return Parse(value)!;
+    }
 
     [SuppressMessage("Globalization", "CA1307:Specify StringComparison", Justification = "Reviewed: Replace overload with culture is not available in .NET Standard 2.0")]
     public override T? Parse(string? value) =>

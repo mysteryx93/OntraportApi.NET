@@ -56,7 +56,7 @@ public class ApiTransactionOffer
     /// For subscriptions, Gets or sets whether or not an invoice should be sent with every recurring order. This value defaults to false.
     /// </summary>
     [JsonPropertyName("send_recurring_invoice")]
-    // [JsonConverter(typeof(JsonConverterIntBool))]
+    [JsonConverter(typeof(JsonConverterIntBool))]
     public bool SendRecurringInvoice { get; set; }
 
     /// <summary>
