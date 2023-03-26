@@ -6,7 +6,7 @@
     <RootNamespace>HanumanInstitute.OntraportApi.IdentityCore</RootNamespace>
     <Nullable>enable</Nullable>
     <PackageId>OntraportApi.IdentityCore</PackageId>
-    <Version>1.2.7</Version>
+    <Version>1.2.8</Version>
     <Authors>Etienne Charland</Authors>
     <Company>Hanuman Institute</Company>
     <Product>OntraportApi</Product>
