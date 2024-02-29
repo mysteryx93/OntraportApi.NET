@@ -90,7 +90,7 @@ public abstract class OntraportBaseRead<T, TOverride> : IOntraportBaseRead<T>
     /// When overriden in a derived class, allows custom parsing of SelectMultipleAsync response.
     /// </summary>
     /// <param name="json">The JSON data to parse.</param>
-    /// <returns>A List<T> or object derived from it.</returns>
+    /// <returns>A List{T} or object derived from it.</returns>
     protected virtual async Task<IList<T>> OnParseSelectMultipleAsync(JsonElement json)
     {
         var list = json.JsonData().EnumerateArray().ToList();
