@@ -26,7 +26,7 @@ public class OntraportPostForms : IOntraportPostForms
     /// <param name="formId">The Ontraport UID of the form.</param>
     /// <param name="formParams">The list of form data to send.</param>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2234:Pass system uri objects instead of strings", Justification = "Reviewed: can't pass null Uri or it can't recognize form string.")]
-    public async void ServerPost(string formId, IDictionary<string, object?> formParams, CancellationToken cancellationToken = default)
+    public async Task ServerPostAsync(string formId, IDictionary<string, object?> formParams, CancellationToken cancellationToken = default)
     {
         formParams ??= new Dictionary<string, object?>();
         formParams.Add("uid", formId);

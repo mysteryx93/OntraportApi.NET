@@ -6,7 +6,7 @@
     <RootNamespace>HanumanInstitute.OntraportApi.IdentityCore</RootNamespace>
     <Nullable>enable</Nullable>
     <PackageId>OntraportApi.IdentityCore</PackageId>
-    <Version>1.2.8</Version>
+    <Version>1.2.9</Version>
     <Authors>Etienne Charland</Authors>
     <Company>Hanuman Institute</Company>
     <Product>OntraportApi</Product>
@@ -33,9 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.9" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.9" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="7.0.19" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.19" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>

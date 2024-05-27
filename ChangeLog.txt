@@ -2,6 +2,10 @@ OntraportApi.NET
 
 What's New
 
+v1.2.9
+- void OntraportPostForms.ServerPost changed to Task ServerPostAsync
+- Updated dependencies versions
+
 v1.2.8
 - Fix RequestUrl not showing fully in log (regression in v1.2.7)
 

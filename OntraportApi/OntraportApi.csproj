@@ -14,7 +14,7 @@
     <PackageTags>Ontraport API marketing automation email sender smtp .net</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>OntraportApi</PackageId>
-    <Version>1.2.8</Version>
+    <Version>1.2.9</Version>
     <PackageReleaseNotes>https://github.com/mysteryx93/OntraportApi.NET/releases</PackageReleaseNotes>
     <Product>OntraportApi</Product>
     <NeutralLanguage>en</NeutralLanguage>
@@ -39,9 +39,9 @@
 
   <ItemGroup>
     <PackageReference Include="HanumanInstitute.Validators" Version="1.2.2" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
-    <PackageReference Include="System.Text.Json" Version="8.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
+    <PackageReference Include="System.Text.Json" Version="7.0.4" />
   </ItemGroup>
 
   <ItemGroup>

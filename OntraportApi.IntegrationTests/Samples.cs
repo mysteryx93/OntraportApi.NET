@@ -65,7 +65,7 @@ public class Samples
 
     public void PostForm(string email, string firstName)
     {
-        _ontraPostForms.ServerPost("my-form-id", new ApiContact()
+        _ontraPostForms.ServerPostAsync("my-form-id", new ApiContact()
         {
             Email = email,
             FirstName = firstName
