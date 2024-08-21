@@ -122,6 +122,7 @@ Fully-typed API and classes for all main documented classes (and a few more), wi
 - Objects
 - Offers
 - Products
+- Purchases
 - Rules
 - Tasks
 - Transactions
