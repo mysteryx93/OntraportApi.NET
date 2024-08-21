@@ -6,13 +6,9 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests;
 
-public class OntraportContactsTests : OntraportBaseCustomObjectTests<OntraportContacts<ApiContact>, ApiContact>
+public class OntraportContactsTests(ITestOutputHelper output) : 
+    OntraportBaseCustomObjectTests<OntraportContacts<ApiContact>, ApiContact>(output, 19, "a@test.com")
 {
-    public OntraportContactsTests(ITestOutputHelper output) :
-        base(output, 19, "a@test.com")
-    {
-    }
-
     [Fact]
     public async Task SelectAsync_GroupId_ReturnsData()
     {

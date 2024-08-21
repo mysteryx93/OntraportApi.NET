@@ -61,7 +61,7 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
     /// <param name="offer">The product and pricing offer for the transaction.</param>
     public async Task UpdateOrderAsync(ApiOffer offer, CancellationToken cancellationToken = default)
     {
-        offer.CheckNotNull(nameof(offer));
+        Check.NotNull(offer);
 
         var query = new Dictionary<string, object?>
         {
@@ -90,7 +90,7 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
         int? creditCardId = null, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1,
         CancellationToken cancellationToken = default)
     {
-        offer.CheckNotNull(nameof(offer));
+        Check.NotNull(offer);
 
         var query = new Dictionary<string, object?>
             {
@@ -123,7 +123,7 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
     public async Task<int> LogTransactionAsync(int contactId, ApiTransactionOffer offer,
         string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1, CancellationToken cancellationToken = default)
     {
-        offer.CheckNotNull(nameof(offer));
+        Check.NotNull(offer);
 
         var query = new Dictionary<string, object?>
             {

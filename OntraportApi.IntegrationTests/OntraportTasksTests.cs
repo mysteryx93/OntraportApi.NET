@@ -6,13 +6,9 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests;
 
-public class OntraportTasksTests : OntraportBaseReadTests<OntraportTasks, ApiTask>
+public class OntraportTasksTests(ITestOutputHelper output) : 
+    OntraportBaseReadTests<OntraportTasks, ApiTask>(output, 1)
 {
-    public OntraportTasksTests(ITestOutputHelper output) :
-        base(output, 1)
-    {
-    }
-
     [Fact]
     public async Task UpdateAsync_SetStatus_ReturnsTask()
     {

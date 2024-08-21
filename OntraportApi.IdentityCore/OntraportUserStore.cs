@@ -75,10 +75,9 @@ public class OntraportUserStore<TContact, TUser, TRole> :
     /// <exception cref="System.OperationCanceledException">The task timed out or was cancelled.</exception>
     public async Task<IdentityResult> CreateAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
-        user.NormalizedUserName.CheckNotNullOrEmpty(nameof(user.NormalizedUserName));
-        user.PasswordHash.CheckNotNullOrEmpty(nameof(user.PasswordHash));
-        // user.UserRole.CheckNotNullOrEmpty(nameof(user.UserRole));
+        Check.NotNull(user);
+        Check.NotNullOrEmpty(user.NormalizedUserName);
+        Check.NotNullOrEmpty(user.PasswordHash);
 
         // Check if user account already exists.
         var contact = await _ontraportContacts.SelectAsync(user.NormalizedUserName, cancellationToken).ConfigureAwait(false);
@@ -124,8 +123,8 @@ public class OntraportUserStore<TContact, TUser, TRole> :
     /// <exception cref="System.OperationCanceledException">The task timed out or was cancelled.</exception>
     public async Task<IdentityResult> DeleteAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
-        user.Id.CheckRange(nameof(user.Id), min: 1);
+        Check.NotNull(nameof(user));
+        Check.Range(user.Id, min: 1);
 
         // Remove password hash.
         var contact = new TContact()
@@ -168,8 +167,8 @@ public class OntraportUserStore<TContact, TUser, TRole> :
     /// <exception cref="System.OperationCanceledException">The task timed out or was cancelled.</exception>
     public async Task<IdentityResult> UpdateAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
-        user.Id.CheckRange(nameof(user.Id), min: 1);
+        Check.NotNull(user);
+        Check.Range(user.Id, min: 1);
 
         // Update password hash.
         var contact = new TContact()
@@ -230,26 +229,26 @@ public class OntraportUserStore<TContact, TUser, TRole> :
 
     public Task<string> GetNormalizedUserNameAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.NormalizedUserName);
     }
 
     public Task<string> GetUserIdAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.Id.ToStringInvariant());
     }
 
     public Task<string> GetUserNameAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.UserName);
     }
 
     public Task SetNormalizedUserNameAsync(TUser user, string normalizedName, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
-        normalizedName.CheckNotNullOrEmpty(nameof(normalizedName));
+        Check.NotNull(user);
+        Check.NotNullOrEmpty(normalizedName);
 
         user.NormalizedUserName = normalizedName;
         return Task.CompletedTask;
@@ -257,8 +256,8 @@ public class OntraportUserStore<TContact, TUser, TRole> :
 
     public Task SetUserNameAsync(TUser user, string userName, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
-        userName.CheckNotNullOrEmpty(nameof(userName));
+        Check.NotNull(user);
+        Check.NotNullOrEmpty(userName);
 
         user.UserName = userName;
         return Task.CompletedTask;
@@ -269,8 +268,8 @@ public class OntraportUserStore<TContact, TUser, TRole> :
 
     public Task SetPasswordHashAsync(TUser user, string passwordHash, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
-        passwordHash.CheckNotNullOrEmpty(nameof(passwordHash));
+        Check.NotNull(user);
+        Check.NotNullOrEmpty(passwordHash);
 
         user.PasswordHash = passwordHash;
         return Task.CompletedTask;
@@ -278,13 +277,13 @@ public class OntraportUserStore<TContact, TUser, TRole> :
 
     public Task<string> GetPasswordHashAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.PasswordHash);
     }
 
     public Task<bool> HasPasswordAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.PasswordHash.HasValue());
     }
 
@@ -293,8 +292,8 @@ public class OntraportUserStore<TContact, TUser, TRole> :
 
     public Task SetEmailAsync(TUser user, string email, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
-        email.CheckNotNullOrEmpty(nameof(email));
+        Check.NotNull(user);
+        Check.NotNullOrEmpty(email);
 
         user.Email = email;
         return Task.CompletedTask;
@@ -302,19 +301,19 @@ public class OntraportUserStore<TContact, TUser, TRole> :
 
     public Task<string> GetEmailAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.Email);
     }
 
     public Task<bool> GetEmailConfirmedAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.EmailConfirmed);
     }
 
     public Task SetEmailConfirmedAsync(TUser user, bool confirmed, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         user.EmailConfirmed = confirmed;
         return Task.CompletedTask;
     }
@@ -322,7 +321,7 @@ public class OntraportUserStore<TContact, TUser, TRole> :
     [return: MaybeNull]
     public async Task<TUser> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
     {
-        normalizedEmail.CheckNotNullOrEmpty(nameof(normalizedEmail));
+        Check.NotNullOrEmpty(normalizedEmail);
 
         var contact = await _ontraportContacts.SelectAsync(normalizedEmail.ToLowerInvariant(), cancellationToken).ConfigureAwait(false);
         return GetUserFromContact(contact)!;
@@ -330,14 +329,14 @@ public class OntraportUserStore<TContact, TUser, TRole> :
 
     public Task<string> GetNormalizedEmailAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.NormalizedEmail);
     }
 
     public Task SetNormalizedEmailAsync(TUser user, string normalizedEmail, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
-        normalizedEmail.CheckNotNullOrEmpty(nameof(normalizedEmail));
+        Check.NotNull(user);
+        Check.NotNullOrEmpty(normalizedEmail);
 
         user.NormalizedEmail = normalizedEmail;
         return Task.CompletedTask;
@@ -354,8 +353,8 @@ public class OntraportUserStore<TContact, TUser, TRole> :
 
     private async Task SetRoleValueAsync(TUser user, string roleName, bool newValue, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
-        roleName.CheckNotNullOrEmpty(nameof(roleName));
+        Check.NotNull(user);
+        Check.NotNullOrEmpty(roleName);
 
         // Validate role name.
         var role = await _roleStore.FindByIdAsync(roleName, cancellationToken).ConfigureAwait(false);
@@ -389,14 +388,14 @@ public class OntraportUserStore<TContact, TUser, TRole> :
 
     public Task<IList<string>> GetRolesAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.Roles.AsReadOnly());
     }
 
     public Task<bool> IsInRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
-        roleName.CheckNotNullOrEmpty(nameof(roleName));
+        Check.NotNull(user);
+        Check.NotNullOrEmpty(roleName);
 
         var result = user.Roles.Any(x => x.EqualsInvariant(roleName));
         return Task.FromResult(result);
@@ -413,45 +412,45 @@ public class OntraportUserStore<TContact, TUser, TRole> :
 
     public Task<DateTimeOffset?> GetLockoutEndDateAsync(TUser user, CancellationToken _)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.LockoutEnd);
     }
 
     public Task SetLockoutEndDateAsync(TUser user, DateTimeOffset? lockoutEnd, CancellationToken _)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         user.LockoutEnd = lockoutEnd;
         return Task.CompletedTask;
     }
 
     public Task<int> IncrementAccessFailedCountAsync(TUser user, CancellationToken _)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.AccessFailedCount++);
     }
 
     public Task ResetAccessFailedCountAsync(TUser user, CancellationToken _)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         user.AccessFailedCount = 0;
         return Task.CompletedTask;
     }
 
     public Task<int> GetAccessFailedCountAsync(TUser user, CancellationToken _)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.AccessFailedCount);
     }
 
     public Task<bool> GetLockoutEnabledAsync(TUser user, CancellationToken _)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.LockoutEnabled);
     }
 
     public Task SetLockoutEnabledAsync(TUser user, bool enabled, CancellationToken _)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         user.LockoutEnabled = enabled;
         return Task.CompletedTask;
     }
@@ -461,14 +460,14 @@ public class OntraportUserStore<TContact, TUser, TRole> :
 
     public Task SetTwoFactorEnabledAsync(TUser user, bool enabled, CancellationToken _)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         user.TwoFactorEnabled = enabled;
         return Task.CompletedTask;
     }
 
     public Task<bool> GetTwoFactorEnabledAsync(TUser user, CancellationToken _)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.TwoFactorEnabled);
     }
 
@@ -477,26 +476,26 @@ public class OntraportUserStore<TContact, TUser, TRole> :
 
     public Task<string> GetPhoneNumberAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.PhoneNumber);
     }
 
     public Task SetPhoneNumberAsync(TUser user, string phoneNumber, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         user.PhoneNumber = phoneNumber;
         return Task.CompletedTask;
     }
 
     public Task<bool> GetPhoneNumberConfirmedAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.PhoneNumberConfirmed);
     }
 
     public Task SetPhoneNumberConfirmedAsync(TUser user, bool confirmed, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         user.PhoneNumberConfirmed = confirmed;
         return Task.CompletedTask;
     }
@@ -506,13 +505,13 @@ public class OntraportUserStore<TContact, TUser, TRole> :
 
     public Task<string> GetSecurityStampAsync(TUser user, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         return Task.FromResult(user.SecurityStamp);
     }
 
     public Task SetSecurityStampAsync(TUser user, string stamp, CancellationToken cancellationToken)
     {
-        user.CheckNotNull(nameof(user));
+        Check.NotNull(user);
         user.SecurityStamp = stamp;
         return Task.CompletedTask;
     }

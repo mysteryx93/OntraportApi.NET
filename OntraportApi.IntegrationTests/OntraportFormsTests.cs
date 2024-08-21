@@ -5,13 +5,9 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests;
 
-public class OntraportFormsTests : OntraportBaseReadTests<OntraportForms, ApiForm>
+public class OntraportFormsTests(ITestOutputHelper output) : 
+    OntraportBaseReadTests<OntraportForms, ApiForm>(output, 1)
 {
-    public OntraportFormsTests(ITestOutputHelper output) :
-        base(output, 1)
-    {
-    }
-
     [Fact]
     public async Task SelectSmartFormHtmlAsync_ValidId_ReturnsString()
     {

@@ -94,7 +94,7 @@ public class IdentityContact : ApiContact, IIdentityContact
 
     public bool GetRole(string roleName)
     {
-        roleName.CheckNotNullOrEmpty(nameof(roleName));
+        Check.NotNullOrEmpty(roleName);
 
         if (roleName.EqualsInvariant("ADMIN"))
         {
@@ -123,7 +123,7 @@ public class IdentityContact : ApiContact, IIdentityContact
 
     public void SetRole(string roleName, bool value)
     {
-        roleName.CheckNotNullOrEmpty(nameof(roleName));
+        Check.NotNullOrEmpty(roleName);
 
         if (roleName.EqualsInvariant("ADMIN"))
         {

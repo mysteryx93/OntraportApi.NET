@@ -35,8 +35,8 @@ public class ApiSearchConditionListConverter : JsonConverter<List<ApiSearchCondi
 
     public override void Write(Utf8JsonWriter writer, List<ApiSearchConditionBase> value, JsonSerializerOptions options)
     {
-        writer.CheckNotNull(nameof(writer));
-        value.CheckNotNull(nameof(value));
+        Check.NotNull(writer);
+        Check.NotNull(value);
 
         writer.WriteStartArray();
 

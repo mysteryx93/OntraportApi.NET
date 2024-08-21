@@ -39,7 +39,7 @@ internal sealed class ArrayBufferWriter<T> : IBufferWriter<T>
     /// </exception>
     public ArrayBufferWriter(int initialCapacity)
     {
-        initialCapacity.CheckRange(nameof(initialCapacity), min: 1);
+        Check.Range(initialCapacity, min: 1);
 
         _buffer = new T[initialCapacity];
         _index = 0;
@@ -97,7 +97,7 @@ internal sealed class ArrayBufferWriter<T> : IBufferWriter<T>
     /// </remarks>
     public void Advance(int count)
     {
-        count.CheckRange(nameof(count), min: 0);
+        Check.Range(count, min: 0);
 
         if (_index > _buffer.Length - count)
         {
@@ -155,7 +155,7 @@ internal sealed class ArrayBufferWriter<T> : IBufferWriter<T>
 
     private void CheckAndResizeBuffer(int sizeHint)
     {
-        sizeHint.CheckRange(nameof(sizeHint), min: 0);
+        Check.Range(sizeHint, min: 0);
 
         if (sizeHint == 0)
         {

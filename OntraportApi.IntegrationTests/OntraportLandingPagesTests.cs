@@ -3,12 +3,5 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests;
 
-public class OntraportLandingPagesTests : OntraportBaseReadTests<OntraportLandingPages, ApiLandingPage>
-{
-    public OntraportLandingPagesTests(ITestOutputHelper output) :
-        base(output, 1)
-    {
-    }
-
-
-}
+public class OntraportLandingPagesTests(ITestOutputHelper output) : 
+    OntraportBaseReadTests<OntraportLandingPages, ApiLandingPage>(output, 1);

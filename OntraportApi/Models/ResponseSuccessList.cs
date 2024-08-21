@@ -14,7 +14,7 @@ public class ResponseSuccessList
     /// <param name="json"></param>
     public ResponseSuccessList(JsonElement json)
     {
-        json.CheckNotNull(nameof(json));
+        Check.NotNull(json);
         if (json.TryGetProperty("data", out var jsonData))
         {
             // Discard [], see JsonEmptyArrayConverter

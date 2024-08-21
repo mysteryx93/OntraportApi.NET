@@ -51,7 +51,7 @@ internal static partial class JsonExtensions
     /// <exception cref="InvalidOperationException">json was null, or json[child] was null.</exception>
     public static JsonElement JsonChild(this JsonElement json, string child, JsonElement? defaultValue = null)
     {
-        child.CheckNotNullOrEmpty(nameof(child));
+        Check.NotNullOrEmpty(child);
 
         if (json.TryGetProperty(child, out var data))
         {
@@ -170,7 +170,7 @@ internal static partial class JsonExtensions
         where T : class
     {
         if (json == null) { return default; }
-        task.CheckNotNull(nameof(task));
+        Check.NotNull(task);
 
         try
         {
@@ -189,7 +189,7 @@ internal static partial class JsonExtensions
         where T : class
     {
         return await RunAndCatchAsync<T>(json,
-            new Func<JsonElement, Task<T>>(x => Task.Run<T>(() => task.Invoke(x)))).ConfigureAwait(false);
+            x => Task.Run<T>(() => task.Invoke(x))).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -214,7 +214,7 @@ internal static partial class JsonExtensions
     {
         if (json == null) { return default!; }
 
-        task.CheckNotNull(nameof(task));
+        Check.NotNull(task);
 
         try
         {

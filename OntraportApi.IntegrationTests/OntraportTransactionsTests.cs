@@ -5,13 +5,8 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests;
 
-public class OntraportTransactionsTests : OntraportBaseReadTests<OntraportTransactions, ApiTransaction>
+public class OntraportTransactionsTests(ITestOutputHelper output) : OntraportBaseReadTests<OntraportTransactions, ApiTransaction>(output, 1)
 {
-    public OntraportTransactionsTests(ITestOutputHelper output) :
-        base(output, 1)
-    {
-    }
-
     private const int ValidOrder3Products = 142;
 
     [Fact]

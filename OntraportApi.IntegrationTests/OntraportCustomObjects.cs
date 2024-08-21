@@ -5,13 +5,9 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests;
 
-public class OntraportCustomObjectsTests : OntraportBaseReadTests<OntraportCustomObjects, ApiCustomObject>
+public class OntraportCustomObjectsTests(ITestOutputHelper output) : 
+    OntraportBaseReadTests<OntraportCustomObjects, ApiCustomObject>(output, 10001)
 {
-    public OntraportCustomObjectsTests(ITestOutputHelper output) :
-        base(output, 10001)
-    {
-    }
-
     [Fact]
     public async Task SelectAsync_ByName_ReturnsData()
     {

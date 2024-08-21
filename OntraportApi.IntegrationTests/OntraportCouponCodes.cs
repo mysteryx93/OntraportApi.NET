@@ -3,11 +3,5 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests;
 
-public class OntraportCouponCodesTests : OntraportBaseReadTests<OntraportCouponCodes, ApiCouponCode>
-{
-    public OntraportCouponCodesTests(ITestOutputHelper output) :
-        base(output, 1)
-    {
-    }
-
-}
+public class OntraportCouponCodesTests(ITestOutputHelper output) : 
+    OntraportBaseReadTests<OntraportCouponCodes, ApiCouponCode>(output, 1);

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.ComponentModel.Design;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -22,10 +23,10 @@ public class OntraportHttpClient
 
     public OntraportHttpClient(HttpClient httpClient, IOptions<OntraportConfig> config, ILogger<OntraportHttpClient>? logger)
     {
-        _httpClient = httpClient.CheckNotNull(nameof(httpClient));
+        _httpClient = Check.NotNull(httpClient);
         _logger = logger;
 
-        var conf = config.CheckNotNull(nameof(config)).Value;
+        var conf = Check.NotNull(config).Value;
 
         if (string.IsNullOrEmpty(conf.ApiKey))
         {
@@ -296,7 +297,7 @@ public class OntraportHttpClient
     /// </summary>
     private async Task<HttpResponseMessage?> SendRequestAsync(string endpoint, HttpMethod method, bool encodeJson, IDictionary<string, object?>? values = null, bool returnNotFoundAsNull = false, CancellationToken cancellationToken = default)
     {
-        endpoint.CheckNotNull(nameof(endpoint));
+        Check.NotNull(endpoint);
         values ??= new Dictionary<string, object?>();
 
         // Serialize request.

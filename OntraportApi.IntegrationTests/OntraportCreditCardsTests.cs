@@ -5,13 +5,9 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests;
 
-public class OntraportCreditCardsTests : OntraportBaseReadTests<OntraportCreditCards, ApiCreditCard>
+public class OntraportCreditCardsTests(ITestOutputHelper output) : 
+    OntraportBaseReadTests<OntraportCreditCards, ApiCreditCard>(output, -1)
 {
-    public OntraportCreditCardsTests(ITestOutputHelper output) :
-        base(output, -1)
-    {
-    }
-
     [Fact]
     public async Task SetDefaultAsync_ValidId_ReturnsObjectWithId()
     {

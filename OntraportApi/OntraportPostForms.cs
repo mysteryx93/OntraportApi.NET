@@ -15,7 +15,7 @@ public class OntraportPostForms : IOntraportPostForms
 
     public OntraportPostForms(HttpClient httpClient)
     {
-        _httpClient = httpClient.CheckNotNull(nameof(httpClient));
+        _httpClient = Check.NotNull(httpClient);
         _httpClient.BaseAddress = new Uri(FormPosttUrl);
     }
 

@@ -3,12 +3,5 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests;
 
-public class OntraportProductsTests : OntraportBaseDeleteTests<OntraportProducts, ApiProduct>
-{
-    public OntraportProductsTests(ITestOutputHelper output) :
-        base(output, 1, "product1")
-    {
-    }
-
-
-}
+public class OntraportProductsTests(ITestOutputHelper output) : 
+    OntraportBaseDeleteTests<OntraportProducts, ApiProduct>(output, 1, "product1");

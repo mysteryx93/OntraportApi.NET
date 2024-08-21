@@ -9,7 +9,7 @@ public class JsonStringCollectionConverter : JsonConverter<ICollection<string>>
 {
     public override ICollection<string> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        typeToConvert.CheckNotNull(nameof(typeToConvert));
+        Check.NotNull(typeToConvert);
 
         if (reader.TokenType == JsonTokenType.String && reader.GetString() == "null")
         {

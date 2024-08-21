@@ -191,7 +191,7 @@ namespace HanumanInstitute.OntraportApi
         /// <returns>The object ID.</returns>
         public async Task<int?> GetObjectIdByEmailAsync(ApiObjectType objectType, string email, CancellationToken cancellationToken = default)
         {
-            email.CheckNotNullOrEmpty(nameof(email));
+            Check.NotNullOrEmpty(email);
 
             var json = await GetObjectIdByEmailAsync(
                 objectType, email, false, cancellationToken).ConfigureAwait(false);
@@ -210,7 +210,7 @@ namespace HanumanInstitute.OntraportApi
         /// <returns>A list of object IDs.</returns>
         public async Task<IEnumerable<int>> GetObjectIdByEmailAllAsync(ApiObjectType objectType, string email, CancellationToken cancellationToken = default)
         {
-            email.CheckNotNull(nameof(email));
+            Check.NotNull(email);
 
             var json = await GetObjectIdByEmailAsync(
                 objectType, email, true, cancellationToken).ConfigureAwait(false);
@@ -293,7 +293,7 @@ namespace HanumanInstitute.OntraportApi
         /// <returns>A list of fields in that section.</returns>
         public async Task<ResponseSectionFields?> SelectFieldsBySectionAsync(ApiObjectType objectType, string sectionName, CancellationToken cancellationToken = default)
         {
-            sectionName.CheckNotNullOrEmpty(nameof(sectionName));
+            Check.NotNullOrEmpty(sectionName);
 
             var query = new Dictionary<string, object?>
             {
@@ -330,7 +330,7 @@ namespace HanumanInstitute.OntraportApi
         /// <returns>A object containing the field information.</returns>
         public async Task<ApiFieldInfo?> SelectFieldByNameAsync(ApiObjectType objectType, string fieldName, CancellationToken cancellationToken = default)
         {
-            fieldName.CheckNotNullOrEmpty(nameof(fieldName));
+            Check.NotNullOrEmpty(fieldName);
 
             var query = new Dictionary<string, object?>
             {
@@ -428,7 +428,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="sectionName">The name of the section.</param>
         public async Task DeleteSectionAsync(ApiObjectType objectType, string sectionName, CancellationToken cancellationToken = default)
         {
-            sectionName.CheckNotNullOrEmpty(nameof(sectionName));
+            Check.NotNullOrEmpty(sectionName);
 
             var query = new Dictionary<string, object?>
             {
@@ -447,7 +447,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="fieldName">The name of the field e.g f1234.</param>
         public async Task DeleteFieldAsync(ApiObjectType objectType, string fieldName, CancellationToken cancellationToken = default)
         {
-            fieldName.CheckNotNullOrEmpty(nameof(fieldName));
+            Check.NotNullOrEmpty(fieldName);
 
             var query = new Dictionary<string, object?>
             {
@@ -467,7 +467,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="sequenceIds">A list of the sequence(s) to which objects should be added.</param>
         public async Task AddToSequenceAsync(ApiObjectType objectType, ApiSearchOptions searchOptions, IEnumerable<int> sequenceIds, CancellationToken cancellationToken = default)
         {
-            sequenceIds.CheckNotNullOrEmpty(nameof(sequenceIds));
+            Check.NotNullOrEmpty(sequenceIds);
 
             var query = new Dictionary<string, object?>
             {
@@ -489,7 +489,7 @@ namespace HanumanInstitute.OntraportApi
         public async Task AddTagAsync(ApiObjectType objectType,
             ApiSearchOptions? searchOptions, IEnumerable<int> tagIds, CancellationToken cancellationToken = default)
         {
-            tagIds.CheckNotNullOrEmpty(nameof(tagIds));
+            Check.NotNullOrEmpty(tagIds);
 
             var query = new Dictionary<string, object?>
             {
@@ -511,7 +511,7 @@ namespace HanumanInstitute.OntraportApi
         public async Task AddTagNamesAsync(ApiObjectType objectType,
             ApiSearchOptions? searchOptions, IEnumerable<string> tagNames, CancellationToken cancellationToken = default)
         {
-            tagNames.CheckNotNullOrEmpty(nameof(tagNames));
+            Check.NotNullOrEmpty(tagNames);
 
             var query = new Dictionary<string, object?>
             {
@@ -533,7 +533,7 @@ namespace HanumanInstitute.OntraportApi
         public async Task AddToCampaignAsync(ApiObjectType objectType,
             ApiSearchOptions? searchOptions, IEnumerable<int> campaignIds, CancellationToken cancellationToken = default)
         {
-            campaignIds.CheckNotNullOrEmpty(nameof(campaignIds));
+            Check.NotNullOrEmpty(campaignIds);
 
             var query = new Dictionary<string, object?>
             {
@@ -555,7 +555,7 @@ namespace HanumanInstitute.OntraportApi
         public async Task RemoveFromSequenceAsync(ApiObjectType objectType,
             ApiSearchOptions? searchOptions, IEnumerable<int> sequenceIds, CancellationToken cancellationToken = default)
         {
-            sequenceIds.CheckNotNullOrEmpty(nameof(sequenceIds));
+            Check.NotNullOrEmpty(sequenceIds);
 
             var query = new Dictionary<string, object?>
             {
@@ -577,7 +577,7 @@ namespace HanumanInstitute.OntraportApi
         public async Task RemoveTagAsync(ApiObjectType objectType,
             ApiSearchOptions? searchOptions, IEnumerable<int> tagIds, CancellationToken cancellationToken = default)
         {
-            tagIds.CheckNotNullOrEmpty(nameof(tagIds));
+            Check.NotNullOrEmpty(tagIds);
 
             var query = new Dictionary<string, object?>
             {
@@ -599,7 +599,7 @@ namespace HanumanInstitute.OntraportApi
         public async Task RemoveTagNamesAsync(ApiObjectType objectType,
             ApiSearchOptions? searchOptions, IEnumerable<string> tagNames, CancellationToken cancellationToken = default)
         {
-            tagNames.CheckNotNullOrEmpty(nameof(tagNames));
+            Check.NotNullOrEmpty(tagNames);
 
             var query = new Dictionary<string, object?>
             {
@@ -621,7 +621,7 @@ namespace HanumanInstitute.OntraportApi
         public async Task RemoveFromCampaignAsync(ApiObjectType objectType,
             ApiSearchOptions? searchOptions, IEnumerable<int> campaignIds, CancellationToken cancellationToken = default)
         {
-            campaignIds.CheckNotNullOrEmpty(nameof(campaignIds));
+            Check.NotNullOrEmpty(campaignIds);
 
             var query = new Dictionary<string, object?>
             {

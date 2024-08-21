@@ -3,11 +3,5 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests;
 
-public class OntraportCouponsTests : OntraportBaseDeleteTests<OntraportCoupons, ApiCoupon>
-{
-    public OntraportCouponsTests(ITestOutputHelper output) :
-        base(output, 2, "GroupCoupon1")
-    {
-    }
-
-}
+public class OntraportCouponsTests(ITestOutputHelper output) : 
+    OntraportBaseDeleteTests<OntraportCoupons, ApiCoupon>(output, 2, "GroupCoupon1");

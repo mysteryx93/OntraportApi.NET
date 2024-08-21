@@ -48,7 +48,7 @@ public abstract class OntraportBaseDelete<T, TOverride> : OntraportBaseWrite<T, 
     /// <returns>A list of objects matching the query.</returns>
     public virtual async Task DeleteAsync(ApiSearchOptions searchOptions, CancellationToken cancellationToken = default)
     {
-        searchOptions.CheckNotNull(nameof(searchOptions));
+        Check.NotNull(searchOptions);
 
         var keysOverride = this.GetKeysOverride();
         var query = new Dictionary<string, object?>()

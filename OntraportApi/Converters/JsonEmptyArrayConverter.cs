@@ -15,7 +15,7 @@ public class JsonEmptyArrayConverter<T> : JsonConverter<T>
 
     public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        typeToConvert.CheckNotNull(nameof(typeToConvert));
+        Check.NotNull(typeToConvert);
 
         if (reader.TokenType == JsonTokenType.StartArray)
         {

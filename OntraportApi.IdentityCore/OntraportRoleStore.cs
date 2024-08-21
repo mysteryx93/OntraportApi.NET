@@ -55,32 +55,32 @@ public class OntraportRoleStore<TRole> : IRoleStore<TRole>
     [return: MaybeNull]
     public Task<TRole> FindByIdAsync(string roleId, CancellationToken cancellationToken)
     {
-        roleId.CheckNotNullOrEmpty(nameof(roleId));
+        Check.NotNullOrEmpty(roleId);
         return Task.FromResult(FindRole(roleId))!;
     }
 
     [return: MaybeNull]
     public Task<TRole> FindByNameAsync(string normalizedRoleName, CancellationToken cancellationToken)
     {
-        normalizedRoleName.CheckNotNullOrEmpty(nameof(normalizedRoleName));
+        Check.NotNullOrEmpty(normalizedRoleName);
         return Task.FromResult(FindRole(normalizedRoleName))!;
     }
 
     public Task<string> GetNormalizedRoleNameAsync(TRole role, CancellationToken cancellationToken)
     {
-        role.CheckNotNull(nameof(role));
+        Check.NotNull(role);
         return Task.FromResult(role.NormalizedName);
     }
 
     public Task<string> GetRoleIdAsync(TRole role, CancellationToken cancellationToken)
     {
-        role.CheckNotNull(nameof(role));
+        Check.NotNull(role);
         return Task.FromResult(role.Id);
     }
 
     public Task<string> GetRoleNameAsync(TRole role, CancellationToken cancellationToken)
     {
-        role.CheckNotNull(nameof(role));
+        Check.NotNull(role);
         return Task.FromResult(role.Name);
     }
 

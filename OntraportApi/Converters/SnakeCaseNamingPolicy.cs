@@ -11,7 +11,7 @@ public class SnakeCaseNamingPolicy : JsonNamingPolicy
 {
     public override string ConvertName(string name)
     {
-        name.CheckNotNullOrEmpty(nameof(name));
+        Check.NotNullOrEmpty(name);
 
         var result = new StringBuilder();
         for (var i = 0; i < name.Length; i++)

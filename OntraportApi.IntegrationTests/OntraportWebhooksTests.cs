@@ -5,13 +5,9 @@ using Xunit.Abstractions;
 
 namespace HanumanInstitute.OntraportApi.IntegrationTests;
 
-public class OntraportWebhookTests : OntraportBaseReadTests<OntraportWebhooks, ApiWebhook>
+public class OntraportWebhookTests(ITestOutputHelper output) : 
+    OntraportBaseReadTests<OntraportWebhooks, ApiWebhook>(output, 1)
 {
-    public OntraportWebhookTests(ITestOutputHelper output) :
-        base(output, 1)
-    {
-    }
-
     [Fact]
     public async Task Subscribe_ValidData_ReturnsIdAndUnsubscribe()
     {

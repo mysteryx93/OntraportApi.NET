@@ -105,17 +105,6 @@ public class ApiPurchase : ApiObject
     public int? OprId { get => OprIdField.Value; set => OprIdField.Value = value; }
     
     /// <summary>
-    /// Returns a ApiProperty object to get or set the purchased product's code for integrations.
-    /// </summary>
-    public ApiPropertyString SkuField => _skuField ??= new ApiPropertyString(this, SkuKey);
-    private ApiPropertyString? _skuField;
-    public const string SkuKey = "sku";
-    /// <summary>
-    /// Gets or sets the purchased product's code for integrations.
-    /// </summary>
-    public string? Sku { get => SkuField.Value; set => SkuField.Value = value; }
-    
-    /// <summary>
     /// Returns a ApiProperty object to get or set the description of the product purchased.
     /// </summary>
     public ApiPropertyString DescriptionField => _descriptionField ??= new ApiPropertyString(this, DescriptionKey);
