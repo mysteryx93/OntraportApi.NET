@@ -14,7 +14,7 @@
     <PackageTags>Ontraport API marketing automation email sender smtp .net</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>OntraportApi</PackageId>
-    <Version>1.3.0</Version>
+    <Version>1.3.2</Version>
     <PackageReleaseNotes>https://github.com/mysteryx93/OntraportApi.NET/releases</PackageReleaseNotes>
     <Product>OntraportApi</Product>
     <NeutralLanguage>en</NeutralLanguage>

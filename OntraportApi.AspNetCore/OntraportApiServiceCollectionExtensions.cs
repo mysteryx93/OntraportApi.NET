@@ -47,6 +47,7 @@ public static class OntraportApiServiceCollectionExtensions
         services.TryAddTransient<IOntraportObjects, OntraportObjects>();
         services.TryAddTransient<IOntraportOffers, OntraportOffers>();
         services.TryAddTransient<IOntraportProducts, OntraportProducts>();
+        services.TryAddTransient<IOntraportPurchases, OntraportPurchases>();
         services.TryAddTransient<IOntraportRules, OntraportRules>();
         services.TryAddTransient<IOntraportTasks, OntraportTasks>();
         services.TryAddTransient<IOntraportTransactions, OntraportTransactions>();

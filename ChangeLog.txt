@@ -2,6 +2,13 @@ OntraportApi.NET
 
 What's New
 
+v1.3.2
+- For advanced search, ApiSearchOptions now sets 'ids' to 0 if not specified, as it is required to return all objects
+
+v1.3
+- Added Ontraport Purchases
+- Updated dependencies
+
 v1.2.9
 - void OntraportPostForms.ServerPost changed to Task ServerPostAsync
 - Updated dependencies versions

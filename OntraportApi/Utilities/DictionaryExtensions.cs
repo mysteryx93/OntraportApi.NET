@@ -53,6 +53,11 @@ namespace HanumanInstitute.OntraportApi
                     // list.Add("ids", string.Join(",", options.Ids));
                     list.Add("ids", options.Ids);
                 }
+                else
+                {
+                    // Required to return all objects.
+                    list.Add("ids", 0);
+                }
                 list.AddIfHasValue("group_id", options.GroupId)
                     .AddIfHasValue("start", options.Start)
                     .AddIfHasValue("range", options.Range)
