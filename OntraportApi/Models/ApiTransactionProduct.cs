@@ -31,6 +31,11 @@ public class ApiTransactionProduct
     /// Gets or sets whether or not there is a cost to ship this product.
     /// </summary>
     public bool Shipping { get; set; }
+    
+    /// <summary>
+    /// Gets or sets whether or not this product should be taxed. Required when logging a transaction
+    /// </summary>
+    public bool Tax { get; set; }
 
     /// <summary>
     /// Gets or sets whether or not this product should be taxed.
