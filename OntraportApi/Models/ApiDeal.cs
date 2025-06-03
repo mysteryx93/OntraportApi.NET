@@ -48,10 +48,10 @@ public class ApiDeal : ApiCustomObjectBase
     public const string WeightedValueKey = "weighted_value";
     public decimal? WeightedValue { get => WeightedValueField.Value; set => WeightedValueField.Value = value; }
 
-    public ApiProperty<SaleStatus> SaleStageField => _saleStageField ??= new ApiPropertyIntEnum<SaleStatus>(this, SaleStageKey);
-    private ApiProperty<SaleStatus>? _saleStageField;
+    public ApiProperty<int> SaleStageField => _saleStageField ??= new ApiProperty<int>(this, SaleStageKey);
+    private ApiProperty<int>? _saleStageField;
     public const string SaleStageKey = "sales_stage";
-    public SaleStatus? SaleStage { get => SaleStageField.Value; set => SaleStageField.Value = value; }
+    public int? SaleStage { get => SaleStageField.Value; set => SaleStageField.Value = value; }
 
     public ApiPropertyDateTime ActualCloseDateField => _actualCloseDateField ??= new ApiPropertyDateTime(this, ActualCloseDateKey);
     private ApiPropertyDateTime? _actualCloseDateField;
@@ -63,24 +63,14 @@ public class ApiDeal : ApiCustomObjectBase
     private ApiProperty<int>? _expectedCloseTimeFrameField;
     public const string ExpectedCloseTimeFrameKey = "expected_close_timeframe";
     public int? ExpectedCloseTimeFrame { get => ExpectedCloseTimeFrameField.Value; set => ExpectedCloseTimeFrameField.Value = value; }
-
-    public ApiProperty<DealSizeEnum> DealSizeField => _dealSizeField ??= new ApiPropertyIntEnum<DealSizeEnum>(this, DealSizeKey);
-    private ApiProperty<DealSizeEnum>? _dealSizeField;
+    
+    public ApiProperty<int> DealSizeField => _dealSizeField ??= new ApiPropertyIntEnum<int>(this, DealSizeKey);
+    private ApiProperty<int>? _dealSizeField;
     public const string DealSizeKey = "deal_size";
-    public DealSizeEnum? DealSize { get => DealSizeField.Value; set => DealSizeField.Value = value; }
+    public int? DealSize { get => DealSizeField.Value; set => DealSizeField.Value = value; }
 
-    public ApiPropertyDateTime RecentActivityField => _recentActivityField ??= new ApiPropertyDateTime(this, RecentActivityKey);
-    private ApiPropertyDateTime? _recentActivityField;
+    public ApiProperty<int> RecentActivityField => _recentActivityField ??= new ApiProperty<int>(this, RecentActivityKey);
+    private ApiProperty<int>? _recentActivityField;
     public const string RecentActivityKey = "recent_activity";
-    public DateTimeOffset? RecentActivity { get => RecentActivityField.Value; set => RecentActivityField.Value = value; }
-
-
-
-    public enum DealSizeEnum
-    {
-        None = 0,
-        Small = 1,
-        Medium = 2,
-        Large = 3
-    }
+    public int? RecentActivity { get => RecentActivityField.Value; set => RecentActivityField.Value = value; }
 }
