@@ -151,13 +151,13 @@ public class ApiContact : ApiCustomObjectBase
     /// <summary>
     /// Returns a ApiProperty object to get or set the contact's Sales Stage.
     /// </summary>
-    public ApiPropertyIntEnum<SaleStatus> StatusField => _statusField ??= new ApiPropertyIntEnum<SaleStatus>(this, StatusKey);
-    private ApiPropertyIntEnum<SaleStatus>? _statusField;
+    public ApiProperty<int> StatusField => _statusField ??= new ApiProperty<int>(this, StatusKey);
+    private ApiProperty<int>? _statusField;
     public const string StatusKey = "status";
     /// <summary>
     /// Gets or sets the contact's Sales Stage.
     /// </summary>
-    public SaleStatus? Status { get => StatusField.Value; set => StatusField.Value = value; }
+    public int? Status { get => StatusField.Value; set => StatusField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the contact's home phone number.
