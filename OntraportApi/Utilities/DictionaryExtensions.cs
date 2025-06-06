@@ -152,14 +152,14 @@ namespace HanumanInstitute.OntraportApi
         {
             if (values != null)
             {
-                if (values is IDictionary<string, object>)
+                if (values is IDictionary<string, object> dic)
                 {
-                    (values as IDictionary<string, object>).ToList().ForEach(x => list.Add(x.Key, x.Value));
+                    dic.ToList().ForEach(x => list.Add(x.Key, x.Value));
                 }
                 else
                 {
-                    // Object properties through reflection.
-                    var properties = values.GetType().GetProperties();
+                    // Object properties through reflection. Skip indexer properties.
+                    var properties = values.GetType().GetProperties().Where(p => !p.GetIndexParameters().Any());
                     foreach (var item in properties)
                     {
                         var itemName = item.Name;
