@@ -42,7 +42,7 @@ public abstract class OntraportBaseRead<T, TOverride> : IOntraportBaseRead<T>
     /// <param name="id">The ID of the specific object.</param>
     /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
     /// <returns>The selected object.</returns>
-    public async Task<T?> SelectAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<T?> SelectAsync(long id, CancellationToken cancellationToken = default)
     {
         var query = new Dictionary<string, object?>
         {

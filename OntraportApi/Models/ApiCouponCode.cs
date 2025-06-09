@@ -5,15 +5,15 @@
 /// </summary>
 public class ApiCouponCode : ApiObject
 {
-    public ApiProperty<int> CouponIdField => _couponIdField ??= new ApiProperty<int>(this, CouponIdKey);
-    private ApiProperty<int>? _couponIdField;
+    public ApiProperty<long> CouponIdField => _couponIdField ??= new ApiProperty<long>(this, CouponIdKey);
+    private ApiProperty<long>? _couponIdField;
     public const string CouponIdKey = "coupon_id";
-    public int? CouponId { get => CouponIdField.Value; set => CouponIdField.Value = value; }
+    public long? CouponId { get => CouponIdField.Value; set => CouponIdField.Value = value; }
 
-    public ApiProperty<int> ContactIdField => _contactIdField ??= new ApiProperty<int>(this, ContactIdKey);
-    private ApiProperty<int>? _contactIdField;
+    public ApiProperty<long> ContactIdField => _contactIdField ??= new ApiProperty<long>(this, ContactIdKey);
+    private ApiProperty<long>? _contactIdField;
     public const string ContactIdKey = "contact_id";
-    public int? ContactId { get => ContactIdField.Value; set => ContactIdField.Value = value; }
+    public long? ContactId { get => ContactIdField.Value; set => ContactIdField.Value = value; }
 
     public ApiPropertyString CodeField => _codeField ??= new ApiPropertyString(this, CodeKey);
     private ApiPropertyString? _codeField;

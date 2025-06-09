@@ -8,101 +8,101 @@ public class ApiPurchase : ApiObject
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the contact associated with the purchase.
     /// </summary>
-    public ApiProperty<int> ContactIdField => _contactIdField ??= new ApiProperty<int>(this, ContactIdKey);
-    private ApiProperty<int>? _contactIdField;
+    public ApiProperty<long> ContactIdField => _contactIdField ??= new ApiProperty<long>(this, ContactIdKey);
+    private ApiProperty<long>? _contactIdField;
     public const string ContactIdKey = "contact_id";
     /// <summary>
     /// Gets or sets the ID of the contact associated with the purchase.
     /// </summary>
-    public int? ContactId { get => ContactIdField.Value; set => ContactIdField.Value = value; }
+    public long? ContactId { get => ContactIdField.Value; set => ContactIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the affiliate that referred the contact associated with the purchase.
     /// </summary>
-    public ApiProperty<int> AffiliateIdField => _affiliateIdField ??= new ApiProperty<int>(this, AffiliateIdKey);
-    private ApiProperty<int>? _affiliateIdField;
+    public ApiProperty<long> AffiliateIdField => _affiliateIdField ??= new ApiProperty<long>(this, AffiliateIdKey);
+    private ApiProperty<long>? _affiliateIdField;
     public const string AffiliateIdKey = "affiliate_id";
     /// <summary>
     /// Gets or sets the ID of the affiliate that referred the contact associated with the purchase.
     /// </summary>
-    public int? AffiliateId { get => AffiliateIdField.Value; set => AffiliateIdField.Value = value; }
+    public long? AffiliateId { get => AffiliateIdField.Value; set => AffiliateIdField.Value = value; }
     
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the purchased product.
     /// </summary>
-    public ApiProperty<int> ProductIdField => _productIdField ??= new ApiProperty<int>(this, ProductIdKey);
-    private ApiProperty<int>? _productIdField;
+    public ApiProperty<long> ProductIdField => _productIdField ??= new ApiProperty<long>(this, ProductIdKey);
+    private ApiProperty<long>? _productIdField;
     public const string ProductIdKey = "product_id";
     /// <summary>
     /// Gets or sets the ID of the purchased product.
     /// </summary>
-    public int? ProductId { get => ProductIdField.Value; set => ProductIdField.Value = value; }
+    public long? ProductId { get => ProductIdField.Value; set => ProductIdField.Value = value; }
     
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the user who controls the contact associated with the purchase.
     /// </summary>
-    public ApiProperty<int> OwnerField => _ownerField ??= new ApiProperty<int>(this, OwnerKey);
-    private ApiProperty<int>? _ownerField;
+    public ApiProperty<long> OwnerField => _ownerField ??= new ApiProperty<long>(this, OwnerKey);
+    private ApiProperty<long>? _ownerField;
     public const string OwnerKey = "owner";
     /// <summary>
     /// Gets or sets the ID of the user who controls the contact associated with the purchase.
     /// </summary>
-    public int? Owner { get => OwnerField.Value; set => OwnerField.Value = value; }
+    public long? Owner { get => OwnerField.Value; set => OwnerField.Value = value; }
     
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the package the purchase belongs to. Default 0 if the purchase is not part of a package.
     /// </summary>
-    public ApiProperty<int> PackageIdField => _packageIdField ??= new ApiProperty<int>(this, PackageIdKey);
-    private ApiProperty<int>? _packageIdField;
+    public ApiProperty<long> PackageIdField => _packageIdField ??= new ApiProperty<long>(this, PackageIdKey);
+    private ApiProperty<long>? _packageIdField;
     public const string PackageIdKey = "package_id";
     /// <summary>
     /// Gets or sets the ID of the package the purchase belongs to. Default 0 if the purchase is not part of a package.
     /// </summary>
-    public int? PackageId { get => PackageIdField.Value; set => PackageIdField.Value = value; }
+    public long? PackageId { get => PackageIdField.Value; set => PackageIdField.Value = value; }
     
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the invoice the purchase belongs to. An invoice can contain multiple purchases.
     /// </summary>
-    public ApiProperty<int> InvoiceIdField => _invoiceIdField ??= new ApiProperty<int>(this, InvoiceIdKey);
-    private ApiProperty<int>? _invoiceIdField;
+    public ApiProperty<long> InvoiceIdField => _invoiceIdField ??= new ApiProperty<long>(this, InvoiceIdKey);
+    private ApiProperty<long>? _invoiceIdField;
     public const string InvoiceIdKey = "invoice_id";
     /// <summary>
     /// Gets or sets the ID of the invoice the purchase belongs to. An invoice can contain multiple purchases.
     /// </summary>
-    public int? InvoiceId { get => InvoiceIdField.Value; set => InvoiceIdField.Value = value; }
+    public long? InvoiceId { get => InvoiceIdField.Value; set => InvoiceIdField.Value = value; }
     
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the subscription the purchase belongs to. Default 0 if the product is not part of a subscription.
     /// </summary>
-    public ApiProperty<int> SubscriptionIdField => _subscriptionIdField ??= new ApiProperty<int>(this, SubscriptionIdKey);
-    private ApiProperty<int>? _subscriptionIdField;
+    public ApiProperty<long> SubscriptionIdField => _subscriptionIdField ??= new ApiProperty<long>(this, SubscriptionIdKey);
+    private ApiProperty<long>? _subscriptionIdField;
     public const string SubscriptionIdKey = "subscription_id";
     /// <summary>
     /// Gets or sets the ID of the subscription the purchase belongs to. Default 0 if the product is not part of a subscription.
     /// </summary>
-    public int? SubscriptionId { get => SubscriptionIdField.Value; set => SubscriptionIdField.Value = value; }
+    public long? SubscriptionId { get => SubscriptionIdField.Value; set => SubscriptionIdField.Value = value; }
     
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the order the purchase belongs to. Default 0 if the product does not have an order associated with it.
     /// </summary>
-    public ApiProperty<int> OrderIdField => _orderIdField ??= new ApiProperty<int>(this, OrderIdKey);
-    private ApiProperty<int>? _orderIdField;
+    public ApiProperty<long> OrderIdField => _orderIdField ??= new ApiProperty<long>(this, OrderIdKey);
+    private ApiProperty<long>? _orderIdField;
     public const string OrderIdKey = "order_id";
     /// <summary>
     /// Gets or sets the ID of the order the purchase belongs to. Default 0 if the product does not have an order associated with it.
     /// </summary>
-    public int? OrderId { get => OrderIdField.Value; set => OrderIdField.Value = value; }
+    public long? OrderId { get => OrderIdField.Value; set => OrderIdField.Value = value; }
     
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the affiliate to be credited for the purchase.
     /// </summary>
-    public ApiProperty<int> OprIdField => _oprIdField ??= new ApiProperty<int>(this, OprIdKey);
-    private ApiProperty<int>? _oprIdField;
+    public ApiProperty<long> OprIdField => _oprIdField ??= new ApiProperty<long>(this, OprIdKey);
+    private ApiProperty<long>? _oprIdField;
     public const string OprIdKey = "oprid";
     /// <summary>
     /// Gets or sets the ID of the affiliate to be credited for the purchase.
     /// </summary>
-    public int? OprId { get => OprIdField.Value; set => OprIdField.Value = value; }
+    public long? OprId { get => OprIdField.Value; set => OprIdField.Value = value; }
     
     /// <summary>
     /// Returns a ApiProperty object to get or set the description of the product purchased.
@@ -173,24 +173,24 @@ public class ApiPurchase : ApiObject
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the coupon applied to the purchase.
     /// </summary>
-    public ApiProperty<int> CouponIdField => _couponIdField ??= new ApiProperty<int>(this, CouponIdKey);
-    private ApiProperty<int>? _couponIdField;
+    public ApiProperty<long> CouponIdField => _couponIdField ??= new ApiProperty<long>(this, CouponIdKey);
+    private ApiProperty<long>? _couponIdField;
     public const string CouponIdKey = "coupon_id";
     /// <summary>
     /// Gets or sets the ID of the coupon applied to the purchase.
     /// </summary>
-    public int? CouponId { get => CouponIdField.Value; set => CouponIdField.Value = value; }
+    public long? CouponId { get => CouponIdField.Value; set => CouponIdField.Value = value; }
     
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the coupon code corresponding to the coupon used, if a coupon was applied to the purchase.
     /// </summary>
-    public ApiProperty<int> CouponCodeIdField => _couponCodeIdField ??= new ApiProperty<int>(this, CouponCodeIdKey);
-    private ApiProperty<int>? _couponCodeIdField;
+    public ApiProperty<long> CouponCodeIdField => _couponCodeIdField ??= new ApiProperty<long>(this, CouponCodeIdKey);
+    private ApiProperty<long>? _couponCodeIdField;
     public const string CouponCodeIdKey = "coupon_code_id";
     /// <summary>
     /// Gets or sets the ID of the coupon code corresponding to the coupon used, if a coupon was applied to the purchase.
     /// </summary>
-    public int? CouponCodeId { get => CouponCodeIdField.Value; set => CouponCodeIdField.Value = value; }
+    public long? CouponCodeId { get => CouponCodeIdField.Value; set => CouponCodeIdField.Value = value; }
     
     /// <summary>
     /// Returns a ApiProperty object to get or set the amount discounted from the purchase.

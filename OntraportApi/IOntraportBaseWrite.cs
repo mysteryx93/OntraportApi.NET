@@ -27,6 +27,6 @@
         /// <param name="objectId">The ID of the object to update.</param>
         /// <param name="values">Fields to set on the object.</param>
         /// <returns>An object containing updated fields.</returns>
-        Task<T> UpdateAsync(int objectId, object? values = null, CancellationToken cancellationToken = default);
+        Task<T> UpdateAsync(long objectId, object? values = null, CancellationToken cancellationToken = default);
     }
 }

@@ -8,7 +8,7 @@ public class ApiTransactionShipping
     /// <summary>
     /// Gets or sets the ID of the shipping method being applied to the offer. This must be an existing shipping method.
     /// </summary>
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the shipping method being used.
@@ -24,5 +24,5 @@ public class ApiTransactionShipping
     /// Gets or sets the ID of the related form, if any.
     /// </summary>
     [JsonPropertyName("form_id")]
-    public int? FormId { get; set; }
+    public long? FormId { get; set; }
 }

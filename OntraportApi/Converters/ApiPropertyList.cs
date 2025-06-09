@@ -1,9 +1,9 @@
 ﻿namespace HanumanInstitute.OntraportApi.Converters;
 
 /// <summary>
-/// Converts an enumeration stored as int.
+/// Converts an enumeration stored as long.
 /// </summary>
-public class ApiPropertyList : ApiPropertyBase<IList<int>, IList<int>>
+public class ApiPropertyList : ApiPropertyBase<IList<long>, IList<long>>
 {
     /// <summary>
     /// Initializes a new instance of the ApiProperty class for specified ApiObject host and field key.

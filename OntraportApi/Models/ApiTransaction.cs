@@ -32,13 +32,13 @@ public class ApiTransaction : ApiObject
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the contact who made the transaction.
     /// </summary>
-    public ApiProperty<int> ContactIdField => _contactIdField ??= new ApiProperty<int>(this, ContactIdKey);
-    private ApiProperty<int>? _contactIdField;
+    public ApiProperty<long> ContactIdField => _contactIdField ??= new ApiProperty<long>(this, ContactIdKey);
+    private ApiProperty<long>? _contactIdField;
     public const string ContactIdKey = "contact_id";
     /// <summary>
     /// Gets or sets the ID of the contact who made the transaction.
     /// </summary>
-    public int? ContactId { get => ContactIdField.Value; set => ContactIdField.Value = value; }
+    public long? ContactId { get => ContactIdField.Value; set => ContactIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the full name of the contact who made the transaction.
@@ -54,57 +54,57 @@ public class ApiTransaction : ApiObject
     /// <summary>
     /// If the transaction resulted from a subscription purchase, returns a ApiProperty object to get or set the ID of the associated order.
     /// </summary>
-    public ApiProperty<int> OrderIdField => _orderIdField ??= new ApiProperty<int>(this, OrderIdKey);
-    private ApiProperty<int>? _orderIdField;
+    public ApiProperty<long> OrderIdField => _orderIdField ??= new ApiProperty<long>(this, OrderIdKey);
+    private ApiProperty<long>? _orderIdField;
     public const string OrderIdKey = "order_id";
     /// <summary>
     /// If the transaction resulted from a subscription purchase, gets or sets the ID of the associated order.
     /// </summary>
-    public int? OrderId { get => OrderIdField.Value; set => OrderIdField.Value = value; }
+    public long? OrderId { get => OrderIdField.Value; set => OrderIdField.Value = value; }
 
     /// <summary>
     /// If the transaction resulted from a purchase made via a form, returns a ApiProperty object to get or set the ID of that form.
     /// </summary>
-    public ApiProperty<int> FormIdField => _formIdField ??= new ApiProperty<int>(this, FormIdKey);
-    private ApiProperty<int>? _formIdField;
+    public ApiProperty<long> FormIdField => _formIdField ??= new ApiProperty<long>(this, FormIdKey);
+    private ApiProperty<long>? _formIdField;
     public const string FormIdKey = "form_id";
     /// <summary>
     /// If the transaction resulted from a purchase made via a form, returns a ApiProperty object to get or set the ID of that form.
     /// </summary>
-    public int? FormId { get => FormIdField.Value; set => FormIdField.Value = value; }
+    public long? FormId { get => FormIdField.Value; set => FormIdField.Value = value; }
 
     /// <summary>
     /// If the transaction resulted from a purchase made via a landing page, returns a ApiProperty object to get or set the ID of that landing page.
     /// </summary>
-    public ApiProperty<int> LandingPageIdField => _landingPageIdField ??= new ApiProperty<int>(this, LandingPageIdKey);
-    private ApiProperty<int>? _landingPageIdField;
+    public ApiProperty<long> LandingPageIdField => _landingPageIdField ??= new ApiProperty<long>(this, LandingPageIdKey);
+    private ApiProperty<long>? _landingPageIdField;
     public const string LandingPageIdKey = "lp_id";
     /// <summary>
     /// If the transaction resulted from a purchase made via a landing page, gets or sets the ID of that landing page.
     /// </summary>
-    public int? LandingPageId { get => LandingPageIdField.Value; set => LandingPageIdField.Value = value; }
+    public long? LandingPageId { get => LandingPageIdField.Value; set => LandingPageIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the credit card used to charge the transaction.
     /// </summary>
-    public ApiProperty<int> CreditCardIdField => _creditCardIdField ??= new ApiProperty<int>(this, CreditCardIdKey);
-    private ApiProperty<int>? _creditCardIdField;
+    public ApiProperty<long> CreditCardIdField => _creditCardIdField ??= new ApiProperty<long>(this, CreditCardIdKey);
+    private ApiProperty<long>? _creditCardIdField;
     public const string CreditCardIdKey = "cc_id";
     /// <summary>
     /// Gets or sets the ID of the credit card used to charge the transaction.
     /// </summary>
-    public int? CreditCardId { get => CreditCardIdField.Value; set => CreditCardIdField.Value = value; }
+    public long? CreditCardId { get => CreditCardIdField.Value; set => CreditCardIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the payment gateway used to complete the transaction.
     /// </summary>
-    public ApiProperty<int> GatewayIdField => _gatewayIdField ??= new ApiProperty<int>(this, GatewayIdKey);
-    private ApiProperty<int>? _gatewayIdField;
+    public ApiProperty<long> GatewayIdField => _gatewayIdField ??= new ApiProperty<long>(this, GatewayIdKey);
+    private ApiProperty<long>? _gatewayIdField;
     public const string GatewayIdKey = "gateway_id";
     /// <summary>
     /// Gets or sets the ID of the payment gateway used to complete the transaction.
     /// </summary>
-    public int? GatewayId { get => GatewayIdField.Value; set => GatewayIdField.Value = value; }
+    public long? GatewayId { get => GatewayIdField.Value; set => GatewayIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the date and time the transaction was made.
@@ -120,13 +120,13 @@ public class ApiTransaction : ApiObject
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the invoice template sent to the contact.
     /// </summary>
-    public ApiProperty<int> TemplateIdField => _templateIdField ??= new ApiProperty<int>(this, TemplateIdKey);
-    private ApiProperty<int>? _templateIdField;
+    public ApiProperty<long> TemplateIdField => _templateIdField ??= new ApiProperty<long>(this, TemplateIdKey);
+    private ApiProperty<long>? _templateIdField;
     public const string TemplateIdKey = "template_id";
     /// <summary>
     /// Gets or sets the ID of the invoice template sent to the contact.
     /// </summary>
-    public int? TemplateId { get => TemplateIdField.Value; set => TemplateIdField.Value = value; }
+    public long? TemplateId { get => TemplateIdField.Value; set => TemplateIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the amount of the transaction prior to tax and shipping.
@@ -252,24 +252,24 @@ public class ApiTransaction : ApiObject
     /// <summary>
     /// If a sale comes from another system, returns a ApiProperty object to get or set the order ID sent from that system.
     /// </summary>
-    public ApiProperty<int> ExternalOrderIdField => _externalOrderIdField ??= new ApiProperty<int>(this, ExternalOrderIdKey);
-    private ApiProperty<int>? _externalOrderIdField;
+    public ApiProperty<long> ExternalOrderIdField => _externalOrderIdField ??= new ApiProperty<long>(this, ExternalOrderIdKey);
+    private ApiProperty<long>? _externalOrderIdField;
     public const string ExternalOrderIdKey = "external_order_id";
     /// <summary>
     /// If a sale comes from another system, gets or sets the order ID sent from that system.
     /// </summary>
-    public int? ExternalOrderId { get => ExternalOrderIdField.Value; set => ExternalOrderIdField.Value = value; }
+    public long? ExternalOrderId { get => ExternalOrderIdField.Value; set => ExternalOrderIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the affiliate to be credited for the transaction.
     /// </summary>
-    public ApiProperty<int> AffiliateIdField => _affiliateIdField ??= new ApiProperty<int>(this, AffiliateIdKey);
-    private ApiProperty<int>? _affiliateIdField;
+    public ApiProperty<long> AffiliateIdField => _affiliateIdField ??= new ApiProperty<long>(this, AffiliateIdKey);
+    private ApiProperty<long>? _affiliateIdField;
     public const string AffiliateIdKey = "oprid";
     /// <summary>
     /// Gets or sets the ID of the affiliate to be credited for the transaction.
     /// </summary>
-    public int? AffiliateId { get => AffiliateIdField.Value; set => AffiliateIdField.Value = value; }
+    public long? AffiliateId { get => AffiliateIdField.Value; set => AffiliateIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the JSON encoded offer data. The offer object contains all information about products, quantities, coupons, tax and shipping.

@@ -73,7 +73,7 @@ public abstract class OntraportBaseWrite<T, TOverride> : OntraportBaseRead<T, TO
     /// <param name="objectId">The ID of the object to update.</param>
     /// <param name="values">Fields to set on the object.</param>
     /// <returns>A dictionary of updated fields.</returns>
-    public async Task<T> UpdateAsync(int objectId, object? values = null, CancellationToken cancellationToken = default)
+    public async Task<T> UpdateAsync(long objectId, object? values = null, CancellationToken cancellationToken = default)
     {
         var query = new Dictionary<string, object?>
         {

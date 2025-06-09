@@ -6,7 +6,7 @@
 /// </summary>
 public interface IOntraportTransactions : IOntraportBaseRead<ApiTransaction>
 {
-    Task MarkCollectionsAsync(int transactionId, CancellationToken cancellationToken = default);
+    Task MarkCollectionsAsync(long transactionId, CancellationToken cancellationToken = default);
     /// <summary>
     /// Marks a transaction as in collections.
     /// </summary>
@@ -16,13 +16,13 @@ public interface IOntraportTransactions : IOntraportBaseRead<ApiTransaction>
     /// Marks a transaction as declined.
     /// </summary>
     /// <param name="transactionId">The transaction ID.</param>
-    Task MarkDeclinedAsync(int transactionId, CancellationToken cancellationToken = default);
+    Task MarkDeclinedAsync(long transactionId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Marks a transaction as paid.
     /// </summary>
     /// <param name="transactionId">The transaction ID.</param>
-    Task MarkPaidAsync(int transactionId, CancellationToken cancellationToken = default);
+    Task MarkPaidAsync(long transactionId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates an order to include new offer data. For example, to update the credit card tied to the recurring subscription.
@@ -43,7 +43,7 @@ public interface IOntraportTransactions : IOntraportBaseRead<ApiTransaction>
     /// <param name="transactionDate">The date and time of the transaction.</param>
     /// <param name="invoiceTemplate">The ID of the invoice template to use for this transaction. The default invoice ID is 1.</param>
     /// <returns>The transaction result.</returns>
-    Task<ApiTransactionResult> ProcessManualAsync(int contactId, int gatewayId, ApiTransactionOffer offer, ApiTransactionAddress? billingAddress = null, ApiTransactionPayer? payer = null, int? creditCardId = null, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1, CancellationToken cancellationToken = default);
+    Task<ApiTransactionResult> ProcessManualAsync(long contactId, long gatewayId, ApiTransactionOffer offer, ApiTransactionAddress? billingAddress = null, ApiTransactionPayer? payer = null, long? creditCardId = null, string? externalOrderId = null, DateTimeOffset? transactionDate = null, long invoiceTemplate = 1, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Far less data is needed to simply log a transaction than to manually process one. The gateway, payer, and billing details are unnecessary 
@@ -55,7 +55,7 @@ public interface IOntraportTransactions : IOntraportBaseRead<ApiTransaction>
     /// <param name="transactionDate">The date and time of the transaction.</param>
     /// <param name="invoiceTemplate">The ID of the invoice template to use for this transaction. The default invoice ID is 1.</param>
     /// <returns>The invoice ID.</returns>
-    Task<int> LogTransactionAsync(int contactId, ApiTransactionOffer offer, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1, CancellationToken cancellationToken = default);
+    Task<int> LogTransactionAsync(long contactId, ApiTransactionOffer offer, string? externalOrderId = null, DateTimeOffset? transactionDate = null, long invoiceTemplate = 1, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Refunds a previously charged transaction.

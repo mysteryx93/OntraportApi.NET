@@ -39,7 +39,7 @@ public interface IOntraportObjects
     /// <param name="objectType">The object type.</param>
     /// <param name="objectId">The ID of the specific object.</param>
     /// <returns>The selected object.</returns>
-    Task<Dictionary<string, string>?> SelectAsync(ApiObjectType objectType, int objectId, CancellationToken cancellationToken = default);
+    Task<Dictionary<string, string>?> SelectAsync(ApiObjectType objectType, long objectId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves a collection of objects based on a set of parameters.
@@ -63,7 +63,7 @@ public interface IOntraportObjects
     /// <param name="externs">If you have a relationship between your object and another object, you may want to include the data from a related field in your results. Each external field is listed in the format {object}//{field}.</param>
     /// <param name="listFields">A string array of the fields which should be returned in your results.</param>
     /// <returns>The number of objects matching the query.</returns>
-    Task<int> GetCountByTagAsync(ApiObjectType objectType, int? tagId = null, string? tagName = null, ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null, IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, CancellationToken cancellationToken = default);
+    Task<int> GetCountByTagAsync(ApiObjectType objectType, long? tagId = null, string? tagName = null, ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null, IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves a collection of objects having a specified tag.
@@ -76,7 +76,7 @@ public interface IOntraportObjects
     /// <param name="externs">If you have a relationship between your object and another object, you may want to include the data from a related field in your results. Each external field is listed in the format {object}//{field}.</param>
     /// <param name="listFields">A string array of the fields which should be returned in your results.</param>
     /// <returns>A list of objects matching the query.</returns>
-    Task<List<Dictionary<string, string>>> SelectByTagAsync(ApiObjectType objectType, int? tagId = null, string? tagName = null, ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null, IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, CancellationToken cancellationToken = default);
+    Task<List<Dictionary<string, string>>> SelectByTagAsync(ApiObjectType objectType, long? tagId = null, string? tagName = null, ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null, IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves the first ID of contact object or custom object by their email fields.
@@ -84,7 +84,7 @@ public interface IOntraportObjects
     /// <param name="objectType">The object type id.</param>
     /// <param name="email">The email of the object you would like to retrieve.</param>
     /// <returns>The object ID.</returns>
-    Task<int?> GetObjectIdByEmailAsync(ApiObjectType objectType, string email, CancellationToken cancellationToken = default);
+    Task<long?> GetObjectIdByEmailAsync(ApiObjectType objectType, string email, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves all IDs of contact objects or custom objects by their email fields.
@@ -93,13 +93,11 @@ public interface IOntraportObjects
     /// <param name="email">The email of the object you would like to retrieve.</param>
     /// <param name="all">A binary integer flag indicating whether you would like to retrieve an array of all IDs for objects with a matching email. If false, only the first object will be returned.</param>
     /// <returns>A list of object IDs.</returns>
-    Task<IEnumerable<int>> GetObjectIdByEmailAllAsync(ApiObjectType objectType, string email, CancellationToken cancellationToken = default);
+    Task<IEnumerable<long>> GetObjectIdByEmailAllAsync(ApiObjectType objectType, string email, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves the field meta data for the specified object type.
     /// </summary>
-    /// <param name="objectType">The object type.</param>
-    /// <param name="indexByName">True to index by name, false to index by id.</param>
     /// <returns>A JsonElement providing raw access to the JSON data.</returns>
     Task<Dictionary<string, ResponseMetadata>> GetAllMetadataAsync(CancellationToken cancellationToken = default);
 
@@ -148,7 +146,7 @@ public interface IOntraportObjects
     /// <param name="objectId">The ID of the object to update.</param>
     /// <param name="values">Fields to set on the object.</param>
     /// <returns>A dictionary of updated fields.</returns>
-    Task<Dictionary<string, string>> UpdateAsync(ApiObjectType objectType, int objectId, object? values = null, CancellationToken cancellationToken = default);
+    Task<Dictionary<string, string>> UpdateAsync(ApiObjectType objectType, long objectId, object? values = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Update fields and sections in an object record. The section MUST exist in order to update it. Any fields that do not already exist 
@@ -166,7 +164,7 @@ public interface IOntraportObjects
     /// </summary>
     /// <param name="objectType">The object type.</param>
     /// <param name="objectId">The ID of the specific object.</param>
-    Task DeleteAsync(ApiObjectType objectType, int objectId, CancellationToken cancellationToken = default);
+    Task DeleteAsync(ApiObjectType objectType, long objectId, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// This endpoint deletes a collection of objects. Use caution with this endpoint.
@@ -196,7 +194,7 @@ public interface IOntraportObjects
     /// <param name="objectType">The object type.</param>
     /// <param name="searchOptions">The search options.</param>
     /// <param name="sequenceIds">A list of the sequence(s) to which objects should be added.</param>
-    Task AddToSequenceAsync(ApiObjectType objectType, ApiSearchOptions searchOptions, IEnumerable<int> sequenceIds, CancellationToken cancellationToken = default);
+    Task AddToSequenceAsync(ApiObjectType objectType, ApiSearchOptions searchOptions, IEnumerable<long> sequenceIds, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Adds one or more tags to one or more objects.
@@ -204,7 +202,7 @@ public interface IOntraportObjects
     /// <param name="objectType">The object type.</param>
     /// <param name="searchOptions">The search options.</param>
     /// <param name="tagIds">A list of the IDs of the tag(s) which should be added to objects.</param>
-    Task AddTagAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions, IEnumerable<int> tagIds, CancellationToken cancellationToken = default);
+    Task AddTagAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions, IEnumerable<long> tagIds, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Adds one or more tags to one or more objects by the tag name. This endpoint will create the tag if it doesn't exist.
@@ -220,7 +218,7 @@ public interface IOntraportObjects
     /// <param name="objectType">The object type.</param>
     /// <param name="searchOptions">The search options.</param>
     /// <param name="campaignIds">A list of the campaign(s) to which objects should be added.</param>
-    Task AddToCampaignAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions, IEnumerable<int> campaignIds, CancellationToken cancellationToken = default);
+    Task AddToCampaignAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions, IEnumerable<long> campaignIds, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Removes one or more objects from one or more sequences.
@@ -228,7 +226,7 @@ public interface IOntraportObjects
     /// <param name="objectType">The object type.</param>
     /// <param name="searchOptions">The search options.</param>
     /// <param name="sequenceIds">A list of the sequence(s) from which objects should be removed.</param>
-    Task RemoveFromSequenceAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions, IEnumerable<int> sequenceIds, CancellationToken cancellationToken = default);
+    Task RemoveFromSequenceAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions, IEnumerable<long> sequenceIds, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Removes one or more tags from one or more objects.
@@ -236,7 +234,7 @@ public interface IOntraportObjects
     /// <param name="objectType">The object type.</param>
     /// <param name="searchOptions">The search options.</param>
     /// <param name="tagIds">A list of the IDs of the tag(s) which should be removed from objects.</param>
-    Task RemoveTagAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions, IEnumerable<int> tagIds, CancellationToken cancellationToken = default);
+    Task RemoveTagAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions, IEnumerable<long> tagIds, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Removes one or more tags from one or more objects by the tag name.
@@ -252,7 +250,7 @@ public interface IOntraportObjects
     /// <param name="objectType">The object type.</param>
     /// <param name="searchOptions">The search options.</param>
     /// <param name="campaignIds">A list of the campaign(s) from which objects should be removed.</param>
-    Task RemoveFromCampaignAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions, IEnumerable<int> campaignIds, CancellationToken cancellationToken = default);
+    Task RemoveFromCampaignAsync(ApiObjectType objectType, ApiSearchOptions? searchOptions, IEnumerable<long> campaignIds, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Pauses rules, sequences, and sequence subscribers.

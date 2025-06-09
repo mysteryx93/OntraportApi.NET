@@ -382,13 +382,13 @@ public class ApiContact : ApiCustomObjectBase
     /// <summary>
     /// For affiliates, returns a ApiProperty object to get or set the partner program ID.
     /// </summary>
-    public ApiProperty<int> AffiliateProgramIdField => _affiliateProgramIdField ??= new ApiProperty<int>(this, AffiliateProgramKey);
-    private ApiProperty<int>? _affiliateProgramIdField;
+    public ApiProperty<long> AffiliateProgramIdField => _affiliateProgramIdField ??= new ApiProperty<long>(this, AffiliateProgramKey);
+    private ApiProperty<long>? _affiliateProgramIdField;
     public const string AffiliateProgramKey = "program_id";
     /// <summary>
     /// For affiliates, returns a ApiProperty object to get or set the partner program ID.
     /// </summary>
-    public int? AffiliateProgramId { get => AffiliateProgramIdField.Value; set => AffiliateProgramIdField.Value = value; }
+    public long? AffiliateProgramId { get => AffiliateProgramIdField.Value; set => AffiliateProgramIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the affiliate email address for Paypal payments.

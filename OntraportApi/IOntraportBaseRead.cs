@@ -13,7 +13,7 @@
         /// <param name="id">The ID of the specific object.</param>
         /// <param name="cancellationToken">The cancellation token to cancel operation.</param>
         /// <returns>The selected object.</returns>
-        Task<T?> SelectAsync(int id, CancellationToken cancellationToken = default);
+        Task<T?> SelectAsync(long id, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves a collection of objects based on a set of parameters.

@@ -19,5 +19,5 @@ public interface IOntraportWebhooks : IOntraportBaseRead<ApiWebhook>
     /// Unsubscribe from a specific webhook by its ID.
     /// </summary>
     /// <param name="webhookId">The ID of the webhook to unsubscribe from. Required.</param>
-    Task UnsubscribeAsync(int webhookId, CancellationToken cancellationToken = default);
+    Task UnsubscribeAsync(long webhookId, CancellationToken cancellationToken = default);
 }

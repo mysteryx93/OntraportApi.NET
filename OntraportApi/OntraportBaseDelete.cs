@@ -30,7 +30,7 @@ public abstract class OntraportBaseDelete<T, TOverride> : OntraportBaseWrite<T, 
     /// Deletes an existing object.
     /// </summary>
     /// <param name="objectId">The ID of the specific object.</param>
-    public virtual async Task DeleteAsync(int objectId, CancellationToken cancellationToken = default)
+    public virtual async Task DeleteAsync(long objectId, CancellationToken cancellationToken = default)
     {
         var query = new Dictionary<string, object?>
         {

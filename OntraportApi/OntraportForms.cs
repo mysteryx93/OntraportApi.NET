@@ -16,7 +16,7 @@ public class OntraportForms : OntraportBaseRead<ApiForm>, IOntraportForms
     /// </summary>
     /// <param name="formId">The ID of the form to retrieve HTML for.</param>
     /// <returns>The form HTML.</returns>
-    public async Task<string?> SelectSmartFormHtmlAsync(int formId, CancellationToken cancellationToken = default)
+    public async Task<string?> SelectSmartFormHtmlAsync(long formId, CancellationToken cancellationToken = default)
     {
         var query = new Dictionary<string, object?>
         {

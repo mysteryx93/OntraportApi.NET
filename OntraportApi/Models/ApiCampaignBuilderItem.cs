@@ -41,13 +41,13 @@ public class ApiCampaignBuilderItem : ApiObject
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the object type the campaign relates to.
     /// </summary>
-    public ApiProperty<int> ObjectTypeIdField => _objectTypeIdField ??= new ApiProperty<int>(this, ObjectTypeIdKey);
-    private ApiProperty<int>? _objectTypeIdField;
+    public ApiProperty<long> ObjectTypeIdField => _objectTypeIdField ??= new ApiProperty<long>(this, ObjectTypeIdKey);
+    private ApiProperty<long>? _objectTypeIdField;
     public const string ObjectTypeIdKey = "object_type_id";
     /// <summary>
     /// Gets or sets the ID of the object type the campaign relates to.
     /// </summary>
-    public int? ObjectTypeId { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
+    public long? ObjectTypeId { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set whether or not the campaign is paused.

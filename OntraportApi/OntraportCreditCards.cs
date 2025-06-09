@@ -15,7 +15,7 @@ public class OntraportCreditCards : OntraportBaseRead<ApiCreditCard>, IOntraport
     /// </summary>
     /// <param name="creditCardId">The credit card ID.</param>
     /// <returns>An ApiCreditCard containing updated fields.</returns>
-    public async Task<ApiCreditCard?> SetDefaultAsync(int creditCardId, CancellationToken cancellationToken = default)
+    public async Task<ApiCreditCard?> SetDefaultAsync(long creditCardId, CancellationToken cancellationToken = default)
     {
         var query = new Dictionary<string, object?>
         {

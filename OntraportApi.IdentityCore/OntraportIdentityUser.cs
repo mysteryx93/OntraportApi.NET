@@ -6,7 +6,7 @@ namespace HanumanInstitute.OntraportApi.IdentityCore;
 /// <summary>
 /// Base IdentityUser class that stores the list of roles internally. You must use OntraportIdentityUser instead of IdentityUser.
 /// </summary>
-public class OntraportIdentityUser : IdentityUser<int>
+public class OntraportIdentityUser : IdentityUser<long>
 {
     /// <summary>
     /// Gets or sets the internal roles cache.

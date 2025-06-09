@@ -33,10 +33,10 @@ public class ApiDeal : ApiCustomObjectBase
     public const string CalcKey = "calc";
     public int? Calc { get => CalcField.Value; set => CalcField.Value = value; }
 
-    public ApiProperty<int> PrimaryContactField => _primaryContactField ??= new ApiProperty<int>(this, PrimaryContactKey);
-    private ApiProperty<int>? _primaryContactField;
+    public ApiProperty<long> PrimaryContactField => _primaryContactField ??= new ApiProperty<long>(this, PrimaryContactKey);
+    private ApiProperty<long>? _primaryContactField;
     public const string PrimaryContactKey = "primary_contact";
-    public int? PrimaryContact { get => PrimaryContactField.Value; set => PrimaryContactField.Value = value; }
+    public long? PrimaryContact { get => PrimaryContactField.Value; set => PrimaryContactField.Value = value; }
 
     public ApiPropertyString CompanyField => _companyField ??= new ApiPropertyString(this, CompanyKey);
     private ApiPropertyString? _companyField;

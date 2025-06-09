@@ -11,5 +11,5 @@ public interface IOntraportCreditCards : IOntraportBaseRead<ApiCreditCard>
     /// </summary>
     /// <param name="creditCardId">The credit card ID.</param>
     /// <returns>An ApiCreditCard containing updated fields.</returns>
-    Task<ApiCreditCard?> SetDefaultAsync(int creditCardId, CancellationToken cancellationToken = default);
+    Task<ApiCreditCard?> SetDefaultAsync(long creditCardId, CancellationToken cancellationToken = default);
 }

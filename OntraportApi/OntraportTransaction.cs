@@ -14,7 +14,7 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
     /// Marks a transaction as in collections.
     /// </summary>
     /// <param name="transactionId">The transaction ID.</param>
-    public async Task MarkCollectionsAsync(int transactionId, CancellationToken cancellationToken = default)
+    public async Task MarkCollectionsAsync(long transactionId, CancellationToken cancellationToken = default)
     {
         var query = new Dictionary<string, object?>
         {
@@ -29,7 +29,7 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
     /// Marks a transaction as declined.
     /// </summary>
     /// <param name="transactionId">The transaction ID.</param>
-    public async Task MarkDeclinedAsync(int transactionId, CancellationToken cancellationToken = default)
+    public async Task MarkDeclinedAsync(long transactionId, CancellationToken cancellationToken = default)
     {
         var query = new Dictionary<string, object?>
         {
@@ -44,7 +44,7 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
     /// Marks a transaction as paid.
     /// </summary>
     /// <param name="transactionId">The transaction ID.</param>
-    public async Task MarkPaidAsync(int transactionId, CancellationToken cancellationToken = default)
+    public async Task MarkPaidAsync(long transactionId, CancellationToken cancellationToken = default)
     {
         var query = new Dictionary<string, object?>
         {
@@ -85,9 +85,9 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
     /// <param name="transactionDate">The date and time of the transaction.</param>
     /// <param name="invoiceTemplate">The ID of the invoice template to use for this transaction. The default invoice ID is 1.</param>
     /// <returns>The transaction result.</returns>
-    public async Task<ApiTransactionResult> ProcessManualAsync(int contactId, int gatewayId,
+    public async Task<ApiTransactionResult> ProcessManualAsync(long contactId, long gatewayId,
         ApiTransactionOffer offer, ApiTransactionAddress? billingAddress = null, ApiTransactionPayer? payer = null,
-        int? creditCardId = null, string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1,
+        long? creditCardId = null, string? externalOrderId = null, DateTimeOffset? transactionDate = null, long invoiceTemplate = 1,
         CancellationToken cancellationToken = default)
     {
         Check.NotNull(offer);
@@ -120,8 +120,8 @@ public class OntraportTransactions : OntraportBaseRead<ApiTransaction>, IOntrapo
     /// <param name="transactionDate">The date and time of the transaction.</param>
     /// <param name="invoiceTemplate">The ID of the invoice template to use for this transaction. The default invoice ID is 1.</param>
     /// <returns>The invoice ID.</returns>
-    public async Task<int> LogTransactionAsync(int contactId, ApiTransactionOffer offer,
-        string? externalOrderId = null, DateTimeOffset? transactionDate = null, int invoiceTemplate = 1, CancellationToken cancellationToken = default)
+    public async Task<int> LogTransactionAsync(long contactId, ApiTransactionOffer offer,
+        string? externalOrderId = null, DateTimeOffset? transactionDate = null, long invoiceTemplate = 1, CancellationToken cancellationToken = default)
     {
         Check.NotNull(offer);
 

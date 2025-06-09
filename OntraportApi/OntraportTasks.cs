@@ -18,7 +18,7 @@ public class OntraportTasks : OntraportBaseRead<ApiTask>, IOntraportTasks
     /// <param name="dateDue">The date and time the task should be due.</param>
     /// <param name="status">The task's status.</param>
     /// <returns>An object containing updated fields.</returns>
-    public async Task<ApiTask> UpdateAsync(int taskId, int? owner = null, DateTimeOffset? dateDue = null, ApiTask.TaskStatus? status = null, CancellationToken cancellationToken = default)
+    public async Task<ApiTask> UpdateAsync(long taskId, long? owner = null, DateTimeOffset? dateDue = null, ApiTask.TaskStatus? status = null, CancellationToken cancellationToken = default)
     {
         var query = new Dictionary<string, object?>
             {
@@ -98,7 +98,7 @@ public class OntraportTasks : OntraportBaseRead<ApiTask>, IOntraportTasks
     /// <param name="id">The task ID.</param>
     /// <param name="newTime">The date and time the task should be rescheduled for.</param>
     /// <returns></returns>
-    public async Task RescheduleAsync(int id, DateTimeOffset newTime, CancellationToken cancellationToken = default)
+    public async Task RescheduleAsync(long id, DateTimeOffset newTime, CancellationToken cancellationToken = default)
     {
         var query = new Dictionary<string, object?>
         {

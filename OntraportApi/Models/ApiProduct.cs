@@ -85,13 +85,13 @@ public class ApiProduct : ApiObject
     /// <summary>
     /// Returns a ApiProperty object to get or set the product's ID in other integrations.
     /// </summary>
-    public ApiProperty<int> ExternalIdField => _externalIdField ??= new ApiProperty<int>(this, ExternalIdKey);
-    private ApiProperty<int>? _externalIdField;
+    public ApiProperty<long> ExternalIdField => _externalIdField ??= new ApiProperty<long>(this, ExternalIdKey);
+    private ApiProperty<long>? _externalIdField;
     public const string ExternalIdKey = "external_id";
     /// <summary>
     /// Gets or sets the product's ID in other integrations.
     /// </summary>
-    public int? ExternalId { get => ExternalIdField.Value; set => ExternalIdField.Value = value; }
+    public long? ExternalId { get => ExternalIdField.Value; set => ExternalIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the product group associated with the product.

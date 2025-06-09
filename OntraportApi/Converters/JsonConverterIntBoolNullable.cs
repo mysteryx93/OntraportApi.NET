@@ -19,7 +19,7 @@ public class JsonConverterIntBoolNullable : JsonConverterBase<bool?>
         {
             valueInt = 0;
         }
-        else if (!IsNullValue(value))
+        else if (!IsNullValue(value) && value != "null")
         {
             valueInt = value?.Convert<int?>();
         }

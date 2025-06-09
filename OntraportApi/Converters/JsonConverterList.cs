@@ -5,19 +5,19 @@ namespace HanumanInstitute.OntraportApi.Converters;
 /// <summary>
 /// Converts an */* delimited list into a managed list.
 /// </summary>
-public class JsonConverterList : JsonConverterBase<IList<int>>
+public class JsonConverterList : JsonConverterBase<IList<long>>
 {
     public const string Separator = "*/*";
 
-    public override IList<int> Parse(string? value)
+    public override IList<long> Parse(string? value)
     {
         return (value ?? string.Empty)
-            .Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries)
-            .Select(x => int.Parse(x, CultureInfo.InvariantCulture))
+            .Split([Separator], StringSplitOptions.RemoveEmptyEntries)
+            .Select(x => long.Parse(x, CultureInfo.InvariantCulture))
             .ToList();
     }
 
-    public override string? Format(IList<int> value)
+    public override string? Format(IList<long> value)
     {
         if (value?.Any() == true)
         {

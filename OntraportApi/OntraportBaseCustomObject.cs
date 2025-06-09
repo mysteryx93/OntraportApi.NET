@@ -11,7 +11,7 @@ namespace HanumanInstitute.OntraportApi
     {
         public OntraportBaseCustomObject(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects,
             string endpointSingular, string endpointPlural,
-            int objectTypeId, string? primarySearchKey) :
+            long objectTypeId, string? primarySearchKey) :
             base(apiRequest, ontraObjects, endpointSingular, endpointPlural, objectTypeId, primarySearchKey)
         { }
     }
@@ -24,11 +24,11 @@ namespace HanumanInstitute.OntraportApi
         where TOverride : T
     {
         private readonly IOntraportObjects _ontraObjects;
-        private readonly int _objectTypeId;
+        private readonly long _objectTypeId;
 
         public OntraportBaseCustomObject(OntraportHttpClient apiRequest, IOntraportObjects ontraObjects,
             string endpointSingular, string endpointPlural,
-            int objectTypeId, string? primarySearchKey) :
+            long objectTypeId, string? primarySearchKey) :
             base(apiRequest, endpointSingular, endpointPlural, primarySearchKey)
         {
             _ontraObjects = ontraObjects;
@@ -100,15 +100,15 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="sequenceId">The id of the sequence to which the object should be added.</param>
-        public Task AddToSequenceAsync(int id, int sequenceId, CancellationToken cancellationToken = default) =>
-            _ontraObjects.AddToSequenceAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { sequenceId }, cancellationToken);
+        public Task AddToSequenceAsync(long id, long sequenceId, CancellationToken cancellationToken = default) =>
+            _ontraObjects.AddToSequenceAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), [sequenceId], cancellationToken);
 
         /// <summary>
         /// Adds an object to one or more sequences.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="sequenceIds">A list of the sequence(s) to which objects should be added.</param>
-        public Task AddToSequenceAsync(int id, IEnumerable<int> sequenceIds, CancellationToken cancellationToken = default) =>
+        public Task AddToSequenceAsync(long id, IEnumerable<long> sequenceIds, CancellationToken cancellationToken = default) =>
             _ontraObjects.AddToSequenceAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), sequenceIds, cancellationToken);
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
         /// <param name="sequenceIds">A list of the sequence(s) to which objects should be added.</param>
-        public Task AddToSequenceAsync(ApiSearchOptions searchOptions, IEnumerable<int> sequenceIds, CancellationToken cancellationToken = default) =>
+        public Task AddToSequenceAsync(ApiSearchOptions searchOptions, IEnumerable<long> sequenceIds, CancellationToken cancellationToken = default) =>
             _ontraObjects.AddToSequenceAsync((ApiObjectType)_objectTypeId, searchOptions, sequenceIds, cancellationToken);
 
         /// <summary>
@@ -124,15 +124,15 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="tagId">The ID of the tag which should be added to the object.</param>
-        public Task AddTagAsync(int id, int tagId, CancellationToken cancellationToken = default) =>
-            _ontraObjects.AddTagAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { tagId }, cancellationToken);
+        public Task AddTagAsync(long id, long tagId, CancellationToken cancellationToken = default) =>
+            _ontraObjects.AddTagAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), [tagId], cancellationToken);
 
         /// <summary>
         /// Adds one or more tags to an object.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="tagIds">A list of the IDs of the tag(s) which should be added to objects.</param>
-        public Task AddTagAsync(int id, IEnumerable<int> tagIds, CancellationToken cancellationToken = default) =>
+        public Task AddTagAsync(long id, IEnumerable<long> tagIds, CancellationToken cancellationToken = default) =>
             _ontraObjects.AddTagAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), tagIds, cancellationToken);
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
         /// <param name="tagIds">A list of the IDs of the tag(s) which should be added to objects.</param>
-        public Task AddTagAsync(ApiSearchOptions searchOptions, IEnumerable<int> tagIds, CancellationToken cancellationToken = default) =>
+        public Task AddTagAsync(ApiSearchOptions searchOptions, IEnumerable<long> tagIds, CancellationToken cancellationToken = default) =>
             _ontraObjects.AddTagAsync((ApiObjectType)_objectTypeId, searchOptions, tagIds, cancellationToken);
 
         /// <summary>
@@ -148,15 +148,15 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="tagName">The name of the tag which should be added to the object.</param>
-        public Task AddTagNamesAsync(int id, string tagName, CancellationToken cancellationToken = default) =>
-            _ontraObjects.AddTagNamesAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { tagName }, cancellationToken);
+        public Task AddTagNamesAsync(long id, string tagName, CancellationToken cancellationToken = default) =>
+            _ontraObjects.AddTagNamesAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), [tagName], cancellationToken);
 
         /// <summary>
         /// Adds one or more tags to an object by the tag name. This endpoint will create the tag if it doesn't exist.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="tagNames">A list of the names of the tag(s) which should be added to objects.</param>
-        public Task AddTagNamesAsync(int id, IEnumerable<string> tagNames, CancellationToken cancellationToken = default) =>
+        public Task AddTagNamesAsync(long id, IEnumerable<string> tagNames, CancellationToken cancellationToken = default) =>
             _ontraObjects.AddTagNamesAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), tagNames, cancellationToken);
 
         /// <summary>
@@ -172,15 +172,15 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="campaignId">The campaign to which the object should be added.</param>
-        public Task AddToCampaignAsync(int id, int campaignId, CancellationToken cancellationToken = default) =>
-            _ontraObjects.AddToCampaignAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { campaignId }, cancellationToken);
+        public Task AddToCampaignAsync(long id, long campaignId, CancellationToken cancellationToken = default) =>
+            _ontraObjects.AddToCampaignAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), [campaignId], cancellationToken);
 
         /// <summary>
         /// Adds an object to one or more campaigns.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="campaignIds">A list of the campaign(s) to which objects should be added.</param>
-        public Task AddToCampaignAsync(int id, IEnumerable<int> campaignIds, CancellationToken cancellationToken = default) =>
+        public Task AddToCampaignAsync(long id, IEnumerable<long> campaignIds, CancellationToken cancellationToken = default) =>
             _ontraObjects.AddToCampaignAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), campaignIds, cancellationToken);
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
         /// <param name="campaignIds">A list of the campaign(s) to which objects should be added.</param>
-        public Task AddToCampaignAsync(ApiSearchOptions searchOptions, IEnumerable<int> campaignIds, CancellationToken cancellationToken = default) =>
+        public Task AddToCampaignAsync(ApiSearchOptions searchOptions, IEnumerable<long> campaignIds, CancellationToken cancellationToken = default) =>
             _ontraObjects.AddToCampaignAsync((ApiObjectType)_objectTypeId, searchOptions, campaignIds, cancellationToken);
 
         /// <summary>
@@ -196,15 +196,15 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="sequenceId">The sequence from which the object should be removed.</param>
-        public Task RemoveFromSequenceAsync(int id, int sequenceId, CancellationToken cancellationToken = default) =>
-            _ontraObjects.RemoveFromSequenceAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { sequenceId }, cancellationToken);
+        public Task RemoveFromSequenceAsync(long id, long sequenceId, CancellationToken cancellationToken = default) =>
+            _ontraObjects.RemoveFromSequenceAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), [sequenceId], cancellationToken);
 
         /// <summary>
         /// Removes an objects from one or more sequences.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="sequenceIds">A list of the sequence(s) from which objects should be removed.</param>
-        public Task RemoveFromSequenceAsync(int id, IEnumerable<int> sequenceIds, CancellationToken cancellationToken = default) =>
+        public Task RemoveFromSequenceAsync(long id, IEnumerable<long> sequenceIds, CancellationToken cancellationToken = default) =>
             _ontraObjects.RemoveFromSequenceAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), sequenceIds, cancellationToken);
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
         /// <param name="sequenceIds">A list of the sequence(s) from which objects should be removed.</param>
-        public Task RemoveFromSequenceAsync(ApiSearchOptions searchOptions, IEnumerable<int> sequenceIds, CancellationToken cancellationToken = default) =>
+        public Task RemoveFromSequenceAsync(ApiSearchOptions searchOptions, IEnumerable<long> sequenceIds, CancellationToken cancellationToken = default) =>
             _ontraObjects.RemoveFromSequenceAsync((ApiObjectType)_objectTypeId, searchOptions, sequenceIds, cancellationToken);
 
         /// <summary>
@@ -220,15 +220,15 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="tagId">The ID of the tag which should be removed from the object.</param>
-        public Task RemoveTagAsync(int id, int tagId, CancellationToken cancellationToken = default) =>
-            _ontraObjects.RemoveTagAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { tagId }, cancellationToken);
+        public Task RemoveTagAsync(long id, long tagId, CancellationToken cancellationToken = default) =>
+            _ontraObjects.RemoveTagAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), [tagId], cancellationToken);
 
         /// <summary>
         /// Removes one or more tags from an object.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="tagIds">A list of the IDs of the tag(s) which should be removed from objects.</param>
-        public Task RemoveTagAsync(int id, IEnumerable<int> tagIds, CancellationToken cancellationToken = default) =>
+        public Task RemoveTagAsync(long id, IEnumerable<long> tagIds, CancellationToken cancellationToken = default) =>
             _ontraObjects.RemoveTagAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), tagIds, cancellationToken);
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
         /// <param name="tagIds">A list of the IDs of the tag(s) which should be removed from objects.</param>
-        public Task RemoveTagAsync(ApiSearchOptions searchOptions, IEnumerable<int> tagIds, CancellationToken cancellationToken = default) =>
+        public Task RemoveTagAsync(ApiSearchOptions searchOptions, IEnumerable<long> tagIds, CancellationToken cancellationToken = default) =>
             _ontraObjects.RemoveTagAsync((ApiObjectType)_objectTypeId, searchOptions, tagIds, cancellationToken);
 
         /// <summary>
@@ -244,15 +244,15 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="tagName">The name of the tag which should be removed from the object.</param>
-        public Task RemoveTagNamesAsync(int id, string tagName, CancellationToken cancellationToken = default) =>
-            _ontraObjects.RemoveTagNamesAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { tagName }, cancellationToken);
+        public Task RemoveTagNamesAsync(long id, string tagName, CancellationToken cancellationToken = default) =>
+            _ontraObjects.RemoveTagNamesAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), [tagName], cancellationToken);
 
         /// <summary>
         /// Removes one or more tags from an object by the tag name.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="tagNames">A list of the names of the tag(s) which should be removed from objects.</param>
-        public Task RemoveTagNamesAsync(int id, IEnumerable<string> tagNames, CancellationToken cancellationToken = default) =>
+        public Task RemoveTagNamesAsync(long id, IEnumerable<string> tagNames, CancellationToken cancellationToken = default) =>
             _ontraObjects.RemoveTagNamesAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), tagNames, cancellationToken);
 
         /// <summary>
@@ -268,15 +268,15 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="campaignId">The campaign from which the object should be removed.</param>
-        public Task RemoveFromCampaignAsync(int id, int campaignId, CancellationToken cancellationToken = default) =>
-            _ontraObjects.RemoveFromCampaignAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), new[] { campaignId }, cancellationToken);
+        public Task RemoveFromCampaignAsync(long id, long campaignId, CancellationToken cancellationToken = default) =>
+            _ontraObjects.RemoveFromCampaignAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), [campaignId], cancellationToken);
 
         /// <summary>
         /// Removes an object from one or more campaigns.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
         /// <param name="campaignIds">A list of the campaign(s) from which objects should be removed.</param>
-        public Task RemoveFromCampaignAsync(int id, IEnumerable<int> campaignIds, CancellationToken cancellationToken = default) =>
+        public Task RemoveFromCampaignAsync(long id, IEnumerable<long> campaignIds, CancellationToken cancellationToken = default) =>
             _ontraObjects.RemoveFromCampaignAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), campaignIds, cancellationToken);
 
         /// <summary>
@@ -284,14 +284,14 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="searchOptions">The search options.</param>
         /// <param name="campaignIds">A list of the campaign(s) from which objects should be removed.</param>
-        public Task RemoveFromCampaignAsync(ApiSearchOptions searchOptions, IEnumerable<int> campaignIds, CancellationToken cancellationToken = default) =>
+        public Task RemoveFromCampaignAsync(ApiSearchOptions searchOptions, IEnumerable<long> campaignIds, CancellationToken cancellationToken = default) =>
             _ontraObjects.RemoveFromCampaignAsync((ApiObjectType)_objectTypeId, searchOptions, campaignIds, cancellationToken);
 
         /// <summary>
         /// Pauses rules, sequences, and sequence subscribers.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
-        public Task PauseRuleOrSequenceAsync(int id, CancellationToken cancellationToken = default) =>
+        public Task PauseRuleOrSequenceAsync(long id, CancellationToken cancellationToken = default) =>
             _ontraObjects.PauseRuleOrSequenceAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), cancellationToken);
 
         /// <summary>
@@ -305,7 +305,7 @@ namespace HanumanInstitute.OntraportApi
         /// Unpauses rules, sequences, and sequence subscribers.
         /// </summary>
         /// <param name="id">The id of the object to affect.</param>
-        public Task UnpauseRuleOrSequenceAsync(int id, CancellationToken cancellationToken = default) =>
+        public Task UnpauseRuleOrSequenceAsync(long id, CancellationToken cancellationToken = default) =>
             _ontraObjects.UnpauseRuleOrSequenceAsync((ApiObjectType)_objectTypeId, new ApiSearchOptions(id), cancellationToken);
 
         /// <summary>

@@ -26,12 +26,12 @@ public class ApiObject
     /// <summary>
     /// Returns a ApiProperty object to get or set the object's ID.
     /// </summary>
-    public ApiProperty<int> IdField => _idField ??= new ApiProperty<int>(this, _idFieldKey);
-    private ApiProperty<int>? _idField;
+    public ApiProperty<long> IdField => _idField ??= new ApiProperty<long>(this, _idFieldKey);
+    private ApiProperty<long>? _idField;
     /// <summary>
     /// Gets or sets the object's ID.
     /// </summary>
-    public int? Id { get => IdField.Value; set => IdField.Value = value; }
+    public long? Id { get => IdField.Value; set => IdField.Value = value; }
 
     /// <summary>
     /// Gets or sets the raw data for this object as a dictionnary of string values.

@@ -19,7 +19,8 @@ public class ApiTransactionOffer
     /// <summary>
     /// Gets or sets a list of shipping detail to be applied to your offer. 
     /// </summary>
-    public IList<ApiTransactionShipping> Shipping { get; set; } = new List<ApiTransactionShipping>();
+    [JsonConverter(typeof(JsonEmptyArrayConverter<List<ApiTransactionShipping>>))]
+    public List<ApiTransactionShipping> Shipping { get; set; } = new List<ApiTransactionShipping>();
 
     /// <summary>
     /// Gets or sets the number of days to delay the start of the offer.
@@ -39,25 +40,25 @@ public class ApiTransactionOffer
     /// <summary>
     /// Gets or sets whether or not there are applicable taxes for this offer.
     /// </summary>
-    public bool HasTaxes { get; set; }
+    public bool? HasTaxes { get; set; }
 
     /// <summary>
     /// Gets or sets whether or not shipping should be applied to this offer.
     /// </summary>
-    public bool HasShipping { get; set; }
+    public bool? HasShipping { get; set; }
 
     /// <summary>
     /// Gets or sets whether or not shipping charges should be applied to recurring orders.
     /// </summary>
     [JsonPropertyName("shipping_charge_recurring_orders")]
-    public bool RecurringShippingCharges { get; set; }
+    public bool? RecurringShippingCharges { get; set; }
 
     /// <summary>
     /// For subscriptions, Gets or sets whether or not an invoice should be sent with every recurring order. This value defaults to false.
     /// </summary>
     [JsonPropertyName("send_recurring_invoice")]
     [JsonConverter(typeof(JsonConverterIntBool))]
-    public bool SendRecurringInvoice { get; set; }
+    public bool? SendRecurringInvoice { get; set; }
 
     /// <summary>
     /// Gets or sets the expiration date of the credit card on file.
@@ -67,7 +68,7 @@ public class ApiTransactionOffer
 
 
 
-    public ApiTransactionOffer AddProduct(int productId, int quantity, decimal price)
+    public ApiTransactionOffer AddProduct(long productId, int quantity, decimal price)
     {
         return Add(new ApiTransactionProduct()
         {

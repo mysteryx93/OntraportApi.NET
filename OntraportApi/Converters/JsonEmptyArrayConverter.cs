@@ -17,7 +17,7 @@ public class JsonEmptyArrayConverter<T> : JsonConverter<T>
     {
         Check.NotNull(typeToConvert);
 
-        if (reader.TokenType == JsonTokenType.StartArray)
+        if (reader.TokenType == JsonTokenType.StartArray || reader.TokenType == JsonTokenType.False || reader.TokenType == JsonTokenType.String)
         {
             reader.Skip();
             return Activator.CreateInstance<T>();

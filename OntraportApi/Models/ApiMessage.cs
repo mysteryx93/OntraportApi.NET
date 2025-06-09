@@ -151,13 +151,13 @@ public class ApiMessage : ApiObject
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the object type associated with the message. The default is 0 for contact objects. This field should only be changed if you are using custom objects.
     /// </summary>
-    public ApiProperty<int> ObjectTypeIdField => _objectTypeIdField ??= new ApiProperty<int>(this, ObjectTypeIdKey);
-    private ApiProperty<int>? _objectTypeIdField;
+    public ApiProperty<long> ObjectTypeIdField => _objectTypeIdField ??= new ApiProperty<long>(this, ObjectTypeIdKey);
+    private ApiProperty<long>? _objectTypeIdField;
     public const string ObjectTypeIdKey = "object_type_id";
     /// <summary>
     /// Gets or sets the ID of the object type associated with the message. The default is 0 for contact objects. This field should only be changed if you are using custom objects.
     /// </summary>
-    public int? ObjectTypeId { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
+    public long? ObjectTypeId { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the data and time the message was last modified.
@@ -315,10 +315,10 @@ public class ApiMessage : ApiObject
     public const string ResourceKey = "resource";
     public string? Resource { get => ResourceField.Value; set => ResourceField.Value = value; }
 
-    public ApiProperty<int> SiteIdField => _SiteIdField ??= new ApiProperty<int>(this, SiteIdKey);
-    private ApiProperty<int>? _SiteIdField;
+    public ApiProperty<long> SiteIdField => _SiteIdField ??= new ApiProperty<long>(this, SiteIdKey);
+    private ApiProperty<long>? _SiteIdField;
     public const string SiteIdKey = "site_id";
-    public int? SiteId { get => SiteIdField.Value; set => SiteIdField.Value = value; }
+    public long? SiteId { get => SiteIdField.Value; set => SiteIdField.Value = value; }
 
 
 

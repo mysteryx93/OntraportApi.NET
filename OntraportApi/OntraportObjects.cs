@@ -26,7 +26,7 @@ namespace HanumanInstitute.OntraportApi
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType }
+                { "objectID", (long)objectType }
             };
 
             return await _apiRequest.PostAsync<Dictionary<string, string>>(
@@ -44,7 +44,7 @@ namespace HanumanInstitute.OntraportApi
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "ignore_blanks", ignoreBlanks }
             };
 
@@ -64,7 +64,7 @@ namespace HanumanInstitute.OntraportApi
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "name", sectionName},
                 { "fields", fields }
             };
@@ -80,11 +80,11 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="objectId">The ID of the specific object.</param>
         /// <returns>The selected object.</returns>
-        public async Task<Dictionary<string, string>?> SelectAsync(ApiObjectType objectType, int objectId, CancellationToken cancellationToken = default)
+        public async Task<Dictionary<string, string>?> SelectAsync(ApiObjectType objectType, long objectId, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "id", objectId }
             };
 
@@ -107,7 +107,7 @@ namespace HanumanInstitute.OntraportApi
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType }
+                { "objectID", (long)objectType }
             }
                 .AddSearchOptions(searchOptions, null)
                 .AddSortOptions(sortOptions, null)
@@ -130,7 +130,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="listFields">A string array of the fields which should be returned in your results.</param>
         /// <returns>The number of objects matching the query.</returns>
         public async Task<int> GetCountByTagAsync(ApiObjectType objectType,
-            int? tagId = null, string? tagName = null,
+            long? tagId = null, string? tagName = null,
             ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null,
             IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, CancellationToken cancellationToken = default)
         {
@@ -154,7 +154,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="listFields">A string array of the fields which should be returned in your results.</param>
         /// <returns>A list of objects matching the query.</returns>
         public async Task<List<Dictionary<string, string>>> SelectByTagAsync(ApiObjectType objectType,
-            int? tagId = null, string? tagName = null,
+            long? tagId = null, string? tagName = null,
             ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null,
             IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, CancellationToken cancellationToken = default)
         {
@@ -165,13 +165,13 @@ namespace HanumanInstitute.OntraportApi
         }
 
         private async Task<JsonElement?> SelectByTagAsync(ApiObjectType objectType,
-            int? tagId = null, string? tagName = null,
+            long? tagId = null, string? tagName = null,
             ApiSearchOptions? searchOptions = null, ApiSortOptions? sortOptions = null,
             IEnumerable<string>? externs = null, IEnumerable<string>? listFields = null, bool count = false, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { tagId.HasValue ? "tag_id" : "tag_name", (object?)tagId ?? tagName },
                 { "count", count ? "true" : "false" },
             }
@@ -189,7 +189,7 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type id.</param>
         /// <param name="email">The email of the object you would like to retrieve.</param>
         /// <returns>The object ID.</returns>
-        public async Task<int?> GetObjectIdByEmailAsync(ApiObjectType objectType, string email, CancellationToken cancellationToken = default)
+        public async Task<long?> GetObjectIdByEmailAsync(ApiObjectType objectType, string email, CancellationToken cancellationToken = default)
         {
             Check.NotNullOrEmpty(email);
 
@@ -208,21 +208,21 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="email">The email of the object you would like to retrieve.</param>
         /// <param name="all">A binary integer flag indicating whether you would like to retrieve an array of all IDs for objects with a matching email. If false, only the first object will be returned.</param>
         /// <returns>A list of object IDs.</returns>
-        public async Task<IEnumerable<int>> GetObjectIdByEmailAllAsync(ApiObjectType objectType, string email, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<long>> GetObjectIdByEmailAllAsync(ApiObjectType objectType, string email, CancellationToken cancellationToken = default)
         {
             Check.NotNull(email);
 
             var json = await GetObjectIdByEmailAsync(
                 objectType, email, true, cancellationToken).ConfigureAwait(false);
-            return await json.RunAndCatchAsync(x => x.JsonData().JsonChild("ids").EnumerateArray().Select(x => x.GetString().Convert<int>())).ConfigureAwait(false)
-                ?? Enumerable.Empty<int>();
+            return await json.RunAndCatchAsync(x => x.JsonData().JsonChild("ids").EnumerateArray().Select(x => x.GetString().Convert<long>())).ConfigureAwait(false)
+                ?? [];
         }
 
         private async Task<JsonElement?> GetObjectIdByEmailAsync(ApiObjectType objectType, string email, bool all = false, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "email", email },
                 { "all", all ? 1 : 0 }
             };
@@ -258,7 +258,7 @@ namespace HanumanInstitute.OntraportApi
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "format", "byId" }
             };
 
@@ -277,7 +277,7 @@ namespace HanumanInstitute.OntraportApi
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
             }
                 .AddSearchOptions(searchOptions, null);
 
@@ -297,7 +297,7 @@ namespace HanumanInstitute.OntraportApi
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "section", sectionName }
             };
 
@@ -314,7 +314,7 @@ namespace HanumanInstitute.OntraportApi
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
             };
 
             var result = await _apiRequest.GetAsync<Dictionary<string, ResponseSectionFields>>(
@@ -334,7 +334,7 @@ namespace HanumanInstitute.OntraportApi
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "field", fieldName }
             };
 
@@ -349,11 +349,11 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectId">The ID of the object to update.</param>
         /// <param name="values">Fields to set on the object.</param>
         /// <returns>A dictionary of updated fields.</returns>
-        public async Task<Dictionary<string, string>> UpdateAsync(ApiObjectType objectType, int objectId, object? values = null, CancellationToken cancellationToken = default)
+        public async Task<Dictionary<string, string>> UpdateAsync(ApiObjectType objectType, long objectId, object? values = null, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "id", objectId }
             };
 
@@ -375,7 +375,7 @@ namespace HanumanInstitute.OntraportApi
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "name", sectionName},
                 { "fields", fields }
             }
@@ -391,11 +391,11 @@ namespace HanumanInstitute.OntraportApi
         /// </summary>
         /// <param name="objectType">The object type.</param>
         /// <param name="objectId">The ID of the specific object.</param>
-        public async Task DeleteAsync(ApiObjectType objectType, int objectId, CancellationToken cancellationToken = default)
+        public async Task DeleteAsync(ApiObjectType objectType, long objectId, CancellationToken cancellationToken = default)
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "id", objectId }
             };
 
@@ -413,7 +413,7 @@ namespace HanumanInstitute.OntraportApi
         {
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
             }
                 .AddSearchOptions(searchOptions, null, true);
 
@@ -432,7 +432,7 @@ namespace HanumanInstitute.OntraportApi
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "section", sectionName}
             };
 
@@ -451,7 +451,7 @@ namespace HanumanInstitute.OntraportApi
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "field", fieldName}
             };
 
@@ -465,13 +465,13 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="objectType">The object type.</param>
         /// <param name="searchOptions">The search options.</param>
         /// <param name="sequenceIds">A list of the sequence(s) to which objects should be added.</param>
-        public async Task AddToSequenceAsync(ApiObjectType objectType, ApiSearchOptions searchOptions, IEnumerable<int> sequenceIds, CancellationToken cancellationToken = default)
+        public async Task AddToSequenceAsync(ApiObjectType objectType, ApiSearchOptions searchOptions, IEnumerable<long> sequenceIds, CancellationToken cancellationToken = default)
         {
             Check.NotNullOrEmpty(sequenceIds);
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "add_list", sequenceIds },
             }
                 .AddSearchOptions(searchOptions, null, true);
@@ -487,13 +487,13 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="tagIds">A list of the IDs of the tag(s) which should be added to objects.</param>
         public async Task AddTagAsync(ApiObjectType objectType,
-            ApiSearchOptions? searchOptions, IEnumerable<int> tagIds, CancellationToken cancellationToken = default)
+            ApiSearchOptions? searchOptions, IEnumerable<long> tagIds, CancellationToken cancellationToken = default)
         {
             Check.NotNullOrEmpty(tagIds);
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "add_list", tagIds },
             }
                 .AddSearchOptions(searchOptions, null, true);
@@ -515,7 +515,7 @@ namespace HanumanInstitute.OntraportApi
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "add_names", tagNames },
             }
                 .AddSearchOptions(searchOptions, null, true);
@@ -531,13 +531,13 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="campaignIds">A list of the campaign(s) to which objects should be added.</param>
         public async Task AddToCampaignAsync(ApiObjectType objectType,
-            ApiSearchOptions? searchOptions, IEnumerable<int> campaignIds, CancellationToken cancellationToken = default)
+            ApiSearchOptions? searchOptions, IEnumerable<long> campaignIds, CancellationToken cancellationToken = default)
         {
             Check.NotNullOrEmpty(campaignIds);
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "add_list", campaignIds },
             }
                 .AddSearchOptions(searchOptions, null, true);
@@ -553,13 +553,13 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="sequenceIds">A list of the sequence(s) from which objects should be removed.</param>
         public async Task RemoveFromSequenceAsync(ApiObjectType objectType,
-            ApiSearchOptions? searchOptions, IEnumerable<int> sequenceIds, CancellationToken cancellationToken = default)
+            ApiSearchOptions? searchOptions, IEnumerable<long> sequenceIds, CancellationToken cancellationToken = default)
         {
             Check.NotNullOrEmpty(sequenceIds);
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "remove_list", sequenceIds }
             }
                 .AddSearchOptions(searchOptions, null);
@@ -575,13 +575,13 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="tagIds">A list of the IDs of the tag(s) which should be removed from objects.</param>
         public async Task RemoveTagAsync(ApiObjectType objectType,
-            ApiSearchOptions? searchOptions, IEnumerable<int> tagIds, CancellationToken cancellationToken = default)
+            ApiSearchOptions? searchOptions, IEnumerable<long> tagIds, CancellationToken cancellationToken = default)
         {
             Check.NotNullOrEmpty(tagIds);
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "remove_list", tagIds },
             }
                 .AddSearchOptions(searchOptions, null);
@@ -603,7 +603,7 @@ namespace HanumanInstitute.OntraportApi
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "remove_names", tagNames },
             }
                 .AddSearchOptions(searchOptions, null);
@@ -619,13 +619,13 @@ namespace HanumanInstitute.OntraportApi
         /// <param name="searchOptions">The search options.</param>
         /// <param name="campaignIds">A list of the campaign(s) from which objects should be removed.</param>
         public async Task RemoveFromCampaignAsync(ApiObjectType objectType,
-            ApiSearchOptions? searchOptions, IEnumerable<int> campaignIds, CancellationToken cancellationToken = default)
+            ApiSearchOptions? searchOptions, IEnumerable<long> campaignIds, CancellationToken cancellationToken = default)
         {
             Check.NotNullOrEmpty(campaignIds);
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
                 { "remove_list", campaignIds }
             }
                 .AddSearchOptions(searchOptions, null);
@@ -648,7 +648,7 @@ namespace HanumanInstitute.OntraportApi
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
             }
                 .AddSearchOptions(searchOptions, null);
 
@@ -670,7 +670,7 @@ namespace HanumanInstitute.OntraportApi
 
             var query = new Dictionary<string, object?>
             {
-                { "objectID", (int)objectType },
+                { "objectID", (long)objectType },
             }
                 .AddSearchOptions(searchOptions, null);
 

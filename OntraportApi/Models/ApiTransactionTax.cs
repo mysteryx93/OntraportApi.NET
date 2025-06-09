@@ -8,7 +8,7 @@ public class ApiTransactionTax
     /// <summary>
     /// Gets or sets the ID of the existing tax object to apply to the offer.
     /// </summary>
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     /// <summary>
     /// Gets or sets the rate at which the offer should be taxed.
@@ -34,5 +34,5 @@ public class ApiTransactionTax
     /// Gets or sets the ID of the related form, if any.
     /// </summary>
     [JsonPropertyName("form_id")]
-    public int? FormId { get; set; }
+    public long? FormId { get; set; }
 }

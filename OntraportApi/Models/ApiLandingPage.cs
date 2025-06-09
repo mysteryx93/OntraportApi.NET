@@ -8,13 +8,13 @@ public class ApiLandingPage : ApiObject
     /// <summary>
     /// Returns a ApiProperty object to get or set the hosted URL's ID.
     /// </summary>
-    public ApiProperty<int> UriIdField => _uriIdField ??= new ApiProperty<int>(this, UrlIdKey);
-    private ApiProperty<int>? _uriIdField;
+    public ApiProperty<long> UriIdField => _uriIdField ??= new ApiProperty<long>(this, UrlIdKey);
+    private ApiProperty<long>? _uriIdField;
     public const string UrlIdKey = "uri_id";
     /// <summary>
     /// Gets or sets the hosted URL's ID.
     /// </summary>
-    public int? UriId { get => UriIdField.Value; set => UriIdField.Value = value; }
+    public long? UriId { get => UriIdField.Value; set => UriIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the JSON encoded data containing the entire structure of the landing page.

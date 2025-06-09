@@ -19,24 +19,24 @@ public class ApiTask : ApiObject
     /// <summary>
     /// If the task is a step in a sequence, returns a ApiProperty object to get or set the ID of that sequence.
     /// </summary>
-    public ApiProperty<int> DripIdField => _dripIdField ??= new ApiProperty<int>(this, DripIdKey);
-    private ApiProperty<int>? _dripIdField;
+    public ApiProperty<long> DripIdField => _dripIdField ??= new ApiProperty<long>(this, DripIdKey);
+    private ApiProperty<long>? _dripIdField;
     public const string DripIdKey = "drip_id";
     /// <summary>
     /// If the task is a step in a sequence, gets or sets the ID of that sequence.
     /// </summary>
-    public int? DripId { get => DripIdField.Value; set => DripIdField.Value = value; }
+    public long? DripId { get => DripIdField.Value; set => DripIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the contact the task is related to.
     /// </summary>
-    public ApiProperty<int> ContactIdField => _contactIdField ??= new ApiProperty<int>(this, ContactIdKey);
-    private ApiProperty<int>? _contactIdField;
+    public ApiProperty<long> ContactIdField => _contactIdField ??= new ApiProperty<long>(this, ContactIdKey);
+    private ApiProperty<long>? _contactIdField;
     public const string ContactIdKey = "contact_id";
     /// <summary>
     /// Gets or sets the ID of the contact the task is related to.
     /// </summary>
-    public int? ContactId { get => ContactIdField.Value; set => ContactIdField.Value = value; }
+    public long? ContactId { get => ContactIdField.Value; set => ContactIdField.Value = value; }
 
     /// <summary>
     /// If the task is a step in a sequence, returns a ApiProperty object to get or set the order in the sequence of that step.
@@ -140,24 +140,24 @@ public class ApiTask : ApiObject
     /// <summary>
     /// If the task has an outcome, returns a ApiProperty object to get or set the ID of that outcome. Task outcomes are user-defined and stored as a related object.
     /// </summary>
-    public ApiProperty<int> CallOutcomeIdField => _callOutcomeIdField ??= new ApiProperty<int>(this, CallOutcomeIdKey);
-    private ApiProperty<int>? _callOutcomeIdField;
+    public ApiProperty<long> CallOutcomeIdField => _callOutcomeIdField ??= new ApiProperty<long>(this, CallOutcomeIdKey);
+    private ApiProperty<long>? _callOutcomeIdField;
     public const string CallOutcomeIdKey = "call_outcome_id";
     /// <summary>
     /// If the task has an outcome, gets or sets the ID of that outcome. Task outcomes are user-defined and stored as a related object.
     /// </summary>
-    public int? CallOutcomeId { get => CallOutcomeIdField.Value; set => CallOutcomeIdField.Value = value; }
+    public long? CallOutcomeId { get => CallOutcomeIdField.Value; set => CallOutcomeIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID of the task message. The task message is the generic template the task was created from.
     /// </summary>
-    public ApiProperty<int> TaskTemplateIdField => _taskTemplateIdField ??= new ApiProperty<int>(this, TaskTemplateIdKey);
-    private ApiProperty<int>? _taskTemplateIdField;
+    public ApiProperty<long> TaskTemplateIdField => _taskTemplateIdField ??= new ApiProperty<long>(this, TaskTemplateIdKey);
+    private ApiProperty<long>? _taskTemplateIdField;
     public const string TaskTemplateIdKey = "item_id";
     /// <summary>
     /// Gets or sets the ID of the task message. The task message is the generic template the task was created from.
     /// </summary>
-    public int? TaskTemplateId { get => TaskTemplateIdField.Value; set => TaskTemplateIdField.Value = value; }
+    public long? TaskTemplateId { get => TaskTemplateIdField.Value; set => TaskTemplateIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set a JSON encoded string including information about sent notifications.
@@ -184,13 +184,13 @@ public class ApiTask : ApiObject
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID for the type of object the task is associated with.
     /// </summary>
-    public ApiProperty<int> ObjectTypeIdField => _objectTypeIdField ??= new ApiProperty<int>(this, ObjectTypeIdKey);
-    private ApiProperty<int>? _objectTypeIdField;
+    public ApiProperty<long> ObjectTypeIdField => _objectTypeIdField ??= new ApiProperty<long>(this, ObjectTypeIdKey);
+    private ApiProperty<long>? _objectTypeIdField;
     public const string ObjectTypeIdKey = "object_type_id";
     /// <summary>
     /// Gets or sets the ID for the type of object the task is associated with.
     /// </summary>
-    public int? ObjectTypeId { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
+    public long? ObjectTypeId { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the name of the type of object the task is associated with.

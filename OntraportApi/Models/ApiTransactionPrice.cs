@@ -8,7 +8,7 @@ public class ApiTransactionPrice
     /// <summary>
     /// Gets or sets the ID of the pricing item.
     /// </summary>
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     /// <summary>
     /// Gets or sets the price of the product.
@@ -24,7 +24,6 @@ public class ApiTransactionPrice
     /// <summary>
     /// Gets or sets the units of time of payments.
     /// </summary>
-    [JsonPropertyName("transaction_period_unit")]
     [JsonConverter(typeof(JsonConverterStringEnum<TransactionPeriodUnit>))]
     public TransactionPeriodUnit? Unit { get; set; }
 }

@@ -9,5 +9,5 @@ public class ApiResponse<T>
     public int Code { get; set; }
     public T Data { get; set; } = default!;
     [JsonPropertyName("account_id")]
-    public int AccountId { get; set; }
+    public long AccountId { get; set; }
 }

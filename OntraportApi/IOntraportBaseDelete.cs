@@ -11,7 +11,7 @@
         /// Deletes an existing object.
         /// </summary>
         /// <param name="objectId">The ID of the specific object.</param>
-        Task DeleteAsync(int objectId, CancellationToken cancellationToken = default);
+        Task DeleteAsync(long objectId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This endpoint deletes a collection of objects. Use caution with this endpoint.

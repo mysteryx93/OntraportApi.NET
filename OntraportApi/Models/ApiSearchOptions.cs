@@ -11,12 +11,12 @@ public class ApiSearchOptions
 {
     public ApiSearchOptions() { }
 
-    public ApiSearchOptions(int id)
+    public ApiSearchOptions(long id)
     {
         Ids.Add(id);
     }
 
-    public ApiSearchOptions(IList<int> ids)
+    public ApiSearchOptions(IList<long> ids)
     {
         Ids.AddRange(ids);
     }
@@ -24,17 +24,17 @@ public class ApiSearchOptions
     /// <summary>
     /// Gets or sets a list of the IDs of the objects to retrieve.
     /// </summary>
-    public List<int> Ids { get; private set; } = new List<int>();
+    public List<long> Ids { get; private set; } = new List<long>();
 
     /// <summary>
     /// Gets or sets the list of the group ids of objects to retrieve.
     /// </summary>
-    public int? GroupId { get; set; }
+    public long? GroupId { get; set; }
 
     /// <summary>
     /// Gets or sets the offset to start your search from.
     /// </summary>
-    public int? Start { get; set; }
+    public long? Start { get; set; }
 
     /// <summary>
     /// Gets or sets the number of objects you want to retrieve. The maximum and default range is 50.
@@ -61,7 +61,7 @@ public class ApiSearchOptions
     /// Sets the Ids value.
     /// </summary>
     /// <param name="ids">A list of the IDs of the objects to retrieve.</param>
-    public ApiSearchOptions SetId(int id)
+    public ApiSearchOptions SetId(long id)
     {
         Ids.Add(id);
         return this;
@@ -71,7 +71,7 @@ public class ApiSearchOptions
     /// Sets the Ids value.
     /// </summary>
     /// <param name="ids">A list of the IDs of the objects to retrieve.</param>
-    public ApiSearchOptions SetIds(IList<int> ids)
+    public ApiSearchOptions SetIds(IList<long> ids)
     {
         Ids.AddRange(ids);
         return this;
@@ -81,7 +81,7 @@ public class ApiSearchOptions
     /// Sets the GroupIds value.
     /// </summary>
     /// <param name="groupIds">List of the group ids of objects to retrieve.</param>
-    public ApiSearchOptions SetGroupId(int groupId)
+    public ApiSearchOptions SetGroupId(long groupId)
     {
         GroupId = groupId;
         return this;
@@ -92,7 +92,7 @@ public class ApiSearchOptions
     /// </summary>
     /// <param name="start">The offset to start your search from.</param>
     /// <param name="range">The number of objects you want to retrieve. The maximum and default range is 50.</param>
-    public ApiSearchOptions SetStart(int? start, int? range = null)
+    public ApiSearchOptions SetStart(long? start, int? range = null)
     {
         Start = start;
         Range = range;

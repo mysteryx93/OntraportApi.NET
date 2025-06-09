@@ -101,13 +101,13 @@
         /// <summary>
         /// Returns a ApiProperty object to get or set the ID of the import batch the custom object was imported with, if any.
         /// </summary>
-        public ApiProperty<int> ImportIdField => _importIdField ??= new ApiProperty<int>(this, ImportIdKey);
-        private ApiProperty<int>? _importIdField;
+        public ApiProperty<long> ImportIdField => _importIdField ??= new ApiProperty<long>(this, ImportIdKey);
+        private ApiProperty<long>? _importIdField;
         public const string ImportIdKey = "import_id";
         /// <summary>
         /// Gets or sets the ID of the import batch the custom object was imported with, if any.
         /// </summary>
-        public int? ImportId { get => ImportIdField.Value; set => ImportIdField.Value = value; }
+        public long? ImportId { get => ImportIdField.Value; set => ImportIdField.Value = value; }
 
         /// <summary>
         /// Returns a ApiProperty object to get or set a flag that indicates a custom object's bulk email status.
@@ -140,7 +140,7 @@
         /// <summary>
         /// Deprecated. Gets or sets the tags a contact is subscribed to.
         /// </summary>
-        public IList<int> ListTags { get => ListTagsField.Value; }
+        public IList<long> ListTags { get => ListTagsField.Value; }
 
         /// <summary>
         /// Deprecated. Returns a ApiProperty object to get or set the sequences a contact is subscribed to.
@@ -151,7 +151,7 @@
         /// <summary>
         /// Deprecated. Gets or sets the sequences a contact is subscribed to.
         /// </summary>
-        public IList<int> ListSequences { get => ListSequencesField.Value; }
+        public IList<long> ListSequences { get => ListSequencesField.Value; }
 
         /// <summary>
         /// Deprecated. Returns a ApiProperty object to get or set the campaigns a contact is subscribed to.
@@ -162,7 +162,7 @@
         /// <summary>
         /// Deprecated. Gets or sets the campaigns a contact is subscribed to.
         /// </summary>
-        public IList<int> ListCampaigns { get => ListCampaignsField.Value; }
+        public IList<long> ListCampaigns { get => ListCampaignsField.Value; }
 
         public ApiProperty<int> BIndexField => _bindexField ??= new ApiProperty<int>(this, BIndexKey);
         private ApiProperty<int>? _bindexField;

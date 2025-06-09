@@ -9,13 +9,13 @@ public class ApiRule : ApiObject
     /// <summary>
     /// If the rule is a step in a sequence, returns a ApiProperty object to get or set the ID of that sequence.
     /// </summary>
-    public ApiProperty<int> DripIdField => _dripIdField ??= new ApiProperty<int>(this, DripIdKey);
-    private ApiProperty<int>? _dripIdField;
+    public ApiProperty<long> DripIdField => _dripIdField ??= new ApiProperty<long>(this, DripIdKey);
+    private ApiProperty<long>? _dripIdField;
     public const string DripIdKey = "drip_id";
     /// <summary>
     /// If the rule is a step in a sequence, gets or sets the ID of that sequence.
     /// </summary>
-    public int? DripId { get => DripIdField.Value; set => DripIdField.Value = value; }
+    public long? DripId { get => DripIdField.Value; set => DripIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the events that trigger rule execution.
@@ -86,13 +86,13 @@ public class ApiRule : ApiObject
     /// <summary>
     /// Returns a ApiProperty object to get or set the ID for the type of object the rule is associated with.
     /// </summary>
-    public ApiProperty<int> ObjectTypeIdField => _objectTypeIdField ??= new ApiProperty<int>(this, ObjectTypeIdKey);
-    private ApiProperty<int>? _objectTypeIdField;
+    public ApiProperty<long> ObjectTypeIdField => _objectTypeIdField ??= new ApiProperty<long>(this, ObjectTypeIdKey);
+    private ApiProperty<long>? _objectTypeIdField;
     public const string ObjectTypeIdKey = "object_type_id";
     /// <summary>
     /// Gets or sets the ID for the type of object the rule is associated with.
     /// </summary>
-    public int? ObjectTypeId { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
+    public long? ObjectTypeId { get => ObjectTypeIdField.Value; set => ObjectTypeIdField.Value = value; }
 
     /// <summary>
     /// Returns a ApiProperty object to get or set the date the rule was added.
