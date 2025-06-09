@@ -2,6 +2,10 @@ OntraportApi.NET
 
 What's New
 
+v1.3.3
+- Fix parsing of transactions data
+- Changed all IDs from INT to LONG data type
+
 v1.3.2
 - For advanced search, ApiSearchOptions now sets 'ids' to 0 if not specified, as it is required to return all objects
 
