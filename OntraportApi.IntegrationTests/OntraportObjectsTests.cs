@@ -20,10 +20,10 @@ public class OntraportObjectsTests
 
     private const string SectionContact = "Contact Information";
     private const string SectionTest = "Test Section";
-    private const int ValidContactId = 19;
-    private const int ValidSequenceId = 1;
-    private const int ValidTagId = 1;
-    private const int ValidTagId2 = 3;
+    private const long ValidContactId = 19;
+    private const long ValidSequenceId = 1;
+    private const long ValidTagId = 1;
+    private const long ValidTagId2 = 3;
 
     protected OntraportContext<OntraportObjects> CreateContext() => new OntraportContext<OntraportObjects>(_output);
 
@@ -163,7 +163,7 @@ public class OntraportObjectsTests
     {
         using var c = CreateContext();
 
-        var result = await c.Ontra.SelectAsync(ApiObjectType.Contact, new ApiSearchOptions(new[] { 19, 20 }));
+        var result = await c.Ontra.SelectAsync(ApiObjectType.Contact, new ApiSearchOptions([19L, 20L]));
 
         Assert.Equal(2, result.Count);
     }
@@ -341,7 +341,7 @@ public class OntraportObjectsTests
                     //Field = "f1584",
                     Alias = "Field1",
                     Type = ApiFieldType.drop
-                }.ListReplace(new[] { "a", "b", "c" })
+                }.ListReplace(["a", "b", "c"])
             },
             new List<ApiFieldEditor>(),
             new List<ApiFieldEditor>() {
@@ -378,9 +378,9 @@ public class OntraportObjectsTests
     {
         using var c = CreateContext();
         var contact = await c.Ontra.CreateAsync(ApiObjectType.Contact);
-        var contactId = int.Parse(contact["id"], CultureInfo.InvariantCulture);
+        var contactId = long.Parse(contact["id"], CultureInfo.InvariantCulture);
 
-        await c.Ontra.DeleteMultipleAsync(ApiObjectType.Contact, new ApiSearchOptions(new[] { contactId }));
+        await c.Ontra.DeleteMultipleAsync(ApiObjectType.Contact, new ApiSearchOptions([contactId]));
     }
 
     [Fact]
@@ -419,7 +419,7 @@ public class OntraportObjectsTests
     {
         using var c = CreateContext();
 
-        await c.Ontra.AddToSequenceAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidSequenceId });
+        await c.Ontra.AddToSequenceAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), [ValidSequenceId]);
     }
 
     [Fact]
@@ -427,7 +427,7 @@ public class OntraportObjectsTests
     {
         using var c = CreateContext();
 
-        await c.Ontra.AddTagAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidTagId, ValidTagId2 });
+        await c.Ontra.AddTagAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), [ValidTagId, ValidTagId2]);
     }
 
     [Fact]
@@ -435,7 +435,7 @@ public class OntraportObjectsTests
     {
         using var c = CreateContext();
 
-        await c.Ontra.AddTagNamesAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { "tag10", "tag11" });
+        await c.Ontra.AddTagNamesAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), ["tag10", "tag11"]);
     }
 
     [Fact]
@@ -443,7 +443,7 @@ public class OntraportObjectsTests
     {
         using var c = CreateContext();
 
-        await c.Ontra.AddToCampaignAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidSequenceId });
+        await c.Ontra.AddToCampaignAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), [ValidSequenceId]);
     }
 
 
@@ -452,7 +452,7 @@ public class OntraportObjectsTests
     {
         using var c = CreateContext();
 
-        await c.Ontra.RemoveFromSequenceAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidSequenceId });
+        await c.Ontra.RemoveFromSequenceAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), [ValidSequenceId]);
     }
 
     [Fact]
@@ -460,7 +460,7 @@ public class OntraportObjectsTests
     {
         using var c = CreateContext();
 
-        await c.Ontra.RemoveTagAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { ValidTagId, ValidTagId2 });
+        await c.Ontra.RemoveTagAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), [ValidTagId, ValidTagId2]);
     }
 
     [Fact]
@@ -468,7 +468,7 @@ public class OntraportObjectsTests
     {
         using var c = CreateContext();
 
-        await c.Ontra.RemoveTagNamesAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), new[] { "tag10", "tag11" });
+        await c.Ontra.RemoveTagNamesAsync(ApiObjectType.Contact, new ApiSearchOptions(ValidContactId), ["tag10", "tag11"]);
     }
 
     [Fact]

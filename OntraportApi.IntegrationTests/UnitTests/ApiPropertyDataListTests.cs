@@ -25,7 +25,7 @@ public class ApiPropertyDataListTests
 
     [Theory]
     [MemberData(nameof(GetValues))]
-    public void Value_SetRawValue_ReturnsExpectedValue(string rawValue, IEnumerable<int> typedValue)
+    public void Value_SetRawValue_ReturnsExpectedValue(string rawValue, IEnumerable<long> typedValue)
     {
         var prop = SetupProperty();
         Set(rawValue);

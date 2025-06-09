@@ -76,7 +76,7 @@ public class OntraportContactsTests(ITestOutputHelper output) :
         using var c = CreateContext();
         var email = "createormerge@test.com";
         var newName = "Etienne";
-        var newStatus = SaleStatus.ClosedLost;
+        var newStatus = 1;
         var contact = new ApiContact()
         {
             Email = email,
@@ -97,7 +97,7 @@ public class OntraportContactsTests(ITestOutputHelper output) :
     {
         using var c = CreateContext();
         var newName = "Etienne";
-        var newStatus = SaleStatus.DemoScheduled;
+        var newStatus = 1;
         var contact = await c.Ontra.SelectAsync("typed@test.com");
         contact.FirstName = newName;
         contact.LastNameField.Value = "Charlandd";
